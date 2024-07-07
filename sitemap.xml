@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://follhim.github.io/CV.html</loc>
-    <lastmod>2024-07-06T20:52:14.991Z</lastmod>
+    <loc>https://follhim.github.io/activity.html</loc>
+    <lastmod>2024-07-06T23:44:39.597Z</lastmod>
   </url>
   <url>
-    <loc>https://follhim.github.io/index.html</loc>
-    <lastmod>2024-07-06T20:47:58.386Z</lastmod>
+    <loc>https://follhim.github.io/resource.html</loc>
+    <lastmod>2024-07-06T23:43:04.403Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource_page/lpa_1.html</loc>
     <lastmod>2024-07-06T18:58:58.670Z</lastmod>
   </url>
   <url>
-    <loc>https://follhim.github.io/resource.html</loc>
-    <lastmod>2024-07-06T19:03:53.601Z</lastmod>
+    <loc>https://follhim.github.io/activity/Test.html</loc>
+    <lastmod>2024-07-06T23:45:54.239Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/index.html</loc>
+    <lastmod>2024-07-06T23:40:44.942Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/CV.html</loc>
+    <lastmod>2024-07-07T00:18:51.948Z</lastmod>
   </url>
 </urlset>

@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/activity.html",
+    "items": [
+      "/activity/Test.html"
+    ]
+  },
+  {
     "listing": "/resource.html",
     "items": [
       "/resource_page/lpa_1.html"

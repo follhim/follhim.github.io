@@ -1,17 +1,52 @@
 [
   {
+    "objectID": "activity.html",
+    "href": "activity.html",
+    "title": "Research Activity",
+    "section": "",
+    "text": "This page contains recent and ongoing reseach activity which includes (but is not limited to) publications, pre-preprints, and projects.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nTesting\n\n\n \n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "resource.html",
+    "href": "resource.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 6, 2024\n\n\nLatent Profile Analysis in R\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "resource_page/lpa_1.html",
+    "href": "resource_page/lpa_1.html",
+    "title": "Latent Profile Analysis in R",
+    "section": "",
+    "text": "The purpose of this document is to guide you through running latent profile analysis in R. To do this we will be using the R programming language.\nFor this tutorial you will need one computer and access to the internet."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "My name is Seungju Kim1, and I am an incoming Clinical Psychology Ph.D. student at the University of Illinois, Urbana-Champaign.\nThis website details some of my research interests and work. Please reach out for any questions!"
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Home",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
+  },
+  {
     "objectID": "CV.html",
     "href": "CV.html",
     "title": "CV",
     "section": "",
-    "text": "Pittsburgh, PA 15201\nEmail: seungju.kim@my.wheaton.edu | seungju7@illinois.edu"
+    "text": "2024-2031\nPh.D. in Clinical/Community Psychology\nUniversity of Illinois, Urbana-Champaign\nAPA/PCSAS Accredited\nAdvisor: Nathan Todd\n2020-2023\nB.A. in Psychology, magna cum laude\nWheaton College\nHonors Thesis: Exploring the Relationship Between Sexual Attraction and Psychological Well-being of Religious Spouses in Mixed-Orientation Marriages\nChair: Mark Yarhouse, Psy.D."
   },
   {
     "objectID": "CV.html#education",
     "href": "CV.html#education",
     "title": "CV",
-    "section": "Education",
-    "text": "Education\n2024-2031\nPh.D. in Clinical/Community Psychology\nUniversity of Illinois, Urbana-Champaign\nAPA/PCSAS Accredited\nAdvisor: Nathan Todd\n2020-2023\nB.A. in Psychology, magna cum laude\nWheaton College\nHonors Thesis: Exploring the Relationship Between Sexual Attraction and Psychological Well-being of Religious Spouses in Mixed-Orientation Marriages\nChair: Mark Yarhouse, Psy.D."
+    "section": "",
+    "text": "2024-2031\nPh.D. in Clinical/Community Psychology\nUniversity of Illinois, Urbana-Champaign\nAPA/PCSAS Accredited\nAdvisor: Nathan Todd\n2020-2023\nB.A. in Psychology, magna cum laude\nWheaton College\nHonors Thesis: Exploring the Relationship Between Sexual Attraction and Psychological Well-being of Religious Spouses in Mixed-Orientation Marriages\nChair: Mark Yarhouse, Psy.D."
   },
   {
     "objectID": "CV.html#research-interests",
@@ -82,33 +117,5 @@
     "title": "CV",
     "section": "Certification",
     "text": "Certification\n\nStatistician with R Programming\nDataCamp\nDecember 2022\nBiomedical Responsible Conduct of Research\nCITI Program\nMay 2023–May 2027\nCredential ID: 56169734\nConflict of Interest\nCITI Program\nJun 2023–Jun 2027\nCredential ID: 56284296\nSocial/Behavioral Research Investigators and Key Personnel\nCITI Program\nMay 2023–May 2026\nCredential ID: 56169733\nUndergraduates - Human Research Subjects\nCITI Program\nApr 2022–Apr 2024\nCredential ID: 44613867"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "My name is Seungju Kim1, and I am an incoming Clinical Psychology Ph.D. student at the University of Illinois, Urbana-Champaign.\nThis website details some of my research interests and work. Please reach out for any questions!"
-  },
-  {
-    "objectID": "index.html#footnotes",
-    "href": "index.html#footnotes",
-    "title": "Home",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
-  },
-  {
-    "objectID": "resource_page/lpa_1.html",
-    "href": "resource_page/lpa_1.html",
-    "title": "Latent Profile Analysis in R",
-    "section": "",
-    "text": "The purpose of this document is to guide you through running latent profile analysis in R. To do this we will be using the R programming language.\nFor this tutorial you will need one computer and access to the internet."
-  },
-  {
-    "objectID": "resource.html",
-    "href": "resource.html",
-    "title": "Resources",
-    "section": "",
-    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 6, 2024\n\n\nLatent Profile Analysis in R\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
   }
 ]
