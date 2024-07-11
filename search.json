@@ -21,6 +21,41 @@
     "text": "The purpose of this document is to guide you through running latent profile analysis in R. To do this we will be using the R programming language.\nFor this tutorial you will need one computer and access to the internet."
   },
   {
+    "objectID": "resume_alex.html",
+    "href": "resume_alex.html",
+    "title": "Seungju Kim",
+    "section": "",
+    "text": "seungju7@illinois.edu ∙ LinkedIn"
+  },
+  {
+    "objectID": "resume_alex.html#education",
+    "href": "resume_alex.html#education",
+    "title": "Seungju Kim",
+    "section": "EDUCATION",
+    "text": "EDUCATION\n\n\nUniversity of Illinois, Urbana-Champaign | Aug 2024-Present\n\n\nPh.D. in Clinical/Community Psychology | Urbana, IL\n\n\n\n\nWheaton College | 2020-2023\n\n\nBachelor of Arts in Psychology | Wheaton, IL"
+  },
+  {
+    "objectID": "resume_alex.html#research-interests",
+    "href": "resume_alex.html#research-interests",
+    "title": "Seungju Kim",
+    "section": "RESEARCH INTERESTS",
+    "text": "RESEARCH INTERESTS\nReligiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics."
+  },
+  {
+    "objectID": "resume_alex.html#experience",
+    "href": "resume_alex.html#experience",
+    "title": "Seungju Kim",
+    "section": "EXPERIENCE",
+    "text": "EXPERIENCE\n\n\nResearch Associate | Aug 2023-Present\n\n\nUniversity of Nebraska-Lincoln | Lincoln, NE\n\n\nAdvisor: Lorey Wheeler, Ph.D.\nRecruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.\nAssisted data cleaning and analysis in 6 federally and privately funded projects (&gt;$2.3M).\nConsultant on problematic and mischievous responses in survey data collection.\nSupported analyses on manuscripts for journal submission.\n\n\n\n\nInternet Archive | Nov 2022-May 2023\n\n\nIntern, Data Science | Washington, D.C.\n\n\nSolved entity resolution problem with Gradient Boosted Trees [here] linking sparse wikipedia references to Internet Archive Database References\nImplemented model in Python [here] which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching."
+  },
+  {
+    "objectID": "resume_alex.html#selected-projects",
+    "href": "resume_alex.html#selected-projects",
+    "title": "Seungju Kim",
+    "section": "SELECTED PROJECTS",
+    "text": "SELECTED PROJECTS\n\n\nBayesian County-Level School Shooting Analysis | August 2022\n\n\nCompared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used hierarchal negative binomial model to predict shootings and make inferences about gun laws\n\n\n\n\nPolitical Message Detection and Likeability in Films | April 2020\n\n\nReceived award from Political Science department to fund a panel survey (n=1000).\nEstimated linear regression and multinomial logit in observational study context and wrote paper [here] on findings."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Home",
@@ -74,7 +109,7 @@
     "href": "CV.html#publications-n2",
     "title": "CV",
     "section": "Publications (N=2)",
-    "text": "Publications (N=2)\n\nKim, S., Lefevor, G.T. & Skidmore, S.J. (2024) Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. Journal of Homosexuality. [In-press]\nLefevor, G.T., Kim, S., & Perez-Figueroa, A. M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. Psychology of Sexual Orientation and Gender Diversity. [In-press]"
+    "text": "Publications (N=2)\n\nKim, S., Lefevor, G.T. & Skidmore, S.J. (2024) Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. Journal of Homosexuality. [Advanced Online Publication] 10.1080/00918369.2024.2378745\nLefevor, G.T., Kim, S., & Perez-Figueroa, A. M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. Psychology of Sexual Orientation and Gender Diversity. [In-press]"
   },
   {
     "objectID": "CV.html#manuscripts",
