@@ -7,69 +7,6 @@
     "text": "This page contains recent and ongoing reseach activity which includes (but is not limited to) publications, pre-preprints, and projects.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nTesting\n\n\n \n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "resource.html",
-    "href": "resource.html",
-    "title": "Resources",
-    "section": "",
-    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 6, 2024\n\n\nLatent Profile Analysis in R\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "resource_page/lpa_1.html",
-    "href": "resource_page/lpa_1.html",
-    "title": "Latent Profile Analysis in R",
-    "section": "",
-    "text": "The purpose of this document is to guide you through running latent profile analysis in R. To do this we will be using the R programming language.\nFor this tutorial you will need one computer and access to the internet."
-  },
-  {
-    "objectID": "resume_alex.html",
-    "href": "resume_alex.html",
-    "title": "Seungju Kim",
-    "section": "",
-    "text": "seungju7@illinois.edu ∙ LinkedIn"
-  },
-  {
-    "objectID": "resume_alex.html#education",
-    "href": "resume_alex.html#education",
-    "title": "Seungju Kim",
-    "section": "EDUCATION",
-    "text": "EDUCATION\n\n\nUniversity of Illinois, Urbana-Champaign | Aug 2024-Present\n\n\nPh.D. in Clinical/Community Psychology | Urbana, IL\n\n\n\n\nWheaton College | 2020-2023\n\n\nBachelor of Arts in Psychology | Wheaton, IL"
-  },
-  {
-    "objectID": "resume_alex.html#research-interests",
-    "href": "resume_alex.html#research-interests",
-    "title": "Seungju Kim",
-    "section": "RESEARCH INTERESTS",
-    "text": "RESEARCH INTERESTS\nReligiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics."
-  },
-  {
-    "objectID": "resume_alex.html#experience",
-    "href": "resume_alex.html#experience",
-    "title": "Seungju Kim",
-    "section": "EXPERIENCE",
-    "text": "EXPERIENCE\n\n\nResearch Associate | Aug 2023-Present\n\n\nUniversity of Nebraska-Lincoln | Lincoln, NE\n\n\nAdvisor: Lorey Wheeler, Ph.D.\nRecruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.\nAssisted data cleaning and analysis in 6 federally and privately funded projects (&gt;$2.3M).\nConsultant on problematic and mischievous responses in survey data collection.\nSupported analyses on manuscripts for journal submission.\n\n\n\n\nInternet Archive | Nov 2022-May 2023\n\n\nIntern, Data Science | Washington, D.C.\n\n\nSolved entity resolution problem with Gradient Boosted Trees [here] linking sparse wikipedia references to Internet Archive Database References\nImplemented model in Python [here] which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching."
-  },
-  {
-    "objectID": "resume_alex.html#selected-projects",
-    "href": "resume_alex.html#selected-projects",
-    "title": "Seungju Kim",
-    "section": "SELECTED PROJECTS",
-    "text": "SELECTED PROJECTS\n\n\nBayesian County-Level School Shooting Analysis | August 2022\n\n\nCompared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used hierarchal negative binomial model to predict shootings and make inferences about gun laws\n\n\n\n\nPolitical Message Detection and Likeability in Films | April 2020\n\n\nReceived award from Political Science department to fund a panel survey (n=1000).\nEstimated linear regression and multinomial logit in observational study context and wrote paper [here] on findings."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "My name is Seungju Kim1, and I am an incoming Clinical Psychology Ph.D. student at the University of Illinois, Urbana-Champaign.\nThis website details some of my research interests and work. Please reach out for any questions!"
-  },
-  {
-    "objectID": "index.html#footnotes",
-    "href": "index.html#footnotes",
-    "title": "Home",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
-  },
-  {
     "objectID": "CV.html",
     "href": "CV.html",
     "title": "CV",
@@ -152,5 +89,75 @@
     "title": "CV",
     "section": "Certification",
     "text": "Certification\n\nStatistician with R Programming\nDataCamp\nDecember 2022\nBiomedical Responsible Conduct of Research\nCITI Program\nMay 2023–May 2027\nCredential ID: 56169734\nConflict of Interest\nCITI Program\nJun 2023–Jun 2027\nCredential ID: 56284296\nSocial/Behavioral Research Investigators and Key Personnel\nCITI Program\nMay 2023–May 2026\nCredential ID: 56169733\nUndergraduates - Human Research Subjects\nCITI Program\nApr 2022–Apr 2024\nCredential ID: 44613867"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "My name is Seungju Kim1, and I am an incoming Clinical Psychology Ph.D. student at the University of Illinois, Urbana-Champaign.\nThis website details some of my research interests and work. Please reach out for any questions!"
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Home",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
+  },
+  {
+    "objectID": "resume_alex.html",
+    "href": "resume_alex.html",
+    "title": "Seungju Kim",
+    "section": "",
+    "text": "seungju7@illinois.edu ∙ LinkedIn"
+  },
+  {
+    "objectID": "resume_alex.html#education",
+    "href": "resume_alex.html#education",
+    "title": "Seungju Kim",
+    "section": "EDUCATION",
+    "text": "EDUCATION\n\n\nUniversity of Illinois, Urbana-Champaign | Aug 2024-Present\n\n\nPh.D. in Clinical/Community Psychology | Urbana, IL\n\n\n\n\nWheaton College | 2020-2023\n\n\nBachelor of Arts in Psychology | Wheaton, IL"
+  },
+  {
+    "objectID": "resume_alex.html#research-interests",
+    "href": "resume_alex.html#research-interests",
+    "title": "Seungju Kim",
+    "section": "RESEARCH INTERESTS",
+    "text": "RESEARCH INTERESTS\nReligiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics."
+  },
+  {
+    "objectID": "resume_alex.html#experience",
+    "href": "resume_alex.html#experience",
+    "title": "Seungju Kim",
+    "section": "EXPERIENCE",
+    "text": "EXPERIENCE\n\n\nResearch Associate | Aug 2023-Present\n\n\nUniversity of Nebraska-Lincoln | Lincoln, NE\n\n\nAdvisor: Lorey Wheeler, Ph.D.\nRecruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.\nAssisted data cleaning and analysis in 6 federally and privately funded projects (&gt;$2.3M).\nConsultant on problematic and mischievous responses in survey data collection.\nSupported analyses on manuscripts for journal submission.\n\n\n\n\nInternet Archive | Nov 2022-May 2023\n\n\nIntern, Data Science | Washington, D.C.\n\n\nSolved entity resolution problem with Gradient Boosted Trees [here] linking sparse wikipedia references to Internet Archive Database References\nImplemented model in Python [here] which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching."
+  },
+  {
+    "objectID": "resume_alex.html#selected-projects",
+    "href": "resume_alex.html#selected-projects",
+    "title": "Seungju Kim",
+    "section": "SELECTED PROJECTS",
+    "text": "SELECTED PROJECTS\n\n\nBayesian County-Level School Shooting Analysis | August 2022\n\n\nCompared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used hierarchal negative binomial model to predict shootings and make inferences about gun laws\n\n\n\n\nPolitical Message Detection and Likeability in Films | April 2020\n\n\nReceived award from Political Science department to fund a panel survey (n=1000).\nEstimated linear regression and multinomial logit in observational study context and wrote paper [here] on findings."
+  },
+  {
+    "objectID": "resource_page/lpa_1.html",
+    "href": "resource_page/lpa_1.html",
+    "title": "Latent Profile Analysis in R",
+    "section": "",
+    "text": "The purpose of this document is to guide you through running latent profile analysis in R. To do this we will be using the R programming language.\nFor this tutorial you will need one computer and access to the internet."
+  },
+  {
+    "objectID": "resource.html",
+    "href": "resource.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 6, 2024\n\n\nLatent Profile Analysis in R\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "cv_pdf.html",
+    "href": "cv_pdf.html",
+    "title": "CV",
+    "section": "",
+    "text": "Download PDF file."
   }
 ]
