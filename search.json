@@ -4,21 +4,70 @@
     "href": "activity.html",
     "title": "Research Activity",
     "section": "",
-    "text": "This page contains recent and ongoing reseach activity which includes (but is not limited to) publications, pre-preprints, and projects.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nTesting\n\n\n \n\n\n\n\n\nNo matching items"
+    "text": "This page contains recent and ongoing reseach activity which includes (but is not limited to) publications, pre-preprints, and projects.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nTesting\n\n\n \n\n\n\n\n\nNo matching items\n\nReuseCC BY-NC 4.0"
   },
   {
     "objectID": "resource.html",
     "href": "resource.html",
     "title": "Resources",
     "section": "",
-    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 20, 2024\n\n\nNSF GRFP Application Materials\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
+    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJul 20, 2024\n\n\nNSF GRFP Application Materials\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items\n\nReuseCC BY-NC 4.0"
   },
   {
-    "objectID": "resource_page/lpa_1.html",
-    "href": "resource_page/lpa_1.html",
-    "title": "NSF GRFP Application Materials",
+    "objectID": "CV_2.html",
+    "href": "CV_2.html",
+    "title": "CV_2",
     "section": "",
-    "text": "To view my NSF GRFP application materials please click on the link below.\nKim, S. (2024, July 20). NSF GRFP Application. https://doi.org/10.17605/OSF.IO/P8ZA5"
+    "text": "ReuseCC BY-NC 4.0"
+  },
+  {
+    "objectID": "activity/Test.html",
+    "href": "activity/Test.html",
+    "title": "Testing",
+    "section": "",
+    "text": "ReuseCC BY-NC 4.0"
+  },
+  {
+    "objectID": "RSxSGM.html",
+    "href": "RSxSGM.html",
+    "title": "RSxSGM",
+    "section": "",
+    "text": "ReuseCC BY-NC 4.0"
+  },
+  {
+    "objectID": "resume_alex.html",
+    "href": "resume_alex.html",
+    "title": "Seungju Kim",
+    "section": "",
+    "text": "seungju7@illinois.edu ∙ LinkedIn"
+  },
+  {
+    "objectID": "resume_alex.html#education",
+    "href": "resume_alex.html#education",
+    "title": "Seungju Kim",
+    "section": "EDUCATION",
+    "text": "EDUCATION\n\n\nUniversity of Illinois, Urbana-Champaign | Aug 2024-Present\n\n\nPh.D. in Clinical/Community Psychology | Urbana, IL\n\n\n\n\nWheaton College | 2020-2023\n\n\nBachelor of Arts in Psychology | Wheaton, IL"
+  },
+  {
+    "objectID": "resume_alex.html#research-interests",
+    "href": "resume_alex.html#research-interests",
+    "title": "Seungju Kim",
+    "section": "RESEARCH INTERESTS",
+    "text": "RESEARCH INTERESTS\nReligiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics."
+  },
+  {
+    "objectID": "resume_alex.html#experience",
+    "href": "resume_alex.html#experience",
+    "title": "Seungju Kim",
+    "section": "EXPERIENCE",
+    "text": "EXPERIENCE\n\n\nResearch Associate | Aug 2023-Present\n\n\nUniversity of Nebraska-Lincoln | Lincoln, NE\n\n\nAdvisor: Lorey Wheeler, Ph.D.\nRecruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.\nAssisted data cleaning and analysis in 6 federally and privately funded projects (&gt;$2.3M).\nConsultant on problematic and mischievous responses in survey data collection.\nSupported analyses on manuscripts for journal submission.\n\n\n\n\nInternet Archive | Nov 2022-May 2023\n\n\nIntern, Data Science | Washington, D.C.\n\n\nSolved entity resolution problem with Gradient Boosted Trees [here] linking sparse wikipedia references to Internet Archive Database References\nImplemented model in Python [here] which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching."
+  },
+  {
+    "objectID": "resume_alex.html#selected-projects",
+    "href": "resume_alex.html#selected-projects",
+    "title": "Seungju Kim",
+    "section": "SELECTED PROJECTS",
+    "text": "SELECTED PROJECTS\n\n\nBayesian County-Level School Shooting Analysis | August 2022\n\n\nCompared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used hierarchal negative binomial model to predict shootings and make inferences about gun laws\n\n\n\n\nPolitical Message Detection and Likeability in Films | April 2020\n\n\nReceived award from Political Science department to fund a panel survey (n=1000).\nEstimated linear regression and multinomial logit in observational study context and wrote paper [here] on findings."
   },
   {
     "objectID": "old_cv.html",
@@ -105,51 +154,37 @@
     "text": "Certification\n\nStatistician with R Programming\nDataCamp\nDecember 2022\nBiomedical Responsible Conduct of Research\nCITI Program\nMay 2023–May 2027\nCredential ID: 56169734\nConflict of Interest\nCITI Program\nJun 2023–Jun 2027\nCredential ID: 56284296\nSocial/Behavioral Research Investigators and Key Personnel\nCITI Program\nMay 2023–May 2026\nCredential ID: 56169733\nUndergraduates - Human Research Subjects\nCITI Program\nApr 2022–Apr 2024\nCredential ID: 44613867"
   },
   {
-    "objectID": "resume_alex.html",
-    "href": "resume_alex.html",
-    "title": "Seungju Kim",
+    "objectID": "resource_page/lpa_1.html",
+    "href": "resource_page/lpa_1.html",
+    "title": "NSF GRFP Application Materials",
     "section": "",
-    "text": "seungju7@illinois.edu ∙ LinkedIn"
+    "text": "To view my NSF GRFP application materials please click on the link below.\nKim, S. (2024, July 20). NSF GRFP Application. https://doi.org/10.17605/OSF.IO/P8ZA5\n\n\n\nReuseCC BY-NC 4.0"
   },
   {
-    "objectID": "resume_alex.html#education",
-    "href": "resume_alex.html#education",
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
     "title": "Seungju Kim",
-    "section": "EDUCATION",
-    "text": "EDUCATION\n\n\nUniversity of Illinois, Urbana-Champaign | Aug 2024-Present\n\n\nPh.D. in Clinical/Community Psychology | Urbana, IL\n\n\n\n\nWheaton College | 2020-2023\n\n\nBachelor of Arts in Psychology | Wheaton, IL"
+    "section": "Welcome",
+    "text": "Welcome\nThank you for visiting my personal website detailing my research interests and work. This website contains"
   },
   {
-    "objectID": "resume_alex.html#research-interests",
-    "href": "resume_alex.html#research-interests",
+    "objectID": "index.html#biography",
+    "href": "index.html#biography",
     "title": "Seungju Kim",
-    "section": "RESEARCH INTERESTS",
-    "text": "RESEARCH INTERESTS\nReligiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics."
+    "section": "Biography",
+    "text": "Biography\nSeungju Kim1 (he/him) is a National Science Foundation Graduate Research Fellow and first-year PhD student in Clinical/Community Psychology at the University of Illinois. His research explores how religiosity and spirituality influence biases, empathy, and health disparities in privileged and marginalized communities."
   },
   {
-    "objectID": "resume_alex.html#experience",
-    "href": "resume_alex.html#experience",
+    "objectID": "index.html#research-interests",
+    "href": "index.html#research-interests",
     "title": "Seungju Kim",
-    "section": "EXPERIENCE",
-    "text": "EXPERIENCE\n\n\nResearch Associate | Aug 2023-Present\n\n\nUniversity of Nebraska-Lincoln | Lincoln, NE\n\n\nAdvisor: Lorey Wheeler, Ph.D.\nRecruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.\nAssisted data cleaning and analysis in 6 federally and privately funded projects (&gt;$2.3M).\nConsultant on problematic and mischievous responses in survey data collection.\nSupported analyses on manuscripts for journal submission.\n\n\n\n\nInternet Archive | Nov 2022-May 2023\n\n\nIntern, Data Science | Washington, D.C.\n\n\nSolved entity resolution problem with Gradient Boosted Trees [here] linking sparse wikipedia references to Internet Archive Database References\nImplemented model in Python [here] which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching."
-  },
-  {
-    "objectID": "resume_alex.html#selected-projects",
-    "href": "resume_alex.html#selected-projects",
-    "title": "Seungju Kim",
-    "section": "SELECTED PROJECTS",
-    "text": "SELECTED PROJECTS\n\n\nBayesian County-Level School Shooting Analysis | August 2022\n\n\nCompared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used hierarchal negative binomial model to predict shootings and make inferences about gun laws\n\n\n\n\nPolitical Message Detection and Likeability in Films | April 2020\n\n\nReceived award from Political Science department to fund a panel survey (n=1000).\nEstimated linear regression and multinomial logit in observational study context and wrote paper [here] on findings."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "Thank you for visiting my personal website detailing my research interests and work. For any additional questions regarding my research please contact: seungju7@illinois.edu"
+    "section": "Research Interests",
+    "text": "Research Interests\nUsing advanced statistical techniques, Seungju aims to uncover insights that can inform religious leaders, clinicians, and community researchers in their approach to caring for marginalized groups. His work spans multiple areas, including:\n\nLGBTQ+/SGM\nBIPOC\nSuicide, substance use, and depression\nReligiosity/spirituality\nNetwork Analysis\nStructural Equation Modeling"
   },
   {
     "objectID": "index.html#footnotes",
     "href": "index.html#footnotes",
-    "title": "Home",
+    "title": "Seungju Kim",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
   },
@@ -158,6 +193,6 @@
     "href": "cv_pdf.html",
     "title": "CV",
     "section": "",
-    "text": "Download PDF file."
+    "text": "Download PDF file.\n\n\n\nReuseCC BY-NC 4.0"
   }
 ]
