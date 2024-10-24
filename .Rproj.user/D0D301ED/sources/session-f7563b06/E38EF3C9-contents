@@ -1,0 +1,30 @@
+project:
+  type: website
+website:
+  google-analytics: G-4B73YXR349
+  title: Seungju Kim
+  navbar:
+    left:
+    - href: index.qmd
+      text: Home
+    - cv_pdf.qmd
+    - resource.qmd
+    right:
+    - text: CV
+      href: files/SK_cv_08_2024.pdf
+    tools:
+    - icon: twitter
+      href: https://x.com/SJKim_Psych
+  announcement:
+      dismissable: true
+      content: "**New** {{< iconify academicons:psyarxiv size=xl >}}Preprint on Christian Nationalism and Spirituality is available [here](https://doi.org/10.31234/osf.io/9xt8r)."
+      type: primary
+      position: below-navbar
+license: CC BY-NC
+format:
+  html:
+    theme: superhero
+    include-in-header:
+      - text: |
+          <meta name="google-site-verification" content="5IVIa4WCIPbbDMvKnTQOS10zRtSxwikNECKbCZWWTB0" />
+editor: visual
