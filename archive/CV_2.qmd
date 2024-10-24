@@ -1,0 +1,15 @@
+---
+title: "CV_2"
+author:
+  firstname: Albert
+  lastname: Einstein
+  address: "Rämistrasse 101, CH-8092 Zürich, Switzerland, Zürich"
+  position: "Research Physicist・Professor"
+  contacts:
+    - icon: fa envelope
+      text: ae@example.com
+      url: "mailto:ae@example.com"
+    - icon: PATH_TO_ICON/icon.svg
+      text: example.com
+      url: https://example.com
+---

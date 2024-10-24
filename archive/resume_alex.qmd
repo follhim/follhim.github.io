@@ -1,0 +1,92 @@
+---
+title: "Seungju Kim"
+format:
+  html:
+    css: styles.css
+    embed-resources: true
+  pdf:
+    css: styles.css
+    embed-resources: true
+---
+
+::: contact-info
+seungju7\@illinois.edu ∙ [LinkedIn](https://www.linkedin.com/in/kimseungju)
+:::
+
+## EDUCATION
+
+::: entry
+::: entry-header
+University of Illinois, Urbana-Champaign \| Aug 2024-Present
+:::
+
+::: entry-subheader
+Ph.D. in Clinical/Community Psychology \| Urbana, IL
+:::
+:::
+
+::: entry
+::: entry-header
+Wheaton College \| 2020-2023
+:::
+
+::: entry-subheader
+Bachelor of Arts in Psychology \| Wheaton, IL
+:::
+:::
+
+## RESEARCH INTERESTS
+
+Religiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics.
+
+## EXPERIENCE
+
+::: entry
+::: entry-header
+Research Associate \| Aug 2023-Present
+:::
+
+::: entry-subheader
+University of Nebraska-Lincoln \| Lincoln, NE
+:::
+
+-   Advisor: Lorey Wheeler, Ph.D.
+-   Recruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.
+-   Assisted data cleaning and analysis in 6 federally and privately funded projects (\>\$2.3M).
+-   Consultant on problematic and mischievous responses in survey data collection.
+-   Supported analyses on manuscripts for journal submission.
+:::
+
+::: entry
+::: entry-header
+[Internet Archive](https://archive.org/) \| Nov 2022-May 2023
+:::
+
+::: entry-subheader
+Intern, Data Science \| Washington, D.C.
+:::
+
+-   **Solved entity resolution problem with Gradient Boosted Trees** [\[here\]](https://alexbass.me/projects/internet_archive/) linking sparse wikipedia references to Internet Archive Database References
+-   Implemented model in Python [\[here\]](https://github.com/acbass49/wiki2ia) which, given a wikipedia reference, will return a match in the Internet Archive Database along with a probability of matching.
+:::
+
+<!-- Add more experience entries as needed -->
+
+## SELECTED PROJECTS
+
+::: entry
+::: entry-header
+[Bayesian County-Level School Shooting Analysis](https://github.com/acbass49/school-shootings) \| August 2022
+:::
+
+-   Compared and estimated several Bayesian Regression models with PYMC3 in Python. Ultimately, used **hierarchal negative binomial model** to predict shootings and make inferences about gun laws
+:::
+
+::: entry
+::: entry-header
+[Political Message Detection and Likeability in Films](https://alexbass.me/projects/star_wars_capstone/) \| April 2020
+:::
+
+-   Received award from Political Science department to fund a panel survey (n=1000).
+-   Estimated linear regression and multinomial logit in observational study context and wrote paper [\[here\]](https://alexbass.me/projects/star_wars_capstone/Capstone%20Project.pdf) on findings.
+:::

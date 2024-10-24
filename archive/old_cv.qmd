@@ -1,0 +1,235 @@
+---
+title: "CV"
+date: last-modified
+date-format: "MM/YYYY"
+author:
+  - name: Seungju Kim
+    orcid: 0009-0009-5166-9170
+    email: seungju7@illinois.edu
+    affiliation: 
+      - name: University of Illinois, Urbana-Champaign
+        department: Psychology
+format:
+  html:
+    page-layout: full
+    toc: true
+    toc-location: right
+    toc-title: "Contents"
+  pdf: 
+    mainfont: Times New Roman
+    sansfont: Times New Roman
+---
+
+## Education
+
+**2024-2031**\
+Ph.D. in Clinical/Community Psychology\
+*University of Illinois, Urbana-Champaign*\
+APA/PCSAS Accredited\
+Advisor: Nathan Todd
+
+**2020-2023**\
+B.A. in Psychology, magna cum laude\
+*Wheaton College*\
+Honors Thesis: Exploring the Relationship Between Sexual Attraction and Psychological Well-being of Religious Spouses in Mixed-Orientation Marriages\
+Chair: Mark Yarhouse, Psy.D.
+
+## Research Interests
+
+Religiosity/spirituality, LGBTQ+, mental health, general linear models, structural equation modeling, and psychometrics.
+
+## Grants & Fellowships
+
+**2024-2029**\
+Graduate Research Fellowship, National Science Foundation\
+Amount: \$159,000
+
+**2024**\
+Presentation Travel Grant, Minority Health Disparity Initiative\
+Amount: \$1,000
+
+**2021**\
+Competitive Conference Grant, Wheaton College\
+Amount: \$500
+
+## Honors & Awards
+
+-   2024: Doctoral Merit Fellowship Nominee, University of Illinois, Urbana-Champaign
+-   2020-2023: Dean's List, Wheaton College
+-   2023: Top Poster Award, UNL Research Symposium
+-   2022: Excellence in Research, YouRR Lab
+
+## Publications (N=2)
+
+1.  **Kim, S.**, Lefevor, G.T. & Skidmore, S.J. (2024) Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. *Journal of Homosexuality.* \[Advanced Online Publication\] [10.1080/00918369.2024.2378745](https://doi.org/10.1080/00918369.2024.2378745)
+
+2.  Lefevor, G.T., **Kim, S.**, & Perez-Figueroa, A. M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. Psychology of Sexual Orientation and Gender Diversity. \[In-press\]
+
+## Manuscripts
+
+### Under-Review (N=3)
+
+1.  Edwards, K.M., Wheeler, L.A., Littleton, H., Xu, W., **Kim, S.**, Thomas, R., Gardella, G., Scheer, J., Ryan, C., Barba A., & Spitz, C. Correlates of Family Rejection in a Diverse Sample of Sexual and Gender Minority Youth: Implications for Intervention and Care.
+
+2.  Edwards, K.M., Wheeler, L.A., **Kim, S.**, Miller, G., Napolitano, C, Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., & Chavez, A. Bystander Helping Intentions in Situations of Risky Alcohol Use and Teen Dating Violence among Sexual and Gender Minority Youth.
+
+3.  Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L.A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Ashworth, S., Camp, E., Girard, J., Chavez, A., **Kim, S.**, Allen, M., Sharma, M., Higgins, M., Hopfauf, S., Neighbors, C. Pilot randomized controlled trial of an online program for sexual and gender minority youth to prevent alcohol use and teen dating violence. \[Revise & Resubmit\]
+
+### In-Preparation (N=5)
+
+1.  **Kim, S.**, Hawkins, H.A., Jankowski, P., & Wang, D.C. Spiritual and Character Profile of Religious Leader Christian Nationalists
+
+2.  **Kim, S.**, Hart, F.G., & Hawkins, H.A. Psychosocial Correlates and Congregational Moderators of LGBQ Support: A National Sample of Religious Leaders. \[[Preregistration](https://doi.org/10.17605/OSF.IO/VY2BC)\]
+
+3.  **Kim, S.** & Lefevor, G.T. The Profiles of Religious Sexual and Gender Minorities of Color: A Picture of Resilience and Flourishing.
+
+4.  Ortells Faci, P., **Kim, S.,** Wheeler, L.A., Edwards, K.M., Gardella, J., & Littleton, H. The Long-term Role of Queer Hope for Sexual and Gender Minority Youth Against Alcohol and Substance Use.
+
+5.  **Kim, S.** & Wang, D. Men and Women in Seminary: A Comparison Across Character, Spiritual Formation, Mental Health, and Social Values.
+
+## Conference Presentations
+
+### Paper Presentations
+
+1.  Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L.A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Ashworth, S., Camp, E., Girard, J., Chavez, A., **Kim, S.**, Allen, M., Sharma, M., Higgins, M., Hopfauf, S., Neighbors, C. Pilot randomized controlled trial of an online program for sexual and gender minority youth to prevent alcohol use and teen dating violence. \[Paper Presentation\] (2024, August 15-17) National LGBTQ Health Conference. Atlanta, GA.
+
+2.  Edwards. K.M., Littleton, H., Gardella. J., Wheeler, L.A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Ashworth, S., Camp, E., Girard, J., Chavez, A., **Kim, S.**, Allen, M., Sharma, M., Higgins, M., Hopfauf, S., Neighbor, C. Pilot Randomized Controlled Trial of an Online Program for Sexual and Gender Minority Youth to Prevent Alcohol Use and Teen Dating Violence. \[Under Review, Research Society on Alcohol\]
+
+3.  Wang, D. & **Kim, S.** Diverse trajectories of human and spiritual formation in theological education: data-informed insights from longitudinal research \[Paper presentation\] Society for the Scientific Study of Religion. Pittsburgh, PA.
+
+4.  Edwards, M., K., Littleton, H., Wheeler, L., **Kim, S.,** Xu., W., Farquhar-Leicester, A., Chavez, A. 2024, May). Bystander helping intentions in situations of risky alcohol use and teen dating violence among sexual and gender minority youth \[Paper presentation\]. Society for Prevention Research. Washington, DC.
+
+### Poster Presentations
+
+1.  Ortells-Faci, P., **Kim, S.**, Edwards., K. M., Gardella, J., Wheeler, L. A. & Littleton, H. (2024, June 6-7). Exploring Hope for the Future as a Protective Factor in Intimate Partner Violence and Alcohol Use in Sexual and Gender Minority Youth. \[Poster Presentation\]. LGBTQ Research Symposium Annual Meeting, Virtual.
+
+2.  **Kim, S.** (2024, August 8-10). Effective Methods of Detecting Mischievous Responses in Online Study of SGM Youth. \[Poster Presentation\] American Psychological Association.
+
+3.  **Kim, S**. & Lefevor, G.T. (2024, August 8-10). Testing the Effectiveness of the Religious/Spiritual Stress and Resilience Model. \[Poster Presentation\] American Psychological Association.
+
+4.  **Kim, S.** (2023, August 3). Effective Methods of Detecting Mischievous Responses in Online Study of SGM Youth. \[Poster Presentation\] Summer Research Symposium, University of Nebraska-Lincoln.
+
+    -   Awarded 1st Place in Health Equity
+
+5.  Martin, E., Yarhouse, M. A., Dean, J., **Kim, S.**, O'Connor, D., & Brose, A. (2024, March 21-23). Comparing Spiritual Abuse of LGBTQ+ identified college students with their cisgender, heterosexual peers. \[Poster Presentation\] Christian Association for Psychological Studies Annual Conference.
+
+6.  Martin, E., Yarhouse, M.A., Palladino, N., O'Connor, D., & **Kim, S.** (2023, March 30-April 1). A Review of the Literature on Spiritual Abuse as it Relates to LGBTQ+ Individuals from Faith-Based Backgrounds. \[Poster Presentation\] Annual National Conference of the Christian Association for Psychological Studies.
+
+7.  **Kim, S.**, & Rueger, S. (2022, March 19) Facilitating Psychology-Church Collaborations: A Four-Step Framework for Practical Integration \[Poster Presentation\] Regional Conference of the Christian Association for Psychological Studies, Wheaton College.
+
+8.  Pyun, Y., **Kim, S.,** & Rueger, S. (2022, March 19) Psychology-Church Collaborations: Understanding the Role of Acculturation and Hope in Adolescent Depression \[Poster Presentation\] Regional Conference of the Christian Association for Psychological Studies, Wheaton College.
+
+9.  Case, S., Chen, P., Chen, Z., Coyle, S., Eveleigh, E., Kassel, M., **Kim, S.,** Kimble, C., & Rueger, S. (2021, May 15-19) Financial Hardship and the Role of Mother and Father Support on Academic Outcomes \[Poster Presentation\] National Conference of the Association of Psychological Studies.
+
+## Research Experiences
+
+**Research Assistant**\
+Nebraska Academy for Methodology, Analytics, & Psychometrics; University of Nebraska-Lincoln\
+Supervisor: Lorey Wheeler, Ph.D.\
+Aug 2023–Present
+
+-   Recruited as a research assistant after completion of NSF-REU under the supervision of Dr. Wheeler. I supported funded projects using R, SPSS, and Mplus.
+-   Assisted data cleaning and analysis in 6 federally and privately funded projects (\>\$2.3M).
+-   Consultant on problematic and mischievous responses in survey data collection.
+-   Supported analyses on manuscripts for journal submission.
+
+**Research Assistant**\
+Sexual, Gender, and Religious Identities Lab, Utah State University\
+Supervisor: Tyler Lefevor, Ph.D.\
+May 2023–Present
+
+-   Assisted in analyzing the Four Options study, a national longitudinal study of Latter-day Saints who are SGMs. This study examined the associations of sexuality, gender identity, and religiosity in LDS-SGMs.
+-   Led analysis of moderation and moderated mediation models using R programming.
+-   Construction and validation of the Religiously-based Family Expectations scale through exploratory and confirmatory factor analysis using {psych} and {lavaan} packages.
+
+**Research Affiliate**\
+Spiritually and Emotionally Sustainable Leadership Lab, Fuller Theological Seminary\
+Supervisor: David Wang, Ph.D.\
+May 2023–Present
+
+-   In collaboration with Dr. Wang, I led analyses and dissemination of the Seminary Formation Assessment Project (N=452), a \$1.9 million longitudinal project funded by the John Templeton Foundation, examining seminary students' spiritual and personality formation.
+-   Longitudinal analyses examining the role of narcissism and gender differences across spiritual and personality traits in seminary students.
+-   Lead author on several manuscripts.
+-   Led and instructed an analysis team of two graduate students to use R for data analysis.
+
+**Research Associate**\
+Sexuality and Gender Identity Institute, Wheaton College\
+Supervisor: Mark Yarhouse, Psy.D.\
+Dec 2023–May 2024
+
+-   Led quantitative analyses related to the SGI+ Project \[N\>2,200\] of college students across the contiguous United States. This study examined two groups of SGM college students, those attending religious and non-religious academic institutions.
+-   Cleaned data and created a codebook.
+-   Provided consultation on identifying mischievous responders.
+
+**Research Assistant**\
+Sexuality and Gender Identity Institute, Wheaton College\
+Supervisor: Mark Yarhouse, Psy.D.\
+Aug 2022–Dec 2023
+
+-   The SGI Institute focuses on research and clinical practice on sexual orientation and gender identity (SOGI) in religious communities. Assisted in the launch and analysis of "SGI+ Project," a national project investigating SOGI experiences in Christian college students across the United States. SGI Institute also provides clinical services to religious and non-religious clients.
+-   Completed transcription of sexual attitudes and behavior, campus climate, emotional well-being, sexual identity, and gender identity.
+-   Observed over 20 hours of gender dysphoria consultations, family counseling sessions, and assessments.
+-   Completed an honors thesis on associations between sexual attraction and psychological distress in religious mixed-orientation marriages.
+-   Consultant on quantitative analyses for graduate dissertations.
+
+**NSF-REU Summer Research Scholar**\
+Interpersonal Violence Lab, University of Nebraska-Lincoln\
+May 2023–Aug 2023\
+Supervisors: Katie Edwards, Ph.D. & Lorey Wheeler, Ph.D.
+
+-   Accepted as a full-time summer research scholar into the Research Experience for Undergraduates (REU) program and funded by the National Science Foundation. This program provided intense research and educational opportunities for undergraduates interested in pursuing careers in research. Worked on the PRYSHM Project, an NIMH clinical trial, to decrease teen dating violence and substance abuse in SGM youth.
+-   Led data cleaning and identifying mischievous responders in an online sample using R & SPSS
+-   Quantitative analyses with ANCOVA, correlations, and mediations using R & SPSS
+-   Qualitative analysis of youths' experiences of PRYSHM using NVivo
+-   Educational seminars on graduate school, funding, and more.
+-   Awarded Top Poster for Research Symposium for Healthy Equity.
+
+**Research Assistant**\
+Youth Risk & Resilience Lab, Wheaton College\
+Dec 2020–May 2022\
+Supervisor: Sandra Rueger, Ph.D.
+
+-   "Coalition for Healthy Asian Minds" study funded by Blue Cross Blue Shield examining barriers and interventions to increase mental healthcare in Asian Americans.
+-   Assisted with manuscript preparation by cleaning data and tables.
+-   Completed literature reviews on family support moderating Asian American help-seeking attitudes on mental health.
+-   First authored a poster on Psychology-Church collaborations and another on the role of acculturation on depression in Asian American youth.
+-   Awarded Excellence in Research
+
+## Professional Affiliations
+
+-   2024-Present: Graduate student member of American Psychological Association
+    -   Division 36, Religion and Spirituality
+    -   Division 44, Sexual Orientation and Gender Diversity
+-   2021–2023: Student member of the Association of Psychological Sciences
+-   2021–2023: Student member of the American Psychological Association
+
+## Software & Programming Languages
+
+-   Proficient: R Programming; SPSS
+-   Familiar: Nvivo, MPlus
+
+## Certification
+
+1.  Statistician with R Programming\
+    DataCamp\
+    December 2022
+
+2.  Biomedical Responsible Conduct of Research\
+    CITI Program\
+    May 2023–May 2027\
+    Credential ID: 56169734
+
+3.  Conflict of Interest\
+    CITI Program\
+    Jun 2023–Jun 2027\
+    Credential ID: 56284296
+
+4.  Social/Behavioral Research Investigators and Key Personnel\
+    CITI Program\
+    May 2023–May 2026\
+    Credential ID: 56169733
+
+5.  Undergraduates - Human Research Subjects\
+    CITI Program\
+    Apr 2022–Apr 2024\
+    Credential ID: 44613867

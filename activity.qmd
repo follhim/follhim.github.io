@@ -1,0 +1,10 @@
+---
+title: "Research Activity"
+listing:
+  contents: activity
+  type: table
+  sort:
+    - "date"
+---
+
+This page contains recent and ongoing reseach activity which includes (but is not limited to) publications, pre-preprints, and projects.

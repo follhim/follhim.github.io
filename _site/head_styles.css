@@ -1,0 +1,36 @@
+body {
+  background-color: #1a1a1a;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.image-container {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.text-container {
+  flex: 1;
+  padding-top: 20px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.footer-text {
+  margin-top: 20px;
+}

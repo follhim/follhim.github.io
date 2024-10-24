@@ -1,0 +1,61 @@
+/* Resume Styles */
+body {
+    font-family: 'Linux Libertine', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.entry {
+    margin-bottom: 15px;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.entry-subheader {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+}
+
+ul {
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
