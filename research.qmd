@@ -21,8 +21,9 @@ format: html
 
 **Kim, S.**, Lefevor, G.T. & Skidmore, S.J. (2024) Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. *Journal of Homosexuality.* \[Advance Online Publication\] 10.1080/00918369.2024.2378745 [{{< iconify la:researchgate height=35px size=xl >}}](https://www.researchgate.net/publication/382396728_Mitigating_the_Impact_of_Religiously_Based_Family_Expectations_on_Depression_Among_Sexual_and_Gender_Minorities_The_Role_of_Authenticity)
 
-::: {.altmetric-embed data-badge-popover="right" data-badge-type="1" data-doi="10.1080/00918369.2024.2378745" data-hide-no-mentions="false"}
-:::
+<span class="__dimensions_badge_embed__" data-doi="10.1080/00918369.2024.2378745" data-style="large_rectangle"></span> 
+<div style="display: inline-block" data-badge-popover="right" data-badge-type="1" data-doi="10.1080/00918369.2024.2378745" data-hide-no-mentions="false" class="altmetric-embed"></div>
+
 
 <center>
 
@@ -32,12 +33,12 @@ format: html
 
 Lefevor, G.T., **Kim, S.**, & Perez-Figueroa, A. M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. *Psychology of Sexual Orientation and Gender Diversity.* \[Advance Online Publication\] 10.1037/sgd0000749
 
-::: {.altmetric-embed data-badge-popover="right" data-badge-type="1" data-doi="10.1037/sgd0000749" data-hide-no-mentions="false"}
-:::
+<span class="__dimensions_badge_embed__" data-doi="10.1037/sgd0000749" data-style="large_rectangle"></span> 
+<div style="display: inline-block" data-badge-popover="right" data-badge-type="1" data-doi="10.1037/sgd0000749" data-hide-no-mentions="false" class="altmetric-embed"></div>
 
 ## Preprints
 
 **Kim, S.**, Jankowski, P., Hawkins, H., & Wang, D. (2024, August 13). Patterns of Christian Nationalist Engagement and Connections to Spirituality. 10.31234/osf.io/9xt8r [{{< iconify academicons:psyarxiv size=xl >}}](https://doi.org/10.31234/osf.io/9xt8r)
 
-::: {.altmetric-embed data-badge-popover="right" data-badge-type="1" data-doi="10.31234/osf.io/9xt8r" data-hide-no-mentions="false"}
-:::
+<span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/9xt8r" data-style="large_rectangle"></span> 
+<div style="display: inline-block" data-badge-popover="right" data-badge-type="1" data-doi="10.31234/osf.io/9xt8r" data-hide-no-mentions="false" class="altmetric-embed"></div>
