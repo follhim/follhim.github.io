@@ -5,7 +5,7 @@ website:
   title: Seungju Kim
   navbar:
     left:
-    - href: index.qmd
+    - href: home.qmd
       text: Home
     - research.qmd
     - resource.qmd
