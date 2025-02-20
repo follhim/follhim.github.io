@@ -33,7 +33,7 @@ Do not install the package from CRAN, as one of the key features is not availabl
 
 ```{r}
 # install.packages("remotes")
-# remotes::install_github("dstanley4/apaTables")
+remotes::install_github("dstanley4/apaTables")
 library(apaTables)
 ```
 
