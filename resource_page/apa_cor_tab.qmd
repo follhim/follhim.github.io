@@ -1,0 +1,99 @@
+---
+title: "Creating APA-7 Ready Correlation Tables"
+date: last-modified
+date-format: "MM/DD/YYYY"
+author:
+  - name: Seungju Kim
+    orcid: 0009-0009-5166-9170
+    email: seungju7@illinois.edu
+    affiliation: 
+      - name: University of Illinois, Urbana-Champaign
+        department: Psychology
+title-block-banner: false
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+One of the most common, and yet painstaking, tasks in writing a manuscript is creating a table (correlation, regression, etc.).
+
+Creating them by hand is not only time-consuming but also error-prone. Even when some softwares (SPSS) allow users to create tables, they are often not APA7 ready.
+
+Today, I introduce a simple package called {apaTables} that will prepare an APA7 ready correlation table (the most commonly reported APA table) in 3 steps AND less than 5 minutes!
+
+**Note**
+
+This assumes that you have basic familiarity with R.
+
+# Step 1: Install {apaTables}
+
+Do not install the package from CRAN, as one of the key features is not available there.
+
+```{r}
+# install.packages("remotes")
+# remotes::install_github("dstanley4/apaTables")
+library(apaTables)
+```
+
+# Step 2: Load the data
+
+To support maximum reproducibility, I will use the built-in dataset in R called `trees`.
+
+```{r}
+data(trees)
+```
+
+::: callout-tip
+If you are using your own dataset, make sure to load it using `read_sav()` or `read_csv()`.
+:::
+
+# Step 3: Create the correlation table
+
+Final step!
+
+```{r}
+apa.cor.table(trees, filename = "correlation_table.doc")
+```
+
+This will create a correlation table in a Word document.
+
+![](word_doc_cor.png)
+
+::: callout-warning
+Note that apa.cor.tables only allows two output options (.doc OR .rtf). However, it is very easy to copy and paste a .doc file into a docx file.
+:::
+
+## Modify Output.
+
+The full arguments are below.
+
+```{r}
+apa.cor.table(
+  trees,
+  filename = NA, # (optional) a filename must end in .doc or .rtf
+  table.number = 0, # optional, you can add in Word.
+  show.conf.interval = TRUE, # Optional, and most would make this FALSE.
+  show.sig.stars = TRUE,
+  show.pvalue = TRUE, # unfortunately, it will only show ** < .01, which is why you should keep this TRUE to add a third *** for < .001.
+  landscape = TRUE
+)
+```
+
+::: callout-important
+Unfortunately, it will only show \* \<.05 or \*\* \< .01, which is why you should keep `show.pvalue = TRUE` to manually add a third \*\*\* for \< .001.
+:::
+
+# All done!
+
+Now you can pluck your APA correlation table into your manuscript in 5 minutes!
+
+If you found this helpful please like the heart below.
+
+# Citations
+
+```{r}
+citation()
+citation("apaTables")
+```

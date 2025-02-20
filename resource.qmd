@@ -1,0 +1,11 @@
+---
+title: "Resources"
+listing:
+  contents: resource_page
+  type: table
+  sort:
+    - "date -newest"
+comments: false
+---
+
+This page contains personally curated resources related to analyses, open science, and more.
