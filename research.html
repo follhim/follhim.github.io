@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Seungju Kim">
-<meta name="dcterms.date" content="2025-02-20">
+<meta name="dcterms.date" content="2025-02-21">
 
 <title>Research – Seungju Kim</title>
 <style>
@@ -41,7 +41,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-a80a1054e1d223551dc964581465f768.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,12 +78,6 @@ gtag('js', new Date());
 gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </script>
 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-T937Z8W5');</script>
-
 
 </head>
 
@@ -115,16 +108,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./resource.html"> 
-<span class="menu-text">Resource</span></a>
+<span class="menu-text">Resources</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+    <div class="dropdown">
+      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label=""><i class="bi bi-github"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/follhim/follhim.github.io">
+            Source Code
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://github.com/follhim/follhim.github.io/issues">
+            Report a Bug
+            </a>
+          </li>
+      </ul>
+    </div>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <div id="quarto-announcement" data-announcement-id="3e93696779406872064a4afc413cf645" class="alert alert-primary hidden"><div class="quarto-announcement-content">
-<p><strong>New</strong> <iconify-icon role="img" inline="" icon="academicons:psyarxiv" style="font-size: 1.5em;" aria-label="Icon psyarxiv from academicons Iconify.design set." title="Icon psyarxiv from academicons Iconify.design set."></iconify-icon>Preprint on the State of LGBQ Support among U.S. Reliigious Leaders is available <a href="https://doi.org/10.31234/osf.io/rc8sh">here</a>.</p>
+  <div id="quarto-announcement" data-announcement-id="87115c20ff17bc71d2be9eb081a0acf8" class="alert alert-primary hidden"><div class="quarto-announcement-content">
+<p><strong>New</strong>: This website has received minor updates externally, and major internally. See the Research page.</p>
 </div><i class="bi bi-x-lg quarto-announcement-action"></i></div>
 </header>
 <!-- content -->
@@ -163,7 +171,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">02/20/2025</p>
+      <p class="date">02/21/2025</p>
     </div>
   </div>
   
@@ -175,7 +183,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </header>
 
 
-<p><a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" class="btn btn-success" target="_blank" id="cv-download-button" data-tracking="cv-download"> <i class="bi bi-file-earmark-pdf"></i> Download CV </a></p>
+<p><a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" class="btn btn-success" target="_blank" id="cv-download-button" data-tracking="cv-download"> <i class="bi bi-file-earmark-pdf"></i> Download CV </a> <span id="count" class="badge bg-primary ms-2">0</span></p>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "{{ FB_API }}",
+            authDomain: "cv-download-40a41.firebaseapp.com",
+            projectId: "cv-download-40a41",
+            storageBucket: "cv-download-40a41.firebasestorage.app",
+            messagingSenderId: "842134969852",
+            appId: "{{ APPID }}",
+            measurementId: "G-7149VRMDP5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Function to increment the CV download count
+        async function incrementCount() {
+            const countRef = db.collection("counts").doc("cvDownload");
+            try {
+                await db.runTransaction(async (transaction) => {
+                    const countDoc = await transaction.get(countRef);
+                    if (!countDoc.exists()) {
+                        transaction.set(countRef, { count: 1 });
+                    } else {
+                        const newCount = countDoc.data().count + 1;
+                        transaction.update(countRef, { count: newCount });
+                    }
+                });
+                console.log("Count incremented!");
+                getCount();
+            } catch (error) {
+                console.log("Transaction failed: ", error);
+            }
+        }
+
+        // Function to get the current CV download count
+        async function getCount() {
+            const countRef = db.collection("counts").doc("cvDownload");
+            try {
+                const countDoc = await countRef.get();
+                if (countDoc.exists()) {
+                    document.getElementById("count").innerText = countDoc.data().count;
+                } else {
+                    document.getElementById("count").innerText = 0;
+                }
+            } catch (error) {
+                console.log("Error getting document:", error);
+            }
+        }
+
+        // Load the current count when the page loads
+        getCount();
+
+        // Attach event listener to the CV download button
+        document.getElementById('cv-download-button').addEventListener('click', incrementCount);
+    });
+</script>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -186,7 +255,9 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>All publications/preprints are free to access. To view or download a file, please see my ResearchGate profile.</p>
+<p>All publications are free to access. To view or download a file, please see my ResearchGate profile.</p>
+<p>All preprints can be accessed through the DOI link.</p>
+<p>Otherwise, please email me.</p>
 </div>
 </div>
 <script src="https://badge.dimensions.ai/badge.js" async="TRUE" charset="utf-8"></script>
@@ -747,8 +818,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T937Z8W5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
