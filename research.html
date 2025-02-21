@@ -184,66 +184,72 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 
 
 <p><a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" class="btn btn-success" target="_blank" id="cv-download-button" data-tracking="cv-download"> <i class="bi bi-file-earmark-pdf"></i> Download CV </a> <span id="count" class="badge bg-primary ms-2">0</span></p>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "{{ FB_API }}",
-            authDomain: "cv-download-40a41.firebaseapp.com",
-            projectId: "cv-download-40a41",
-            storageBucket: "cv-download-40a41.firebasestorage.app",
-            messagingSenderId: "842134969852",
-            appId: "{{ APPID }}",
-            measurementId: "G-7149VRMDP5"
-        };
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "{{ FB_API }}",
+      authDomain: "cv-download-40a41.firebaseapp.com",
+      projectId: "cv-download-40a41",
+      storageBucket: "cv-download-40a41.firebasestorage.app",
+      messagingSenderId: "842134969852",
+      appId: "{{ APPID }}",
+      measurementId: "G-7149VRMDP5"
+    };
 
-        // Function to increment the CV download count
-        async function incrementCount() {
-            const countRef = db.collection("counts").doc("cvDownload");
-            try {
-                await db.runTransaction(async (transaction) => {
-                    const countDoc = await transaction.get(countRef);
-                    if (!countDoc.exists()) {
-                        transaction.set(countRef, { count: 1 });
-                    } else {
-                        const newCount = countDoc.data().count + 1;
-                        transaction.update(countRef, { count: newCount });
-                    }
-                });
-                console.log("Count incremented!");
-                getCount();
-            } catch (error) {
-                console.log("Transaction failed: ", error);
-            }
-        }
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const countRef = doc(db, "counts", "cvDownload"); // Updated to match your new structure
 
-        // Function to get the current CV download count
-        async function getCount() {
-            const countRef = db.collection("counts").doc("cvDownload");
-            try {
-                const countDoc = await countRef.get();
-                if (countDoc.exists()) {
-                    document.getElementById("count").innerText = countDoc.data().count;
-                } else {
-                    document.getElementById("count").innerText = 0;
-                }
-            } catch (error) {
-                console.log("Error getting document:", error);
-            }
-        }
-
-        // Load the current count when the page loads
+    // Function to increment the CV download count
+    async function incrementCount() {
+      console.log("Increment button clicked");
+      try {
+        await runTransaction(db, async (transaction) => {
+          const countDoc = await transaction.get(countRef);
+          if (!countDoc.exists()) {
+            console.log("Document does not exist. Creating new document.");
+            transaction.set(countRef, { counts: 1 }); // Changed count to counts to match your field name
+          } else {
+            const newCount = countDoc.data().counts + 1; // Changed count to counts
+            console.log("Document exists. Updating count to:", newCount);
+            transaction.update(countRef, { counts: newCount }); // Changed count to counts
+          }
+        });
+        console.log("Transaction successful!");
         getCount();
+      } catch (error) {
+        console.error("Transaction failed:", error);
+      }
+    }
 
-        // Attach event listener to the CV download button
-        document.getElementById('cv-download-button').addEventListener('click', incrementCount);
-    });
+    // Function to get the current CV download count
+    async function getCount() {
+      console.log("Fetching count from Firestore");
+      try {
+        const countDoc = await getDoc(countRef);
+        if (countDoc.exists()) {
+          console.log("Count document exists:", countDoc.data());
+          document.getElementById("count").innerText = countDoc.data().counts; // Changed count to counts
+        } else {
+          console.log("Count document does not exist");
+          document.getElementById("count").innerText = "0";
+        }
+      } catch (error) {
+        console.error("Error getting document:", error);
+      }
+    }
+
+    // Load the current count when the page loads
+    getCount();
+
+    // Attach event listener to the CV download button
+    document.getElementById('cv-download-button').addEventListener('click', incrementCount);
+  });
 </script>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
