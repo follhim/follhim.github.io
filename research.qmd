@@ -10,23 +10,7 @@ author:
       - name: University of Illinois, Urbana-Champaign
         department: Psychology
 title-block-banner: false
-format:
-  html:
-    include-in-header:
-      - text: |
-          <!-- Google Tag Manager -->
-          <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-T937Z8W5');</script>
-          <!-- End Google Tag Manager -->
-    include-after-body:
-      - text: |
-          <!-- Google Tag Manager (noscript) -->
-          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T937Z8W5"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-          <!-- End Google Tag Manager (noscript) -->
+format: html
 comments: false
 editor_options: 
   chunk_output_type: console
@@ -49,6 +33,71 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools)
    data-tracking="cv-download">
     <i class="bi bi-file-earmark-pdf"></i> Download CV
 </a>
+<span id="count" class="badge bg-primary ms-2">0</span>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "{{ FB_API }}",
+            authDomain: "cv-download-40a41.firebaseapp.com",
+            projectId: "cv-download-40a41",
+            storageBucket: "cv-download-40a41.firebasestorage.app",
+            messagingSenderId: "842134969852",
+            appId: "{{ APPID }}",
+            measurementId: "G-7149VRMDP5"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Function to increment the CV download count
+        async function incrementCount() {
+            const countRef = db.collection("counts").doc("cvDownload");
+            try {
+                await db.runTransaction(async (transaction) => {
+                    const countDoc = await transaction.get(countRef);
+                    if (!countDoc.exists()) {
+                        transaction.set(countRef, { count: 1 });
+                    } else {
+                        const newCount = countDoc.data().count + 1;
+                        transaction.update(countRef, { count: newCount });
+                    }
+                });
+                console.log("Count incremented!");
+                getCount();
+            } catch (error) {
+                console.log("Transaction failed: ", error);
+            }
+        }
+
+        // Function to get the current CV download count
+        async function getCount() {
+            const countRef = db.collection("counts").doc("cvDownload");
+            try {
+                const countDoc = await countRef.get();
+                if (countDoc.exists()) {
+                    document.getElementById("count").innerText = countDoc.data().count;
+                } else {
+                    document.getElementById("count").innerText = 0;
+                }
+            } catch (error) {
+                console.log("Error getting document:", error);
+            }
+        }
+
+        // Load the current count when the page loads
+        getCount();
+
+        // Attach event listener to the CV download button
+        document.getElementById('cv-download-button').addEventListener('click', incrementCount);
+    });
+</script>
+
+
 
 :::callout-note
 All publications are free to access. To view or download a file, please see my ResearchGate profile. 
