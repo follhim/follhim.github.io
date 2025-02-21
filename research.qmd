@@ -51,7 +51,11 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools)
 </a>
 
 :::callout-note
-All publications/preprints are free to access. To view or download a file, please see my ResearchGate profile. 
+All publications are free to access. To view or download a file, please see my ResearchGate profile. 
+
+All preprints can be accessed through the DOI link. 
+
+Otherwise, please email me. 
 :::
 
 

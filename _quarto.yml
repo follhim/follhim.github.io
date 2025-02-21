@@ -11,6 +11,13 @@ website:
       text: Research
     - href: resource.qmd
       text: Resource
+    tools:
+    - icon: github
+        menu:
+          - text: Source Code
+            href:  https://github.com/follhim/follhim.github.io
+          - text: Report a Bug
+            href:  https://github.com/follhim/follhim.github.io/issues
   announcement:
       dismissable: true
       content: "**New** {{< iconify academicons:psyarxiv size=xl >}}Preprint on the State of LGBQ Support among U.S. Reliigious Leaders is available [here](https://doi.org/10.31234/osf.io/rc8sh)."
