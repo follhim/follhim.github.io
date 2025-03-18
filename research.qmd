@@ -148,7 +148,7 @@ my_publications <- list(
   list(
     citation = 'Lefevor, G.T., **Kim, S.,** & Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. *Psychology of Sexual Orientation and Gender Diversity.* [https://doi.org/10.1037/sgd0000749](https://doi.org/10.1037/sgd0000749)',
     doi = "10.1037/sgd0000749",
-    pdf_link = NULL,
+    pdf_link = "https://drive.google.com/file/d/1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG/view?usp=sharing",
     preregistration_link = NULL,
     osf_link = NULL,
     preprint_link = NULL
