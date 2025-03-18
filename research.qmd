@@ -169,16 +169,16 @@ A preprint is an early-stage research paper not yet peer-reviewed or published i
 # You can create separate sections for different types of publications
 preprints <- list(
   list(
-    citation = "**Kim, S.,** & Xu, W. Religious Leaders' LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. *OSF* [https://doi.org/10.31234/osf.io/rc8sh](https://doi.org/10.31234/osf.io/rc8sh)",
+    citation = "**Kim, S.,** & Xu, W. Religious Leaders' LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. (2024). *OSF* [https://doi.org/10.31234/osf.io/rc8sh](https://doi.org/10.31234/osf.io/rc8sh)",
     doi = "10.31234/osf.io/rc8sh",
     pdf_link = NULL,
     preregistration_link = "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf",
-    osf_link = NULL,
+    osf_link = "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8",
     preprint_link = "https://doi.org/10.31234/osf.io/rc8sh"
   ),
   # Preprint 2
   list(
-    citation = "**Kim, S.,** Wang, D. C., Gin, D. H. C., Deasy, J. A., & Sandage, S. Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. *OSF* [https://doi.org/10.31234/osf.io/mqwg9](https://doi.org/10.31234/osf.io/mqwg9)",
+    citation = "**Kim, S.,** Wang, D. C., Gin, D. H. C., Deasy, J. A., & Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. *OSF* [https://doi.org/10.31234/osf.io/mqwg9](https://doi.org/10.31234/osf.io/mqwg9)",
     doi = "10.31234/osf.io/mqwg9",
     pdf_link = NULL,
     preregistration_link = NULL,
@@ -187,7 +187,7 @@ preprints <- list(
   ),
   # Preprint 3
   list(
-    citation = "**Kim, S.,** Jankowski, P., Hawkins, H.A., & Wang, D.C. Patterns of Christian Nationalist Engagement and Connections to Spirituality. *OSF* [https://doi.org/10.31234/osf.io/9xt8r](https://doi.org/10.31234/osf.io/9xt8r)",
+    citation = "**Kim, S.,** Jankowski, P., Hawkins, H.A., & Wang, D.C. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality. *OSF* [https://doi.org/10.31234/osf.io/9xt8r](https://doi.org/10.31234/osf.io/9xt8r)",
     doi = "10.31234/osf.io/9xt8r",
     pdf_link = NULL,
     preregistration_link = NULL,
