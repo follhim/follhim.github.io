@@ -105,221 +105,98 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools)
 </script>
 
 :::callout-note
-All publications are free to access. To view or download a file, please see my ResearchGate profile. 
+All publications are free to access. Some files may not be accessible in their final forms due to copyright restrictions.
 
-All preprints can be accessed through the DOI link. 
+Please refer to the legend below:
 
-Otherwise, please email me. 
+{{< iconify ic:baseline-picture-as-pdf size=lg >}} PDF File
+
+{{< iconify academicons:preregistered size=lg >}} Preregistration
+
+{{< iconify academicons:osf-square size=lg >}} OSF Repository
+
+{{< iconify academicons:psyarxiv size=lg >}} PsyArXiv Preprint
 :::
 
+## Publications
 
-```{r results = "asis"}
-#| echo: FALSE
-#| message: FALSE
-#| warning: FALSE
-#| results: "asis"
+```{r publications, results='asis', echo=FALSE}
+source("citations.R")
+# Create citation list with your manually formatted citations
+my_publications <- list(
+  # Pub 1
+  list(
+    citation = 'Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., **Kim, S.,** Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. *Journal of Studies on Alcohol and Drugs.* [https://doi.org/10.15288/jsad.24-00007](doi.org/10.15288/jsad.24-00007)',
+    doi = "10.15288/jsad.24-00007",
+    pdf_link = "https://drive.google.com/file/d/1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY/view?usp=sharing",
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = NULL
+  ),
+  
+  # Pub 2
+  list(
+    citation = '**Kim, S.,** Lefevor, G.T. & Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. *Journal of Homosexuality.* [https://doi.org/10.1080/00918369.2024.2378745](https://doi.org/10.1080/00918369.2024.2378745)',
+    doi = "10.1080/00918369.2024.2378745",
+    pdf_link = "https://drive.google.com/file/d/1Vvemb89xpOLp8mjQS0HePneRliNTD5zF/view?usp=sharing",
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = NULL
+  ),
+  
+  # Pub 3
+  list(
+    citation = 'Lefevor, G.T., **Kim, S.,** & Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. *Psychology of Sexual Orientation and Gender Diversity.* [https://doi.org/10.1037/sgd0000749](https://doi.org/10.1037/sgd0000749)',
+    doi = "10.1037/sgd0000749",
+    pdf_link = NULL,
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = NULL
+  )
+)
 
-# Function to get publications with DOIs
-get_all_pubs_with_doi <- function(scholar_id) {
-    # Get publications from Google Scholar
-    pubs <- get_publications(scholar_id)
-    
-    # Create a function to safely search for DOI
-    safe_get_doi <- function(title) {
-        Sys.sleep(1) # Rate limiting to be nice to the API
-        tryCatch({
-            result <- cr_works(query = title)$data
-            if(nrow(result) > 0) {
-                return(result$doi[1])
-            }
-            return(NA)
-        }, error = function(e) {
-            return(NA)
-        })
-    }
-    
-    # Add DOIs to the publications
-    pubs$doi <- sapply(pubs$title, safe_get_doi)
-    
-    return(pubs)
-}
-
-# Function to check if publication is a preprint
-is_preprint <- function(pub) {
-    if (is.na(pub$journal) && is.na(pub$doi)) {
-        return(FALSE)
-    }
-    return(grepl("OSF", pub$journal, ignore.case = TRUE) || 
-           grepl("OSF", pub$doi, ignore.case = TRUE))
-}
-
-
-# Function to format a single citation row
-format_citation_row <- function(pub, number) {
-    # Format authors
-    authors <- strsplit(pub$author, ", ")[[1]]
-    author_text <- paste(authors, collapse = ", ")
-    
-    # Bold "S Kim" in the author list
-    author_text <- gsub("S Kim", "<strong>S Kim</strong>", author_text)
-    
-    # Create base citation HTML
-    base_citation <- paste0(
-        number, ". ",  # Add the numbering
-        author_text,
-        ". (",
-        pub$year,
-        "). ",
-        pub$title,
-        ". <i>",
-        pub$journal,
-        "</i>"
-    )
-    
-    # Add DOI link if exists
-    if(!is.na(pub$doi)) {
-        base_citation <- paste0(
-            base_citation,
-            sprintf(
-                '. <a href="https://doi.org/%s">https://doi.org/%s</a>',
-                pub$doi,
-                pub$doi
-            )
-        )
-    }
-    
-    # Start building the table row with proper indentation
-    row_html <- paste0(
-        '<tr>',
-        '<td style="padding: 10px; width: 100%;">',  # Full width for citation
-        '<div style="text-indent: -1.5em; padding-left: 1.5em;">',  # Indentation
-        base_citation,
-        '</div>',
-        '</td>'
-    )
-    
-    # Add Dimensions badge with horizontal centering
-    if(!is.na(pub$doi)) {
-        row_html <- paste0(
-            row_html,
-            '<td style="padding: 10px; width: 40px; text-align: center;">',  # Smaller width, centered badge
-            '<div style="display: flex; justify-content: center;">',
-            sprintf(
-                '<span class="__dimensions_badge_embed__" data-doi="%s" data-style="small_circle" data-legend="hover-right"></span>',
-                pub$doi
-            ),
-            '</div>',
-            '</td>'
-        )
-    } else {
-        row_html <- paste0(row_html, '<td style="width: 60px;"></td>')
-    }
-    
-    # Add Altmetric badge with horizontal centering
-    if(!is.na(pub$doi)) {
-        row_html <- paste0(
-            row_html,
-            '<td style="padding: 10px; width: 40px; text-align: center;">',  # Smaller width, centered badge
-            '<div style="display: flex; justify-content: center;">',
-            sprintf(
-                '<div style="background-color: white; display: inline-block; border-radius: 50%%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);"><div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="%s"></div></div>',
-                pub$doi
-            ),
-            '</div>',
-            '</td>'
-        )
-    } else {
-        row_html <- paste0(row_html, '<td style="width: 60px;"></td>')
-    }
-    
-    # Close the row
-    row_html <- paste0(row_html, '</tr>')
-    
-    return(row_html)
-}
-
-# Main function to generate publication list
-generate_publication_html <- function(scholar_id) {
-    # Get publications
-    pubs <- get_all_pubs_with_doi(scholar_id)
-    
-    # Sort publications by year (ascending) and cites (descending) initially
-    pubs <- pubs[order(pubs$year, -pubs$cites),]
-    
-    # Split into publications and preprints
-    preprints <- pubs[sapply(split(pubs, 1:nrow(pubs)), is_preprint), ]
-    publications <- pubs[!sapply(split(pubs, 1:nrow(pubs)), is_preprint), ]
-    
-    # Reverse order for display (newer on top)
-    if(nrow(publications) > 0) {
-        publications <- publications[nrow(publications):1, ]
-    }
-    if(nrow(preprints) > 0) {
-        preprints <- preprints[nrow(preprints):1, ]
-    }
-    
-    # Generate HTML fragments using htmltools
-    html <- tagList(
-        tags$script(src = "https://badge.dimensions.ai/badge.js", async = TRUE, charset = "utf-8"),
-        tags$script(src = "https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js", async = TRUE, charset = "utf-8"),
-        tags$style("
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                table-layout: fixed;  /* Fixed column widths */
-            }
-            td {
-                color: inherit;
-                overflow-wrap: break-word;  /* Better text wrapping */
-                vertical-align: middle;     /* Vertical centering */
-            }
-            tr {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            /* Center badge containers */
-            td span.__dimensions_badge_embed__, 
-            td div.altmetric-embed {
-                margin: 0 auto;
-                display: block;
-            }
-        ")
-    )
-    
-    # Add publications section if exists
-    if(nrow(publications) > 0) {
-        publication_rows <- mapply(
-            format_citation_row,
-            split(publications, 1:nrow(publications)),
-            nrow(publications):1,
-            SIMPLIFY = FALSE
-        )
-        html <- tagList(
-            html,
-            tags$h1("Publications"),
-            HTML(paste0('<table>', paste(publication_rows, collapse = "\n"), '</table>'))
-        )
-    }
-    
-    # Add preprints section if exists
-    if(nrow(preprints) > 0) {
-        preprint_rows <- mapply(
-            format_citation_row,
-            split(preprints, 1:nrow(preprints)),
-            nrow(preprints):1,
-            SIMPLIFY = FALSE
-        )
-        html <- tagList(
-            html,
-            tags$h1("Preprints"),
-            HTML(paste0('<table>', paste(preprint_rows, collapse = "\n"), '</table>'))
-        )
-    }
-    
-    return(html)
-}
-
-# Run the generation and render HTML
-scholar_id <- "JWNJV9UAAAAJ"
-html_content <- generate_publication_html(scholar_id)
-html_content
+# Generate and display the publications table
+cat(generate_publications_table(my_publications))
 ```
+
+## Preprints
+
+:::callout-warning
+A preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.
+:::
+
+```{r preprints, results='asis', echo=FALSE}
+# You can create separate sections for different types of publications
+preprints <- list(
+  list(
+    citation = "**Kim, S.,** & Xu, W. Religious Leaders' LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. *OSF* [https://doi.org/10.31234/osf.io/rc8sh](https://doi.org/10.31234/osf.io/rc8sh)",
+    doi = "10.31234/osf.io/rc8sh",
+    pdf_link = NULL,
+    preregistration_link = "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf",
+    osf_link = NULL,
+    preprint_link = "https://doi.org/10.31234/osf.io/rc8sh"
+  ),
+  # Preprint 2
+  list(
+    citation = "**Kim, S.,** Wang, D. C., Gin, D. H. C., Deasy, J. A., & Sandage, S. Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. *OSF* [https://doi.org/10.31234/osf.io/mqwg9](https://doi.org/10.31234/osf.io/mqwg9)",
+    doi = "10.31234/osf.io/mqwg9",
+    pdf_link = NULL,
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = "https://doi.org/10.31234/osf.io/mqwg9"
+  ),
+  # Preprint 3
+  list(
+    citation = "**Kim, S.,** Jankowski, P., Hawkins, H.A., & Wang, D.C. Patterns of Christian Nationalist Engagement and Connections to Spirituality. *OSF* [https://doi.org/10.31234/osf.io/9xt8r](https://doi.org/10.31234/osf.io/9xt8r)",
+    doi = "10.31234/osf.io/9xt8r",
+    pdf_link = NULL,
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = "https://doi.org/10.31234/osf.io/9xt8r"
+  )
+)
+
+# Generate and display the preprints table
+cat(generate_publications_table(preprints))
+```
+

@@ -23,22 +23,16 @@ Thank you for visiting my personal website detailing my research interests and w
 
 ## Biography
 
-Seungju Kim[^1] (he/him) is a **National Science Foundation Graduate Research Fellow** and first-year PhD student in Clinical/Community Psychology at the University of Illinois. His research explores how religiosity and spirituality influence biases, empathy, and health disparities in privileged and marginalized communities.
+Seungju Kim[^1] (he/him) is a **National Science Foundation Graduate Research Fellow** and first-year PhD student in Clinical/Community Psychology at the University of Illinois under Dr. Nathan Todd. Prior to starting graduate school, he worked as a research assistant under Drs. Mark Yarhouse (Wheaton College) and Tyler Lefevor (Utah State University), a Research Scholar under Drs. Lorey Wheeler and Katie Edwards (University of Nebraska), and a Research Affiliate under Dr. David Wang (Fuller Theological Seminary). 
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
 ## Research Interests
 
-Using advanced statistical techniques, Seungju aims to uncover insights that can inform religious leaders, clinicians, and community researchers in their approach to caring for marginalized groups. His work spans multiple areas, including:
+My research explores the intersection of religiosity/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.
 
--   LGBTQ+/SGM
+I seek to develop innovative measurement tools that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.
 
--   BIPOC
+I am currently engaged in efforts to investigate both the pathways through which negative RS experiences may contribute to psychological distress and behavioral health, and how certain RS practices foster resilience and wellbeing.
 
--   Suicide, substance use, and depression
-
--   Religiosity/spirituality
-
--   Network Analysis
-
--   Structural Equation Modeling
+Finally, as part of my commitment to translational research, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals.
