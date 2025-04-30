@@ -18,11 +18,6 @@ website:
           href:  https://github.com/follhim/follhim.github.io
         - text: Report a Bug
           href:  https://github.com/follhim/follhim.github.io/issues
-  announcement:
-    dismissable: true
-    content: "**New**: This website has received minor updates externally, and major internally. See the Research page."
-    type: primary
-    position: below-navbar
   comments:
     giscus:
       repo: follhim/follhim.github.io

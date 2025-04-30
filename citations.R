@@ -19,7 +19,7 @@ convert_gdrive_link <- function(link) {
 
 # Function to create a citation with badges and multiple optional icon links
 create_citation_with_badges <- function(citation_text, doi, pdf_link = NULL, preregistration_link = NULL, 
-                                        osf_link = NULL, preprint_link = NULL) {
+                                        osf_link = NULL, preprint_link = NULL, open_access_link = NULL) {
   # Convert PDF link if it's a Google Drive link
   pdf_link <- convert_gdrive_link(pdf_link)
   
@@ -32,7 +32,8 @@ create_citation_with_badges <- function(citation_text, doi, pdf_link = NULL, pre
   )
   
   # Add a new line for icons if any are provided
-  if(!is.null(pdf_link) || !is.null(preregistration_link) || !is.null(osf_link) || !is.null(preprint_link)) {
+  if(!is.null(pdf_link) || !is.null(preregistration_link) || !is.null(osf_link) || 
+     !is.null(preprint_link) || !is.null(open_access_link)) {
     row_html <- paste0(row_html, '<br><div style="margin-top: 8px; margin-left: 1.5em;">')
     
     # Add PDF icon if provided
@@ -64,6 +65,14 @@ create_citation_with_badges <- function(citation_text, doi, pdf_link = NULL, pre
       row_html <- paste0(
         row_html, 
         '[{{< iconify academicons:psyarxiv size=lg >}}](', preprint_link, ') '
+      )
+    }
+    
+    # Add Open Access icon if provided
+    if(!is.null(open_access_link) && open_access_link != "") {
+      row_html <- paste0(
+        row_html, 
+        '[{{< iconify academicons:open-access size=lg >}}](', open_access_link, ') '
       )
     }
     
@@ -135,7 +144,8 @@ generate_publications_table <- function(citation_list) {
       item$pdf_link,
       item$preregistration_link,
       item$osf_link,
-      item$preprint_link
+      item$preprint_link,
+      item$open_access_link
     )
   })
   

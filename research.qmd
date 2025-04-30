@@ -105,13 +105,15 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools)
 </script>
 
 :::callout-note
-All publications are free to access. Some files may not be accessible in their final forms due to copyright restrictions.
+All publications are free to access. Some files may not be accessible in their final forms due to copyright restrictions. Should a link not be provided, please email me.
 
 Please refer to the legend below:
 
+{{< iconify academicons:preregistered size=lg >}} Preregistration
+
 {{< iconify ic:baseline-picture-as-pdf size=lg >}} PDF File
 
-{{< iconify academicons:preregistered size=lg >}} Preregistration
+{{< iconify academicons:open-access-square size=lg >}}  Open Access
 
 {{< iconify academicons:osf-square size=lg >}} OSF Repository
 
@@ -124,9 +126,17 @@ Please refer to the legend below:
 source("citations.R")
 # Create citation list with your manually formatted citations
 my_publications <- list(
+  # Publication 
+  list(
+    citation = 'Edwards, K. M., Wheeler, L., **Kim, S.,** Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., & Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth. *Journal of Interpersonal Violence.* [https://doi.org/10.1177/08862605251329471](https://doi.org/10.1177/08862605251329471)',
+    doi = "10.1177/08862605251329471",
+    preregistration_link = NULL,
+    osf_link = NULL,
+    preprint_link = NULL
+  ),
   # Pub 1
   list(
-    citation = 'Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., **Kim, S.,** Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. *Journal of Studies on Alcohol and Drugs.* [https://doi.org/10.15288/jsad.24-00007](doi.org/10.15288/jsad.24-00007)',
+    citation = 'Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., **Kim, S.,** Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. *Journal of Studies on Alcohol and Drugs.* [https://doi.org/10.15288/jsad.24-00007](https://doi.org/10.15288/jsad.24-00007)',
     doi = "10.15288/jsad.24-00007",
     pdf_link = "https://drive.google.com/file/d/1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY/view?usp=sharing",
     preregistration_link = NULL,
