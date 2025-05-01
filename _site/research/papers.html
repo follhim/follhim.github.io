@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Seungju Kim">
-<meta name="dcterms.date" content="2025-04-30">
+<meta name="dcterms.date" content="2025-05-01">
 
 <title>Research – Seungju Kim</title>
 <style>
@@ -80,9 +80,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubclosed','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubclosed','listing-note','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubclosed","listing-pdf"],
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubclosed","listing-note","listing-pdf"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -108,9 +108,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-preprint','listing-osf','listing-prereg',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-preprint','listing-osf','listing-prereg','listing-note',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-preprint","listing-osf","listing-prereg"],
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-preprint","listing-osf","listing-prereg","listing-note"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -267,7 +267,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">04/30/2025</p>
+      <p class="date">05/01/2025</p>
     </div>
   </div>
   
@@ -363,7 +363,7 @@ window.Quarto = {
     font-size: 1.2em;  /* Adjust as needed */
   }
   .citation {
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduced from 10px to 5px to decrease spacing */
   }
   .paper-list {
     list-style-type: none;
@@ -373,7 +373,8 @@ window.Quarto = {
     display: flex;
     flex-direction: row;
     width: 100%;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center for vertical alignment */
+    margin-bottom: 5px; /* Added to reduce space above the separator */
   }
   .paper-content {
     flex: 1;
@@ -384,7 +385,7 @@ window.Quarto = {
     min-width: 160px;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 0; /* Changed from 10px to 0 to align badges */
   }
   .badge-container {
     padding: 0 10px;
@@ -418,6 +419,11 @@ window.Quarto = {
   .note {
     color: rgba(255, 255, 255, 0.7);
   }
+  /* New style for smaller gap above horizontal line */
+  hr {
+    margin-top: 10px; /* Reduced margin above the horizontal line */
+    margin-bottom: 10px; /* Kept consistent spacing below */
+  }
 </style>
 <div class="paper-list">
   
@@ -436,7 +442,7 @@ window.Quarto = {
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -464,6 +470,11 @@ window.Quarto = {
           
           
           
+            <br>
+            <small class="text-secondary">
+              <span class="note">Please email me to obtain a copy.</span>    
+            </small>
+          
           </p>
         </div>
         
@@ -476,7 +487,7 @@ window.Quarto = {
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1177/08862605251329471"></div>
             </div>
           </div>
@@ -501,7 +512,7 @@ window.Quarto = {
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -546,7 +557,7 @@ window.Quarto = {
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.15288/jsad.24-00007"></div>
             </div>
           </div>
@@ -571,7 +582,7 @@ window.Quarto = {
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -616,7 +627,7 @@ window.Quarto = {
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1080/00918369.2024.2378745"></div>
             </div>
           </div>
@@ -641,7 +652,7 @@ window.Quarto = {
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -686,7 +697,7 @@ window.Quarto = {
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1037/sgd0000749"></div>
             </div>
           </div>
@@ -731,7 +742,7 @@ Warning
     font-size: 1.2em;  /* Adjust as needed */
   }
   .citation {
-    margin-bottom: 10px;
+    margin-bottom: 5px; /* Reduced from 10px to 5px to decrease spacing */
   }
   .paper-list {
     list-style-type: none;
@@ -741,7 +752,8 @@ Warning
     display: flex;
     flex-direction: row;
     width: 100%;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center for vertical alignment */
+    margin-bottom: 5px; /* Added to reduce space above the separator */
   }
   .paper-content {
     flex: 1;
@@ -752,7 +764,7 @@ Warning
     min-width: 160px;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 0; /* Changed from 10px to 0 to align badges */
   }
   .badge-container {
     padding: 0 10px;
@@ -786,6 +798,11 @@ Warning
   .note {
     color: rgba(255, 255, 255, 0.7);
   }
+  /* New style for smaller gap above horizontal line */
+  hr {
+    margin-top: 10px; /* Reduced margin above the horizontal line */
+    margin-bottom: 10px; /* Kept consistent spacing below */
+  }
 </style>
 <div class="paper-list">
   
@@ -802,7 +819,7 @@ Warning
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -850,7 +867,7 @@ Warning
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/rc8sh"></div>
             </div>
           </div>
@@ -873,7 +890,7 @@ Warning
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -901,6 +918,11 @@ Warning
           
           
           
+            <br>
+            <small class="text-secondary">
+              <span class="note">Currenty in-press at *Review of Religious Research*</span>    
+            </small>
+          
           </p>
         </div>
         
@@ -913,7 +935,7 @@ Warning
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/mqwg9"></div>
             </div>
           </div>
@@ -936,7 +958,7 @@ Warning
             
           </div>
           
-          <p>
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
           
           
           
@@ -980,7 +1002,7 @@ Warning
           
           <!-- Altmetric badge -->
           <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
               <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/9xt8r"></div>
             </div>
           </div>

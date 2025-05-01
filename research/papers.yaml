@@ -26,7 +26,7 @@
   # prereg: "https://osf.io/prereg123/"  # Preregistration
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
-  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+  note: "Please email me to obtain a copy."  # Additional note (displayed at bottom)
 
 - title: "An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial"
   type: "Published"                  # Use "Published" for published papers
@@ -153,7 +153,7 @@
   # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
-  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+  note: "Currenty in-press at Review of Religious Research"  # Additional note (displayed at bottom)
 
 - title: "Patterns of Christian Nationalist Engagement and Connections to Spirituality"
   type: "Preprint"                  # Use "Published" for published papers
