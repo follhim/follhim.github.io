@@ -2,7 +2,6 @@
 title: "Modeling Religion and Health"
 about:
   template: jolla
-  image-width: 600px
   image-shape: rectangle
   image: images/rel_health.png
   links: 

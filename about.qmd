@@ -4,7 +4,6 @@ about:
   id: intro-bio
   template: jolla
   image: images/headshot.png
-  image-width: 250px
   image-title: "Seungju Kim"
   links: 
     - text: "{{< iconify academicons:google-scholar height=35px width=35px >}}"
