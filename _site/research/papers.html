@@ -25,23 +25,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +70,63 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-published .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubclosed','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubclosed","listing-pdf"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-published'] = new List('listing-published', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-preprints .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-preprint','listing-osf','listing-prereg',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-preprint","listing-osf","listing-prereg"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-preprints'] = new List('listing-preprints', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-4B73YXR349"></script>
 
 <script type="text/javascript">
@@ -79,6 +137,35 @@ gtag('js', new Date());
 gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -89,7 +176,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Seungju Kim</span>
     </a>
   </div>
@@ -100,19 +187,19 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./home.html"> 
+    <a class="nav-link" href="../home.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./research.html" aria-current="page"> 
+    <a class="nav-link active" href="../research/papers.html" aria-current="page"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resource.html"> 
+    <a class="nav-link" href="../resource.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -146,7 +233,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#publications" id="toc-publications" class="nav-link active" data-scroll-target="#publications">Publications</a></li>
+  <li><a href="#published-papers" id="toc-published-papers" class="nav-link active" data-scroll-target="#published-papers">Published Papers</a></li>
   <li><a href="#preprints" id="toc-preprints" class="nav-link" data-scroll-target="#preprints">Preprints</a></li>
   </ul>
 </nav>
@@ -260,125 +347,360 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     document.getElementById('cv-download-button').addEventListener('click', incrementCount);
   });
 </script>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="published-papers" class="level2">
+<h2 class="anchored" data-anchor-id="published-papers">Published Papers</h2>
+<div id="listing-published" class="quarto-listing quarto-listing-container-custom">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css">
+<!-- Add required scripts for Dimensions and Altmetric badges -->
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<style>
+  .btn-xs {
+    padding: 1px 5px;
+    font-size: 15px;
+  }
+  .ai-lg {
+    font-size: 1.2em;  /* Adjust as needed */
+  }
+  .citation {
+    margin-bottom: 10px;
+  }
+  .paper-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .paper-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .paper-content {
+    flex: 1;
+  }
+  .paper-badges {
+    display: flex;
+    flex-direction: row;
+    min-width: 160px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .badge-container {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Custom button styling for dark themes */
+  .btn-light-outline {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .btn-light-outline:hover {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  /* Icon color adjustments for dark theme */
+  .bi, .ai {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .btn-light-outline:hover .bi,
+  .btn-light-outline:hover .ai {
+    color: #333;
+  }
+  /* Make note text visible on dark backgrounds */
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .note {
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>
+<div class="paper-list">
+  
+    <div data-index="0">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            Edwards, K. M., Wheeler, L., <strong>Kim, S.</strong>, Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth.
+            
+              <i>Journal of Interpersonal Violence</i>.
+            
+            
+              <a href="https://doi.org/10.1177/08862605251329471">https://doi.org/10.1177/08862605251329471</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.1177/08862605251329471" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
+            </a>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.1177/08862605251329471" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1177/08862605251329471"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="1">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., <strong>Kim, S.</strong>, Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial.
+            
+              <i>Journal of Studies on Alcohol and Drugs</i>.
+            
+            
+              <a href="https://doi.org/10.15288/jsad.24-00007">https://doi.org/10.15288/jsad.24-00007</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+            
+            <a role="button" href="https://drive.google.com/uc?export=download&amp;id=1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
+            </a> 
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.15288/jsad.24-00007" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
+            </a>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.15288/jsad.24-00007" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.15288/jsad.24-00007"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="2">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            <strong>Kim, S.</strong>, Lefevor, G.T., Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity.
+            
+              <i>Journal of Homosexuality</i>.
+            
+            
+              <a href="https://doi.org/10.1080/00918369.2024.2378745">https://doi.org/10.1080/00918369.2024.2378745</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+            
+            <a role="button" href="https://drive.google.com/uc?export=download&amp;id=1Vvemb89xpOLp8mjQS0HePneRliNTD5zF" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
+            </a> 
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.1080/00918369.2024.2378745" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
+            </a>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.1080/00918369.2024.2378745" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1080/00918369.2024.2378745"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="3">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            Lefevor, G.T., <strong>Kim, S.</strong>, Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model.
+            
+              <i>Psychology of Sexual Orientation and Gender Diversity</i>.
+            
+            
+              <a href="https://doi.org/10.1037/sgd0000749">https://doi.org/10.1037/sgd0000749</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+            
+            <a role="button" href="https://drive.google.com/uc?export=download&amp;id=1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
+            </a> 
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.1037/sgd0000749" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
+            </a>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.1037/sgd0000749" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1037/sgd0000749"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<div class="listing-no-matching d-none">
+No matching items
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>All publications are free to access. Some files may not be accessible in their final forms due to copyright restrictions. Should a link not be provided, please email me.</p>
-<p>Please refer to the legend below:</p>
-<p><iconify-icon role="img" inline="" icon="academicons:preregistered" style="font-size: 1.25em;" aria-label="Icon preregistered from academicons Iconify.design set." title="Icon preregistered from academicons Iconify.design set."></iconify-icon> Preregistration</p>
-<p><iconify-icon role="img" inline="" icon="ic:baseline-picture-as-pdf" style="font-size: 1.25em;" aria-label="Icon baseline-picture-as-pdf from ic Iconify.design set." title="Icon baseline-picture-as-pdf from ic Iconify.design set."></iconify-icon> PDF File</p>
-<p><iconify-icon role="img" inline="" icon="academicons:open-access-square" style="font-size: 1.25em;" aria-label="Icon open-access-square from academicons Iconify.design set." title="Icon open-access-square from academicons Iconify.design set."></iconify-icon> Open Access</p>
-<p><iconify-icon role="img" inline="" icon="academicons:osf-square" style="font-size: 1.25em;" aria-label="Icon osf-square from academicons Iconify.design set." title="Icon osf-square from academicons Iconify.design set."></iconify-icon> OSF Repository</p>
-<p><iconify-icon role="img" inline="" icon="academicons:psyarxiv" style="font-size: 1.25em;" aria-label="Icon psyarxiv from academicons Iconify.design set." title="Icon psyarxiv from academicons Iconify.design set."></iconify-icon> PsyArXiv Preprint</p>
-</div>
-</div>
-<section id="publications" class="level2">
-<h2 class="anchored" data-anchor-id="publications">Publications</h2>
-<script src="https://badge.dimensions.ai/badge.js" async="" charset="utf-8"></script>
-<script src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js" async="" charset="utf-8"></script>
-<style>table { width: 100%; border-collapse: collapse; table-layout: fixed; }td { color: inherit; overflow-wrap: break-word; vertical-align: middle; }tr { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }td span.__dimensions_badge_embed__, td div.altmetric-embed { margin: 0 auto; display: block; }</style>
-<table>
-<tbody><tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-Edwards, K. M., Wheeler, L., <strong>Kim, S.,</strong> Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., &amp; Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth. <em>Journal of Interpersonal Violence.</em> <a href="https://doi.org/10.1177/08862605251329471">https://doi.org/10.1177/08862605251329471</a>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.1177/08862605251329471" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1177/08862605251329471">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., <strong>Kim, S.,</strong> Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., &amp; Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. <em>Journal of Studies on Alcohol and Drugs.</em> <a href="https://doi.org/10.15288/jsad.24-00007">https://doi.org/10.15288/jsad.24-00007</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://drive.google.com/uc?export=download&amp;id=1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY"><iconify-icon role="img" inline="" icon="ic:baseline-picture-as-pdf" style="font-size: 1.25em;" aria-label="Icon baseline-picture-as-pdf from ic Iconify.design set." title="Icon baseline-picture-as-pdf from ic Iconify.design set."></iconify-icon></a>
-</div>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.15288/jsad.24-00007" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.15288/jsad.24-00007">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-<strong>Kim, S.,</strong> Lefevor, G.T. &amp; Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. <em>Journal of Homosexuality.</em> <a href="https://doi.org/10.1080/00918369.2024.2378745">https://doi.org/10.1080/00918369.2024.2378745</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://drive.google.com/uc?export=download&amp;id=1Vvemb89xpOLp8mjQS0HePneRliNTD5zF"><iconify-icon role="img" inline="" icon="ic:baseline-picture-as-pdf" style="font-size: 1.25em;" aria-label="Icon baseline-picture-as-pdf from ic Iconify.design set." title="Icon baseline-picture-as-pdf from ic Iconify.design set."></iconify-icon></a>
-</div>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.1080/00918369.2024.2378745" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1080/00918369.2024.2378745">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-Lefevor, G.T., <strong>Kim, S.,</strong> &amp; Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. <em>Psychology of Sexual Orientation and Gender Diversity.</em> <a href="https://doi.org/10.1037/sgd0000749">https://doi.org/10.1037/sgd0000749</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://drive.google.com/uc?export=download&amp;id=1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG"><iconify-icon role="img" inline="" icon="ic:baseline-picture-as-pdf" style="font-size: 1.25em;" aria-label="Icon baseline-picture-as-pdf from ic Iconify.design set." title="Icon baseline-picture-as-pdf from ic Iconify.design set."></iconify-icon></a>
-</div>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.1037/sgd0000749" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1037/sgd0000749">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-</tbody></table>
 </section>
 <section id="preprints" class="level2">
 <h2 class="anchored" data-anchor-id="preprints">Preprints</h2>
@@ -395,83 +717,281 @@ Warning
 <p>A preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.</p>
 </div>
 </div>
-<script src="https://badge.dimensions.ai/badge.js" async="" charset="utf-8"></script>
-<script src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js" async="" charset="utf-8"></script>
-<style>table { width: 100%; border-collapse: collapse; table-layout: fixed; }td { color: inherit; overflow-wrap: break-word; vertical-align: middle; }tr { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }td span.__dimensions_badge_embed__, td div.altmetric-embed { margin: 0 auto; display: block; }</style>
-<table>
-<tbody><tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-<strong>Kim, S.,</strong> &amp; Xu, W. (2024). Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. <em>OSF</em> <a href="https://doi.org/10.31234/osf.io/rc8sh">https://doi.org/10.31234/osf.io/rc8sh</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"><iconify-icon role="img" inline="" icon="academicons:preregistered" style="font-size: 1.25em;" aria-label="Icon preregistered from academicons Iconify.design set." title="Icon preregistered from academicons Iconify.design set."></iconify-icon></a> <a href="https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"><iconify-icon role="img" inline="" icon="academicons:osf-square" style="font-size: 1.25em;" aria-label="Icon osf-square from academicons Iconify.design set." title="Icon osf-square from academicons Iconify.design set."></iconify-icon></a> <a href="https://doi.org/10.31234/osf.io/rc8sh"><iconify-icon role="img" inline="" icon="academicons:psyarxiv" style="font-size: 1.25em;" aria-label="Icon psyarxiv from academicons Iconify.design set." title="Icon psyarxiv from academicons Iconify.design set."></iconify-icon></a>
+<div id="listing-preprints" class="quarto-listing quarto-listing-container-custom">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css">
+<!-- Add required scripts for Dimensions and Altmetric badges -->
+<script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<style>
+  .btn-xs {
+    padding: 1px 5px;
+    font-size: 15px;
+  }
+  .ai-lg {
+    font-size: 1.2em;  /* Adjust as needed */
+  }
+  .citation {
+    margin-bottom: 10px;
+  }
+  .paper-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .paper-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .paper-content {
+    flex: 1;
+  }
+  .paper-badges {
+    display: flex;
+    flex-direction: row;
+    min-width: 160px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .badge-container {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Custom button styling for dark themes */
+  .btn-light-outline {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .btn-light-outline:hover {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  /* Icon color adjustments for dark theme */
+  .bi, .ai {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .btn-light-outline:hover .bi,
+  .btn-light-outline:hover .ai {
+    color: #333;
+  }
+  /* Make note text visible on dark backgrounds */
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .note {
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>
+<div class="paper-list">
+  
+    <div data-index="0">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            <strong>Kim, S.</strong>, Xu, W. (2024). Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors.
+            
+            
+              <a href="https://doi.org/10.31234/osf.io/rc8sh">https://doi.org/10.31234/osf.io/rc8sh</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.31234/osf.io/rc8sh" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
+            </a> 
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-osf ai-lg"></i> OSF
+            </a>
+          
+          
+          
+          
+          
+            <a role="button" href="https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-preregistered ai-lg"></i> Preregistration 
+            </a> 
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/rc8sh" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/rc8sh"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="1">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            <strong>Kim, S.</strong>, Wang, D. C., Gin, D.H., Deasy, J.A., Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders.
+            
+            
+              <a href="https://doi.org/10.31234/osf.io/mqwg9">https://doi.org/10.31234/osf.io/mqwg9</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.31234/osf.io/mqwg9" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
+            </a> 
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/mqwg9" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/mqwg9"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="2">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
+            <strong>Kim, S.</strong>, Jankowski, P.J., Wang, D. C., Hawkins, H.H. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality.
+            
+            
+              <a href="https://doi.org/10.31234/osf.io/9xt8r">https://doi.org/10.31234/osf.io/9xt8r</a>
+            
+          </div>
+          
+          <p>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.31234/osf.io/9xt8r" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
+            </a> 
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/9xt8r" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/9xt8r"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+</div>
+<div class="listing-no-matching d-none">
+No matching items
 </div>
 </div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/rc8sh" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/rc8sh">
 
-</div>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-<strong>Kim, S.,</strong> Wang, D. C., Gin, D. H. C., Deasy, J. A., &amp; Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. <em>OSF</em> <a href="https://doi.org/10.31234/osf.io/mqwg9">https://doi.org/10.31234/osf.io/mqwg9</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://doi.org/10.31234/osf.io/mqwg9"><iconify-icon role="img" inline="" icon="academicons:psyarxiv" style="font-size: 1.25em;" aria-label="Icon psyarxiv from academicons Iconify.design set." title="Icon psyarxiv from academicons Iconify.design set."></iconify-icon></a>
-</div>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/mqwg9" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/mqwg9">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-<tr>
-<td style="padding: 10px; width: 100%;">
-<div style="text-indent: -1.5em; padding-left: 1.5em;">
-<strong>Kim, S.,</strong> Jankowski, P., Hawkins, H.A., &amp; Wang, D.C. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality. <em>OSF</em> <a href="https://doi.org/10.31234/osf.io/9xt8r">https://doi.org/10.31234/osf.io/9xt8r</a><br>
-<div style="margin-top: 8px; margin-left: 1.5em;">
-<a href="https://doi.org/10.31234/osf.io/9xt8r"><iconify-icon role="img" inline="" icon="academicons:psyarxiv" style="font-size: 1.25em;" aria-label="Icon psyarxiv from academicons Iconify.design set." title="Icon psyarxiv from academicons Iconify.design set."></iconify-icon></a>
-</div>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center;">
-<span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/9xt8r" data-style="small_circle" data-legend="hover-right"></span>
-</div>
-</td>
-<td style="padding: 10px; width: 80px; text-align: center;">
-<div style="display: flex; justify-content: center; margin-left: 20px;">
-<div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);">
-<div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/9xt8r">
-
-</div>
-</div>
-</div>
-</td>
-</tr>
-</tbody></table>
 
 
 </section>

@@ -1,0 +1,184 @@
+---
+# Published paper example
+- title: "Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "Edwards, K. M."
+    - "Wheeler, L."
+    - "**Kim, S.**"
+    - "Miller, G."
+    - "Napolitano, C."
+    - "Xu, W."
+    - "Littleton, H." 
+    - "Gardella, J."
+    - "Farquhar-Leicester, A."
+    - "Chavez, A."                   # First author                   # Second author
+  year: 2025                        # Publication year (for published papers)
+  journal: "Journal of Interpersonal Violence"  # Journal name
+  doi: "10.1177/08862605251329471"       # DOI without the https://doi.org/ prefix
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  pubclosed: "https://doi.org/10.1177/08862605251329471"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # osf: "https://osf.io/example/"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/prereg123/"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+- title: "An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - Edwards, K. M. 
+    - Littleton, H. 
+    - Gardella, J. 
+    - Wheeler, L. A. 
+    - Farquhar-Leicester, A. 
+    - Xu, W. 
+    - Spitz, C. 
+    - Hespe, P. 
+    - Chavez, A. 
+    - "**Kim, S.**"
+    - Choi, D. 
+    - Allen, M. 
+    - Camp, E. 
+    - Ashworth, S. 
+    - Sharma, M. 
+    - Girard, J. 
+    - Higgins, M. 
+    - Hopfauf, S.
+    - Neighbors, C.                  
+  year: 2025                        # Publication year (for published papers)
+  journal: "Journal of Studies on Alcohol and Drugs"  # Journal name
+  doi: "10.15288/jsad.24-00007"       # DOI without the https://doi.org/ prefix
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  pubclosed: "https://doi.org/10.15288/jsad.24-00007"     # Publisher version (if not open access)
+  pdf: "https://drive.google.com/file/d/1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY/view?usp=sharing"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # osf: "https://osf.io/example/"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/prereg123/"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+- title: "Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Lefevor, G.T."
+    - "Skidmore, S.J."                
+  year: 2024                        # Publication year (for published papers)
+  journal: "Journal of Homosexuality"  # Journal name
+  doi: "10.1080/00918369.2024.2378745"       # DOI without the https://doi.org/ prefix
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  pubclosed: "https://doi.org/10.1080/00918369.2024.2378745"     # Publisher version (if not open access)
+  pdf: "https://drive.google.com/file/d/1Vvemb89xpOLp8mjQS0HePneRliNTD5zF/view?usp=sharing"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # osf: "https://osf.io/example/"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/prereg123/"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+- title: "How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "Lefevor, G.T."
+    - "**Kim, S.**"
+    - "Perez-Figueroa, A.M."
+                   # First author                   # Second author
+  year: 2024                        # Publication year (for published papers)
+  journal: "Psychology of Sexual Orientation and Gender Diversity"  # Journal name
+  doi: "10.1037/sgd0000749"       # DOI without the https://doi.org/ prefix
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  pubclosed: "https://doi.org/10.1037/sgd0000749"     # Publisher version (if not open access)
+  pdf: "https://drive.google.com/file/d/1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG/view?usp=sharing"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # osf: "https://osf.io/example/"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/prereg123/"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+## PREPRINTS
+
+- title: "Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors"
+  type: "Preprint"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Xu, W."
+  year: 2024                        # Publication year (for published papers)
+  journal: "OSF"  # Journal name
+  doi: "10.31234/osf.io/rc8sh"
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  preprint: "https://doi.org/10.31234/osf.io/rc8sh"
+  osf: "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+- title: "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders"
+  type: "Preprint"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Wang, D. C."
+    - "Gin, D.H."
+    - "Deasy, J.A."
+    - "Sandage, S."
+  year: 2024                        # Publication year (for published papers)
+  journal: "OSF"  # Journal name
+  doi: "10.31234/osf.io/mqwg9"
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  preprint: "https://doi.org/10.31234/osf.io/mqwg9"
+  # osf: "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+- title: "Patterns of Christian Nationalist Engagement and Connections to Spirituality"
+  type: "Preprint"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Jankowski, P.J."
+    - "Wang, D. C."
+    - "Hawkins, H.H."
+  year: 2024                        # Publication year (for published papers)
+  journal: "OSF"  # Journal name
+  doi: "10.31234/osf.io/9xt8r"
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  preprint: "https://doi.org/10.31234/osf.io/9xt8r"
+  # osf: "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+
+
+
+

@@ -1,0 +1,138 @@
+---
+title: "Research"
+date: last-modified
+date-format: "MM/DD/YYYY"
+author:
+  - name: Seungju Kim
+    orcid: 0009-0009-5166-9170
+    email: seungju7@illinois.edu
+    affiliation: 
+      - name: University of Illinois, Urbana-Champaign
+        department: Psychology
+title-block-banner: false
+format: html
+comments: false
+description: "" 
+listing:
+  - id: published
+    include: 
+      type: "Published"
+    contents: papers.yaml
+    template: papers.ejs
+    filter-ui: false
+    sort: "date desc"
+    sort-ui: false
+    #categories: true  
+  - id: preprints
+    include: 
+      type: "Preprint"    # Changed from lowercase "preprint" to "Preprint" to match YAML
+    contents: papers.yaml
+    template: papers.ejs
+    #filter-ui: true
+    sort: "date desc" 
+    sort-ui: false
+    #categories: true
+toc: true    
+#page-layout: full
+---
+
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| include: FALSE
+# Required packages
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here)
+```
+
+<a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" 
+   class="btn btn-success" 
+   target="_blank"
+   id="cv-download-button"
+   data-tracking="cv-download">
+    <i class="bi bi-file-earmark-pdf"></i> Download CV
+</a>
+<span id="count" class="badge bg-primary ms-2">0</span>
+
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "{{ FB_API }}",
+      authDomain: "cv-download-40a41.firebaseapp.com",
+      projectId: "cv-download-40a41",
+      storageBucket: "cv-download-40a41.firebasestorage.app",
+      messagingSenderId: "842134969852",
+      appId: "{{ APPID }}",
+      measurementId: "G-7149VRMDP5"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const countRef = doc(db, "counts", "cvDownload"); // Updated to match your new structure
+
+    // Function to increment the CV download count
+    async function incrementCount() {
+      console.log("Increment button clicked");
+      try {
+        await runTransaction(db, async (transaction) => {
+          const countDoc = await transaction.get(countRef);
+          if (!countDoc.exists()) {
+            console.log("Document does not exist. Creating new document.");
+            transaction.set(countRef, { counts: 1 }); // Changed count to counts to match your field name
+          } else {
+            const newCount = countDoc.data().counts + 1; // Changed count to counts
+            console.log("Document exists. Updating count to:", newCount);
+            transaction.update(countRef, { counts: newCount }); // Changed count to counts
+          }
+        });
+        console.log("Transaction successful!");
+        getCount();
+      } catch (error) {
+        console.error("Transaction failed:", error);
+      }
+    }
+
+    // Function to get the current CV download count
+    async function getCount() {
+      console.log("Fetching count from Firestore");
+      try {
+        const countDoc = await getDoc(countRef);
+        if (countDoc.exists()) {
+          console.log("Count document exists:", countDoc.data());
+          document.getElementById("count").innerText = countDoc.data().counts; // Changed count to counts
+        } else {
+          console.log("Count document does not exist");
+          document.getElementById("count").innerText = "0";
+        }
+      } catch (error) {
+        console.error("Error getting document:", error);
+      }
+    }
+
+    // Load the current count when the page loads
+    getCount();
+
+    // Attach event listener to the CV download button
+    document.getElementById('cv-download-button').addEventListener('click', incrementCount);
+  });
+</script>
+
+## Published Papers
+
+:::{#published}
+:::
+
+## Preprints
+:::callout-warning
+A preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.
+:::
+
+:::{#preprints}
+:::

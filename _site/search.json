@@ -1,61 +1,5 @@
 [
   {
-    "objectID": "home.html",
-    "href": "home.html",
-    "title": "Welcome",
-    "section": "",
-    "text": "My name is Seungju Kim1 and thank you for visiting my personal website detailing my research interests and work!\nI am a National Science Foundation Graduate Research Fellow and first-year PhD student in Clinical/Community Psychology Program at the University of Illinois under Dr. Nathan Todd.\nMy research is focused on modeling the relationship between religiosity/spirituality (RS) and psychological/behavioral health in historically marginalized communities."
-  },
-  {
-    "objectID": "home.html#welcome",
-    "href": "home.html#welcome",
-    "title": "Seungju Kim",
-    "section": "",
-    "text": "Thank you for visiting my personal website detailing my research interests and work. This website contains a collection of my work and other research resources."
-  },
-  {
-    "objectID": "home.html#biography",
-    "href": "home.html#biography",
-    "title": "My name is Seungju Kim",
-    "section": "",
-    "text": "Seungju Kim1 (he/him) is a Prior to starting graduate school, he worked as a research assistant under Drs. Mark Yarhouse (Wheaton College) and Tyler Lefevor (Utah State University), a Research Scholar under Drs. Lorey Wheeler and Katie Edwards (University of Nebraska), and a Research Affiliate under Dr. David Wang (Fuller Theological Seminary)."
-  },
-  {
-    "objectID": "home.html#research-interests",
-    "href": "home.html#research-interests",
-    "title": "Welcome",
-    "section": "Research Interests",
-    "text": "Research Interests\nMy research explores the intersection of religiosity/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.\nI seek to develop innovative measurement tools that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.\nI am currently engaged in efforts to model RS-health pathways through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.\nFinally, as part of my commitment to translational research, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals."
-  },
-  {
-    "objectID": "home.html#footnotes",
-    "href": "home.html#footnotes",
-    "title": "Welcome",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "research.html",
-    "href": "research.html",
-    "title": "Research",
-    "section": "",
-    "text": "Download CV  0"
-  },
-  {
-    "objectID": "research.html#publications",
-    "href": "research.html#publications",
-    "title": "Research",
-    "section": "Publications",
-    "text": "Publications\n\n\n\n\n\n\n\nEdwards, K. M., Wheeler, L., Kim, S., Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., & Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth. Journal of Interpersonal Violence. https://doi.org/10.1177/08862605251329471\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEdwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., Kim, S., Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. Journal of Studies on Alcohol and Drugs. https://doi.org/10.15288/jsad.24-00007\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKim, S., Lefevor, G.T. & Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. Journal of Homosexuality. https://doi.org/10.1080/00918369.2024.2378745\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLefevor, G.T., Kim, S., & Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. Psychology of Sexual Orientation and Gender Diversity. https://doi.org/10.1037/sgd0000749"
-  },
-  {
     "objectID": "resource.html",
     "href": "resource.html",
     "title": "Resources",
@@ -77,6 +21,20 @@
     "text": "Modify Output.\nThe full arguments are below.\n\napa.cor.table(\n  trees,\n  filename = NA, # (optional) a filename must end in .doc or .rtf\n  table.number = 0, # optional, you can add in Word.\n  show.conf.interval = TRUE, # Optional, and most would make this FALSE.\n  show.sig.stars = TRUE,\n  show.pvalue = TRUE, # unfortunately, it will only show ** &lt; .01, which is why you should keep this TRUE to add a third *** for &lt; .001.\n  landscape = TRUE\n)\n\n\n\nTable 0 \n\nDescriptive Statistics and Correlations\n \n\n  Variable  N  M     SD    1          2         \n  1. Girth  31 13.25 3.14                       \n                                                \n                                                \n                                                \n  2. Height 31 76.00 6.37  .52**                \n                           [.20, .74]           \n                           p = .003             \n                                                \n  3. Volume 31 30.17 16.44 .97**      .60**     \n                           [.93, .98] [.31, .79]\n                           p &lt; .001   p &lt; .001  \n                                                \n\nNote. N = number of cases. M = mean. SD = standard deviation.\nValues in square brackets indicate the 95% confidence interval.\n * indicates p &lt; .05. ** indicates p &lt; .01.\n \n\n\n\n\n\n\n\n\nImportant\n\n\n\nUnfortunately, it will only show * &lt;.05 or ** &lt; .01, which is why you should keep show.pvalue = TRUE to manually add a third *** for &lt; .001."
   },
   {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Download CV  0"
+  },
+  {
+    "objectID": "research.html#publications",
+    "href": "research.html#publications",
+    "title": "Research",
+    "section": "Publications",
+    "text": "Publications\n\n\n\n\n\n\n\nEdwards, K. M., Wheeler, L., Kim, S., Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., & Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth. Journal of Interpersonal Violence. https://doi.org/10.1177/08862605251329471\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEdwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., Kim, S., Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. Journal of Studies on Alcohol and Drugs. https://doi.org/10.15288/jsad.24-00007\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKim, S., Lefevor, G.T. & Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. Journal of Homosexuality. https://doi.org/10.1080/00918369.2024.2378745\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLefevor, G.T., Kim, S., & Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. Psychology of Sexual Orientation and Gender Diversity. https://doi.org/10.1037/sgd0000749"
+  },
+  {
     "objectID": "research.html#preprints",
     "href": "research.html#preprints",
     "title": "Research",
@@ -84,10 +42,94 @@
     "text": "Preprints\n\n\n\n\n\n\nWarning\n\n\n\nA preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.\n\n\n\n\n\n\n\n\n\nKim, S., & Xu, W. (2024). Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. OSF https://doi.org/10.31234/osf.io/rc8sh\n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKim, S., Wang, D. C., Gin, D. H. C., Deasy, J. A., & Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. OSF https://doi.org/10.31234/osf.io/mqwg9\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKim, S., Jankowski, P., Hawkins, H.A., & Wang, D.C. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality. OSF https://doi.org/10.31234/osf.io/9xt8r"
   },
   {
-    "objectID": "home.html#news",
-    "href": "home.html#news",
-    "title": "Welcome",
-    "section": "News",
-    "text": "News\nUniversity of California, San Diego | San Diego, CA PhD in Mathematics | Sept 2011 - June 2015\nMacalester College | St. Paul, MN B.A in Economics | Sept 2007 - June 2011"
+    "objectID": "home.html",
+    "href": "home.html",
+    "title": "Modeling Religion and Health",
+    "section": "",
+    "text": "Hello, and thank you for visiting my website! My name is Seungju and this website is focused on disseminating my research on modeling the relationship between religiousness/spirituality and health.\nMy scholarship is particularly focuses on:\nAdverse and beneficial religious experiences Mental and behavioral health LGBTQ+ communities Religious leaders, families, and communities\n\n\nNews\n\n\n\n\n\n\n\n04/2025\n“Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth” is now published in Journal of Interpersonal Violence.\n\n\n04/2025\nMy paper “Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders” is now in-press at Review of Religious Research."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
+    "section": "",
+    "text": "My name is Seungju Kim1 and thank you for visiting my personal website detailing my research interests and work!\nI am a National Science Foundation Graduate Research Fellow and first-year PhD student in Clinical/Community Psychology Program at the University of Illinois under Dr. Nathan Todd.\nMy research is focused on modeling the relationship between religiosity/spirituality (RS) and psychological/behavioral health in historically marginalized communities."
+  },
+  {
+    "objectID": "about.html#seungju-kim",
+    "href": "about.html#seungju-kim",
+    "title": "About Me",
+    "section": "",
+    "text": "My name is Seungju Kim1 and thank you for visiting my personal website detailing my research interests and work!\nI am a National Science Foundation Graduate Research Fellow and first-year PhD student in Clinical/Community Psychology Program at the University of Illinois under Dr. Nathan Todd.\nMy research is focused on modeling the relationship between religiosity/spirituality (RS) and psychological/behavioral health in historically marginalized communities."
+  },
+  {
+    "objectID": "about.html#research-interests",
+    "href": "about.html#research-interests",
+    "title": "About Me",
+    "section": "Research Interests",
+    "text": "Research Interests\nMy research explores the intersection of religiosity/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.\nI seek to develop innovative measurement tools that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.\nI am currently engaged in efforts to model RS-health pathways through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.\nFinally, as part of my commitment to translational research, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals."
+  },
+  {
+    "objectID": "about.html#footnotes",
+    "href": "about.html#footnotes",
+    "title": "About Me",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
+  },
+  {
+    "objectID": "research/papers.html",
+    "href": "research/papers.html",
+    "title": "Research",
+    "section": "",
+    "text": "Download CV  0"
+  },
+  {
+    "objectID": "research/papers.html#working-papers",
+    "href": "research/papers.html#working-papers",
+    "title": "Papers",
+    "section": "Working Papers",
+    "text": "Working Papers\n\n\n\n\n\n\n\n  \n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/papers.html#forthcoming",
+    "href": "research/papers.html#forthcoming",
+    "title": "Papers",
+    "section": "Forthcoming",
+    "text": "Forthcoming\n\n\n\n\n\n\n\n  \n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/papers.html#published-papers",
+    "href": "research/papers.html#published-papers",
+    "title": "Research",
+    "section": "Published Papers",
+    "text": "Published Papers\n\n\n\n\n\n\n\n  \n    \n      \n        \n          \n            \n            \n            Edwards, K. M., Wheeler, L., Kim, S., Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth.\n            \n              Journal of Interpersonal Violence.\n            \n            \n              https://doi.org/10.1177/08862605251329471\n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n             \n               Publisher's Version \n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n    \n      \n        \n          \n            \n            \n            Edwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., Kim, S., Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial.\n            \n              Journal of Studies on Alcohol and Drugs.\n            \n            \n              https://doi.org/10.15288/jsad.24-00007\n            \n          \n          \n          \n          \n          \n          \n          \n          \n            \n             \n               PDF \n             \n          \n          \n          \n          \n          \n             \n               Publisher's Version \n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n    \n      \n        \n          \n            \n            \n            Kim, S., Lefevor, G.T., Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity.\n            \n              Journal of Homosexuality.\n            \n            \n              https://doi.org/10.1080/00918369.2024.2378745\n            \n          \n          \n          \n          \n          \n          \n          \n          \n            \n             \n               PDF \n             \n          \n          \n          \n          \n          \n             \n               Publisher's Version \n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n    \n      \n        \n          \n            \n            \n            Lefevor, G.T., Kim, S., Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model.\n            \n              Psychology of Sexual Orientation and Gender Diversity.\n            \n            \n              https://doi.org/10.1037/sgd0000749\n            \n          \n          \n          \n          \n          \n          \n          \n          \n            \n             \n               PDF \n             \n          \n          \n          \n          \n          \n             \n               Publisher's Version \n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n\n\nNo matching items"
+  },
+  {
+    "objectID": "research/research.html",
+    "href": "research/research.html",
+    "title": "Research",
+    "section": "",
+    "text": "Download CV  0"
+  },
+  {
+    "objectID": "research/research.html#publications",
+    "href": "research/research.html#publications",
+    "title": "Research",
+    "section": "Publications",
+    "text": "Publications\n\n\n \n\n\n\n\nEdwards, K. M., Wheeler, L., *&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; Miller, G., Napolitano, C., Xu, W., Littleton, H., Gardella, J., Farquhar-Leicester, A., & Chavez, A. (2025). Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth. &lt;/span&gt;Journal of Interpersonal Violence.* &lt;a href=\"https://doi.org/10.1177/08862605251329471\" class=\"doi-link\"&gt;https://doi.org/10.1177/08862605251329471&lt;/a&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.1177/08862605251329471\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.1177/08862605251329471\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n\n\n\n\nEdwards, K. M., Littleton, H., Gardella, J., Wheeler, L. A., Farquhar-Leicester, A., Xu, W., Spitz, C., Hespe, P., Chavez, A., *&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; Choi, D., Allen, M., Camp, E., Ashworth, S., Sharma, M., Girard, J., Higgins, M., Hopfauf, S., & Neighbors, C. (2025). An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial. &lt;/span&gt;Journal of Studies on Alcohol and Drugs.* &lt;a href=\"https://doi.org/10.15288/jsad.24-00007\" class=\"doi-link\"&gt;https://doi.org/10.15288/jsad.24-00007&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://drive.google.com/uc?export=download&id=1q02lGcU0Nf6Hj0mVu9Fl2wygBx3SfjlY\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"bi bi-file-earmark-pdf\"&gt;&lt;/i&gt; PDF&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.15288/jsad.24-00007\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.15288/jsad.24-00007\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n\n\n\n\n*&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; Lefevor, G.T. & Skidmore, S.J. (2024). Mitigating the Impact of Religiously Based Family Expectations on Depression among Sexual and Gender Minorities: The Role of Authenticity. &lt;/span&gt;Journal of Homosexuality.* &lt;a href=\"https://doi.org/10.1080/00918369.2024.2378745\" class=\"doi-link\"&gt;https://doi.org/10.1080/00918369.2024.2378745&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://drive.google.com/uc?export=download&id=1Vvemb89xpOLp8mjQS0HePneRliNTD5zF\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"bi bi-file-earmark-pdf\"&gt;&lt;/i&gt; PDF&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.1080/00918369.2024.2378745\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.1080/00918369.2024.2378745\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n\n\n\n\nLefevor, G.T., *&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; & Perez-Figueroa, A.M. (2024). How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model. &lt;/span&gt;Psychology of Sexual Orientation and Gender Diversity.* &lt;a href=\"https://doi.org/10.1037/sgd0000749\" class=\"doi-link\"&gt;https://doi.org/10.1037/sgd0000749&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://drive.google.com/uc?export=download&id=1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"bi bi-file-earmark-pdf\"&gt;&lt;/i&gt; PDF&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.1037/sgd0000749\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.1037/sgd0000749\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;"
+  },
+  {
+    "objectID": "research/research.html#preprints",
+    "href": "research/research.html#preprints",
+    "title": "Research",
+    "section": "Preprints",
+    "text": "Preprints\n\n\n\n\n\n\nWarning\n\n\n\nA preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.\n\n\n\n\n \n\n\n\n\n*&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; & Xu, W. (2024). Religious Leaders' LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors. &lt;/span&gt;OSF* &lt;a href=\"https://doi.org/10.31234/osf.io/rc8sh\" class=\"doi-link\"&gt;https://doi.org/10.31234/osf.io/rc8sh&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"ai ai-preregistered\"&gt;&lt;/i&gt; Preregistration&lt;/a&gt;&lt;/div&gt;\n&lt;div&gt;&lt;a href=\"https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"ai ai-osf\"&gt;&lt;/i&gt; OSF&lt;/a&gt;&lt;/div&gt;\n&lt;div&gt;&lt;a href=\"https://doi.org/10.31234/osf.io/rc8sh\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"ai ai-psyarxiv\"&gt;&lt;/i&gt; PsyArXiv&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.31234/osf.io/rc8sh\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.31234/osf.io/rc8sh\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n\n\n\n\n*&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; Wang, D. C., Gin, D. H. C., Deasy, J. A., & Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders. &lt;/span&gt;OSF* &lt;a href=\"https://doi.org/10.31234/osf.io/mqwg9\" class=\"doi-link\"&gt;https://doi.org/10.31234/osf.io/mqwg9&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://doi.org/10.31234/osf.io/mqwg9\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"ai ai-psyarxiv\"&gt;&lt;/i&gt; PsyArXiv&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.31234/osf.io/mqwg9\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.31234/osf.io/mqwg9\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;\n\n\n\n\n*&lt;span class=\"journal-name\"&gt;Kim, S.,&lt;/span&gt;&lt;span class=\"journal-name\"&gt; Jankowski, P., Hawkins, H.A., & Wang, D.C. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality. &lt;/span&gt;OSF* &lt;a href=\"https://doi.org/10.31234/osf.io/9xt8r\" class=\"doi-link\"&gt;https://doi.org/10.31234/osf.io/9xt8r&lt;/a&gt;\n&lt;div&gt;&lt;a href=\"https://doi.org/10.31234/osf.io/9xt8r\" class=\"pdf-button\" target=\"_blank\"&gt;&lt;i class=\"ai ai-psyarxiv\"&gt;&lt;/i&gt; PsyArXiv&lt;/a&gt;&lt;/div&gt;\n\n\n&lt;div class=\"badge-container\"&gt;\n  &lt;span class=\"__dimensions_badge_embed__\" data-doi=\"10.31234/osf.io/9xt8r\" data-style=\"small_circle\" data-legend=\"hover-right\"&gt;&lt;/span&gt;\n&lt;/div&gt;\n&lt;div class=\"badge-container\"&gt;\n  &lt;div style=\"background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transform: scale(0.92);\"&gt;\n    &lt;div class=\"altmetric-embed\" data-badge-type=\"donut\" data-badge-popover=\"right\" data-doi=\"10.31234/osf.io/9xt8r\"&gt;&lt;/div&gt;\n  &lt;/div&gt;\n&lt;/div&gt;"
+  },
+  {
+    "objectID": "research/papers.html#preprints",
+    "href": "research/papers.html#preprints",
+    "title": "Research",
+    "section": "Preprints",
+    "text": "Preprints\n\n\n\n\n\n\nWarning\n\n\n\nA preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.\n\n\n\n\n\n\n\n\n\n  \n    \n      \n        \n          \n            \n            \n            Kim, S., Xu, W. (2024). Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors.\n            \n            \n              https://doi.org/10.31234/osf.io/rc8sh\n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n             \n               PsyArXiv Preprint \n             \n          \n          \n          \n          \n          \n          \n          \n             \n               OSF\n            \n          \n          \n          \n          \n          \n             \n               Preregistration \n             \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n    \n      \n        \n          \n            \n            \n            Kim, S., Wang, D. C., Gin, D.H., Deasy, J.A., Sandage, S. (2024). Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders.\n            \n            \n              https://doi.org/10.31234/osf.io/mqwg9\n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n             \n               PsyArXiv Preprint \n             \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n    \n      \n        \n          \n            \n            \n            Kim, S., Jankowski, P.J., Wang, D. C., Hawkins, H.H. (2024). Patterns of Christian Nationalist Engagement and Connections to Spirituality.\n            \n            \n              https://doi.org/10.31234/osf.io/9xt8r\n            \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n             \n               PsyArXiv Preprint \n             \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n          \n        \n        \n        \n        \n          \n          \n            \n          \n          \n          \n          \n            \n              \n            \n          \n        \n        \n      \n      \n    \n  \n\n\nNo matching items"
   }
 ]

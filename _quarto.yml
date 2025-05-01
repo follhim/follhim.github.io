@@ -7,10 +7,12 @@ website:
     left:
     - href: home.qmd
       text: Home
-    - href: research.qmd
+    - href: research/papers.qmd
       text: Research
     - href: resource.qmd
       text: Resources
+    - href: about.qmd
+      text: About
     tools:
     - icon: github
       menu:

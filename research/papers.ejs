@@ -1,0 +1,256 @@
+```{=html}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css">
+<!-- Add required scripts for Dimensions and Altmetric badges -->
+<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+<style>
+  .btn-xs {
+    padding: 1px 5px;
+    font-size: 15px;
+  }
+  .ai-lg {
+    font-size: 1.2em;  /* Adjust as needed */
+  }
+  .citation {
+    margin-bottom: 10px;
+  }
+  .paper-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .paper-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .paper-content {
+    flex: 1;
+  }
+  .paper-badges {
+    display: flex;
+    flex-direction: row;
+    min-width: 160px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .badge-container {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Custom button styling for dark themes */
+  .btn-light-outline {
+    color: rgba(255, 255, 255, 0.7);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .btn-light-outline:hover {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  /* Icon color adjustments for dark theme */
+  .bi, .ai {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .btn-light-outline:hover .bi,
+  .btn-light-outline:hover .ai {
+    color: #333;
+  }
+  /* Make note text visible on dark backgrounds */
+  .text-secondary {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .note {
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>
+<div class="paper-list">
+  <% for (const item of items) { %>
+    <div <%= metadataAttrs(item) %>>
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            <% 
+              // Format authors for APA7 style
+              let formattedAuthors = '';
+              if (item.author) {
+                if (Array.isArray(item.author)) {
+                  // Process author array
+                  let authorStrings = [];
+                  
+                  item.author.forEach(author => {
+                    // Check if the author name contains bold markers ** **
+                    if (author.includes('**')) {
+                      // Extract the name and wrap in <strong> tags
+                      const cleanName = author.replace(/\*\*/g, '');
+                      authorStrings.push('<strong>' + cleanName + '</strong>');
+                    } else {
+                      // Regular author name, no bolding
+                      authorStrings.push(author);
+                    }
+                  });
+                  
+                  // Format based on number of authors
+                  if (authorStrings.length === 1) {
+                    formattedAuthors = authorStrings[0] + '.';
+                  } else if (authorStrings.length === 2) {
+                    formattedAuthors = authorStrings[0] + ', & ' + authorStrings[1] + '.';
+                  } else {
+                    // For many authors
+                    const lastAuthor = authorStrings.pop();
+                    formattedAuthors = authorStrings.join(', ') + ', & ' + lastAuthor + '.';
+                  }
+                } else {
+                  // If author is provided as a string
+                  formattedAuthors = item.author.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+                }
+              }
+              
+              // Get year from date or year field
+              let year = item.year;
+              if (!year && item.date) {
+                year = item.date.split('-')[0] || item.date.substring(0, 4);
+              }
+              
+              // Format publication venue
+              let venue = '';
+              if (item.type === 'Published' && item.journal) {
+                venue = '<i>' + item.journal + '</i>';
+              } else if (item.status) {
+                venue = '<i>' + item.status + '</i>';
+              }
+              
+              // Format DOI or URL
+              let linkText = '';
+              let doiValue = '';
+              if (item.doi) {
+                doiValue = item.doi.replace('doi.org/', '').replace('https://doi.org/', '');
+                linkText = 'https://doi.org/' + doiValue;
+              } else if (item.preprint) {
+                linkText = item.preprint;
+              }
+            %>
+            
+            <%= formattedAuthors %> (<%= year %>). <%= item.title %>.
+            <% if (venue) { %>
+              <%= venue %>.
+            <% } %>
+            <% if (linkText) { %>
+              <a href="<%= linkText %>"><%= linkText %></a>
+            <% } %>
+          </div>
+          
+          <p>
+          <% if (item.errata) { %>
+            <a role="button" href="<%= item.errata %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-exclamation-diamond ai-lg"></i> Errata
+            </a> 
+          <% } %>
+          
+          <% if (item.website) { %>
+            <a role="button" href="<%= item.website %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-filetype-html ai-lg"></i> Project Website
+            </a>
+          <% } %>
+          
+          <% if (item.pdf) { %>
+            <% 
+              // Convert Google Drive sharing link to direct download link
+              let pdfLink = item.pdf;
+              if (pdfLink.includes('drive.google.com/file/d/')) {
+                // Extract the file ID from the Google Drive link
+                const fileIdMatch = pdfLink.match(/\/d\/([^\/]+)/);
+                if (fileIdMatch && fileIdMatch[1]) {
+                  const fileId = fileIdMatch[1];
+                  pdfLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+                }
+              }
+            %>
+            <a role="button" href="<%= pdfLink %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
+            </a> 
+          <% } %>
+          
+          <% if (item.pubopen) { %>
+            <a role="button" href="<%= item.pubopen %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-open-access ai-lg"></i> Open Access
+            </a>
+          <% } %>
+          
+          <% if (item.pubclosed) { %>
+            <a role="button" href="<%= item.pubclosed %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
+            </a>
+          <% } %>
+          
+          <% if (item.preprint) { %>
+            <a role="button" href="<%= item.preprint %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
+            </a> 
+          <% } %>
+          
+          <% if (item.appendix) { %>
+            <a role="button" href="<%= item.appendix %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-file-earmark-plus ai-lg"></i> Appendix 
+            </a>
+          <% } %>
+          
+          <% if (item.dataverse) { %>
+            <a role="button" href="<%= item.dataverse %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-dataverse ai-lg"></i> Dataverse 
+            </a>
+          <% } %>
+          
+          <% if (item.osf) { %>
+            <a role="button" href="<%= item.osf %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-osf ai-lg"></i> OSF
+            </a>
+          <% } %>
+          
+          <% if (item.github) { %>
+            <a role="button" href="<%= item.github %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="bi bi-github ai-lg"></i> GitHub 
+            </a>
+          <% } %>
+          
+          <% if (item.prereg) { %>
+            <a role="button" href="<%= item.prereg %>" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-preregistered ai-lg"></i> Preregistration 
+            </a> 
+          <% } %>
+          
+          <% if (item.note) { %>
+            <br/>
+            <small class="text-secondary">
+              <span class="note"><%= item.note %></span>    
+            </small>
+          <% } %>
+          </p>
+        </div>
+        
+        <% if (doiValue) { %>
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="<%= doiValue %>" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="<%= doiValue %>"></div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <hr>
+    </div>
+  <% } %>
+</div>
+```
+

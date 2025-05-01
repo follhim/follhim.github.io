@@ -1,11 +1,10 @@
 ---
-title: "Welcome"
+title: "Modeling Religion and Health"
 about:
-  id: intro-bio
-  template: trestles
-  image: images/headshot.png
-  image-width: 250px
-  image-title: "Seungju Kim"
+  template: jolla
+  image-width: 600px
+  image-shape: rectangle
+  image: images/rel_health.png
   links: 
     - text: "{{< iconify academicons:google-scholar height=35px width=35px >}}"
       href: https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl
@@ -16,34 +15,21 @@ about:
     - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
       href: https://orcid.org/0009-0009-5166-9170
 comments: false
+editor_options: 
+  chunk_output_type: console
 ---
 
-:::{#intro-bio}
-My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work! 
+::: {#hero-heading}
+**Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health.
 
-I am a **National Science Foundation Graduate Research Fellow** and first-year PhD student in Clinical/Community Psychology Program at the **University of Illinois** under Dr. Nathan Todd. 
+**My scholarship is particularly focuses on:**
 
-My research is focused on modeling the relationship between **religiosity/spirituality (RS)** and **psychological/behavioral health** in historically marginalized communities. 
-
+Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities
 :::
 
-[^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
+### News
 
-
-## News
-
-University of California, San Diego | San Diego, CA
-PhD in Mathematics | Sept 2011 - June 2015
-
-Macalester College | St. Paul, MN
-B.A in Economics | Sept 2007 - June 2011
-
-## Research Interests
-
-My research explores the intersection of religiosity/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.
-
-I seek to develop **innovative measurement tools** that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.
-
-I am currently engaged in efforts to **model RS-health pathways** through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.
-
-Finally, as part of my commitment to **translational research**, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals.
+|  |  |
+|:---------------|:------------------------------------------------------|
+| 04/2025 | "Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth" is now published in *Journal of Interpersonal Violence*. |
+| 04/2025 | My paper "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders" is now in-press at *Review of Religious Research.* |
