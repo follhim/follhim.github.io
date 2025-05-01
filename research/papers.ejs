@@ -229,10 +229,15 @@
             </a> 
           <% } %>
           
-          <% if (item.note) { %>
+          <% if (item.note || item.noteLink) { %>
             <br/>
             <small class="text-secondary">
-              <span class="note"><%= item.note %></span>    
+              <span class="note">
+                <%= item.note || '' %>
+                <% if (item.noteLink && item.noteLinkText) { %>
+                  <a href="<%= item.noteLink %>" style="color: rgba(255, 255, 255, 0.7); text-decoration: underline;"><%= item.noteLinkText %></a>
+                <% } %>
+              </span>    
             </small>
           <% } %>
           </p>

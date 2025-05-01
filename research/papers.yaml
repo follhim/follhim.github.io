@@ -84,7 +84,9 @@
   # prereg: "https://osf.io/prereg123/"  # Preregistration
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
-  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+  note: "Limited free access to publisher's copy"  # Additional note (displayed at bottom)
+  noteLink: "https://www.tandfonline.com/eprint/QYJBP9VNUJNUWRVCYM99/full?target=10.1080/00918369.2024.2378745"
+  noteLinkText: "here"
 
 - title: "How does religiousness influence health among sexual and gender minorities? Evaluating the propositions of the religious/spiritual stress and resilience model"
   type: "Published"                  # Use "Published" for published papers
