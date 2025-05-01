@@ -5,7 +5,7 @@ website:
   title: Seungju Kim
   navbar:
     left:
-    - href: home.qmd
+    - href: index.qmd
       text: Home
     - href: research/papers.qmd
       text: Research
@@ -24,10 +24,7 @@ website:
     giscus:
       repo: follhim/follhim.github.io
       theme: dark
-
 format:
   html:
     toc: true
     theme: superhero
-
-

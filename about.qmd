@@ -2,7 +2,7 @@
 title: "About Me"
 about:
   id: intro-bio
-  template: trestles
+  template: jolla
   image: images/headshot.png
   image-width: 250px
   image-title: "Seungju Kim"
@@ -16,25 +16,39 @@ about:
     - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
       href: https://orcid.org/0009-0009-5166-9170
 comments: false
+format:
+  html:
+    css: styles.css
 ---
 
-## Seungju Kim
-
-My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work! 
-
-I am a **National Science Foundation Graduate Research Fellow** and first-year PhD student in Clinical/Community Psychology Program at the **University of Illinois** under Dr. Nathan Todd. 
-
-My research is focused on modeling the relationship between **religiosity/spirituality (RS)** and **psychological/behavioral health** in historically marginalized communities. 
+:::{#intro-bio .text-center}
+My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work!
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
+I am a **National Science Foundation Graduate Research Fellow** and first-year PhD student in Clinical/Community Psychology Program at the **University of Illinois** under Dr. Nathan Todd.
+
+My research is focused on modeling the relationship between **religiosity/spirituality (RS)** and **psychological/behavioral health** in historically marginalized communities.
+:::
 
 ## Research Interests
 
 My research explores the intersection of religiosity/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.
 
-I seek to develop **innovative measurement tools** that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.
+1.  I seek to develop **innovative measurement tools** that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.
 
-I am currently engaged in efforts to **model RS-health pathways** through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.
+2.  I am currently engaged in efforts to **model RS-health pathways** through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.
 
-Finally, as part of my commitment to **translational research**, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals.
+3.  Finally, as part of my commitment to **translational research**, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals.
+
+## Education & Training
+
+Prior to beginning his doctoral studies, Seungju earned his B.A. in Psychology *magna cum laude* from Wheaton College, where he completed an honors thesis examining psychological well-being in religious mixed-orientation marriages. His research training began as a freshman working with Dr. Sandra Rueger, before joining Dr. Mark Yarhouse at the Sexuality and Gender Identity Institute, where he contributed to a national study investigating the complex intersection of faith and LGBTQ+ identities.
+
+Expanding his research training during his junior year, Seungju established significant external collaborations with leading researchers. At **Utah State University**, he worked with Dr. Tyler Lefevor examining the effects of religiousness and spirituality on LGBTQ+ mental health, where he developed skills in psychometric scale development and validation using R's {psych} and {lavaan} packages.
+
+Simultaneously, Seungju joined Dr. David Wang at **Fuller Theological Seminary**, analyzing longitudinal data from a $1.9 million study on spiritual formation. This collaboration strengthened his experience in sophisticated longitudinal modeling using R and Mplus, examining complex patterns of change over time.
+
+His quantitative methodological expertise was further enhanced when he was competitively selected for the competitive **NSF-REU Health Equity** summer internship at the University of Nebraska-Lincoln. Working with Drs. Katie Edwards and Lorey Wheeler on multiple NIH-funded studies examining LGBTQ+ youth and emerging adults, Seungju gained advanced skills for identifying mischievous responders in survey data, regression models, and scale development. He was later recruited as a post-bac research associated.
+
+Before entering graduate school, Seungju was awarded the **National Science Foundation Graduate Research Fellowship** (NSF GRFP), among one of the only awardees at Wheaton.
