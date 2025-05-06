@@ -17,6 +17,9 @@ about:
 comments: false
 editor_options: 
   chunk_output_type: console
+format:
+  html:
+    css: styles.css
 ---
 
 ::: {#hero-heading}
@@ -30,6 +33,6 @@ Adverse and beneficial religious experiences<br> Mental and behavioral health<br
 ### News
 
 |  |  |
-|:---|:---|
+|:-------------|:--------------------------------------------------------|
 | 04/2025 | "Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth" is now published in *Journal of Interpersonal Violence*. |
 | 04/2025 | My paper "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders" is now in-press at *Review of Religious Research.* |
