@@ -81,9 +81,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubclosed','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubclosed','listing-viewonlinefree','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubclosed","listing-pdf"],
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubclosed","listing-viewonlinefree","listing-pdf"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -355,6 +355,8 @@ window.Quarto = {
 <!-- Add required scripts for Dimensions and Altmetric badges -->
 <script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<!-- Add Iconify for Material Symbols -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <style>
   .btn-xs {
     padding: 1px 5px;
@@ -425,6 +427,15 @@ window.Quarto = {
     margin-top: 10px; /* Reduced margin above the horizontal line */
     margin-bottom: 10px; /* Kept consistent spacing below */
   }
+  /* Style for iconify icons to match other icons */
+  .iconify {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+  .btn-light-outline:hover .iconify {
+    color: #333;
+  }
 </style>
 <div class="paper-list">
   
@@ -449,10 +460,11 @@ window.Quarto = {
           
           
           
-            
+          
+          
             <a role="button" href="https://journals.sagepub.com/share/5GJ46EGPPVKIGBHBTIBB?target=10.1177/08862605251329471" type="button" class="btn btn-light-outline btn-xs"> 
-              <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
-            </a> 
+              <span class="iconify" data-icon="carbon:view"></span> View Online Free
+            </a>
           
           
           
@@ -528,6 +540,8 @@ window.Quarto = {
           
           
           
+          
+          
             <a role="button" href="https://doi.org/10.15288/jsad.24-00007" type="button" class="btn btn-light-outline btn-xs"> 
               <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
             </a>
@@ -590,9 +604,15 @@ window.Quarto = {
           
           
             
-            <a role="button" href="https://www.tandfonline.com/share/7Z7APPKPZ7S7WZSTUGYU?target=10.1080/00918369.2024.2378745" type="button" class="btn btn-light-outline btn-xs"> 
+            <a role="button" href="https://www.researchgate.net/profile/Seungju-Kim-11/publication/382396728_Mitigating_the_Impact_of_Religiously_Based_Family_Expectations_on_Depression_Among_Sexual_and_Gender_Minorities_The_Role_of_Authenticity/links/66a3d9bdc6e41359a84033c0/Mitigating-the-Impact-of-Religiously-Based-Family-Expectations-on-Depression-Among-Sexual-and-Gender-Minorities-The-Role-of-Authenticity.pdf?origin=publicationDetail&amp;_sg%5B0%5D=HJFHGxujDEochZ8dq0GsgMMxVvSGKIceMJTBl2g65jrTwLDzukV7jwF9YNlhECgloNE-cbIw0mZ6OhDxzgJ-fw.YfekfXODhLPeroKYfkhnF4h38v89m8Ng9jNwEPxP9uvnsjInkj0h1DRQDTPp5vru7I37wUHWty7b-LQamZGe_g&amp;_sg%5B1%5D=OuNP3NzEE-pGXSiDkbbksjyisqH1CekJ11kSzrJydh_hDL5IjHyhFwq11gVlilzZEMlLJxA3rzTtiYG4D5b4iTsLr9mtbMKHXnQp-yynYd26.YfekfXODhLPeroKYfkhnF4h38v89m8Ng9jNwEPxP9uvnsjInkj0h1DRQDTPp5vru7I37wUHWty7b-LQamZGe_g&amp;_iepl=&amp;_rtd=eyJjb250ZW50SW50ZW50IjoibWFpbkl0ZW0ifQ%3D%3D&amp;_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHVibGljYXRpb24iLCJwcmV2aW91c1BhZ2UiOiJwcm9maWxlIiwicG9zaXRpb24iOiJwYWdlSGVhZGVyIn19" type="button" class="btn btn-light-outline btn-xs"> 
               <i class="bi bi-file-earmark-pdf ai-lg"></i> PDF 
             </a> 
+          
+          
+          
+            <a role="button" href="https://www.tandfonline.com/share/7Z7APPKPZ7S7WZSTUGYU?target=10.1080/00918369.2024.2378745" type="button" class="btn btn-light-outline btn-xs"> 
+              <span class="iconify" data-icon="carbon:view"></span> View Online Free
+            </a>
           
           
           
@@ -668,6 +688,8 @@ window.Quarto = {
           
           
           
+          
+          
             <a role="button" href="https://doi.org/10.1037/sgd0000749" type="button" class="btn btn-light-outline btn-xs"> 
               <i class="ai ai-closed-access ai-lg"></i> Publisher's Version 
             </a>
@@ -732,6 +754,8 @@ Warning
 <!-- Add required scripts for Dimensions and Altmetric badges -->
 <script async="" src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+<!-- Add Iconify for Material Symbols -->
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 <style>
   .btn-xs {
     padding: 1px 5px;
@@ -802,6 +826,15 @@ Warning
     margin-top: 10px; /* Reduced margin above the horizontal line */
     margin-bottom: 10px; /* Kept consistent spacing below */
   }
+  /* Style for iconify icons to match other icons */
+  .iconify {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
+  .btn-light-outline:hover .iconify {
+    color: #333;
+  }
 </style>
 <div class="paper-list">
   
@@ -819,6 +852,8 @@ Warning
           </div>
           
           <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
+          
+          
           
           
           
@@ -901,6 +936,8 @@ Warning
           
           
           
+          
+          
             <a role="button" href="https://doi.org/10.31234/osf.io/mqwg9" type="button" class="btn btn-light-outline btn-xs"> 
               <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
             </a> 
@@ -961,6 +998,8 @@ Warning
           </div>
           
           <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
+          
+          
           
           
           
