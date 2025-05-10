@@ -1,7 +1,6 @@
 ---
 title: "Creating APA-7 Ready Correlation Tables"
-date: last-modified
-date-format: "MM/DD/YYYY"
+date: "10/13/2024"
 author:
   - name: Seungju Kim
     orcid: 0009-0009-5166-9170

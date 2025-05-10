@@ -18,7 +18,7 @@
   doi: "10.1177/08862605251329471"       # DOI without the https://doi.org/ prefix
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1177/08862605251329471"     # Publisher version (if not open access)
-  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  pdf: "https://journals.sagepub.com/share/5GJ46EGPPVKIGBHBTIBB?target=10.1177/08862605251329471"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
   # osf: "https://osf.io/example/"    # OSF project
@@ -26,7 +26,7 @@
   # prereg: "https://osf.io/prereg123/"  # Preregistration
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
-  note: "Please email me to obtain a copy."  # Additional note (displayed at bottom)
+  # note: "Please email me to obtain a copy."  # Additional note (displayed at bottom)
 
 - title: "An Online Program for Sexual and Gender Minority Youth Reduces Alcohol Use and Teen Dating Violence: A Randomized Controlled Trial"
   type: "Published"                  # Use "Published" for published papers
@@ -76,7 +76,7 @@
   doi: "10.1080/00918369.2024.2378745"       # DOI without the https://doi.org/ prefix
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1080/00918369.2024.2378745"     # Publisher version (if not open access)
-  pdf: "https://drive.google.com/file/d/1Vvemb89xpOLp8mjQS0HePneRliNTD5zF/view?usp=sharing"   # Direct PDF link
+  pdf: "https://www.tandfonline.com/share/7Z7APPKPZ7S7WZSTUGYU?target=10.1080/00918369.2024.2378745"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
   # osf: "https://osf.io/example/"    # OSF project

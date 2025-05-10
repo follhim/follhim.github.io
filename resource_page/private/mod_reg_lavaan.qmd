@@ -1,0 +1,89 @@
+---
+title: "Moderation Regression and Simple Slopes in Lavaan"
+author:
+  - name: Seungju Kim
+    orcid: 0009-0009-5166-9170
+    email: seungju7@illinois.edu
+    affiliation: 
+      - name: University of Illinois, Urbana-Champaign
+        department: Psychology
+title-block-banner: false
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+Typically, when we run a linear regression in R, we will use the `lm()` function. And while the `lm()` will get most jobs done, it has several limitations:
+
+1.   It cannot handle missing data.
+2.   It does not have maximum likelihood estimators built in. 
+
+This is in contrast to `Mplus` which has both of these features, with capabilities for a host of estimators (e.g., `maximum likelihood with robust standard errors`) and the ability to handle missing data using `full information maximum likelihood` estimator. 
+
+Well the great news is that you too can do this in R using the `lavaan` package. Finally, often times I hear that people have a hard time plotting simple slopes using `lavaan`, but I will be going over a very helpful function to help us! 
+
+Let's begin! 
+
+# Preparation
+Like any analysis you run in R, you should always have you set up in the beginning. 
+## Packages
+```{r}
+# install.packages("pacman")
+```
+
+If you haven't already, I would highly recommend downloading the `pacman` (package manager) package. It will install and/or load a library if you haven't automatically! 
+
+```{r}
+# pacman::p_load(tidyverse, lavaan, readr, here, psych, DT)
+```
+
+Great! Now let's import our dataset! 
+
+## Import Data
+
+For our example today, we will be using the `ACTIVE (Advanced Cognitive Training for Independent and Vital Elderly)` dataset available [here](https://advstats.psychstat.org/data/example.php)
+
+```{r}
+# data <- read.csv(here("resource_page", "active.csv"))
+```
+
+Great we've imported our dataset! Let's take a look at the dataset!
+
+# Descriptives
+```{r}
+# psych::describe(data) %>%
+#   round(digits = 2) %>%
+#   DT::datatable()
+```
+
+Here we can take a good look at the desriptives of our dataset. But what we're really interested in is running a regression model with missing data! Let's introduce some missingness. 
+
+## Introduce Missingness
+```{r}
+# na_data <- data %>%
+#   mutate(across(everything(), ~{
+#     # For each value, 15% chance of becoming NA
+#     ifelse(runif(n()) < 0.15, NA, .)
+#   }))
+```
+
+Great! Let's take a look at the data now. 
+
+## Examine Missingness
+```{r}
+# pacman::p_load(naniar) # install/load the "naniar" package
+# 
+# miss_var_summary(na_data)
+```
+
+We can see here that about 15% of all data is missing. Let's now run our regression model!
+
+# Analysis
+## Multiple Regression Model
+
+What we would normally do if we were interested in if 
+```{r}
+
+```
+
