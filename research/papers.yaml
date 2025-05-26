@@ -1,4 +1,28 @@
 ---
+- title: "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Wang, D. C."
+    - "Gin, D.H."
+    - "Deasy, J.A."
+    - "Sandage, S."
+  year: 2025                        # Publication year (for published papers)
+  journal: "Review of Religious Research"  # Journal name
+  doi: "10.1177/0034673X251336459"
+  # pubopen: "https://journal.com/open/article123"  # Open access version
+  pubclosed: "https://doi.org/10.1177/0034673X251336459"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  preprint: "https://doi.org/10.31234/osf.io/mqwg9"
+  # osf: "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Currenty in-press at Review of Religious Research"  # Additional note (displayed at bottom)
+
 # Published paper example
 - title: "Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth"
   type: "Published"                  # Use "Published" for published papers
@@ -133,30 +157,6 @@
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
   # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
-
-- title: "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders"
-  type: "Preprint"                  # Use "Published" for published papers
-  author:                           # Can be array or string
-    - "**Kim, S.**"
-    - "Wang, D. C."
-    - "Gin, D.H."
-    - "Deasy, J.A."
-    - "Sandage, S."
-  year: 2024                        # Publication year (for published papers)
-  journal: "OSF"  # Journal name
-  doi: "10.31234/osf.io/mqwg9"
-  # pubopen: "https://journal.com/open/article123"  # Open access version
-  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
-  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
-  # appendix: "https://journal.com/appendix123"     # Supplementary materials
-  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
-  preprint: "https://doi.org/10.31234/osf.io/mqwg9"
-  # osf: "https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8"    # OSF project
-  # github: "https://github.com/username/project"   # GitHub repository
-  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
-  # website: "https://project-website.com"  # Project website
-  # errata: "https://journal.com/errata123"  # Errata/correction
-  note: "Currenty in-press at Review of Religious Research"  # Additional note (displayed at bottom)
 
 - title: "Patterns of Christian Nationalist Engagement and Connections to Spirituality"
   type: "Preprint"                  # Use "Published" for published papers
