@@ -1,0 +1,27 @@
+---
+title: "Blitz Presentation for SCRA 2025"
+date: "6/16/2025"
+author:
+  - name: Seungju Kim
+    orcid: 0009-0009-5166-9170
+    email: seungju7@illinois.edu
+    affiliation: 
+      - name: University of Illinois, Urbana-Champaign
+        department: Psychology
+title-block-banner: false
+format: html
+editor_options: 
+  chunk_output_type: console
+categories:
+  - Presentation
+---
+
+To view my blitz presentation on **Engagement with Religious/Spirituality among Sexual Gender Minorities of Color** at the Society of Community Research and Action, please see the github repository below. 
+
+{{< include ../private/gh-cards.qmd >}}
+
+```{=html}
+<script>
+ghCard('follhim/usu_lpa-poc-sgm', 'large');
+</script>
+```

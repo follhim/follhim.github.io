@@ -5,6 +5,7 @@ listing:
   type: table
   sort:
     - "date -newest"
+  categories: true
 comments: false
 ---
 

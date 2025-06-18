@@ -4,14 +4,14 @@
     "href": "resource.html",
     "title": "Resources",
     "section": "",
-    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nOct 13, 2024\n\n\nCreating APA-7 Ready Correlation Tables\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
+    "text": "This page contains personally curated resources related to analyses, open science, and more.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nJun 16, 2025\n\n\nBlitz Presentation for SCRA 2025\n\n\nSeungju Kim\n\n\n\n\nOct 13, 2024\n\n\nCreating APA-7 Ready Correlation Tables\n\n\nSeungju Kim\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Modeling Religion and Health",
     "section": "",
-    "text": "Hello, and thank you for visiting my website! My name is Seungju and this website is focused on disseminating my research on modeling the relationship between religiousness/spirituality and health.\nMy research is particularly focuses on:\nAdverse and beneficial religious experiences Mental and behavioral health LGBTQ+ communities Religious leaders, families, and communities\n\n\nNews\n\n\n\n\n\n\n\n05/2025\nMy paper “Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leader” is now published at Review of Religious Research.\n\n\n04/2025\n“Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth” is now published in Journal of Interpersonal Violence.\n\n\n04/2025\nMy paper “Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders” is now in-press at Review of Religious Research."
+    "text": "Hello, and thank you for visiting my website! My name is Seungju and this website is focused on disseminating my research on modeling the relationship between religiousness/spirituality and health.\nMy research is particularly focuses on:\nAdverse and beneficial religious experiences Mental and behavioral health LGBTQ+ communities Religious leaders, families, and communities\n\n\nNews\n\n\n\n\n\n\n\n05/2025\nMy paper “Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leader” is now published at Review of Religious Research.\n\n\n04/2025\n“Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth” is now published in Journal of Interpersonal Violence."
   },
   {
     "objectID": "resource_page/public/apa_cor_tab.html",
@@ -110,5 +110,19 @@
     "title": "About Me",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nClick here to learn how to pronounce my name↩︎"
+  },
+  {
+    "objectID": "resource_page/public/scra25_blitz.html",
+    "href": "resource_page/public/scra25_blitz.html",
+    "title": "Blitz Presentation for SCRA 2025",
+    "section": "",
+    "text": "To view my blitz presentation on Engagement with Religious/Spirituality among Sexual Gender Minorities of Color at the Society of Community Research and Action, please see the github repository below."
+  },
+  {
+    "objectID": "resource_page/public/scra25_blitz.html#my-github-repositories",
+    "href": "resource_page/public/scra25_blitz.html#my-github-repositories",
+    "title": "gh-cards",
+    "section": "",
+    "text": "ghCard('hacsbcu/mesahub');\nghCard('microsoft/vscode');\nghCard('tensorflow/tensorflow', 'small');"
   }
 ]

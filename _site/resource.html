@@ -198,9 +198,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Presentation">Presentation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R Stats">R Stats <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -269,7 +269,18 @@ window.Quarto = {
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1728792000000" data-listing-file-modified-sort="1746901864740" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319" data-listing-title-sort="Creating APA-7 Ready Correlation Tables" data-listing-filename-sort="apa_cor_tab.qmd">
+<tr data-index="0" data-categories="Presentation" data-listing-date-sort="1750046400000" data-listing-file-modified-sort="1750256095593" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="34" data-listing-title-sort="Blitz Presentation for SCRA 2025" data-listing-filename-sort="scra25_blitz.qmd">
+<td>
+<span class="listing-date">Jun 16, 2025</span>
+</td>
+<td>
+<a href="./resource_page/public/scra25_blitz.html" class="title listing-title">Blitz Presentation for SCRA 2025</a>
+</td>
+<td>
+<span class="listing-author">Seungju Kim</span>
+</td>
+</tr>
+<tr data-index="1" data-categories="R Stats" data-listing-date-sort="1728792000000" data-listing-file-modified-sort="1750134611457" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="319" data-listing-title-sort="Creating APA-7 Ready Correlation Tables" data-listing-filename-sort="apa_cor_tab.qmd">
 <td>
 <span class="listing-date">Oct 13, 2024</span>
 </td>
@@ -378,7 +389,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/follhim\.github\.io\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

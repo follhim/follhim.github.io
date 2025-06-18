@@ -1,0 +1,70 @@
+<style>
+.gh h4 { padding: 0; margin: 0; }
+.gh a, .gh a:visited { text-decoration: none; color: #e8e8e8; }
+.gh a:hover { color: #58a6ff; }
+.gh-small { zoom: 0.5; }
+.gh-medium { zoom: 0.75; }
+.gh-large { zoom: 1; }
+.gh-card {
+  font-family: 'Arial';
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  transition: 0.3s;
+  max-width: 300px;
+  display: inline-block;
+  margin: 8px;
+  border-radius: 8px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+.gh-card:hover { box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6); border-color: #58a6ff; }
+img.gh { border-radius: 8px 8px 0 0; width: 100%; clip-path: polygon(100% 0, 100% 95%, 50% 100%, 0% 95%, 0 0); }
+.container.gh { padding: 16px; }
+.gh p { line-height: 1.6; margin: 8px 0; color: #8b949e; }
+.gh-loading { padding: 20px; text-align: center; color: #8b949e; }
+.gh h4 a { color: #58a6ff; font-weight: 600; }
+.gh div a { color: #8b949e; font-size: 14px; }
+.gh div a:hover { color: #58a6ff; }
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+function createGitHubCard(repo, elementId, size = '') {
+  const sizeClass = size ? ` gh-${size}` : '';
+  const container = document.getElementById(elementId);
+  
+  container.innerHTML = `<div class="gh-card${sizeClass}" repo="${repo}">
+    <div class="gh-loading">Loading repository...</div>
+  </div>`;
+  
+  const card = container.querySelector('.gh-card');
+  const url = `https://api.github.com/repos/${repo}`;
+  
+  fetch(url)
+    .then(resp => resp.json())
+    .then(json => {
+      card.innerHTML = `
+        <img class="gh" src="${json.owner.avatar_url}">
+        <div class="gh container">
+          <h4 class="gh">
+            <a class="gh" href="${json.html_url}" target="_blank">
+              <i class="fa fa-fw fa-github"></i> ${json.full_name}
+            </a>
+          </h4>
+          <p class="gh">${json.description || 'No description'}</p>
+          <div>
+            <a class="gh" href="${json.html_url}/network" target="_blank" style="margin-right: 15px;">
+              <i class="fa fa-fw fa-code-fork"></i> ${json.forks_count}
+            </a>
+            <a class="gh" href="${json.html_url}/stargazers" target="_blank">
+              <i class="fa fa-fw fa-star"></i> ${json.stargazers_count}
+            </a>
+          </div>
+        </div>`;
+    })
+    .catch(err => {
+      card.innerHTML = `<div class="gh-loading">Error: ${repo}</div>`;
+    });
+}
+</script>

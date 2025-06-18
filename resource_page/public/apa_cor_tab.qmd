@@ -12,6 +12,8 @@ title-block-banner: false
 format: html
 editor_options: 
   chunk_output_type: console
+categories:
+  - R Stats
 ---
 
 # Introduction

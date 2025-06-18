@@ -1,0 +1,112 @@
+```{=html}
+<style>
+.gh h4 { padding: 0; margin: 0; }
+.gh a, .gh a:visited { text-decoration: none; color: #e8e8e8; }
+.gh a:hover { color: #58a6ff; }
+.gh-small { zoom: 0.5; }
+.gh-medium { zoom: 0.75; }
+.gh-large { zoom: 1; }
+.gh-card {
+  font-family: 'Arial';
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  transition: 0.3s;
+  max-width: 300px;
+  display: inline-block;
+  margin: 8px;
+  border-radius: 8px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #e6edf3;
+}
+.gh-card:hover { box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6); border-color: #58a6ff; }
+img.gh { border-radius: 8px 8px 0 0; width: 100%; clip-path: polygon(100% 0, 100% 95%, 50% 100%, 0% 95%, 0 0); }
+.container.gh { padding: 16px; }
+.gh p { line-height: 1.6; margin: 8px 0; color: #8b949e; }
+.gh-loading { padding: 20px; text-align: center; color: #8b949e; }
+.gh h4 a { color: #58a6ff; font-weight: 600; }
+.gh div a { color: #8b949e; font-size: 14px; }
+.gh div a:hover { color: #58a6ff; }
+.gh-last-updated { 
+  color: #8b949e; 
+  font-size: 12px; 
+  margin-top: 8px; 
+  font-style: italic; 
+}
+</style>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+window.ghCardCounter = 0;
+
+function ghCard(repo, size = '', customImage = '') {
+  const id = 'gh-card-' + (++window.ghCardCounter);
+  const sizeClass = size ? ` gh-${size}` : '';
+  
+  // Create the container immediately
+  document.write(`<div id="${id}" class="gh-card${sizeClass}">
+    <div class="gh-loading">Loading ${repo}...</div>
+  </div>`);
+  
+  // Fetch both repo data and last commit data
+  setTimeout(() => {
+    const card = document.getElementById(id);
+    if (!card) return;
+    
+    // Fetch repository data
+    const repoPromise = fetch(`https://api.github.com/repos/${repo}`)
+      .then(resp => resp.json());
+    
+    // Fetch last commit data
+    const commitsPromise = fetch(`https://api.github.com/repos/${repo}/commits?per_page=1`)
+      .then(resp => resp.json());
+    
+    Promise.all([repoPromise, commitsPromise])
+      .then(([repoData, commitsData]) => {
+        // Determine image source
+        let imageSrc = repoData.owner.avatar_url;
+        if (customImage) {
+          imageSrc = `figures/${customImage}`;
+        }
+        
+        // Format last commit date
+        let lastUpdated = '';
+        if (commitsData && commitsData.length > 0) {
+          const commitDate = new Date(commitsData[0].commit.author.date);
+          lastUpdated = `<div class="gh-last-updated">
+            <i class="fa fa-clock-o"></i> Last updated: ${commitDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })}
+          </div>`;
+        }
+        
+        card.innerHTML = `
+          <img class="gh" src="${imageSrc}" alt="${repoData.owner.login}" onerror="this.src='${repoData.owner.avatar_url}'">
+          <div class="gh container">
+            <h4 class="gh">
+              <a class="gh" href="${repoData.html_url}" target="_blank">
+                <i class="fa fa-fw fa-github"></i> ${repoData.full_name}
+              </a>
+            </h4>
+            <p class="gh">${repoData.description || 'No description available'}</p>
+            <div>
+              <a class="gh" href="${repoData.html_url}/network" target="_blank" style="margin-right: 15px;">
+                <i class="fa fa-fw fa-code-fork"></i> ${repoData.forks_count}
+              </a>
+              <a class="gh" href="${repoData.html_url}/stargazers" target="_blank">
+                <i class="fa fa-fw fa-star"></i> ${repoData.stargazers_count}
+              </a>
+            </div>
+            ${lastUpdated}
+          </div>`;
+      })
+      .catch(err => {
+        console.error('Error loading repo:', repo, err);
+        card.innerHTML = `<div class="gh-loading">Error loading: ${repo}</div>`;
+      });
+  }, 100);
+}
+</script>
+```
