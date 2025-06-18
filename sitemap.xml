@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://follhim.github.io/research/papers.html</loc>
-    <lastmod>2025-05-26T14:56:07.463Z</lastmod>
-  </url>
-  <url>
     <loc>https://follhim.github.io/index.html</loc>
-    <lastmod>2025-05-26T14:56:07.462Z</lastmod>
+    <lastmod>2025-06-18T14:16:01.188Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource_page/private/mod_reg_lavaan.html</loc>
-    <lastmod>2025-05-26T14:56:07.463Z</lastmod>
+    <lastmod>2025-06-18T14:16:01.189Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource_page/public/apa_cor_tab.html</loc>
-    <lastmod>2025-05-26T14:56:07.463Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.github.io/about.html</loc>
-    <lastmod>2025-05-26T14:56:07.457Z</lastmod>
+    <lastmod>2025-06-18T14:16:01.189Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource.html</loc>
-    <lastmod>2025-05-26T14:56:07.463Z</lastmod>
+    <lastmod>2025-06-18T14:16:01.188Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/about.html</loc>
+    <lastmod>2025-06-18T14:16:01.183Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/resource_page/public/scra25_blitz.html</loc>
+    <lastmod>2025-06-18T14:16:01.189Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/resource_page/private/gh-cards.html</loc>
+    <lastmod>2025-06-18T14:16:01.189Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/research/papers.html</loc>
+    <lastmod>2025-06-18T14:16:01.188Z</lastmod>
   </url>
 </urlset>
