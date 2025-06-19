@@ -1,6 +1,6 @@
 ---
 title: "Blitz Presentation for SCRA 2025"
-date: "6/16/2025"
+date: "6/19/2025"
 author:
   - name: Seungju Kim
     orcid: 0009-0009-5166-9170
@@ -16,16 +16,29 @@ categories:
   - Presentation
 ---
 
-To view all reproducible materials (e.g., code, data) on **Engagement with Religious/Spirituality among Sexual Gender Minorities of Color** at the Society of Community Research and Action, please see the github repository below. 
+:::callout-note
+This presentation was given at the 2025 Biennial Society for Community Research and Action.
+:::
+
+# Abstract
+In this study, we sought to understand how Sexual and Gender Minorities of Color engage with their sexual/gender identity and religiosity/spirituality and how different patterns of engagement related to social and mental health. We identified four patterns of engagement, suggesting higher religious engagement is tied to lower mental distress but higher internalized stigma. In summary, we find religious engagement is tied to both health benefits and risks. 
+
+# Presentation
+
+To view the presentation file, please see below.
+
+{{< embedpdf "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://follhim.github.io/usu_lpa-poc-sgm/presentation/SK_SCRA_Blitz.pdf" iframe=true width=100% height=600 >}}
+
+
+# Open Materials
+
+To view all reproducible materials (e.g., code, data), please see the github repository below. 
 
 {{< include ../private/gh-cards.qmd >}}
 
 ```{=html}
+<div style="text-align: center;">
 <script>
-ghCard('follhim/usu_lpa-poc-sgm', 'large');
+ghCard('follhim/usu_lpa-poc-sgm', 'large', '', '80%');
 </script>
-```
-
-To view the presentation file, please see below.
-
-{{< embedpdf "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://github.com/follhim/usu_lpa-poc-sgm/raw/main/presentation/SK_SCRA_Blitz.pdf" iframe=true width=100% height=600 >}}
+</div>

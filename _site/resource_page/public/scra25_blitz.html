@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Seungju Kim">
-<meta name="dcterms.date" content="2025-06-16">
+<meta name="dcterms.date" content="2025-06-19">
 
 <title>Blitz Presentation for SCRA 2025 – Seungju Kim</title>
 <style>
@@ -140,8 +140,16 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#presentation" id="toc-presentation" class="nav-link" data-scroll-target="#presentation">Presentation</a></li>
+  <li><a href="#open-materials" id="toc-open-materials" class="nav-link" data-scroll-target="#open-materials">Open Materials</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,7 +183,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 16, 2025</p>
+      <p class="date">June 19, 2025</p>
     </div>
   </div>
   
@@ -187,7 +195,31 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </header>
 
 
-<p>To view my blitz presentation on <strong>Engagement with Religious/Spirituality among Sexual Gender Minorities of Color</strong> at the Society of Community Research and Action, please see the github repository below.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This presentation was given at the 2025 Biennial Society for Community Research and Action.</p>
+</div>
+</div>
+<section id="abstract" class="level1">
+<h1>Abstract</h1>
+<p>In this study, we sought to understand how Sexual and Gender Minorities of Color engage with their sexual/gender identity and religiosity/spirituality and how different patterns of engagement related to social and mental health. We identified four patterns of engagement, suggesting higher religious engagement is tied to lower mental distress but higher internalized stigma. In summary, we find religious engagement is tied to both health benefits and risks.</p>
+</section>
+<section id="presentation" class="level1">
+<h1>Presentation</h1>
+<p>To view the presentation file, please see below.</p>
+<p><object data="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://follhim.github.io/usu_lpa-poc-sgm/presentation/SK_SCRA_Blitz.pdf" type="application/pdf" width="100%" height="600"><a href="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://follhim.github.io/usu_lpa-poc-sgm/presentation/SK_SCRA_Blitz.pdf" download="">Download PDF file.</a></object></p>
+</section>
+<section id="open-materials" class="level1">
+<h1>Open Materials</h1>
+<p>To view all reproducible materials (e.g., code, data), please see the github repository below.</p>
 <style>
 .gh h4 { padding: 0; margin: 0; }
 .gh a, .gh a:visited { text-decoration: none; color: #e8e8e8; }
@@ -199,7 +231,8 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
   font-family: 'Arial';
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   transition: 0.3s;
-  max-width: 300px;
+  max-width: 300px; /* Default width - will be overridden by custom width */
+  width: 100%;
   display: inline-block;
   margin: 8px;
   border-radius: 8px;
@@ -222,13 +255,10 @@ img.gh { border-radius: 8px 8px 0 0; width: 100%; clip-path: polygon(100% 0, 100
   font-style: italic; 
 }
 </style>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script>
 window.ghCardCounter = 0;
-
-function ghCard(repo, size = '', customImage = '') {
+function ghCard(repo, size = '', customImage = '', customWidth = '') {
   const id = 'gh-card-' + (++window.ghCardCounter);
   const sizeClass = size ? ` gh-${size}` : '';
   
@@ -236,6 +266,22 @@ function ghCard(repo, size = '', customImage = '') {
   document.write(`<div id="${id}" class="gh-card${sizeClass}">
     <div class="gh-loading">Loading ${repo}...</div>
   </div>`);
+  
+  // Apply custom width if provided
+  setTimeout(() => {
+    const card = document.getElementById(id);
+    if (!card) return;
+    
+    if (customWidth) {
+      // Handle different width formats
+      if (customWidth.includes('%') || customWidth.includes('px') || customWidth.includes('em') || customWidth.includes('rem')) {
+        card.style.maxWidth = customWidth;
+      } else {
+        // Assume it's pixels if no unit specified
+        card.style.maxWidth = customWidth + 'px';
+      }
+    }
+  }, 50);
   
   // Fetch both repo data and last commit data
   setTimeout(() => {
@@ -298,12 +344,14 @@ function ghCard(repo, size = '', customImage = '') {
   }, 100);
 }
 </script>
+<div style="text-align: center;">
 <script>
-ghCard('follhim/usu_lpa-poc-sgm', 'large');
+ghCard('follhim/usu_lpa-poc-sgm', 'large', '', '80%');
 </script>
-<p><object data="https://github.com/follhim/usu_lpa-poc-sgm/raw/main/presentation/SK_SCRA_Blitz.pdf" type="application/pdf" width="100%" height="600"><a href="https://github.com/follhim/usu_lpa-poc-sgm/raw/main/presentation/SK_SCRA_Blitz.pdf" download="">Download PDF file.</a></object></p>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
