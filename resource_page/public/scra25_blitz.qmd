@@ -16,7 +16,7 @@ categories:
   - Presentation
 ---
 
-To view my blitz presentation on **Engagement with Religious/Spirituality among Sexual Gender Minorities of Color** at the Society of Community Research and Action, please see the github repository below. 
+To view all reproducible materials (e.g., code, data) on **Engagement with Religious/Spirituality among Sexual Gender Minorities of Color** at the Society of Community Research and Action, please see the github repository below. 
 
 {{< include ../private/gh-cards.qmd >}}
 
@@ -25,3 +25,7 @@ To view my blitz presentation on **Engagement with Religious/Spirituality among 
 ghCard('follhim/usu_lpa-poc-sgm', 'large');
 </script>
 ```
+
+To view the presentation file, please see below.
+
+{{< embedpdf "https://mozilla.github.io/pdf.js/web/viewer.html?file=https://github.com/follhim/usu_lpa-poc-sgm/raw/main/presentation/SK_SCRA_Blitz.pdf" iframe=true width=100% height=600 >}}
