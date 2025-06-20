@@ -158,7 +158,8 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
   font-family: 'Arial';
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
   transition: 0.3s;
-  max-width: 300px;
+  max-width: 300px; /* Default width - will be overridden by custom width */
+  width: 100%;
   display: inline-block;
   margin: 8px;
   border-radius: 8px;
@@ -181,13 +182,10 @@ img.gh { border-radius: 8px 8px 0 0; width: 100%; clip-path: polygon(100% 0, 100
   font-style: italic; 
 }
 </style>
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script>
 window.ghCardCounter = 0;
-
-function ghCard(repo, size = '', customImage = '') {
+function ghCard(repo, size = '', customImage = '', customWidth = '') {
   const id = 'gh-card-' + (++window.ghCardCounter);
   const sizeClass = size ? ` gh-${size}` : '';
   
@@ -195,6 +193,22 @@ function ghCard(repo, size = '', customImage = '') {
   document.write(`<div id="${id}" class="gh-card${sizeClass}">
     <div class="gh-loading">Loading ${repo}...</div>
   </div>`);
+  
+  // Apply custom width if provided
+  setTimeout(() => {
+    const card = document.getElementById(id);
+    if (!card) return;
+    
+    if (customWidth) {
+      // Handle different width formats
+      if (customWidth.includes('%') || customWidth.includes('px') || customWidth.includes('em') || customWidth.includes('rem')) {
+        card.style.maxWidth = customWidth;
+      } else {
+        // Assume it's pixels if no unit specified
+        card.style.maxWidth = customWidth + 'px';
+      }
+    }
+  }, 50);
   
   // Fetch both repo data and last commit data
   setTimeout(() => {
