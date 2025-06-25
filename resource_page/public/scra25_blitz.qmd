@@ -42,6 +42,6 @@ To view all reproducible materials (e.g., code, data), please see the github rep
 ```{=html}
 <div style="text-align: center;">
 <script>
-ghCard('follhim/usu_lpa-poc-sgm', 'medium', '', '80%');
+ghCard('follhim/usu_lpa-poc-sgm', 'medium');
 </script>
 </div>
