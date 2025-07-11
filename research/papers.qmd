@@ -136,6 +136,10 @@ library(patchwork)
 
 scholar_id <- "JWNJV9UAAAAJ"
 
+# Add user agent and delay
+options(HTTPUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+Sys.sleep(2)  # Add delay between requests
+
 # Get citation data
 citation_data <- get_citation_history(scholar_id) %>%
   as.data.frame()
