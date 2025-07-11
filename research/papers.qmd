@@ -34,6 +34,8 @@ listing:
     #categories: true
 toc: true    
 #page-layout: full
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -43,7 +45,7 @@ toc: true
 #| include: FALSE
 # Required packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph)
+pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph, patchwork)
 ```
 
 <a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" 
@@ -127,19 +129,30 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 ```{r}
 #| echo: FALSE
 #| warning: FALSE
+
 library(ggplot2)
 library(ggiraph)
+library(patchwork)
 
 scholar_id <- "JWNJV9UAAAAJ"
+
+# Get citation data
 citation_data <- get_citation_history(scholar_id) %>%
   as.data.frame()
 
-# Calculate total citations
-total_citations <- sum(citation_data$cites)
+# Get publication data
+publication_data <- get_publications(scholar_id) %>%
+  select(year) %>%
+  count(year, name = "publications") %>%
+  filter(!is.na(year))
 
-# Create the interactive plot
-g_scho_plot <- citation_data %>%
-  ggplot(aes(x = as.factor(year), y = cites)) +
+# Calculate totals
+total_citations <- sum(citation_data$cites)
+total_publications <- sum(publication_data$publications)
+
+# Create citations plot (horizontal)
+citations_plot <- citation_data %>%
+  ggplot(aes(x = cites, y = as.factor(year))) +
   geom_col_interactive(
     aes(tooltip = cites),
     fill = "#4A90A4",
@@ -148,33 +161,68 @@ g_scho_plot <- citation_data %>%
   labs(
     title = "Citation History Over Time",
     subtitle = paste("Total Citations:", total_citations),
-    x = "Year",
-    y = "# of Citations",
-    caption = paste("Data from Google Scholar (", Sys.Date(), ")", sep = "")
+    x = "Number of Citations",
+    y = "Year"
   ) +
   theme_minimal() +
   theme(
     plot.background = element_rect(fill = "#0E2638", color = NA),
     panel.background = element_rect(fill = "#0E2638", color = NA),
-    plot.title = element_text(size = 18, face = "bold", color = "white"),
-    plot.subtitle = element_text(size = 14, color = "white"),
-    axis.title = element_text(size = 14, color = "white"),
-    axis.text = element_text(size = 12, color = "white"),
-    plot.caption = element_text(size = 10, color = "#BDC3C7"),
-    axis.line = element_line(color = "white", size = 0.5),
+    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB"),
+    plot.subtitle = element_text(size = 12, color = "#EBEBEB"),
+    axis.title = element_text(size = 12, color = "#EBEBEB"),
+    axis.text = element_text(size = 10, color = "#EBEBEB"),
+    axis.line = element_line(color = "#EBEBEB", size = 0.5),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
   )
 
+# Create publications plot (horizontal)
+publications_plot <- publication_data %>%
+  ggplot(aes(x = publications, y = as.factor(year))) +
+  geom_col_interactive(
+    aes(tooltip = publications),
+    fill = "#7FB069",
+    width = 0.7
+  ) +
+  labs(
+    title = "Publications Over Time",
+    subtitle = paste("Total Publications:", total_publications),
+    x = "Number of Publications",
+    y = "Year"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.background = element_rect(fill = "#0E2638", color = NA),
+    panel.background = element_rect(fill = "#0E2638", color = NA),
+    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB"),
+    plot.subtitle = element_text(size = 12, color = "#EBEBEB"),
+    axis.title = element_text(size = 12, color = "#EBEBEB"),
+    axis.text = element_text(size = 10, color = "#EBEBEB"),
+    axis.line = element_line(color = "#EBEBEB", size = 0.5),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+
+# Combine plots side by side
+combined_plot <- citations_plot + publications_plot + 
+  plot_layout(ncol = 2) +
+  plot_annotation(
+    caption = paste("Data from Google Scholar (", Sys.Date(), ")", sep = ""),
+    theme = theme(
+      plot.background = element_rect(fill = "#0E2638", color = NA),
+      plot.caption = element_text(size = 10, color = "#EBEBEB")
+    )
+  )
+
 # Create the girafe object
 interactive_plot <- girafe(
-  ggobj = g_scho_plot,
-  width_svg = 8,
-  height_svg = 3
+  ggobj = combined_plot,
+  width_svg = 12,
+  height_svg = 5
 )
 
 # Display the interactive plot
-print(interactive_plot)
 interactive_plot
 ```
 
