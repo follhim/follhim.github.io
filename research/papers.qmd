@@ -43,7 +43,7 @@ toc: true
 #| include: FALSE
 # Required packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here)
+pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph)
 ```
 
 <a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" 
@@ -123,6 +123,61 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here)
     document.getElementById('cv-download-button').addEventListener('click', incrementCount);
   });
 </script>
+
+```{r}
+#| echo: FALSE
+#| warning: FALSE
+library(ggplot2)
+library(ggiraph)
+
+scholar_id <- "JWNJV9UAAAAJ"
+citation_data <- get_citation_history(scholar_id) %>%
+  as.data.frame()
+
+# Calculate total citations
+total_citations <- sum(citation_data$cites)
+
+# Create the interactive plot
+g_scho_plot <- citation_data %>%
+  ggplot(aes(x = as.factor(year), y = cites)) +
+  geom_col_interactive(
+    aes(tooltip = cites),
+    fill = "#4A90A4",
+    width = 0.7
+  ) +
+  labs(
+    title = "Citation History Over Time",
+    subtitle = paste("Total Citations:", total_citations),
+    x = "Year",
+    y = "# of Citations",
+    caption = paste("Data from Google Scholar (", Sys.Date(), ")", sep = "")
+  ) +
+  theme_minimal() +
+  theme(
+    plot.background = element_rect(fill = "#0E2638", color = NA),
+    panel.background = element_rect(fill = "#0E2638", color = NA),
+    plot.title = element_text(size = 18, face = "bold", color = "white"),
+    plot.subtitle = element_text(size = 14, color = "white"),
+    axis.title = element_text(size = 14, color = "white"),
+    axis.text = element_text(size = 12, color = "white"),
+    plot.caption = element_text(size = 10, color = "#BDC3C7"),
+    axis.line = element_line(color = "white", size = 0.5),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()
+  )
+
+# Create the girafe object
+interactive_plot <- girafe(
+  ggobj = g_scho_plot,
+  width_svg = 8,
+  height_svg = 3
+)
+
+# Display the interactive plot
+print(interactive_plot)
+interactive_plot
+```
+
 
 ## Published Papers
 
