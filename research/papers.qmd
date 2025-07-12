@@ -215,10 +215,10 @@ citations_plot <- citation_data %>%
   theme(
     plot.background = element_rect(fill = "#0E2638", color = NA),
     panel.background = element_rect(fill = "#0E2638", color = NA),
-    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB"),
-    plot.subtitle = element_text(size = 12, color = "#EBEBEB"),
-    axis.title = element_text(size = 12, color = "#EBEBEB"),
-    axis.text = element_text(size = 10, color = "#EBEBEB"),
+    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB", family = "sans"),
+    plot.subtitle = element_text(size = 12, color = "#EBEBEB", family = "sans"),
+    axis.title = element_text(size = 12, color = "#EBEBEB", family = "sans"),
+    axis.text = element_text(size = 10, color = "#EBEBEB", family = "sans"),
     axis.line = element_line(color = "#EBEBEB", size = 0.5),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
@@ -242,10 +242,10 @@ publications_plot <- publication_data %>%
   theme(
     plot.background = element_rect(fill = "#0E2638", color = NA),
     panel.background = element_rect(fill = "#0E2638", color = NA),
-    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB"),
-    plot.subtitle = element_text(size = 12, color = "#EBEBEB"),
-    axis.title = element_text(size = 12, color = "#EBEBEB"),
-    axis.text = element_text(size = 10, color = "#EBEBEB"),
+    plot.title = element_text(size = 14, face = "bold", color = "#EBEBEB", family = "sans"),
+    plot.subtitle = element_text(size = 12, color = "#EBEBEB", family = "sans"),
+    axis.title = element_text(size = 12, color = "#EBEBEB", family = "sans"),
+    axis.text = element_text(size = 10, color = "#EBEBEB", family = "sans"),
     axis.line = element_line(color = "#EBEBEB", size = 0.5),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank()
@@ -258,7 +258,7 @@ combined_plot <- citations_plot + publications_plot +
     caption = paste("Data from Google Scholar (", Sys.Date(), ")", sep = ""),
     theme = theme(
       plot.background = element_rect(fill = "#0E2638", color = NA),
-      plot.caption = element_text(size = 10, color = "#EBEBEB")
+      plot.caption = element_text(size = 10, color = "#EBEBEB", family = "sans")
     )
   )
 
