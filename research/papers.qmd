@@ -45,13 +45,7 @@ editor_options:
 #| include: FALSE
 # Required packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph, patchwork)
-
-library(ggplot2)
-library(ggiraph)
-library(here)
-library(patchwork)
-library(gdtools)
+pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph, patchwork, gdtools)
 
 # Register a web font for better consistency
 register_gfont("Inter")
