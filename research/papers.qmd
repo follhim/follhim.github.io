@@ -266,7 +266,12 @@ combined_plot <- citations_plot + publications_plot +
 interactive_plot <- girafe(
   ggobj = combined_plot,
   width_svg = 12,
-  height_svg = 5
+  height_svg = 5,
+  options = list(
+    opts_tooltip(
+      css = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;"
+    )
+  )
 )
 
 interactive_plot
