@@ -46,6 +46,15 @@ editor_options:
 # Required packages
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph, patchwork)
+
+library(ggplot2)
+library(ggiraph)
+library(here)
+library(patchwork)
+library(gdtools)
+
+# Register a web font for better consistency
+register_gfont("Inter")
 ```
 
 <a href="https://docs.google.com/document/d/1bB2WnhJIigiq-S9CmZNKPpmEYytFz98U/export?format=pdf" 
@@ -130,10 +139,6 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 #| echo: FALSE
 #| warning: FALSE
 #| asis: TRUE
-
-library(ggplot2)
-library(ggiraph)
-library(patchwork)
 
 scholar_id <- "JWNJV9UAAAAJ"
 
@@ -262,16 +267,12 @@ combined_plot <- citations_plot + publications_plot +
     )
   )
 
-# Create the girafe object
+# Create the girafe object with Helvetica font
 interactive_plot <- girafe(
   ggobj = combined_plot,
   width_svg = 12,
   height_svg = 5,
-  options = list(
-    opts_tooltip(
-      css = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;"
-    )
-  )
+  fonts = list(sans = "Helvetica")
 )
 
 interactive_plot
