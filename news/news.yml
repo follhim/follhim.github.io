@@ -1,0 +1,23 @@
+news:
+  - date: "05/15/2025"
+    title: "🎉 Easily create your own simple yet highly customizable blog"
+    subtitle: "Take full control of your personal brand and privacy by migrating away from the big tech platforms!"
+    link: "https://example.com/blog-post-1"
+    
+  - date: "04/22/2025"
+    title: "🧠 Sharpen your thinking with a second brain"
+    subtitle: "Create a personal knowledge base and share your knowledge with your peers."
+    link: "https://example.com/second-brain"
+    
+  - date: "03/18/2025"
+    title: "📊 Communicate your results effectively with the best data visualizations"
+    subtitle: "Use popular tools such as Plotly, Mermaid, and data frames."
+    link: "https://example.com/data-viz"
+    
+  - date: "02/10/2025"
+    title: "🎓 Teach academic courses"
+    subtitle: "Embed videos, podcasts, code, LaTeX math, and even test students!"
+    
+  - date: "01/05/2025"
+    title: "📝 New research collaboration announced"
+    subtitle: "Partnering with leading institutions to advance our understanding of religious experiences."

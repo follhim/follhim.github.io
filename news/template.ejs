@@ -1,0 +1,30 @@
+<div class="news-section">
+  <h3 class="news-heading">Recent News</h3>
+  <div class="news-container">
+    <% news.news.forEach(function(item) { %>
+      <div class="news-item">
+        <div class="news-date"><%= item.date %></div>
+        <div class="news-content">
+          <div class="news-title">
+            <% if (item.link) { %>
+              <a href="<%= item.link %>" target="_blank"><%= item.title %></a>
+            <% } else { %>
+              <%= item.title %>
+            <% } %>
+          </div>
+          
+          <div class="news-subtitle">
+            <%= item.subtitle %>
+          </div>
+        </div>
+        <div class="news-actions">
+          <% if (item.link) { %>
+            <a href="<%= item.link %>" class="read-more" target="_blank">
+              Read more <span class="arrow">→</span>
+            </a>
+          <% } %>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
