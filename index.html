@@ -219,7 +219,7 @@ window.Quarto = {
 </div>
 <div id="listing-news" class="quarto-listing quarto-listing-container-custom">
 <style>
-/* News Section Styles */
+/* News Section Styles - Always Dark Mode */
 .news-section {
   margin: 2rem 0;
   padding: 0;
@@ -227,7 +227,7 @@ window.Quarto = {
 .news-heading {
   font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: #e2e8f0; /* Always light text */
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -240,50 +240,51 @@ window.Quarto = {
   flex-direction: column;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  background: #fff;
+  background: #2d3748; /* Always dark background */
+  color: #e2e8f0; /* Always light text */
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .news-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
 }
 .news-date {
   font-size: 0.9rem;
-  color: #666;
+  color: #a0aec0; /* Light gray for dark mode */
   font-weight: 600;
-  text-align: center; /* Centered date */
+  text-align: center;
   margin-bottom: 1rem;
 }
 .news-content {
-  margin-bottom: 0.5rem; /* Smaller gap between content and read more */
+  margin-bottom: 0.5rem;
 }
 .news-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #007bff; /* Blue color for title */
+  color: #63b3ed; /* Light blue for dark mode */
   margin-bottom: 0.5rem;
   line-height: 1.4;
 }
 .news-subtitle {
   font-size: 0.95rem;
-  color: #fff; /* White color for subtitle */
+  color: #fff; /* White for subtitle */
   line-height: 1.4;
-  text-align: left; /* Left aligned subtitle */
+  text-align: left;
 }
 .news-actions {
-  text-align: right; /* Right aligned read more */
+  text-align: right;
 }
 .read-more {
-  color: #28a745;
+  color: #68d391; /* Light green for dark mode */
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 .read-more:hover {
-  color: #1e7e34;
+  color: #9ae6b4; /* Lighter green on hover */
 }
 .arrow {
   margin-left: 0.25rem;
@@ -291,22 +292,6 @@ window.Quarto = {
 }
 .read-more:hover .arrow {
   transform: translateX(3px);
-}
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .news-item {
-    background: #2d3748;
-    color: #e2e8f0;
-  }
-  .news-heading {
-    color: #e2e8f0;
-  }
-  .news-title {
-    color: #63b3ed; /* Light blue for dark mode */
-  }
-  .news-subtitle {
-    color: #fff; /* Keep white for subtitle in dark mode */
-  }
 }
 </style>
 <div class="news-section">
