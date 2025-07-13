@@ -20,19 +20,21 @@ editor_options:
 format:
   html:
     css: styles.css
+    include-before-body: |
+      ```{=html}
+      <% 
+      const yaml = require('js-yaml');
+      const fs = require('fs');
+      const news = yaml.load(fs.readFileSync('news/data.yml', 'utf8'));
+      %>
+      <%- include('news/template.ejs', { news: news }) %>
+      ```
 ---
 
 ::: {#hero-heading}
 **Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health.
-
 **My research is particularly focuses on:**
-
 Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities
 :::
 
-### News
-
-|  |  |
-|----|----|
-| 05/2025 | My paper "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leader" is now published at *Review of Religious Research*. |
-| 04/2025 | "Bystander Helping Intentions in Risky Alcohol Use and Teen Dating Violence Situations Among Sexual and Gender Minority Youth" is now published in *Journal of Interpersonal Violence*. |
+<!-- News section will be automatically included here -->
