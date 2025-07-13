@@ -9,5 +9,13 @@
   {
     "listing": "/research/papers.html",
     "items": []
+  },
+  {
+    "listing": "/index.html",
+    "items": []
+  },
+  {
+    "listing": "/news/news.html",
+    "items": []
   }
 ]

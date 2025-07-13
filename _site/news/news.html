@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modeling Religion and Health – Seungju Kim</title>
+<title>News – Seungju Kim</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,20 +71,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-news .list');
+    const listingTargetEl = window.document.querySelector('#listing-news-listing .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-description','listing-url',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-description","listing-url"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-news'] = new List('listing-news', options);
+    window['quarto-listings']['listing-news-listing'] = new List('listing-news-listing', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -137,17 +137,16 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Seungju Kim</span>
     </a>
   </div>
@@ -158,19 +157,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research/papers.html"> 
+    <a class="nav-link" href="../research/papers.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resource.html"> 
+    <a class="nav-link" href="../resource.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -199,155 +198,45 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="images/rel_health.png" class="about-image
-  rectangle " style="width: 500px;">
- <header id="title-block-header" class="quarto-title-block default">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Modeling Religion and Health</h1>
+<h1 class="title">News</h1>
 </div>
+
+
+
 <div class="quarto-title-meta">
+
+    
+  
+    
   </div>
-</header><main class="content" id="quarto-document-content">
-<div id="hero-heading">
-<p><strong>Hello, and thank you for visiting my website!</strong><br> My name is <em>Seungju</em> and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health.</p>
-<p><strong>My research is particularly focuses on:</strong></p>
-<p>Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities</p>
-</div>
-<div id="listing-news" class="quarto-listing quarto-listing-container-custom">
-<style>
-/* News Section Styles */
-.news-section {
-  margin: 2rem 0;
-  padding: 0;
-}
-.news-heading {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-.news-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.news-item {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.news-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-.news-date {
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 600;
-  text-align: center; /* Centered date */
-  margin-bottom: 1rem;
-}
-.news-content {
-  margin-bottom: 0.5rem; /* Smaller gap between content and read more */
-}
-.news-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #007bff; /* Blue color for title */
-  margin-bottom: 0.5rem;
-  line-height: 1.4;
-}
-.news-subtitle {
-  font-size: 0.95rem;
-  color: #fff; /* White color for subtitle */
-  line-height: 1.4;
-  text-align: left; /* Left aligned subtitle */
-}
-.news-actions {
-  text-align: right; /* Right aligned read more */
-}
-.read-more {
-  color: #28a745;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-.read-more:hover {
-  color: #1e7e34;
-}
-.arrow {
-  margin-left: 0.25rem;
-  transition: transform 0.2s ease;
-}
-.read-more:hover .arrow {
-  transform: translateX(3px);
-}
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .news-item {
-    background: #2d3748;
-    color: #e2e8f0;
-  }
-  .news-heading {
-    color: #e2e8f0;
-  }
-  .news-title {
-    color: #63b3ed; /* Light blue for dark mode */
-  }
-  .news-subtitle {
-    color: #fff; /* Keep white for subtitle in dark mode */
-  }
-}
-</style>
-<div class="news-section">
-  <h3 class="news-heading">Recent News</h3>
-  <div class="news-container">
-      <div class="news-item">
-        <div class="news-date">
-          May 26, 2025
-        </div>
-        <div class="news-content">
-          <div class="news-title">
-            New Paper on Gender Disparities in Next-Gen Religious Leaders
-          </div>
-          <div class="news-subtitle">
-            Using a sample of male and female emerging religious leaders, we examine differences on health, spirituality, character, and more.
-          </div>
-        </div>
-        <div class="news-actions">
-          <a href="https://doi.org/10.1177/0034673X251336459" class="read-more" target="_blank">
-            Read more <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-      <div class="news-item">
-        <div class="news-date">
-          Apr 22, 2025
-        </div>
-        <div class="news-content">
-          <div class="news-title">
-            How might religiously based family expectations be associated with LGBTQ+ mental health?
-          </div>
-          <div class="news-subtitle">
-            My first, first-authored, paper demonstrates how religious family expectations is associated with depression, but can be buffered when LGBTQ+ people are more authentic with themselves.
-          </div>
-        </div>
-        <div class="news-actions">
-          <a href="https://www.tandfonline.com/share/7Z7APPKPZ7S7WZSTUGYU?target=10.1080/00918369.2024.2378745" class="read-more" target="_blank">
-            Read more <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-  </div>
+  
+
+
+</header>
+
+
+<div id="listing-news-listing" class="quarto-listing quarto-listing-container-custom">
+<div style="background: red; color: white; padding: 20px; margin: 20px; border: 3px solid blue;">
+  <h2 class="anchored">EJS TEMPLATE IS WORKING!</h2>
+  <p>If you see this red box, the EJS template is loading.</p>
+  
+  
+    <p>✅ Items variable exists</p>
+    <p>Number of items: 0</p>
+    
+    
+      <p>❌ Items array is empty</p>
+    
+    
+  
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -355,24 +244,9 @@ No matching items
 </div>
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://scholar.google.com/citations?user=JWNJV9UAAAAJ&amp;hl" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="academicons:google-scholar" aria-label="Icon google-scholar from academicons Iconify.design set." title="Icon google-scholar from academicons Iconify.design set." width="35px" height="35px"></iconify-icon></span>
-  </a>
-  <a href="https://www.researchgate.net/profile/Seungju-Kim-11" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="la:researchgate" aria-label="Icon researchgate from la Iconify.design set." title="Icon researchgate from la Iconify.design set." width="35px" height="35px"></iconify-icon></span>
-  </a>
-  <a href="https://www.linkedin.com/in/kimseungju/" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="ion:logo-linkedin" aria-label="Icon logo-linkedin from ion Iconify.design set." title="Icon logo-linkedin from ion Iconify.design set." width="35px" height="35px"></iconify-icon></span>
-  </a>
-  <a href="https://orcid.org/0009-0009-5166-9170" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="fa6-brands:orcid" aria-label="Icon orcid from fa6-brands Iconify.design set." title="Icon orcid from fa6-brands Iconify.design set." width="35px" height="35px"></iconify-icon></span>
-  </a>
-</div>
-</div>
- <!-- /main -->
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -393,6 +267,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -786,6 +667,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="follhim/follhim.github.io" data-repo-id="R_kgDON868GQ" data-category="General" data-category-id="DIC_kwDON868Gc4CnJwJ" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="dark">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 
 

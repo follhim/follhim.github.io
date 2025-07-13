@@ -20,21 +20,23 @@ editor_options:
 format:
   html:
     css: styles.css
-    include-before-body: |
-      ```{=html}
-      <% 
-      const yaml = require('js-yaml');
-      const fs = require('fs');
-      const news = yaml.load(fs.readFileSync('news/data.yml', 'utf8'));
-      %>
-      <%- include('news/template.ejs', { news: news }) %>
-      ```
+listing:
+  - id: news
+    contents: "news.yml"
+    template: news/news.ejs  # Same folder as index.qmd
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
 ---
 
 ::: {#hero-heading}
 **Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health.
+
 **My research is particularly focuses on:**
+
 Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities
 :::
 
-<!-- News section will be automatically included here -->
+
+:::{#news}
+:::

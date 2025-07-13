@@ -1,0 +1,14 @@
+---
+title: "News"
+listing:
+  - id: news-listing
+    contents: "*.yaml"
+    template: news.ejs
+    filter-ui: false
+    sort: "date desc"
+    sort-ui: false
+format: html
+---
+
+:::{#news-listing}
+:::
