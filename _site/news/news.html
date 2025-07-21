@@ -224,19 +224,101 @@ window.Quarto = {
 
 
 <div id="listing-news-listing" class="quarto-listing quarto-listing-container-custom">
-<div style="background: red; color: white; padding: 20px; margin: 20px; border: 3px solid blue;">
-  <h2 class="anchored">EJS TEMPLATE IS WORKING!</h2>
-  <p>If you see this red box, the EJS template is loading.</p>
-  
-  
-    <p>✅ Items variable exists</p>
-    <p>Number of items: 0</p>
+<style>
+/* News Section Styles - Always Dark Mode */
+.news-section {
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.news-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e2e8f0; /* Always light text */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.news-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.news-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  background: #2d3748; /* Always dark background */
+  color: #e2e8f0; /* Always light text */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
+}
+
+.news-date {
+  font-size: 0.9rem;
+  color: #a0aec0; /* Light gray for dark mode */
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.news-content {
+  margin-bottom: 0.5rem;
+}
+
+.news-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #63b3ed; /* Light blue for dark mode */
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.news-subtitle {
+  font-size: 0.95rem;
+  color: #fff; /* White for subtitle */
+  line-height: 1.4;
+  text-align: left;
+}
+
+.news-actions {
+  text-align: right;
+}
+
+.read-more {
+  color: #68d391; /* Light green for dark mode */
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.read-more:hover {
+  color: #9ae6b4; /* Lighter green on hover */
+}
+
+.arrow {
+  margin-left: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.read-more:hover .arrow {
+  transform: translateX(3px);
+}
+</style>
+
+<div class="news-section">
+  <h3 class="news-heading anchored">Recent News</h3>
+  <div class="news-container">
     
-    
-      <p>❌ Items array is empty</p>
-    
-    
-  
+  </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
