@@ -10,7 +10,7 @@
   year: 2025                        # Publication year (for published papers)
   journal: "American Journal of Community Psychology"  # Journal name
   doi: "doi.org/10.1002/ajcp.70002"
-  pubopen: "doi.org/10.1002/ajcp.70002"  # Open access version
+  pubopen: "https://doi.org/10.1002/ajcp.70002"  # Open access version
   # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
   # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
