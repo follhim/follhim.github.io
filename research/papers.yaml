@@ -1,4 +1,27 @@
 ---
+- title: "Patterns of Christian Nationalist Engagement and Connections to Spirituality"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Jankowski, P.J."
+    - "Wang, D.C."
+    - "Hawkins, H.A."
+  year: 2025                        # Publication year (for published papers)
+  journal: "Pastoral Psychology"  # Journal name
+  doi: "10.1007/s11089-025-01241-3"
+  pubopen: "https://doi.org/10.1007/s11089-025-01241-3"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  preprint: "https://doi.org/10.31234/osf.io/9xt8r_v2"
+  osf: "https://osf.io/jnvgs/?view_only=79b25ae9c643488eb80831a339b1f76a"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  note: "Currently In-press"  # Additional note (displayed at bottom)
+  
 - title: "Linking the religious and social environment to sexual minority mental health"
   type: "Published"                  # Use "Published" for published papers
   author:                           # Can be array or string
@@ -22,29 +45,6 @@
   # website: "https://project-website.com"  # Project website
   # errata: "https://journal.com/errata123"  # Errata/correction
   # note: "Currently In-press"  # Additional note (displayed at bottom)
-  
-- title: "Patterns of Christian Nationalist Engagement and Connections to Spirituality"
-  type: "Published"                  # Use "Published" for published papers
-  author:                           # Can be array or string
-    - "**Kim, S.**"
-    - "Jankowski, P.J."
-    - "Wang, D.C."
-    - "Hawkins, H.A."
-  year: 2025                        # Publication year (for published papers)
-  journal: "Pastoral Psychology"  # Journal name
-  doi: "10.1007/s11089-025-01241-3"
-  pubopen: "https://doi.org/10.1007/s11089-025-01241-3"  # Open access version
-  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
-  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
-  # appendix: "https://journal.com/appendix123"     # Supplementary materials
-  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
-  preprint: "https://doi.org/10.31234/osf.io/9xt8r"
-  osf: "https://osf.io/jnvgs/?view_only=79b25ae9c643488eb80831a339b1f76a"    # OSF project
-  # github: "https://github.com/username/project"   # GitHub repository
-  # prereg: "https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf"  # Preregistration
-  # website: "https://project-website.com"  # Project website
-  # errata: "https://journal.com/errata123"  # Errata/correction
-  note: "Currently In-press"  # Additional note (displayed at bottom)
 
 - title: "Contrasting Experiences: Gender Disparities in Spirituality, Character Strengths, Mental Health, and Social Justice Among Next-Generation Religious Leaders"
   type: "Published"                  # Use "Published" for published papers

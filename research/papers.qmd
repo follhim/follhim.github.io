@@ -141,24 +141,26 @@ citation_file <- here("research", "citations.csv")
 publications_file <- here("research", "publications.csv")
 
 # Get citation data
-if (file.exists(citation_file)) {
-  citation_data <- read.csv(citation_file)
-  message("Using cached citation data from: ", citation_file)
-} else {
-  tryCatch({
-    citation_data <- get_citation_history(scholar_id) %>%
-      as.data.frame()
-    dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-    write.csv(citation_data, citation_file, row.names = FALSE)
-    message("Fetched new citation data and saved to: ", citation_file)
-  }, error = function(e) {
-    warning(paste("Error fetching citation data:", e$message))
-    citation_data <<- data.frame(
-      year = c(2020, 2021, 2022, 2023, 2024, 2025),
-      cites = c(0, 0, 0, 3, 4, 0)
-    )
-  })
-}
+tryCatch({
+  citation_data <- get_citation_history(scholar_id) %>%
+    as.data.frame()
+  
+  # Save the fresh data
+  dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
+  write.csv(citation_data, citation_file, row.names = FALSE)
+  message("Fetched fresh citation data and saved to: ", citation_file)
+  
+}, error = function(e) {
+  warning(paste("Error fetching citation data:", e$message))
+  
+  # Only use cached data as fallback if API fails
+  if (file.exists(citation_file)) {
+    citation_data <<- read.csv(citation_file)
+    message("Using cached citation data as fallback")
+  } else {
+    stop("No cached data available and API call failed")
+  }
+})
 
 # Get publication data
 if (file.exists(publications_file)) {
