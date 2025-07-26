@@ -189,23 +189,13 @@ tryCatch({
   }
 })
 
-# Debug: Check the data structures
-message("Citation data structure:")
-print(str(citation_data))
-message("Citation data:")
-print(citation_data)
+# Force data into global scope and verify
+citation_data <<- citation_data
+publication_data <<- publication_data
 
-message("Publication data structure:")
-print(str(publication_data))
-message("Publication data:")
-print(publication_data)
-
-# Calculate totals
-total_citations <- sum(citation_data$cites)
-total_publications <- sum(publication_data$publications)
-
-message("Total citations: ", total_citations)
-message("Total publications: ", total_publications)
+# Calculate totals with explicit access
+total_citations <- sum(citation_data$cites, na.rm = TRUE)
+total_publications <- sum(publication_data$publications, na.rm = TRUE)
 
 # Create citations plot (horizontal)
 citations_plot <- citation_data %>%
