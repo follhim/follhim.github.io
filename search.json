@@ -18,7 +18,7 @@
     "href": "research/papers.html",
     "title": "Research",
     "section": "",
-    "text": "Download CV  0\n'data.frame':   2 obs. of  2 variables:\n $ year : num  2024 2025\n $ cites: num  3 5\nNULL\n\n\n  year cites\n1 2024     3\n2 2025     5\n\n\n'data.frame':   2 obs. of  2 variables:\n $ year        : num  2024 2025\n $ publications: int  1 5\nNULL\n\n\n  year publications\n1 2024            1\n2 2025            5"
+    "text": "Download CV  0"
   },
   {
     "objectID": "research/papers.html#published-papers",
