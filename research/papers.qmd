@@ -188,23 +188,10 @@ tryCatch({
   }
 })
 
-# Debug: Check the data structures
-message("Citation data structure:")
-print(str(citation_data))
-message("Citation data:")
-print(citation_data)
-
-message("Publication data structure:")
-print(str(publication_data))
-message("Publication data:")
-print(publication_data)
-
 # Calculate totals
 total_citations <- sum(citation_data$cites)
 total_publications <- sum(publication_data$publications)
 
-message("Total citations: ", total_citations)
-message("Total publications: ", total_publications)
 
 # Create citations plot (horizontal)
 citations_plot <- citation_data %>%
