@@ -136,26 +136,51 @@ register_gfont("Inter")
 
 scholar_id <- "JWNJV9UAAAAJ"
 
-# Try to read from cached CSV files first, fallback to API
+# File paths
 citation_file <- here("research", "citations.csv")
 publications_file <- here("research", "publications.csv")
 
-# Always fetch fresh citation data and save it
-citation_data <- get_citation_history(scholar_id) %>%
-  as.data.frame()
+# Try to fetch citation data, use existing CSV if blocked (e.g., on GitHub Actions)
+tryCatch({
+  citation_data <- get_citation_history(scholar_id) %>%
+    as.data.frame()
+  message("Successfully fetched fresh citation data from API")
+}, error = function(e) {
+  message("API call failed (likely blocked on GitHub Actions): ", e$message)
+  if (file.exists(citation_file)) {
+    citation_data <<- read.csv(citation_file)
+    message("Using existing CSV citation data")
+  } else {
+    stop("No existing citation CSV found and API blocked")
+  }
+})
 
-# Make sure directory exists and save
+# Save citation data
 dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
 write.csv(citation_data, citation_file, row.names = FALSE)
 
-# Always fetch fresh publication data and save it
-publications_raw <- get_publications(scholar_id)
-
-# Filter out OSF publications and count by year
-publication_data <- publications_raw %>%
-  filter(!is.na(year)) %>%  # Remove rows with missing years
-  filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%  # Remove OSF publications
-  count(year, name = "publications")  # Count publications per year
+# Try to fetch publication data, use fallback if blocked
+tryCatch({
+  publications_raw <- get_publications(scholar_id)
+  
+  if (is.data.frame(publications_raw) && nrow(publications_raw) > 0) {
+    publication_data <- publications_raw %>%
+      filter(!is.na(year)) %>%
+      filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%
+      count(year, name = "publications")
+    message("Successfully fetched fresh publication data from API")
+  } else {
+    stop("API returned invalid data")
+  }
+}, error = function(e) {
+  message("Publication API call failed (likely blocked on GitHub Actions): ", e$message)
+  if (file.exists(publications_file)) {
+    publication_data <<- read.csv(publications_file)
+    message("Using existing CSV publication data")
+  } else {
+    stop("No existing publication CSV found and API blocked")
+  }
+})
 
 # Save publication data
 write.csv(publication_data, publications_file, row.names = FALSE)
