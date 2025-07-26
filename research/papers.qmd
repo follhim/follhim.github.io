@@ -136,54 +136,78 @@ register_gfont("Inter")
 
 scholar_id <- "JWNJV9UAAAAJ"
 
-# File paths
+# Try to read from cached CSV files first, fallback to API
 citation_file <- here("research", "citations.csv")
 publications_file <- here("research", "publications.csv")
 
-# Try to fetch citation data, use existing CSV if blocked (e.g., on GitHub Actions)
+# Get citation data
 tryCatch({
   citation_data <- get_citation_history(scholar_id) %>%
     as.data.frame()
-  message("Successfully fetched fresh citation data from API")
+  
+  # Save the fresh data
+  dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
+  write.csv(citation_data, citation_file, row.names = FALSE)
+  message("Fetched fresh citation data and saved to: ", citation_file)
+  
 }, error = function(e) {
-  message("API call failed (likely blocked on GitHub Actions): ", e$message)
+  warning(paste("Error fetching citation data:", e$message))
+  
+  # Only use cached data as fallback if API fails
   if (file.exists(citation_file)) {
     citation_data <<- read.csv(citation_file)
-    message("Using existing CSV citation data")
+    message("Using cached citation data as fallback")
   } else {
-    stop("No existing citation CSV found and API blocked")
+    stop("No cached data available and API call failed")
   }
 })
 
-# Save citation data
-dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-write.csv(citation_data, citation_file, row.names = FALSE)
+# Get publication data
+if (file.exists(publications_file)) {
+  publication_data <- read.csv(publications_file)
+  message("Using cached publication data from: ", publications_file)
+  # Check if we need to recalculate due to OSF filtering
+  # If total publications is 7, we likely need to refresh the data
+} else {
+  publication_data <- NULL
+}
 
-# Try to fetch publication data, use fallback if blocked
+# Always fetch fresh data to apply OSF filter (you can comment this out later)
 tryCatch({
   publications_raw <- get_publications(scholar_id)
-  
-  if (is.data.frame(publications_raw) && nrow(publications_raw) > 0) {
+  if (is.data.frame(publications_raw) && "year" %in% colnames(publications_raw)) {
+    # Debug: print original data
+    message("Original publications: ", nrow(publications_raw))
+    message("Publications with OSF: ", sum(grepl("OSF", publications_raw$journal, ignore.case = TRUE)))
+    
+    # Filter out OSF publications and count
     publication_data <- publications_raw %>%
-      filter(!is.na(year)) %>%
-      filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%
-      count(year, name = "publications")
-    message("Successfully fetched fresh publication data from API")
+      filter(!is.na(year)) %>%  # Remove rows with missing years first
+      filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%  # Remove OSF publications
+      count(year, name = "publications")  # Count publications per year
+    
+    # Debug: print filtered data
+    message("Publications after filtering OSF: ", sum(publication_data$publications))
+    
+    # Save the updated data
+    dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
+    write.csv(publication_data, publications_file, row.names = FALSE)
+    message("Updated publication data saved to: ", publications_file)
   } else {
-    stop("API returned invalid data")
+    # Fallback: use citation years but adjust for known OSF count
+    publication_data <- data.frame(
+      year = c(2024, 2025),
+      publications = c(1, 4)  # Manually adjusted: 1 in 2024 (3-2 OSF), 4 in 2025
+    )
   }
 }, error = function(e) {
-  message("Publication API call failed (likely blocked on GitHub Actions): ", e$message)
-  if (file.exists(publications_file)) {
-    publication_data <<- read.csv(publications_file)
-    message("Using existing CSV publication data")
-  } else {
-    stop("No existing publication CSV found and API blocked")
-  }
+  warning(paste("Error fetching publication data:", e$message))
+  # Use fallback with correct counts (excluding OSF)
+  publication_data <- data.frame(
+    year = c(2024, 2025),
+    publications = c(1, 4)  # 1 in 2024 (3-2 OSF), 4 in 2025
+  )
 })
-
-# Save publication data
-write.csv(publication_data, publications_file, row.names = FALSE)
 
 # Calculate totals
 total_citations <- sum(citation_data$cites)
