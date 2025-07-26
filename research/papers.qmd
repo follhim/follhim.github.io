@@ -140,74 +140,25 @@ scholar_id <- "JWNJV9UAAAAJ"
 citation_file <- here("research", "citations.csv")
 publications_file <- here("research", "publications.csv")
 
-# Get citation data
-tryCatch({
-  citation_data <- get_citation_history(scholar_id) %>%
-    as.data.frame()
-  
-  # Save the fresh data
-  dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-  write.csv(citation_data, citation_file, row.names = FALSE)
-  message("Fetched fresh citation data and saved to: ", citation_file)
-  
-}, error = function(e) {
-  warning(paste("Error fetching citation data:", e$message))
-  
-  # Only use cached data as fallback if API fails
-  if (file.exists(citation_file)) {
-    citation_data <<- read.csv(citation_file)
-    message("Using cached citation data as fallback")
-  } else {
-    stop("No cached data available and API call failed")
-  }
-})
+# Always fetch fresh citation data and save it
+citation_data <- get_citation_history(scholar_id) %>%
+  as.data.frame()
 
-# Get publication data
-if (file.exists(publications_file)) {
-  publication_data <- read.csv(publications_file)
-  message("Using cached publication data from: ", publications_file)
-  # Check if we need to recalculate due to OSF filtering
-  # If total publications is 7, we likely need to refresh the data
-} else {
-  publication_data <- NULL
-}
+# Make sure directory exists and save
+dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
+write.csv(citation_data, citation_file, row.names = FALSE)
 
-# Always fetch fresh data to apply OSF filter (you can comment this out later)
-tryCatch({
-  publications_raw <- get_publications(scholar_id)
-  if (is.data.frame(publications_raw) && "year" %in% colnames(publications_raw)) {
-    # Debug: print original data
-    message("Original publications: ", nrow(publications_raw))
-    message("Publications with OSF: ", sum(grepl("OSF", publications_raw$journal, ignore.case = TRUE)))
-    
-    # Filter out OSF publications and count
-    publication_data <- publications_raw %>%
-      filter(!is.na(year)) %>%  # Remove rows with missing years first
-      filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%  # Remove OSF publications
-      count(year, name = "publications")  # Count publications per year
-    
-    # Debug: print filtered data
-    message("Publications after filtering OSF: ", sum(publication_data$publications))
-    
-    # Save the updated data
-    dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-    write.csv(publication_data, publications_file, row.names = FALSE)
-    message("Updated publication data saved to: ", publications_file)
-  } else {
-    # Fallback: use citation years but adjust for known OSF count
-    publication_data <- data.frame(
-      year = c(2024, 2025),
-      publications = c(1, 4)  # Manually adjusted: 1 in 2024 (3-2 OSF), 4 in 2025
-    )
-  }
-}, error = function(e) {
-  warning(paste("Error fetching publication data:", e$message))
-  # Use fallback with correct counts (excluding OSF)
-  publication_data <- data.frame(
-    year = c(2024, 2025),
-    publications = c(1, 4)  # 1 in 2024 (3-2 OSF), 4 in 2025
-  )
-})
+# Always fetch fresh publication data and save it
+publications_raw <- get_publications(scholar_id)
+
+# Filter out OSF publications and count by year
+publication_data <- publications_raw %>%
+  filter(!is.na(year)) %>%  # Remove rows with missing years
+  filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%  # Remove OSF publications
+  count(year, name = "publications")  # Count publications per year
+
+# Save publication data
+write.csv(publication_data, publications_file, row.names = FALSE)
 
 # Calculate totals
 total_citations <- sum(citation_data$cites)
