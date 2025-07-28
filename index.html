@@ -244,11 +244,23 @@ window.Quarto = {
   color: #e2e8f0; /* Always light text */
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
 }
 .news-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
+}
+.news-item.news-hidden {
+  display: none;
+}
+.news-item.news-fade-in {
+  opacity: 0;
+  animation: newsFadeIn 0.4s ease forwards;
+}
+@keyframes newsFadeIn {
+  to {
+    opacity: 1;
+  }
 }
 .news-date {
   font-size: 0.9rem;
@@ -293,11 +305,66 @@ window.Quarto = {
 .read-more:hover .arrow {
   transform: translateX(3px);
 }
+/* Show More/Less Button Styles */
+.news-controls {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+.news-show-more-btn, .news-show-less-btn {
+  background: #4a5568;
+  color: #e2e8f0;
+  border: 2px solid #63b3ed;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0 0.5rem;
+}
+.news-show-more-btn:hover, .news-show-less-btn:hover {
+  background: #63b3ed;
+  color: #1a202c;
+  transform: translateY(-1px);
+}
+.news-show-more-btn:active, .news-show-less-btn:active {
+  transform: translateY(0);
+}
+.news-controls button {
+  display: none;
+}
+.news-controls button.news-visible {
+  display: inline-block;
+}
+.news-summary {
+  text-align: center;
+  color: #a0aec0;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
 </style>
 <div class="news-section">
   <h3 class="news-heading">Recent News</h3>
   <div class="news-container">
-      <div class="news-item">
+      <div class="news-item " data-news-index="0">
+        <div class="news-date">
+          Jul 27, 2025
+        </div>
+        <div class="news-content">
+          <div class="news-title">
+            The strongest supporters of Christian nationalism are the most likely to report spiritual grandiosity and inflate their sense of spirituality
+          </div>
+          <div class="news-subtitle">
+            In this open access paper, we examine how patterns of Christian Nationalism engagement are linked with spirituality, an area commonly overlooked. Overall, results suggest that the biggest supporters of Christian Nationalism are more less in tune with their spirituality than they may claim.
+          </div>
+        </div>
+        <div class="news-actions">
+          <a href="https://doi.org/10.1007/s11089-025-01241-3" class="read-more" target="_blank">
+            Read more <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="news-item " data-news-index="1">
         <div class="news-date">
           Jul 21, 2025
         </div>
@@ -315,7 +382,7 @@ window.Quarto = {
           </a>
         </div>
       </div>
-      <div class="news-item">
+      <div class="news-item " data-news-index="2">
         <div class="news-date">
           May 26, 2025
         </div>
@@ -333,7 +400,7 @@ window.Quarto = {
           </a>
         </div>
       </div>
-      <div class="news-item">
+      <div class="news-item news-hidden" data-news-index="3">
         <div class="news-date">
           Apr 22, 2025
         </div>
@@ -351,8 +418,90 @@ window.Quarto = {
           </a>
         </div>
       </div>
+    <div class="news-controls">
+      <button class="news-show-more-btn news-visible" onclick="newsShowMore()">
+        Show More News
+      </button>
+      <button class="news-show-less-btn" onclick="newsShowLess()">
+        Show Less News
+      </button>
+      <div class="news-summary">
+        Showing <span id="news-visible-count">3</span> of <span id="news-total-count">4</span> news items
+      </div>
+    </div>
   </div>
 </div>
+<script>
+(function() {
+  let newsVisibleCount = 3;
+  const newsTotalItems = 4;
+  const newsItemsPerLoad = 5;
+  function newsShowMore() {
+    const hiddenItems = document.querySelectorAll('.news-item.news-hidden');
+    const itemsToShow = Math.min(newsItemsPerLoad, hiddenItems.length);
+    for (let i = 0; i < itemsToShow; i++) {
+      const item = hiddenItems[i];
+      item.classList.remove('news-hidden');
+      item.classList.add('news-fade-in');
+      setTimeout(() => {
+        item.classList.remove('news-fade-in');
+      }, 400);
+    }
+    newsVisibleCount += itemsToShow;
+    newsUpdateControls();
+    if (itemsToShow > 0) {
+      setTimeout(() => {
+        hiddenItems[0].scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 200);
+    }
+  }
+  function newsShowLess() {
+    const allItems = document.querySelectorAll('.news-item');
+    for (let i = 3; i < allItems.length; i++) {
+      allItems[i].classList.add('news-hidden');
+      allItems[i].classList.remove('news-fade-in');
+    }
+    newsVisibleCount = 3;
+    newsUpdateControls();
+    document.querySelector('.news-heading').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  }
+  function newsUpdateControls() {
+    const showMoreBtn = document.querySelector('.news-show-more-btn');
+    const showLessBtn = document.querySelector('.news-show-less-btn');
+    const visibleCountSpan = document.getElementById('news-visible-count');
+    const remainingItems = newsTotalItems - newsVisibleCount;
+    if (remainingItems > 0 && showMoreBtn) {
+      showMoreBtn.classList.add('news-visible');
+      showMoreBtn.textContent = 'Show More News (' + remainingItems + ' more)';
+    } else if (showMoreBtn) {
+      showMoreBtn.classList.remove('news-visible');
+    }
+    if (newsVisibleCount > 3 && showLessBtn) {
+      showLessBtn.classList.add('news-visible');
+    } else if (showLessBtn) {
+      showLessBtn.classList.remove('news-visible');
+    }
+    if (visibleCountSpan) {
+      visibleCountSpan.textContent = newsVisibleCount;
+    }
+  }
+  // Make functions globally available
+  window.newsShowMore = newsShowMore;
+  window.newsShowLess = newsShowLess;
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', newsUpdateControls);
+  } else {
+    newsUpdateControls();
+  }
+})();
+</script>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
 
