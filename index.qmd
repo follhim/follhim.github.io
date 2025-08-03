@@ -30,9 +30,10 @@ listing:
 ---
 
 ::: {#hero-heading}
-**Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health.
+**Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health. <br>
+You can learn more [about me](https://follhim.github.io/about.html) and my ongoing [research](https://follhim.github.io/research/papers.html).
 
-**My research is particularly focuses on:**
+**Broadly, my research is particularly focuses on:**
 
 Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities
 :::
