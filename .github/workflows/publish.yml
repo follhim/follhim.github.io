@@ -33,3 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FB_API: ${{ secrets.FB_API }}
           APPID: ${{ secrets.APPID }}
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
