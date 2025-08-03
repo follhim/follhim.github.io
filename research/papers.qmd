@@ -1,6 +1,6 @@
 ---
 title: "Research"
-date: last-modified
+date: 08/02/2025
 date-format: "MM/DD/YYYY"
 author:
   - name: Seungju Kim
@@ -133,79 +133,98 @@ register_gfont("Inter")
 #| echo: FALSE
 #| warning: FALSE
 #| asis: TRUE
+pacman::p_load(httr, jsonlite, tidyverse, ggiraph, patchwork, here)
 
 scholar_id <- "JWNJV9UAAAAJ"
 
-# Try to read from cached CSV files first, fallback to API
-citation_file <- here("research", "citations.csv")
-publications_file <- here("research", "publications.csv")
-
-# Get citation data
-if (file.exists(citation_file)) {
-  citation_data <- read.csv(citation_file)
-  message("Using cached citation data from: ", citation_file)
-} else {
-  tryCatch({
-    citation_data <- get_citation_history(scholar_id) %>%
-      as.data.frame()
-    dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-    write.csv(citation_data, citation_file, row.names = FALSE)
-    message("Fetched new citation data and saved to: ", citation_file)
-  }, error = function(e) {
-    warning(paste("Error fetching citation data:", e$message))
-    citation_data <<- data.frame(
-      year = c(2020, 2021, 2022, 2023, 2024, 2025),
-      cites = c(0, 0, 0, 3, 4, 0)
-    )
-  })
-}
-
-# Get publication data
-if (file.exists(publications_file)) {
-  publication_data <- read.csv(publications_file)
-  message("Using cached publication data from: ", publications_file)
-  # Check if we need to recalculate due to OSF filtering
-  # If total publications is 7, we likely need to refresh the data
-} else {
-  publication_data <- NULL
-}
-
-# Always fetch fresh data to apply OSF filter (you can comment this out later)
-tryCatch({
-  publications_raw <- get_publications(scholar_id)
-  if (is.data.frame(publications_raw) && "year" %in% colnames(publications_raw)) {
-    # Debug: print original data
-    message("Original publications: ", nrow(publications_raw))
-    message("Publications with OSF: ", sum(grepl("OSF", publications_raw$journal, ignore.case = TRUE)))
+# SerpApi functions
+get_citation_history_serpapi <- function(scholar_id, api_key) {
+  url <- "https://serpapi.com/search.json"
+  
+  response <- GET(url, query = list(
+    engine = "google_scholar_author",
+    author_id = scholar_id,
+    api_key = api_key
+  ))
+  
+  if (status_code(response) == 200) {
+    data <- fromJSON(content(response, "text"))
     
-    # Filter out OSF publications and count
-    publication_data <- publications_raw %>%
-      filter(!is.na(year)) %>%  # Remove rows with missing years first
-      filter(!grepl("OSF", journal, ignore.case = TRUE)) %>%  # Remove OSF publications
-      count(year, name = "publications")  # Count publications per year
-    
-    # Debug: print filtered data
-    message("Publications after filtering OSF: ", sum(publication_data$publications))
-    
-    # Save the updated data
-    dir.create(here("research"), showWarnings = FALSE, recursive = TRUE)
-    write.csv(publication_data, publications_file, row.names = FALSE)
-    message("Updated publication data saved to: ", publications_file)
-  } else {
-    # Fallback: use citation years but adjust for known OSF count
-    publication_data <- data.frame(
-      year = c(2024, 2025),
-      publications = c(1, 4)  # Manually adjusted: 1 in 2024 (3-2 OSF), 4 in 2025
-    )
+    # Extract citation graph data - it's already a data frame!
+    if ("cited_by" %in% names(data) && "graph" %in% names(data$cited_by)) {
+      citation_graph <- data$cited_by$graph
+      
+      # The graph has 'year' and 'citations' columns (not 'cited_by')
+      citation_data <- data.frame(
+        year = as.numeric(citation_graph$year),
+        cites = as.numeric(citation_graph$citations)  # Fixed: was 'cited_by', now 'citations'
+      )
+      return(citation_data)
+    }
   }
+  return(NULL)
+}
+
+get_publications_serpapi <- function(scholar_id, api_key) {
+  url <- "https://serpapi.com/search.json"
+  
+  # Get the publications list
+  response <- GET(url, query = list(
+    engine = "google_scholar_author",
+    author_id = scholar_id,
+    api_key = api_key,
+    view_op = "list_works",
+    num = 100
+  ))
+  
+  if (status_code(response) == 200) {
+    data <- fromJSON(content(response, "text"))
+    
+    if ("articles" %in% names(data)) {
+      publications <- data$articles
+      
+      # Filter and count by year (no OSF filtering since no publication_info field)
+      if (nrow(publications) > 0 && "year" %in% names(publications)) {
+        publication_data <- publications %>%
+          filter(!is.na(year)) %>%  # Remove rows with missing years
+          # Note: Removed OSF filtering since publication_info field doesn't exist in this response
+          count(year, name = "publications")  # Count publications per year
+        
+        return(publication_data)
+      }
+    }
+  }
+  return(NULL)
+}
+
+# Get API key from environment variable
+api_key <- Sys.getenv("SERPAPI_KEY")
+
+if (api_key == "") {
+  stop("SERPAPI_KEY not found in environment variables. Please set your SerpApi key.")
+}
+
+# Get citation data from API
+citation_data <- tryCatch({
+  get_citation_history_serpapi(scholar_id, api_key)
 }, error = function(e) {
-  warning(paste("Error fetching publication data:", e$message))
-  # Use fallback with correct counts (excluding OSF)
-  publication_data <- data.frame(
-    year = c(2024, 2025),
-    publications = c(1, 4)  # 1 in 2024 (3-2 OSF), 4 in 2025
-  )
+  stop(paste("Error fetching citation data via SerpApi:", e$message))
 })
+
+if (is.null(citation_data)) {
+  stop("No citation data returned from SerpApi")
+}
+
+# Get publication data from API
+publication_data <- tryCatch({
+  get_publications_serpapi(scholar_id, api_key)
+}, error = function(e) {
+  stop(paste("Error fetching publication data via SerpApi:", e$message))
+})
+
+if (is.null(publication_data)) {
+  stop("No publication data returned from SerpApi")
+}
 
 # Calculate totals
 total_citations <- sum(citation_data$cites)
@@ -269,7 +288,7 @@ publications_plot <- publication_data %>%
 combined_plot <- citations_plot + publications_plot + 
   plot_layout(ncol = 2) +
   plot_annotation(
-    caption = paste("Data from Google Scholar (", Sys.Date(), ")", sep = ""),
+    caption = paste("Data from Google Scholar via SerpApi (", Sys.Date(), ")", sep = ""),
     theme = theme(
       plot.background = element_rect(fill = "#0E2638", color = NA),
       plot.caption = element_text(size = 10, color = "#EBEBEB", family = "Helvetica")
@@ -286,7 +305,6 @@ interactive_plot <- girafe(
 
 interactive_plot
 ```
-
 
 ## Published Papers
 
