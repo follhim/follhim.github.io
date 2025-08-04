@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - "google9541c230ce597c09.html"
 website:
   google-analytics: G-4B73YXR349
   title: Seungju Kim
