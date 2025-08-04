@@ -28,3 +28,8 @@ format:
   html:
     toc: true
     theme: superhero
+    html-meta:
+      author: "Seungju Kim"
+      description: "Seungju Kim's research website focusing on modeling the relationship between religiousness/spirituality and health, LGBTQ+ communities, and mental health. Clinical psychology researcher at University of Illinois Urbana-Champaign (UIUC)."
+      keywords: "Seungju Kim, Kim Seungju, religion and health, LGBTQ research, mental health, spirituality research, psychology, clinical psychology, University of Illinois, Urbana, Champaign, UIUC"
+      google-site-verification: "8o0g9lyitTlQOMMIfpCrywCM7SA5ldwWWewZTS16eiE"
