@@ -45,7 +45,7 @@ jobs:
         SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
       run: |
         # Render your Quarto document (adjust filename as needed)
-        quarto render index.qmd
+        quarto render research/papers.qmd
         # Or if it's an R Markdown file:
         # Rscript -e "rmarkdown::render('index.Rmd')"
       
