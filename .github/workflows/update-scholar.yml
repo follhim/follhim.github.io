@@ -20,7 +20,7 @@ jobs:
       
     - name: Render with SerpApi
       env:
-        SERPAPI_KEY: ${{  SERPAPI_KEY }}
+        SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
       run: |
         quarto render research/papers.qmd
       

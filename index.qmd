@@ -19,7 +19,7 @@ listing:
     filter-ui: false
 ---
 
-![](images/rel_health.png){fig-align="center"}
+![](images/rel_health.png){fig-align="center" width="500"}
 
 ::: {#hero-heading}
 **Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health. <br> You can learn more [about me](https://follhim.github.io/about.html) and my ongoing [research](https://follhim.github.io/research/papers.html).
@@ -30,12 +30,8 @@ Adverse and beneficial religious experiences<br> Mental and behavioral health<br
 :::
 
 ::: {.social-links style="text-align: center; margin: 2rem 0;"}
-[{{< iconify academicons:google-scholar height=35px width=35px >}}](https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl){target="_blank" style="margin: 0 10px;"}
-[{{< iconify la:researchgate height=35px width=35px >}}](https://www.researchgate.net/profile/Seungju-Kim-11){target="_blank" style="margin: 0 10px;"}
-[{{< iconify ion:logo-linkedin height=35px width=35px >}}](https://www.linkedin.com/in/kimseungju/){target="_blank" style="margin: 0 10px;"}
-[{{< iconify fa6-brands:orcid height=35px width=35px >}}](https://orcid.org/0009-0009-5166-9170){target="_blank" style="margin: 0 10px;"}
+[{{< iconify academicons:google-scholar height=35px width=35px >}}](https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl){target="_blank" style="margin: 0 10px;"} [{{< iconify la:researchgate height=35px width=35px >}}](https://www.researchgate.net/profile/Seungju-Kim-11){target="_blank" style="margin: 0 10px;"} [{{< iconify ion:logo-linkedin height=35px width=35px >}}](https://www.linkedin.com/in/kimseungju/){target="_blank" style="margin: 0 10px;"} [{{< iconify fa6-brands:orcid height=35px width=35px >}}](https://orcid.org/0009-0009-5166-9170){target="_blank" style="margin: 0 10px;"}
 :::
-
 
 ::: {#news}
 :::
