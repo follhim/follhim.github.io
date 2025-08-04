@@ -1,33 +1,58 @@
-name: Update Scholar Stats
+name: Update Scholar Stats Daily
+
 on:
   schedule:
-    - cron: '0 9 * * *'  # Daily at 9 AM UTC
-  workflow_dispatch:  # Allow manual triggers
+    - cron: '0 9 * * *'  # Runs daily at 9 AM UTC (4 AM ET / 3 AM CT)
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+  push:
+    branches: [ main ]  # Also runs on pushes to main (for testing)
 
 jobs:
-  update-stats:
+  update-scholar-stats:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
     
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Setup R
       uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.4.2'
+        
+    - name: Setup Quarto
+      uses: quarto-dev/quarto-actions/setup@v2
       
-    - name: Install packages
+    - name: Install R packages
       run: |
-        install.packages(c("httr", "jsonlite", "dplyr", "ggplot2", "ggiraph", "patchwork", "here"))
+        install.packages(c(
+          "httr", 
+          "jsonlite", 
+          "dplyr", 
+          "ggplot2", 
+          "ggiraph", 
+          "patchwork", 
+          "here",
+          "rmarkdown",
+          "knitr"
+        ))
       shell: Rscript {0}
       
-    - name: Render with SerpApi
+    - name: Update Scholar Stats
       env:
         SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
       run: |
-        quarto render research/papers.qmd
+        # Render your Quarto document (adjust filename as needed)
+        quarto render index.qmd
+        # Or if it's an R Markdown file:
+        # Rscript -e "rmarkdown::render('index.Rmd')"
       
-    - name: Commit and push
+    - name: Commit and push changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "Update scholar stats $(date)" || exit 0
+        git diff --staged --quiet || git commit -m "📊 Update scholar stats - $(date +'%Y-%m-%d %H:%M UTC')"
         git push
