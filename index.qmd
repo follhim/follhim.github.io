@@ -2,24 +2,14 @@
 title: "Modeling Religion and Health"
 about:
   template: jolla
-  image-shape: rectangle
-  image-width: 500px
-  image: images/rel_health.png
-  links: 
-    - text: "{{< iconify academicons:google-scholar height=35px width=35px >}}"
-      href: https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl
-    - text: "{{< iconify la:researchgate height=35px width=35px >}}"
-      href: https://www.researchgate.net/profile/Seungju-Kim-11
-    - text: "{{< iconify ion:logo-linkedin height=35px width=35px >}}"
-      href: https://www.linkedin.com/in/kimseungju/
-    - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
-      href: https://orcid.org/0009-0009-5166-9170
 comments: false
 editor_options: 
   chunk_output_type: console
 format:
   html:
     css: styles.css
+    html-meta:
+      keywords: "Seungju Kim, Kim Seungju, religion and health, LGBTQ research, mental health, spirituality research, psychology, clinical psychology, University of Illinois, Urbana, Champaign, UIUC"
 listing:
   - id: news
     contents: "news.yml"
@@ -29,15 +19,23 @@ listing:
     filter-ui: false
 ---
 
+![](images/rel_health.png){fig-align="center"}
+
 ::: {#hero-heading}
-**Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health. <br>
-You can learn more [about me](https://follhim.github.io/about.html) and my ongoing [research](https://follhim.github.io/research/papers.html).
+**Hello, and thank you for visiting my website!**<br> My name is *Seungju* and this website is focused on disseminating my research on modeling<br> the relationship between religiousness/spirituality and health. <br> You can learn more [about me](https://follhim.github.io/about.html) and my ongoing [research](https://follhim.github.io/research/papers.html).
 
 **Broadly, my research is particularly focuses on:**
 
 Adverse and beneficial religious experiences<br> Mental and behavioral health<br> LGBTQ+ communities<br> Religious leaders, families, and communities
 :::
 
+::: {.social-links style="text-align: center; margin: 2rem 0;"}
+[{{< iconify academicons:google-scholar height=35px width=35px >}}](https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl){target="_blank" style="margin: 0 10px;"}
+[{{< iconify la:researchgate height=35px width=35px >}}](https://www.researchgate.net/profile/Seungju-Kim-11){target="_blank" style="margin: 0 10px;"}
+[{{< iconify ion:logo-linkedin height=35px width=35px >}}](https://www.linkedin.com/in/kimseungju/){target="_blank" style="margin: 0 10px;"}
+[{{< iconify fa6-brands:orcid height=35px width=35px >}}](https://orcid.org/0009-0009-5166-9170){target="_blank" style="margin: 0 10px;"}
+:::
 
-:::{#news}
+
+::: {#news}
 :::
