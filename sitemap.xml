@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://follhim.github.io/resource.html</loc>
-    <lastmod>2025-08-04T12:06:46.345Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.github.io/resource_page/public/scra25_blitz.html</loc>
-    <lastmod>2025-08-04T12:06:46.346Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.github.io/resource_page/private/gh-cards.html</loc>
-    <lastmod>2025-08-04T12:06:46.345Z</lastmod>
+    <loc>https://follhim.github.io/index.html</loc>
+    <lastmod>2025-08-25T18:01:47.003Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/research/papers.html</loc>
-    <lastmod>2025-08-04T12:06:46.344Z</lastmod>
+    <lastmod>2025-08-25T18:01:47.004Z</lastmod>
   </url>
   <url>
-    <loc>https://follhim.github.io/about.html</loc>
-    <lastmod>2025-08-04T12:06:46.339Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.github.io/index.html</loc>
-    <lastmod>2025-08-04T12:06:46.344Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.github.io/news/news.html</loc>
-    <lastmod>2025-08-04T12:06:46.344Z</lastmod>
+    <loc>https://follhim.github.io/resource.html</loc>
+    <lastmod>2025-08-25T18:01:47.004Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource_page/private/mod_reg_lavaan.html</loc>
-    <lastmod>2025-08-04T12:06:46.345Z</lastmod>
+    <lastmod>2025-08-25T18:01:47.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/resource_page/public/scra25_blitz.html</loc>
+    <lastmod>2025-08-25T18:01:47.005Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.github.io/resource_page/public/apa_cor_tab.html</loc>
-    <lastmod>2025-08-04T12:06:46.345Z</lastmod>
+    <lastmod>2025-08-25T18:01:47.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/resource_page/private/gh-cards.html</loc>
+    <lastmod>2025-08-25T18:01:47.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/about.html</loc>
+    <lastmod>2025-08-25T18:01:46.998Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.github.io/news/news.html</loc>
+    <lastmod>2025-08-25T18:01:47.004Z</lastmod>
   </url>
 </urlset>
