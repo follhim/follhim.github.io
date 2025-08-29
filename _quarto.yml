@@ -13,8 +13,6 @@ website:
       text: Research
     - href: resource.qmd
       text: Resources
-    - href: about.qmd
-      text: About
     tools:
     - icon: github
       menu:
