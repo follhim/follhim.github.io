@@ -8,14 +8,14 @@
     "items": []
   },
   {
+    "listing": "/news/news.html",
+    "items": []
+  },
+  {
     "listing": "/resource.html",
     "items": [
       "/resource_page/public/scra25_blitz.html",
       "/resource_page/public/apa_cor_tab.html"
     ]
-  },
-  {
-    "listing": "/news/news.html",
-    "items": []
   }
 ]
