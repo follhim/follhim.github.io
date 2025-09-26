@@ -8,7 +8,7 @@
 
 <meta name="author" content="Seungju Kim">
 
-<title>Moderation Regression and Simple Slopes in Lavaan – Seungju Kim</title>
+<title>An R Statistician’s Github Workflow – Seungju Kim</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -174,19 +140,9 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#preparation" id="toc-preparation" class="nav-link" data-scroll-target="#preparation">Preparation</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">Import Data</a></li>
-  </ul></li>
-  <li><a href="#descriptives" id="toc-descriptives" class="nav-link" data-scroll-target="#descriptives">Descriptives</a>
-  <ul class="collapse">
-  <li><a href="#introduce-missingness" id="toc-introduce-missingness" class="nav-link" data-scroll-target="#introduce-missingness">Introduce Missingness</a></li>
-  <li><a href="#examine-missingness" id="toc-examine-missingness" class="nav-link" data-scroll-target="#examine-missingness">Examine Missingness</a></li>
-  </ul></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a>
-  <ul class="collapse">
-  <li><a href="#multiple-regression-model" id="toc-multiple-regression-model" class="nav-link" data-scroll-target="#multiple-regression-model">Multiple Regression Model</a></li>
+  <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link" data-scroll-target="#what-youll-learn">What You’ll Learn</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -196,7 +152,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Moderation Regression and Simple Slopes in Lavaan</h1>
+<h1 class="title">An R Statistician’s Github Workflow</h1>
 </div>
 
 
@@ -228,69 +184,14 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Typically, when we run a linear regression in R, we will use the <code>lm()</code> function. And while the <code>lm()</code> will get most jobs done, it has several limitations:</p>
-<ol type="1">
-<li>It cannot handle missing data.</li>
-<li>It does not have robust standard errors estimators built in.</li>
-</ol>
-<p>This is in contrast to <code>Mplus</code> which has both of these features, with capabilities for a host of estimators (e.g., <code>maximum likelihood with robust standard errors</code>) and the ability to handle missing data using <code>full information maximum likelihood</code> estimator.</p>
-<p>Well the great news is that you too can do this in R using the <code>lavaan</code> package. Finally, often times I hear that people have a hard time plotting simple slopes using <code>lavaan</code>, but I will be going over a very helpful function to help us!</p>
-<p>Let’s begin!</p>
-</section>
-<section id="preparation" class="level1">
-<h1>Preparation</h1>
-<p>Like any analysis you run in R, you should always have you set up in the beginning. ## Packages</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("pacman")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you haven’t already, I would highly recommend downloading the <code>pacman</code> (package manager) package. It will install and/or load a library if you haven’t automatically!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pacman::p_load(tidyverse, lavaan, readr, here, psych, DT)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Great! Now let’s import our dataset!</p>
-<section id="import-data" class="level2">
-<h2 class="anchored" data-anchor-id="import-data">Import Data</h2>
-<p>For our example today, we will be using the ACTIVE (Advanced Cognitive Training for Independent and Vital Elderly) dataset available <a href="https://advstats.psychstat.org/data/example.php">here</a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data &lt;- read.csv(here("resource_page", "active.csv"))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Great we’ve imported our dataset! Let’s take a look at the dataset!</p>
-</section>
-</section>
-<section id="descriptives" class="level1">
-<h1>Descriptives</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># psych::describe(data) %&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   round(digits = 2) %&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   DT::datatable()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Here we can take a good look at the desriptives of our dataset. But what we’re really interested in is running a regression model with missing data! Let’s introduce some missingness.</p>
-<section id="introduce-missingness" class="level2">
-<h2 class="anchored" data-anchor-id="introduce-missingness">Introduce Missingness</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># na_data &lt;- data %&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(across(everything(), ~{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     # For each value, 15% chance of becoming NA</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     ifelse(runif(n()) &lt; 0.15, NA, .)</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   }))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Great! Let’s take a look at the data now.</p>
-</section>
-<section id="examine-missingness" class="level2">
-<h2 class="anchored" data-anchor-id="examine-missingness">Examine Missingness</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pacman::p_load(naniar) # install/load the "naniar" package</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># miss_var_summary(na_data)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can see here that about 15% of all data is missing. Let’s now run our regression model!</p>
-</section>
-</section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
-<section id="multiple-regression-model" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-regression-model">Multiple Regression Model</h2>
-<p>What we would normally do if we were interested in if</p>
+<p>Social scientists increasingly use R for data analysis because it’s open-source, reproducible, and free—unlike proprietary software such as Mplus, SAS, or SPSS. While researchers have embraced online collaboration tools like Google Docs for writing, R statistical work often remains stuck in the email-and-file-sharing era.</p>
+<p>GitHub changes this by providing a powerful platform for collaborative statistical work that maintains reproducibility and enables seamless teamwork.</p>
+<section id="what-youll-learn" class="level2">
+<h2 class="anchored" data-anchor-id="what-youll-learn">What You’ll Learn</h2>
+<p>This guide covers two essential GitHub workflows for R users:</p>
+<p>• <strong>Publishing with GitHub Pages + Quarto</strong>: Create beautiful, interactive websites directly from your R code and statistical reports</p>
+<p>• <strong>Collaborative Development</strong>: Master pushing, pulling, and working effectively with multiple team members on shared R projects</p>
+<p>Whether you’re a solo researcher wanting to showcase your work or part of a research team, you’ll gain the GitHub skills needed for modern, professional statistical practice.</p>
 
 
 </section>

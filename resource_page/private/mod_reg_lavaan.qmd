@@ -17,7 +17,7 @@ editor_options:
 Typically, when we run a linear regression in R, we will use the `lm()` function. And while the `lm()` will get most jobs done, it has several limitations:
 
 1.   It cannot handle missing data.
-2.   It does not have maximum likelihood estimators built in. 
+2.   It does not have robust standard errors estimators built in. 
 
 This is in contrast to `Mplus` which has both of these features, with capabilities for a host of estimators (e.g., `maximum likelihood with robust standard errors`) and the ability to handle missing data using `full information maximum likelihood` estimator. 
 
@@ -42,7 +42,7 @@ Great! Now let's import our dataset!
 
 ## Import Data
 
-For our example today, we will be using the `ACTIVE (Advanced Cognitive Training for Independent and Vital Elderly)` dataset available [here](https://advstats.psychstat.org/data/example.php)
+For our example today, we will be using the ACTIVE (Advanced Cognitive Training for Independent and Vital Elderly) dataset available [here](https://advstats.psychstat.org/data/example.php)
 
 ```{r}
 # data <- read.csv(here("resource_page", "active.csv"))

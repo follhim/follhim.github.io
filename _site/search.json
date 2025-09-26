@@ -53,7 +53,7 @@
     "href": "resource_page/private/mod_reg_lavaan.html",
     "title": "Moderation Regression and Simple Slopes in Lavaan",
     "section": "",
-    "text": "Typically, when we run a linear regression in R, we will use the lm() function. And while the lm() will get most jobs done, it has several limitations:\n\nIt cannot handle missing data.\nIt does not have maximum likelihood estimators built in.\n\nThis is in contrast to Mplus which has both of these features, with capabilities for a host of estimators (e.g., maximum likelihood with robust standard errors) and the ability to handle missing data using full information maximum likelihood estimator.\nWell the great news is that you too can do this in R using the lavaan package. Finally, often times I hear that people have a hard time plotting simple slopes using lavaan, but I will be going over a very helpful function to help us!\nLet’s begin!"
+    "text": "Typically, when we run a linear regression in R, we will use the lm() function. And while the lm() will get most jobs done, it has several limitations:\n\nIt cannot handle missing data.\nIt does not have robust standard errors estimators built in.\n\nThis is in contrast to Mplus which has both of these features, with capabilities for a host of estimators (e.g., maximum likelihood with robust standard errors) and the ability to handle missing data using full information maximum likelihood estimator.\nWell the great news is that you too can do this in R using the lavaan package. Finally, often times I hear that people have a hard time plotting simple slopes using lavaan, but I will be going over a very helpful function to help us!\nLet’s begin!"
   },
   {
     "objectID": "resource_page/private/mod_reg_lavaan.html#import-data",
@@ -130,7 +130,7 @@
     "href": "news/news.html",
     "title": "News",
     "section": "",
-    "text": "Recent News\n  \n    \n  \n\n\nNo matching items"
+    "text": "Recent News\n  \n    \n    \n    \n  \n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#research-interests",
@@ -159,5 +159,19 @@
     "title": "Modeling Religion and Health",
     "section": "Recent News",
     "text": "Recent News\n\n\n\n\n  Recent News\n  \n    \n      \n        \n          Jul 27, 2025\n        \n        \n          \n            The strongest supporters of Christian nationalism are the most likely to report spiritual grandiosity and inflate their sense of spirituality\n          \n          \n            In this open access paper, we examine how patterns of Christian Nationalism engagement are linked with spirituality, an area commonly overlooked. Overall, results suggest that the biggest supporters of Christian Nationalism are more less in tune with their spirituality than they may claim.\n          \n        \n        \n        \n          \n            Read more →\n          \n        \n        \n      \n    \n      \n        \n          Jul 21, 2025\n        \n        \n          \n            Measuring religious environment, and its relationship with sexual minority mental health\n          \n          \n            In a new open access paper, we show that religiousness may influence health through structural pathways. We introduce new ways of measuring 'objective' religious environment and conservative policty environment.\n          \n        \n        \n        \n          \n            Read more →\n          \n        \n        \n      \n    \n      \n        \n          May 26, 2025\n        \n        \n          \n            New Paper on Gender Disparities in Next-Gen Religious Leaders\n          \n          \n            Using a sample of male and female emerging religious leaders, we examine differences on health, spirituality, character, and more.\n          \n        \n        \n        \n          \n            Read more →\n          \n        \n        \n      \n    \n      \n        \n          Apr 22, 2025\n        \n        \n          \n            How might religiously based family expectations be associated with LGBTQ+ mental health?\n          \n          \n            My first, first-authored, paper demonstrates how religious family expectations is associated with depression, but can be buffered when LGBTQ+ people are more authentic with themselves.\n          \n        \n        \n        \n          \n            Read more →\n          \n        \n        \n      \n    \n    \n    \n    \n      \n        Show More News\n      \n      \n        Show Less News\n      \n      \n        Showing 3 of 4 news items\n      \n    \n    \n  \n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "resource_page/private/gh_workflow_guide.html",
+    "href": "resource_page/private/gh_workflow_guide.html",
+    "title": "An R Statistician’s Github Workflow",
+    "section": "",
+    "text": "Social scientists increasingly use R for data analysis because it’s open-source, reproducible, and free—unlike proprietary software such as Mplus, SAS, or SPSS. While researchers have embraced online collaboration tools like Google Docs for writing, R statistical work often remains stuck in the email-and-file-sharing era.\nGitHub changes this by providing a powerful platform for collaborative statistical work that maintains reproducibility and enables seamless teamwork.\n\n\nThis guide covers two essential GitHub workflows for R users:\n• Publishing with GitHub Pages + Quarto: Create beautiful, interactive websites directly from your R code and statistical reports\n• Collaborative Development: Master pushing, pulling, and working effectively with multiple team members on shared R projects\nWhether you’re a solo researcher wanting to showcase your work or part of a research team, you’ll gain the GitHub skills needed for modern, professional statistical practice."
+  },
+  {
+    "objectID": "resource_page/private/gh_workflow_guide.html#what-youll-learn",
+    "href": "resource_page/private/gh_workflow_guide.html#what-youll-learn",
+    "title": "An R Statistician’s Github Workflow",
+    "section": "",
+    "text": "This guide covers two essential GitHub workflows for R users:\n• Publishing with GitHub Pages + Quarto: Create beautiful, interactive websites directly from your R code and statistical reports\n• Collaborative Development: Master pushing, pulling, and working effectively with multiple team members on shared R projects\nWhether you’re a solo researcher wanting to showcase your work or part of a research team, you’ll gain the GitHub skills needed for modern, professional statistical practice."
   }
 ]

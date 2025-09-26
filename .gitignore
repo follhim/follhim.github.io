@@ -4,3 +4,6 @@
 .Ruserdata
 /.quarto/
 .Renviron
+
+
+/resource_page/private/
