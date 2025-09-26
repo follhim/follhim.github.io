@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-48853523c56965cbee4e9d361ca5beef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-b654365ec9f6baf3fdeb64dbed93b847.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubopen','listing-preprint','listing-osf','listing-pubclosed','listing-viewonlinefree','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-pubopen','listing-preprint','listing-osf','listing-prereg','listing-pubclosed','listing-viewonlinefree','listing-pdf',{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubopen","listing-preprint","listing-osf","listing-pubclosed","listing-viewonlinefree","listing-pdf"],
+      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-pubopen","listing-preprint","listing-osf","listing-prereg","listing-pubclosed","listing-viewonlinefree","listing-pdf"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -109,9 +110,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-type','listing-author','listing-year','listing-journal','listing-doi','listing-preprint','listing-osf','listing-prereg',{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-title","listing-type","listing-author","listing-year","listing-journal","listing-doi","listing-preprint","listing-osf","listing-prereg"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -161,7 +162,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -186,6 +187,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Seungju Kim</span>
     </a>
@@ -355,8 +358,8 @@ window.Quarto = {
 </script>
 <div class="cell" data-asis="true">
 <div class="cell-output-display">
-<div class="girafe html-widget html-fill-item" id="htmlwidget-ba28e7240849c4311ddc" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-ba28e7240849c4311ddc">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_f885128f_6365_43ee_a392_ec980721266e' viewBox='0 0 864 360'>\n <defs id='svg_f885128f_6365_43ee_a392_ec980721266e_defs'>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c1'>\n   <rect x='0' y='0' width='864' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c2'>\n   <rect x='52.23' y='46.55' width='800.81' height='259.04'/>\n  <\/clipPath>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c3'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.09'/>\n  <\/clipPath>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c4'>\n   <rect x='432' y='5.48' width='426.52' height='334.09'/>\n  <\/clipPath>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c5'>\n   <rect x='52.23' y='46.55' width='374.29' height='259.04'/>\n  <\/clipPath>\n  <clipPath id='svg_f885128f_6365_43ee_a392_ec980721266e_c6'>\n   <rect x='478.75' y='46.55' width='374.29' height='259.04'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_f885128f_6365_43ee_a392_ec980721266e_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c1)'>\n   <rect x='0' y='0' width='864' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='864' height='360' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c3)'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.09' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c4)'>\n   <rect x='432' y='5.48' width='426.52' height='334.09' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c5)'>\n   <rect x='52.23' y='46.55' width='374.29' height='259.04' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_f885128f_6365_43ee_a392_ec980721266e_e1' x='69.25' y='193.73' width='127.6' height='82.42' fill='#4A90A4' fill-opacity='1' stroke='none' title='3'/>\n   <rect id='svg_f885128f_6365_43ee_a392_ec980721266e_e2' x='69.25' y='75.98' width='340.26' height='82.42' fill='#4A90A4' fill-opacity='1' stroke='none' title='8'/>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c1)'>\n   <polyline points='52.23,305.59 52.23,46.55' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='25.07' y='238.58' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='25.07' y='120.84' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <polyline points='52.23,305.59 426.52,305.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='66.47' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='151.53' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='236.6' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='321.66' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='406.73' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>8<\/text>\n   <text x='204.36' y='331.47' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Citations<\/text>\n   <text transform='translate(19.71,188.74) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='52.23' y='38.45' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Citations: 11<\/text>\n   <text x='52.23' y='21.16' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Citation History Over Time<\/text>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c6)'>\n   <rect x='478.75' y='46.55' width='374.29' height='259.04' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_f885128f_6365_43ee_a392_ec980721266e_e3' x='495.77' y='193.73' width='113.42' height='82.42' fill='#7FB069' fill-opacity='1' stroke='none' title='2'/>\n   <rect id='svg_f885128f_6365_43ee_a392_ec980721266e_e4' x='495.77' y='75.98' width='340.26' height='82.42' fill='#7FB069' fill-opacity='1' stroke='none' title='6'/>\n  <\/g>\n  <g clip-path='url(#svg_f885128f_6365_43ee_a392_ec980721266e_c1)'>\n   <polyline points='478.75,305.59 478.75,46.55' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='451.59' y='238.58' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='451.59' y='120.84' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <polyline points='478.75,305.59 853.04,305.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='492.99' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='606.41' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='719.83' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='833.25' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='621.87' y='331.47' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Publications<\/text>\n   <text transform='translate(446.23,188.74) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='478.75' y='38.45' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Publications: 8<\/text>\n   <text x='478.75' y='21.16' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Publications Over Time<\/text>\n   <text x='622.99' y='352.34' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Data from Google Scholar via SerpApi (2025-08-29)<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_f885128f_6365_43ee_a392_ec980721266e","ratio":2.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<div class="girafe html-widget html-fill-item" id="htmlwidget-541bdcef502c30b975f6" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-541bdcef502c30b975f6">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003' viewBox='0 0 864 360'>\n <defs id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_defs'>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c1'>\n   <rect x='0' y='0' width='864' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c2'>\n   <rect x='52.23' y='46.55' width='800.81' height='259.04'/>\n  <\/clipPath>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c3'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.09'/>\n  <\/clipPath>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c4'>\n   <rect x='432' y='5.48' width='426.52' height='334.09'/>\n  <\/clipPath>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c5'>\n   <rect x='52.23' y='46.55' width='374.29' height='259.04'/>\n  <\/clipPath>\n  <clipPath id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c6'>\n   <rect x='478.75' y='46.55' width='374.29' height='259.04'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c1)'>\n   <rect x='0' y='0' width='864' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='864' height='360' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c3)'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.09' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c4)'>\n   <rect x='432' y='5.48' width='426.52' height='334.09' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c5)'>\n   <rect x='52.23' y='46.55' width='374.29' height='259.04' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_e1' x='69.25' y='193.73' width='127.6' height='82.42' fill='#4A90A4' fill-opacity='1' stroke='none' title='3'/>\n   <rect id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_e2' x='69.25' y='75.98' width='340.26' height='82.42' fill='#4A90A4' fill-opacity='1' stroke='none' title='8'/>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c1)'>\n   <polyline points='52.23,305.59 52.23,46.55' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='25.07' y='238.58' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='25.07' y='120.84' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <polyline points='52.23,305.59 426.52,305.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='66.47' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='151.53' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='236.6' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='321.66' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='406.73' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>8<\/text>\n   <text x='204.36' y='331.47' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Citations<\/text>\n   <text transform='translate(19.71,188.74) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='52.23' y='38.45' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Citations: 11<\/text>\n   <text x='52.23' y='21.16' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Citation History Over Time<\/text>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c6)'>\n   <rect x='478.75' y='46.55' width='374.29' height='259.04' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_e3' x='495.77' y='193.73' width='113.42' height='82.42' fill='#7FB069' fill-opacity='1' stroke='none' title='2'/>\n   <rect id='svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_e4' x='495.77' y='75.98' width='340.26' height='82.42' fill='#7FB069' fill-opacity='1' stroke='none' title='6'/>\n  <\/g>\n  <g clip-path='url(#svg_424c0193_e73d_4c67_8c0c_4c8c280d8003_c1)'>\n   <polyline points='478.75,305.59 478.75,46.55' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='451.59' y='238.58' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='451.59' y='120.84' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <polyline points='478.75,305.59 853.04,305.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='492.99' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='606.41' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='719.83' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='833.25' y='317.8' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='621.87' y='331.47' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Publications<\/text>\n   <text transform='translate(446.23,188.74) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='478.75' y='38.45' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Publications: 8<\/text>\n   <text x='478.75' y='21.16' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Publications Over Time<\/text>\n   <text x='622.99' y='352.34' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Data from Google Scholar via SerpApi (2025-09-26)<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_424c0193_e73d_4c67_8c0c_4c8c280d8003","ratio":2.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <section id="published-papers" class="level2">
@@ -456,6 +459,85 @@ window.Quarto = {
           <div class="citation">
             
             
+            <strong>Kim, S.</strong>, Xu, W. (2025). The State of LGBQ+ Support: Correlates, Predictors, and Congregational Moderators of a National Sample of U.S. Religious Leaders.
+            
+              <i>Sexuality Research and Social Policy</i>.
+            
+            
+              <a href="https://doi.org/10.1007/s13178-025-01192-7">https://doi.org/10.1007/s13178-025-01192-7</a>
+            
+          </div>
+          
+          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.1007/s13178-025-01192-7" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-open-access ai-lg"></i> Open Access
+            </a>
+          
+          
+          
+          
+          
+            <a role="button" href="https://doi.org/10.31234/osf.io/rc8sh_v3" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
+            </a> 
+          
+          
+          
+          
+          
+          
+          
+            <a role="button" href="https://osf.io/epdvu" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-osf ai-lg"></i> OSF
+            </a>
+          
+          
+          
+          
+          
+            <a role="button" href="https://osf.io/vy2bc" type="button" class="btn btn-light-outline btn-xs"> 
+              <i class="ai ai-preregistered ai-lg"></i> Preregistration 
+            </a> 
+          
+          
+          
+          </p>
+        </div>
+        
+        
+        <div class="paper-badges">
+          <!-- Dimensions badge -->
+          <div class="badge-container">
+            <span class="__dimensions_badge_embed__" data-doi="10.1007/s13178-025-01192-7" data-style="small_circle" data-legend="hover-right"></span>
+          </div>
+          
+          <!-- Altmetric badge -->
+          <div class="badge-container">
+            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
+              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.1007/s13178-025-01192-7"></div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <hr>
+    </div>
+  
+    <div data-index="1">
+      <div class="paper-container">
+        <div class="paper-content">
+          <div class="citation">
+            
+            
             <strong>Kim, S.</strong>, Jankowski, P.J., Wang, D.C., Hawkins, H.A. (2025). Patterns of Christian Nationalist Engagement and Connections to Spirituality.
             
               <i>Pastoral Psychology</i>.
@@ -525,7 +607,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="1">
+    <div data-index="2">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -592,7 +674,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="2">
+    <div data-index="3">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -663,7 +745,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="3">
+    <div data-index="4">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -734,7 +816,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="4">
+    <div data-index="5">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -806,7 +888,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="5">
+    <div data-index="6">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -882,7 +964,7 @@ window.Quarto = {
       <hr>
     </div>
   
-    <div data-index="6">
+    <div data-index="7">
       <div class="paper-container">
         <div class="paper-content">
           <div class="citation">
@@ -1062,79 +1144,6 @@ Warning
 </style>
 <div class="paper-list">
   
-    <div data-index="0">
-      <div class="paper-container">
-        <div class="paper-content">
-          <div class="citation">
-            
-            
-            <strong>Kim, S.</strong>, Xu, W. (2024). Religious Leaders’ LGBQ Support: A National Survey Examining Psychosocial, Religious, and Congregational Factors.
-            
-            
-              <a href="https://doi.org/10.31234/osf.io/rc8sh">https://doi.org/10.31234/osf.io/rc8sh</a>
-            
-          </div>
-          
-          <p class="buttons-container" style="margin-bottom: 0;"> <!-- Added margin-bottom: 0 to reduce space -->
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-            <a role="button" href="https://doi.org/10.31234/osf.io/rc8sh" type="button" class="btn btn-light-outline btn-xs"> 
-              <i class="ai ai-psyarxiv ai-lg"></i> PsyArXiv Preprint 
-            </a> 
-          
-          
-          
-          
-          
-          
-          
-            <a role="button" href="https://osf.io/epdvu/?view_only=95aebd4a3ec940eb83eb198b8848c7d8" type="button" class="btn btn-light-outline btn-xs"> 
-              <i class="ai ai-osf ai-lg"></i> OSF
-            </a>
-          
-          
-          
-          
-          
-            <a role="button" href="https://osf.io/vy2bc?view_only=27e52b269f4d43f2b66275c3524becdf" type="button" class="btn btn-light-outline btn-xs"> 
-              <i class="ai ai-preregistered ai-lg"></i> Preregistration 
-            </a> 
-          
-          
-          
-          </p>
-        </div>
-        
-        
-        <div class="paper-badges">
-          <!-- Dimensions badge -->
-          <div class="badge-container">
-            <span class="__dimensions_badge_embed__" data-doi="10.31234/osf.io/rc8sh" data-style="small_circle" data-legend="hover-right"></span>
-          </div>
-          
-          <!-- Altmetric badge -->
-          <div class="badge-container">
-            <div style="background-color: white; display: inline-block; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 3px;"> <!-- Added margin-top to lower this badge slightly -->
-              <div class="altmetric-embed" data-badge-type="donut" data-badge-popover="right" data-doi="10.31234/osf.io/rc8sh"></div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-      <hr>
-    </div>
-  
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
@@ -1195,13 +1204,14 @@ Warning
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,13 +34,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-48853523c56965cbee4e9d361ca5beef.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-b654365ec9f6baf3fdeb64dbed93b847.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -122,7 +123,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -148,6 +149,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Seungju Kim</span>
     </a>
@@ -377,6 +380,27 @@ window.Quarto = {
     
       <div class="news-item " data-news-index="0">
         <div class="news-date">
+          Sep 26, 2025
+        </div>
+        <div class="news-content">
+          <div class="news-title">
+            What is the state of LGBQ+ support among U.S. Religious Leaders?
+          </div>
+          <div class="news-subtitle">
+            Using a nationally representative sample of 1,600 religious leaders, this study reveals overall low LGBQ+ support among U.S. religious leaders. Religious fundamentalism emerged as the strongest predictor of lower support, while factors like higher education and religious/spiritual struggles were associated with greater acceptance. The findings highlight a significant gap between religious leader attitudes and broader population trends toward LGBQ+ acceptance.
+          </div>
+        </div>
+        
+        <div class="news-actions">
+          <a href="https://doi.org/10.1007/s13178-025-01192-7" class="read-more" target="_blank">
+            Read more <span class="arrow">→</span>
+          </a>
+        </div>
+        
+      </div>
+    
+      <div class="news-item " data-news-index="1">
+        <div class="news-date">
           Jul 27, 2025
         </div>
         <div class="news-content">
@@ -396,7 +420,7 @@ window.Quarto = {
         
       </div>
     
-      <div class="news-item " data-news-index="1">
+      <div class="news-item " data-news-index="2">
         <div class="news-date">
           Jul 21, 2025
         </div>
@@ -417,7 +441,7 @@ window.Quarto = {
         
       </div>
     
-      <div class="news-item " data-news-index="2">
+      <div class="news-item news-hidden" data-news-index="3">
         <div class="news-date">
           May 26, 2025
         </div>
@@ -438,7 +462,7 @@ window.Quarto = {
         
       </div>
     
-      <div class="news-item news-hidden" data-news-index="3">
+      <div class="news-item news-hidden" data-news-index="4">
         <div class="news-date">
           Apr 22, 2025
         </div>
@@ -469,7 +493,7 @@ window.Quarto = {
         Show Less News
       </button>
       <div class="news-summary">
-        Showing <span id="news-visible-count">3</span> of <span id="news-total-count">4</span> news items
+        Showing <span id="news-visible-count">3</span> of <span id="news-total-count">5</span> news items
       </div>
     </div>
     
@@ -479,7 +503,7 @@ window.Quarto = {
 <script>
 (function() {
   let newsVisibleCount = 3;
-  const newsTotalItems = 4;
+  const newsTotalItems = 5;
   const newsItemsPerLoad = 5;
 
   function newsShowMore() {
@@ -638,13 +662,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
