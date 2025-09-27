@@ -1,6 +1,5 @@
 ---
 title: "Research"
-date-format: "MM/DD/YYYY"
 author:
   - name: Seungju Kim
     orcid: 0009-0009-5166-9170
