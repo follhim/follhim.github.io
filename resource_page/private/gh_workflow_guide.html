@@ -8,7 +8,7 @@
 
 <meta name="author" content="Seungju Kim">
 
-<title>An R Statistician’s Github Workflow – Seungju Kim</title>
+<title>An R Statistician’s 2025 Workflow – Seungju Kim</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,6 +143,11 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#what-youll-learn" id="toc-what-youll-learn" class="nav-link" data-scroll-target="#what-youll-learn">What You’ll Learn</a></li>
+  <li><a href="#what-youll-need" id="toc-what-youll-need" class="nav-link" data-scroll-target="#what-youll-need">What You’ll Need</a></li>
+  </ul></li>
+  <li><a href="#quick-workflow" id="toc-quick-workflow" class="nav-link" data-scroll-target="#quick-workflow">Quick Workflow</a>
+  <ul class="collapse">
+  <li><a href="#set-up" id="toc-set-up" class="nav-link" data-scroll-target="#set-up">Set-up</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -152,7 +157,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">An R Statistician’s Github Workflow</h1>
+<h1 class="title">An R Statistician’s 2025 Workflow</h1>
 </div>
 
 
@@ -185,13 +190,43 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>Social scientists increasingly use R for data analysis because it’s open-source, reproducible, and free—unlike proprietary software such as Mplus, SAS, or SPSS. While researchers have embraced online collaboration tools like Google Docs for writing, R statistical work often remains stuck in the email-and-file-sharing era.</p>
-<p>GitHub changes this by providing a powerful platform for collaborative statistical work that maintains reproducibility and enables seamless teamwork.</p>
+<p>In this guide, I will be providing my case for a 2025 R-stats workflow by introducing new and easy ways to streamline your research project, collaborations, and dissemination.</p>
 <section id="what-youll-learn" class="level2">
 <h2 class="anchored" data-anchor-id="what-youll-learn">What You’ll Learn</h2>
+<ol type="1">
+<li><p><strong>Quick Workflow</strong> (5 min): With only RStudio, you will learn how to render your analyses into an online webpage that is easy to share with others, and can be updated at any time, reducing the need to share any files.</p></li>
+<li><p><strong>Basic Workflow</strong> (15 min): Using Github, we can build upon the <em>Quick</em> workflow by generating the webpages on Github. The benefit? By rendering on Github pages you will retain the history of every update you make to the webpage. This is a life-saving feature as you will inevitibly need to go back to find code you previously deleted or changed.</p></li>
+<li><p><strong>Best Workflow</strong> (20 min): In this approach, you will learn how most of Computer Science/Engineering folks tackle collaborations. Full utilization of Github! In this approach, you will learn to “push” each udpate you make in your analyses to Github which will save all new changes in your “project” space all the while generating a webpage.</p></li>
+</ol>
+</section>
+<section id="what-youll-need" class="level2">
+<h2 class="anchored" data-anchor-id="what-youll-need">What You’ll Need</h2>
 <p>This guide covers two essential GitHub workflows for R users:</p>
-<p>• <strong>Publishing with GitHub Pages + Quarto</strong>: Create beautiful, interactive websites directly from your R code and statistical reports</p>
-<p>• <strong>Collaborative Development</strong>: Master pushing, pulling, and working effectively with multiple team members on shared R projects</p>
-<p>Whether you’re a solo researcher wanting to showcase your work or part of a research team, you’ll gain the GitHub skills needed for modern, professional statistical practice.</p>
+<ul>
+<li>Github account</li>
+<li>RStudio (&amp; by implication R programming)</li>
+</ul>
+</section>
+</section>
+<section id="quick-workflow" class="level1">
+<h1>Quick Workflow</h1>
+<p>In this quick workflow, I will show you how to create your own webpage of a Markdown file you render in less than 5 minutes. All you need is <strong>RStudio</strong>.</p>
+<section id="set-up" class="level2">
+<h2 class="anchored" data-anchor-id="set-up">Set-up</h2>
+<p>This set up assumes that you created a .Rproj file in whatever folder you are working in.</p>
+<ol type="1">
+<li>Create a <a href="https://quartopub.com/">Quarto Pub</a> account.</li>
+<li>Create/use a Quarto markdown file (which is a modern version of Rmarkdown files) for your project.</li>
+<li>After adding all your analyses, render the file into HTML output.</li>
+</ol>
+<p>Did it render properly? If yes, then you only have one step left. If it did not render, then you need to examine the error. Note, that depending on what package you use, an output that shows on your Desktop RStudio may not show in an HTML output.</p>
+<p>I would recommend refering to an R expert or what most people do these days: ask ChatGPT/Claude.</p>
+<ol start="4" type="1">
+<li>Finally, go to the terminal tab inside RStudio. Where is the terminal tab located? If you have your Rstudio set conventionally, then its in the bottom section (not top or right section). There are three tabs: Console, Terminal, and Background jobs. Type the following into the terminal:</li>
+</ol>
+<p><code>quarto publish quarto-pub FILENAME.qmd</code></p>
+<p>Then hit enter/return.</p>
+<p>It will ask you to authenticate, sign in with your Quarto Pub account. It will then update your pae</p>
 
 
 </section>
