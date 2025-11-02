@@ -1,4 +1,29 @@
 ---
+- title: "Sexual Attraction and Perceived Relational Insecurity in Sexual Minorities of Mixed Orientation Marriages: Is Religiousness a Risk or Protective Factor?"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Yarhouse, M.A."
+    - "Zaporozhets, O."
+    - "Matthews, E."
+    - "Matlack, J."
+  year: 2025                        # Publication year (for published papers)
+  journal: "Contemporary Family Therapy"  # Journal name
+  doi: "10.1007/s10591-025-09762-y"
+  pubopen: "https://doi.org/10.1007/s10591-025-09762-y"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # preprint: "https://doi.org/10.31234/osf.io/rc8sh_v3"
+  # osf: "https://osf.io/epdvu"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+
 - title: "The State of LGBQ+ Support: Correlates, Predictors, and Congregational Moderators of a National Sample of U.S. Religious Leaders"
   type: "Published"                  # Use "Published" for published papers
   author:                           # Can be array or string
