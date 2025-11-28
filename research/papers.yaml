@@ -23,7 +23,6 @@
   # errata: "https://journal.com/errata123"  # Errata/correction
   # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
 
-
 - title: "The State of LGBQ+ Support: Correlates, Predictors, and Congregational Moderators of a National Sample of U.S. Religious Leaders"
   type: "Published"                  # Use "Published" for published papers
   author:                           # Can be array or string
@@ -105,7 +104,7 @@
   doi: "10.1177/0034673X251336459"
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1177/0034673X251336459"     # Publisher version (if not open access)
-  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  pdf: "https://www.researchgate.net/profile/Seungju-Kim-11/publication/392097181_Contrasting_Experiences_Gender_Disparities_in_Spirituality_Character_Strengths_Mental_Health_and_Social_Justice_Among_Next-Generation_Religious_Leaders/links/6838a26cc33afe388ac7f727/Contrasting-Experiences-Gender-Disparities-in-Spirituality-Character-Strengths-Mental-Health-and-Social-Justice-Among-Next-Generation-Religious-Leaders.pdf"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
   preprint: "https://doi.org/10.31234/osf.io/mqwg9"
@@ -217,7 +216,7 @@
   doi: "10.1037/sgd0000749"       # DOI without the https://doi.org/ prefix
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1037/sgd0000749"     # Publisher version (if not open access)
-  pdf: "https://drive.google.com/file/d/1qVH4TEqYISAWjoGsT96BUgfcmWyyhzrG/view?usp=sharing"   # Direct PDF link
+  pdf: "https://www.researchgate.net/profile/Seungju-Kim-11/publication/382561893_How_Does_Religiousness_Influence_Health_Among_Sexual_and_Gender_Minorities_Evaluating_the_Propositions_of_the_ReligiousSpiritual_Stress_and_Resilience_Model/links/68ba36b99fda29494a1a270a/How-Does-Religiousness-Influence-Health-Among-Sexual-and-Gender-Minorities-Evaluating-the-Propositions-of-the-Religious-Spiritual-Stress-and-Resilience-Model.pdf"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
   # osf: "https://osf.io/example/"    # OSF project
