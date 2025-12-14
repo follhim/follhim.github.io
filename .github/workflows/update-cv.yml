@@ -1,12 +1,12 @@
 name: Update CV with Citation Badges
 
-on:
-  push:
+on: 
+  push: 
     branches: [main, master]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents:  write
 
 jobs:
   update-cv:
@@ -16,7 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets. GITHUB_TOKEN }}
+          persist-credentials: true   # ADD THIS
+          fetch-depth: 0              # ADD THIS
       
       - name: Download CV from Google Drive
         run: |
@@ -47,6 +49,10 @@ jobs:
           ls -la ${{ github.workspace }}/cv_with_badges.docx || echo "Not in workspace"
           ls -la cv_with_badges.docx || echo "Not in current dir"
           ls -la /tmp/*.docx 2>/dev/null || echo "Not in tmp"
+      
+      - name: Install Java (for LibreOffice)
+        run: |
+          sudo apt-get install -y default-jre
       
       - name: Install LibreOffice
         run: |
