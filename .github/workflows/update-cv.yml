@@ -22,3 +22,37 @@ jobs:
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.3.0'
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+      
+      - name: Install R packages
+        run: |
+          install.packages(c("httr", "jsonlite"), repos = "https://cloud.r-project.org")
+        shell: Rscript {0}
+      
+      - name: Process CV with citation badges
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: Rscript process_cv.R cv_source.docx cv_with_badges.docx
+      
+      - name: Install LibreOffice
+        run: |
+          sudo apt-get install -y libreoffice-writer
+      
+      - name: Convert to PDF
+        run: |
+          libreoffice --headless --convert-to pdf cv_with_badges.docx --outdir .
+          mkdir -p _site/cv
+          mv cv_with_badges.pdf _site/cv/cv.pdf
+          mv cv_with_badges.docx _site/cv/cv.docx
+      
+      - name: Commit updated CV
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _site/cv/
+          git diff --staged --quiet || git commit -m "Update CV with latest citations [skip ci]"
+          git push

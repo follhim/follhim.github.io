@@ -1,26 +1,45 @@
 #!/usr/bin/env Rscript
 # CV Citation Badge Generator - CLI Version
-# ==========================================
-# Uses official Dimensions Metrics API for accurate citation counts
-# 
-# Usage: Rscript process_cv.R input.docx output.docx
+# Uses Dimensions Metrics API + SerpAPI for Google Scholar
 
 library(httr)
 library(jsonlite)
-library(scholar)
 
 # ============== CONFIGURATION ==============
-SCHOLAR_ID <- "JWNJV9UAAAAJ"  # Your Google Scholar ID
+SCHOLAR_ID <- "JWNJV9UAAAAJ"
 
 # ============== FUNCTIONS ==============
 
-# Get total citations from Google Scholar
+# Get total citations from Google Scholar via SerpAPI
 get_total_citations <- function(scholar_id) {
+  api_key <- Sys.getenv("SERPAPI_KEY")
+  
+  if (api_key == "") {
+    message("Warning: SERPAPI_KEY not set, skipping total citations")
+    return(NA)
+  }
+  
   tryCatch({
-    profile <- get_profile(scholar_id)
-    return(profile$total_cites)
+    url <- "https://serpapi.com/search.json"
+    
+    response <- GET(url, query = list(
+      engine = "google_scholar_author",
+      author_id = scholar_id,
+      api_key = api_key
+    ))
+    
+    if (status_code(response) == 200) {
+      data <- fromJSON(content(response, "text"))
+      
+      if ("cited_by" %in% names(data) && "table" %in% names(data$cited_by)) {
+        # Get "Citations" -> "All" value
+        citations_all <- data$cited_by$table$citations$all
+        return(as.numeric(citations_all))
+      }
+    }
+    return(NA)
   }, error = function(e) {
-    message(paste("Error fetching Google Scholar profile:", e$message))
+    message(paste("Error fetching Google Scholar via SerpAPI:", e$message))
     return(NA)
   })
 }
@@ -43,7 +62,6 @@ get_citations_dimensions <- function(doi) {
       if (!is.null(data$times_cited)) {
         return(list(
           times_cited = data$times_cited,
-          recent_citations = data$recent_citations,
           source = "Dimensions"
         ))
       }
@@ -56,7 +74,7 @@ get_citations_dimensions <- function(doi) {
   })
 }
 
-# Get citations (Dimensions only)
+# Get citations
 get_citations_best <- function(doi) {
   dim_result <- get_citations_dimensions(doi)
   
@@ -167,7 +185,7 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   
   # Handle total citations [[XX]]
   if (grepl("\\[\\[XX\\]\\]", doc_xml)) {
-    message("Fetching total citations from Google Scholar...")
+    message("Fetching total citations from Google Scholar via SerpAPI...")
     total_cites <- get_total_citations(scholar_id)
     if (!is.na(total_cites)) {
       message(paste("  Total Citations:", total_cites))
@@ -235,7 +253,7 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
         new_parts[[length(new_parts) + 1]] <- '<w:r><w:rPr><w:color w:val="888888"/><w:sz w:val="20"/></w:rPr><w:t> [No DOI]</w:t></w:r>'
       }
       
-      Sys.sleep(0.2)  # Be nice to the API
+      Sys.sleep(0.2)
     }
     
     new_parts[[length(new_parts) + 1]] <- parts[[length(parts)]]
