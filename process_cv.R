@@ -211,10 +211,10 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   if (grepl("\\[\\[XX\\]\\]", doc_xml)) {
     message("Fetching total citations from Google Scholar via SerpAPI...")
     total_cites <- get_total_citations(scholar_id)
-    if (!is.na(total_cites)) {
-      message(paste("  Total Citations:", total_cites))
-      doc_xml <- gsub("\\[\\[XX\\]\\]", as.character(total_cites), doc_xml)
-    } else {
+    # Ensure single value
+    if (length(total_cites) > 1) total_cites <- total_cites[1]
+    if (!is.na(total_cites) && length(total_cites) == 1) {
+      else {
       message("  Warning: Could not fetch total citations")
       doc_xml <- gsub("\\[\\[XX\\]\\]", "--", doc_xml)
     }
