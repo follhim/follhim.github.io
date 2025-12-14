@@ -37,7 +37,7 @@ jobs:
       
       - name: Install R packages
         run: |
-          install.packages(c("httr", "jsonlite", "officer", "xml2"), repos = "https://cloud.r-project. org")
+          install.packages(c("httr", "jsonlite", "officer", "xml2"), repos = "https://cloud.r-project.org")
         shell: Rscript {0}
       
       - name: Process CV with citation badges
