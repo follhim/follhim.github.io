@@ -2,16 +2,39 @@ name: Deploy CV
 
 on:
   push:
-    branches:  [main, master]
+    branches: [main, master]
     paths:
-      - '_site/cv/**'
+      - '_site/cv/**'  # Triggers only when you modify files in this folder
   workflow_dispatch:
 
 permissions:
-  contents:  read
+  contents: read
   pages: write
   id-token: write
 
-# This workflow doesn't need to do anything special - 
-# Quarto/GitHub Pages will automatically serve files in _site/
-# Just make sure _site/cv/ is committed with your cv. pdf and cv.docx
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # This tells GitHub to publish the contents of the '_site' folder
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
