@@ -44,10 +44,28 @@ jobs:
       
       - name: Convert to PDF
         run: |
-          libreoffice --headless --convert-to pdf cv_with_badges.docx --outdir .
+          echo "📄 Converting to PDF..."
+          echo "Files in directory:"
+          ls -la
+          
+          # Convert using full path
+          libreoffice --headless --convert-to pdf --outdir . cv_with_badges.docx
+          
+          echo "After conversion:"
+          ls -la *.pdf || echo "No PDF found"
+          
+          # Create output directory and move files
           mkdir -p _site/cv
-          mv cv_with_badges.pdf _site/cv/cv.pdf
-          mv cv_with_badges.docx _site/cv/cv.docx
+          
+          if [ -f "cv_with_badges.pdf" ]; then
+            mv cv_with_badges.pdf _site/cv/cv.pdf
+            mv cv_with_badges.docx _site/cv/cv.docx
+            echo "✅ PDF created successfully"
+          else
+            echo "❌ PDF conversion failed, copying docx only"
+            cp cv_with_badges.docx _site/cv/cv.docx
+            exit 1
+          fi
       
       - name: Commit updated CV
         run: |
