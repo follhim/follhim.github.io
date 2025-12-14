@@ -11,7 +11,6 @@ SCHOLAR_ID <- "JWNJV9UAAAAJ"
 # ============== FUNCTIONS ==============
 
 # Get total citations from Google Scholar via SerpAPI
-# Get total citations from Google Scholar via SerpAPI
 get_total_citations <- function(scholar_id) {
   api_key <- Sys.getenv("SERPAPI_KEY")
   
@@ -32,29 +31,41 @@ get_total_citations <- function(scholar_id) {
     if (status_code(response) == 200) {
       data <- fromJSON(content(response, "text"))
       
-      if ("cited_by" %in% names(data) && "table" %in% names(data$cited_by)) {
-        # Get "Citations" -> "All" value - handle different response structures
-        table_data <- data$cited_by$table
+      # Try to get total citations from cited_by
+      if ("cited_by" %in% names(data)) {
+        cited_by <- data$cited_by
         
-        # It might be a data frame or list - extract carefully
-        if (is.data.frame(table_data)) {
-          # Look for citations row
-          citations_row <- table_data[table_data$h_index == "Citations" | 
-                                        rownames(table_data) == "Citations", ]
-          if (nrow(citations_row) > 0) {
-            return(as.numeric(citations_row$all[1]))
+        # Method 1: Direct table access
+        if ("table" %in% names(cited_by)) {
+          table_data <- cited_by$table
+          
+          # Handle data frame structure
+          if (is.data.frame(table_data) && "citations" %in% names(table_data)) {
+            all_val <- table_data$citations$all
+            if (!is.null(all_val)) {
+              return(as.numeric(all_val[1]))
+            }
+          }
+          
+          # Handle list structure  
+          if (is.list(table_data) && !is.data.frame(table_data)) {
+            if ("citations" %in% names(table_data)) {
+              all_val <- table_data$citations$all
+              if (!is.null(all_val)) {
+                return(as.numeric(all_val[1]))
+              }
+            }
           }
         }
         
-        # Alternative: direct access if it's a nested list
-        if (!is.null(table_data$citations) && !is.null(table_data$citations$all)) {
-          return(as.numeric(table_data$citations$all[1]))
+        # Method 2: Graph total
+        if ("graph" %in% names(cited_by)) {
+          graph_data <- cited_by$graph
+          if (is.data.frame(graph_data) && "citations" %in% names(graph_data)) {
+            total <- sum(as.numeric(graph_data$citations), na.rm = TRUE)
+            return(total)
+          }
         }
-      }
-      
-      # Fallback: try cited_by total
-      if ("cited_by" %in% names(data) && "total" %in% names(data$cited_by)) {
-        return(as.numeric(data$cited_by$total[1]))
       }
     }
     return(NA)
@@ -109,7 +120,6 @@ get_citations_best <- function(doi) {
 }
 
 # Extract DOI from text
-# Extract DOI from text
 extract_doi <- function(text) {
   matches <- unlist(regmatches(text, gregexpr("10\\.\\d{4,}/[^\\s<>\\[\\]\"']+", text, perl = TRUE)))
   
@@ -121,7 +131,7 @@ extract_doi <- function(text) {
   
   preprint_prefixes <- c("10.31234", "10.1101", "10.2139")
   
-  # Fixed: handle each match individually
+  # Handle each match individually
   is_preprint <- sapply(matches, function(d) {
     any(startsWith(d, preprint_prefixes))
   })
@@ -211,10 +221,16 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   if (grepl("\\[\\[XX\\]\\]", doc_xml)) {
     message("Fetching total citations from Google Scholar via SerpAPI...")
     total_cites <- get_total_citations(scholar_id)
-    # Ensure single value
-    if (length(total_cites) > 1) total_cites <- total_cites[1]
-    if (!is.na(total_cites) && length(total_cites) == 1) {
-      else {
+    
+    # Ensure we have a single valid value
+    if (length(total_cites) > 1) {
+      total_cites <- total_cites[1]
+    }
+    
+    if (!is.na(total_cites)) {
+      message(paste("  Total Citations:", total_cites))
+      doc_xml <- gsub("\\[\\[XX\\]\\]", as.character(total_cites), doc_xml)
+    } else {
       message("  Warning: Could not fetch total citations")
       doc_xml <- gsub("\\[\\[XX\\]\\]", "--", doc_xml)
     }
