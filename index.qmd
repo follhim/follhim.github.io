@@ -34,7 +34,7 @@ My name is Seungju Kim[^1] and thank you for visiting my personal website detail
 
 I am a **National Science Foundation Graduate Research Fellow** and second-year PhD student in Clinical/Community Psychology Program at the **University of Illinois** under Dr. Nathan Todd.
 
-My [research](https://follhim.github.io/research/papers.html) is focused on modeling the relationship between **religion/spirituality** and **psychological/behavioral health** disparities.
+My [research](https://follhim.github.io/research/papers.html) is broadly focused advancing the **science of LGBTQ+ health disparities** by looking ath the **socio-ecological** effects of **religion/spirituality**.
 :::
 
 ::: {#news}
@@ -42,13 +42,13 @@ My [research](https://follhim.github.io/research/papers.html) is focused on mode
 
 ## Research Interests
 
-My research explores the intersection of religion/spirituality (RS) and mental health in LGBTQ+ populations, with special attention to communities of color. I take a multilevel approach, examining these dynamics at internal, interpersonal, and institutional levels.
+My research is ultimately informed by my commitment to creating lasting change for the health and well-being of LGBTQ+ people within the context of religion.
 
-1.  I seek to develop **innovative measurement tools** that capture the unique RS experiences of LGBTQ+ individuals, ensuring these instruments work effectively across diverse sexual, gender, racial, and religious groups.
+1.  I engaged in modeling how **religion/spirituality** across varying **socioecological levels** are associated with health for LGBTQ+ individuals.
 
-2.  I am currently engaged in efforts to **model RS-health pathways** through which adverse/beneficial RS experiences may contribute to psychological or behavioral health.
+2.  I currently pursuing efforts in **meta-science** focused on advancing methodological rigor in LGBTQ+ health research. This includes critically examining dominant theoretical frameworks, methodological innovations (e.g., Bayesian inference), and creation of software/resources to advance the quantitative infrastructure of LGBTQ+ science.
 
-3.  Finally, as part of my commitment to **translational research**, I hope to collaborate with religious organizations to develop empirically-supported, culturally-responsive resources and training protocols that enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals.
+3.  As part of my commitment to **translational research**, I seek to collaborate with religious communities to develop empirically-supported, culturally-responsive resources and training protocols. This work aims to enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals in ways that honor both their faith commitments and sexual/gender identities.
 
 
 ## Education & Training

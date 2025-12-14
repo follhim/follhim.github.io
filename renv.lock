@@ -1605,28 +1605,6 @@
       ],
       "Hash": "df58958f293b166e4ab885ebcad90e02"
     },
-    "officer": {
-      "Package": "officer",
-      "Version": "0.7.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R6",
-        "cli",
-        "dplyr",
-        "grDevices",
-        "graphics",
-        "openssl",
-        "ragg",
-        "stats",
-        "tidyr",
-        "utils",
-        "uuid",
-        "xml2",
-        "zip"
-      ],
-      "Hash": "6aebaa42ddb2d496b0244e33f4c981bd"
-    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.3.4",
