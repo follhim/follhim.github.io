@@ -4,6 +4,8 @@
 
 library(httr)
 library(jsonlite)
+library(officer)  # ADD THIS - install with install.packages("officer")
+library(xml2)     # ADD THIS
 
 # ============== CONFIGURATION ==============
 SCHOLAR_ID <- "JWNJV9UAAAAJ"
@@ -204,8 +206,61 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   message(paste("Output:", output_file))
   message("")
   
-  message("Reading document...")
+  # Read document using officer
+  doc <- read_docx(input_file)
   
+  # Get document content as data frame
+  content <- docx_summary(doc)
+  
+  # Find paragraphs containing [[ADD BADGE]]
+  badge_rows <- grep("\\[\\[ADD BADGE\\]\\]", content$text)
+  message(paste("Found", length(badge_rows), "badge markers"))
+  
+  # Find paragraphs containing [[XX]] for total citations
+  xx_rows <- grep("\\[\\[XX\\]\\]", content$text)
+  
+  if (length(xx_rows) > 0) {
+    message("Fetching total citations from Google Scholar via SerpAPI...")
+    total_cites <- get_total_citations(scholar_id)
+    if (! is.na(total_cites) && length(total_cites) > 0) {
+      message(paste("  Total Citations:", total_cites[1]))
+    }
+  }
+  
+  # Process the document using cursor-based approach
+  # For each badge marker, find the DOI in preceding text and create badge
+  
+  for (i in seq_along(badge_rows)) {
+    row_idx <- badge_rows[i]
+    
+    # Look backwards to find DOI in previous paragraphs
+    search_text <- paste(content$text[max(1, row_idx-5):row_idx], collapse = " ")
+    doi <- extract_doi(search_text)
+    
+    message(paste("Processing publication", i, "of", length(badge_rows)))
+    
+    if (!is.na(doi)) {
+      message(paste("  DOI:", doi))
+      citation_result <- get_citations_best(doi)
+      citations <- citation_result$count
+      
+      if (! is.na(citations)) {
+        message(paste("  Citations:", citations))
+        # Replace [[ADD BADGE]] with citation text
+        badge_text <- paste0(" [Citations: ", citations, "]")
+      } else {
+        message("  Citations: N/A")
+        badge_text <- " [Citations: 0]"
+      }
+    } else {
+      message("  Warning: No DOI found")
+      badge_text <- " [No DOI]"
+    }
+    
+    Sys.sleep(0.2)
+  }
+  
+  # For now, use text replacement approach on raw XML with normalization
   temp_dir <- tempdir()
   unzip_dir <- file.path(temp_dir, "docx_unzipped")
   unlink(unzip_dir, recursive = TRUE)
@@ -214,90 +269,25 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   doc_xml_path <- file.path(unzip_dir, "word", "document.xml")
   doc_xml <- paste(readLines(doc_xml_path, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
   
-  rels_path <- file.path(unzip_dir, "word", "_rels", "document.xml.rels")
-  rels_xml <- paste(readLines(rels_path, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
+  # NORMALIZE:  Remove XML tags between bracket characters to find markers
+  # Extract just the text content to find markers, then work backwards
+  text_only <- gsub("<[^>]+>", "", doc_xml)
   
-  # Handle total citations [[XX]]
-  if (grepl("\\[\\[XX\\]\\]", doc_xml)) {
-    message("Fetching total citations from Google Scholar via SerpAPI...")
-    total_cites <- get_total_citations(scholar_id)
+  # Check if markers exist in text
+  if (grepl("\\[\\[ADD BADGE\\]\\]", text_only)) {
+    message("Badge markers found in normalized text!")
     
-    # Ensure we have a single valid value
-    if (length(total_cites) > 1) {
-      total_cites <- total_cites[1]
-    }
+    # Use a regex that matches [[ADD BADGE]] even when split across XML tags
+    # Match:  [ possibly tags ][ possibly tags ]ADD possibly tags BADGE possibly tags ] possibly tags ]
+    badge_pattern <- "\\[(<[^>]*>)*\\[(<[^>]*>)*A(<[^>]*>)*D(<[^>]*>)*D(<[^>]*>)* (<[^>]*>)*B(<[^>]*>)*A(<[^>]*>)*D(<[^>]*>)*G(<[^>]*>)*E(<[^>]*>)*\\](<[^>]*>)*\\]"
     
-    if (!is.na(total_cites)) {
-      message(paste("  Total Citations:", total_cites))
-      doc_xml <- gsub("\\[\\[XX\\]\\]", as.character(total_cites), doc_xml)
-    } else {
-      message("  Warning: Could not fetch total citations")
-      doc_xml <- gsub("\\[\\[XX\\]\\]", "--", doc_xml)
-    }
-  }
-  
-  # Handle badges [[ADD BADGE]]
-  badge_matches <- gregexpr("\\[\\[ADD BADGE\\]\\]", doc_xml)[[1]]
-  badge_count <- ifelse(badge_matches[1] == -1, 0, length(badge_matches))
-  
-  message(paste("Found", badge_count, "badge markers"))
-  message("Using Dimensions Metrics API")
-  message("")
-  
-  new_rels <- c()
-  
-  if (badge_count > 0) {
-    parts <- strsplit(doc_xml, "\\[\\[ADD BADGE\\]\\]")[[1]]
-    new_parts <- list()
+    # Simpler approach: find </w:t> patterns and consolidate
+    # Replace the fragmented marker with a placeholder, then replace placeholder with badge
     
-    existing_rids <- as.numeric(gsub("rId", "", unlist(regmatches(rels_xml, gregexpr("rId\\d+", rels_xml)))))
-    next_rid <- max(existing_rids, na.rm = TRUE) + 1
+    # This pattern catches common fragmentations
+    doc_xml <- gsub("\\[\\[ADD BADGE\\]\\]", "{{BADGE_PLACEHOLDER}}", doc_xml)
+    doc_xml <- gsub("\\[(<[^>]*>)*\\[(<[^>]*>)*ADD BADGE(<[^>]*>)*\\](<[^>]*>)*\\]", "{{BADGE_PLACEHOLDER}}", doc_xml)
     
-    for (i in seq_along(parts[-length(parts)])) {
-      section <- parts[[i]]
-      
-      message(paste("Processing publication", i, "of", badge_count))
-      
-      doi <- extract_doi(section)
-      
-      if (!is.na(doi)) {
-        message(paste("  DOI:", doi))
-        
-        citation_result <- get_citations_best(doi)
-        citations <- citation_result$count
-        source <- citation_result$source
-        
-        if (is.na(citations)) {
-          message("  Citations: N/A")
-        } else {
-          message(paste("  Citations:", citations, paste0("(", source, ")")))
-        }
-        
-        hyperlink_rid <- paste0("rId", next_rid)
-        next_rid <- next_rid + 1
-        
-        dimensions_url <- get_dimensions_url(doi)
-        new_rels <- c(new_rels, 
-                      paste0('<Relationship Id="', hyperlink_rid, 
-                             '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="', 
-                             dimensions_url, '" TargetMode="External"/>'))
-        
-        badge_xml <- create_text_badge_xml(citations, hyperlink_rid)
-        
-        new_parts[[length(new_parts) + 1]] <- section
-        new_parts[[length(new_parts) + 1]] <- badge_xml
-        
-      } else {
-        message(paste("  Warning: No DOI found for entry", i))
-        new_parts[[length(new_parts) + 1]] <- section
-        new_parts[[length(new_parts) + 1]] <- '<w:r><w:rPr><w:color w:val="888888"/><w:sz w:val="20"/></w:rPr><w:t> [No DOI]</w:t></w:r>'
-      }
-      
-      Sys.sleep(0.2)
-    }
-    
-    new_parts[[length(new_parts) + 1]] <- parts[[length(parts)]]
-    doc_xml <- paste(unlist(new_parts), collapse = "")
   }
   
   writeLines(doc_xml, doc_xml_path, useBytes = TRUE)
