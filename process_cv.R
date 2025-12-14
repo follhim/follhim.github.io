@@ -1,338 +1,271 @@
 #!/usr/bin/env Rscript
-# CV Citation Badge Generator - CLI Version
-# Uses Dimensions Metrics API + SerpAPI for Google Scholar
+# =============================================================================
+# CV CITATION BADGE GENERATOR — FINAL VERSION (AUTO-CLEANUP)
+# =============================================================================
 
-library(httr)
-library(jsonlite)
-library(officer)  # ADD THIS - install with install.packages("officer")
-library(xml2)     # ADD THIS
+suppressPackageStartupMessages({
+  library(httr)
+  library(jsonlite)
+  library(scholar)
+  library(xml2)
+  library(tools) 
+})
 
-# ============== CONFIGURATION ==============
+# ======================== CONFIGURATION ========================
+CV_SOURCE_PATH <- "/Users/seungjukim/Library/CloudStorage/GoogleDrive-seungju7@illinois.edu/My Drive/PERSONAL/CV/SK_cv.docx"
 SCHOLAR_ID <- "JWNJV9UAAAAJ"
+OUTPUT_FOLDER <- "_site/cv"
+# ===============================================================
 
-# ============== FUNCTIONS ==============
+# =============================================================================
+# 1. API HELPERS
+# =============================================================================
 
-# Get total citations from Google Scholar via SerpAPI
 get_total_citations <- function(scholar_id) {
-  api_key <- Sys.getenv("SERPAPI_KEY")
-  
-  if (api_key == "") {
-    message("Warning: SERPAPI_KEY not set, skipping total citations")
-    return(NA)
-  }
-  
+  message("📊 Fetching total citations (Google Scholar)")
   tryCatch({
-    url <- "https://serpapi.com/search.json"
-    
-    response <- GET(url, query = list(
-      engine = "google_scholar_author",
-      author_id = scholar_id,
-      api_key = api_key
-    ))
-    
-    if (status_code(response) == 200) {
-      data <- fromJSON(content(response, "text"))
-      
-      # Try to get total citations from cited_by
-      if ("cited_by" %in% names(data)) {
-        cited_by <- data$cited_by
-        
-        # Method 1: Direct table access
-        if ("table" %in% names(cited_by)) {
-          table_data <- cited_by$table
-          
-          # Handle data frame structure
-          if (is.data.frame(table_data) && "citations" %in% names(table_data)) {
-            all_val <- table_data$citations$all
-            if (!is.null(all_val)) {
-              return(as.numeric(all_val[1]))
-            }
-          }
-          
-          # Handle list structure  
-          if (is.list(table_data) && !is.data.frame(table_data)) {
-            if ("citations" %in% names(table_data)) {
-              all_val <- table_data$citations$all
-              if (!is.null(all_val)) {
-                return(as.numeric(all_val[1]))
-              }
-            }
-          }
-        }
-        
-        # Method 2: Graph total
-        if ("graph" %in% names(cited_by)) {
-          graph_data <- cited_by$graph
-          if (is.data.frame(graph_data) && "citations" %in% names(graph_data)) {
-            total <- sum(as.numeric(graph_data$citations), na.rm = TRUE)
-            return(total)
-          }
-        }
-      }
-    }
-    return(NA)
-  }, error = function(e) {
-    message(paste("Error fetching Google Scholar via SerpAPI:", e$message))
-    return(NA)
-  })
+    profile <- get_profile(scholar_id)
+    message("    ✅ Total: ", profile$total_cites)
+    profile$total_cites
+  }, error = function(e) NA)
 }
 
-# Fetch citation count from Dimensions Metrics API
 get_citations_dimensions <- function(doi) {
+  message("    🔎 DOI: ", doi)
   tryCatch({
     url <- paste0("https://metrics-api.dimensions.ai/doi/", doi)
-    
-    response <- GET(url, 
-                    add_headers(
-                      `User-Agent` = "CVBadgeGenerator/1.0",
-                      `Accept` = "application/json"
-                    ),
-                    timeout(15))
-    
-    if (status_code(response) == 200) {
-      data <- fromJSON(content(response, "text", encoding = "UTF-8"))
-      
-      if (!is.null(data$times_cited)) {
-        return(list(
-          times_cited = data$times_cited,
-          source = "Dimensions"
-        ))
-      }
+    res <- GET(url, add_headers(Accept = "application/json"), timeout(10))
+    if (status_code(res) == 200) {
+      cites <- fromJSON(content(res, "text", encoding = "UTF-8"))$times_cited
+      message("       ✅ Citations: ", cites)
+      cites
+    } else {
+      message("       ⚠️  API Status: ", status_code(res))
+      NA
     }
-    
-    return(NULL)
   }, error = function(e) {
-    message(paste("  Dimensions API error:", e$message))
-    return(NULL)
+    message("       ❌ Error: ", e$message)
+    NA
   })
 }
 
-# Get citations
-get_citations_best <- function(doi) {
-  dim_result <- get_citations_dimensions(doi)
-  
-  if (!is.null(dim_result) && !is.null(dim_result$times_cited)) {
-    return(list(
-      count = dim_result$times_cited,
-      source = "Dimensions"
-    ))
-  }
-  
-  return(list(count = NA, source = "None"))
-}
-
-# Extract DOI from text
 extract_doi <- function(text) {
-  matches <- unlist(regmatches(text, gregexpr("10\\.\\d{4,}/[^\\s<>\\[\\]\"']+", text, perl = TRUE)))
-  
-  if (length(matches) == 0) return(NA)
-  
-  matches <- gsub("[.,;:]+$", "", matches)
-  matches <- gsub("<.*$", "", matches)
-  matches <- gsub("\\)$", "", matches)
-  
-  preprint_prefixes <- c("10.31234", "10.1101", "10.2139")
-  
-  # Handle each match individually
-  is_preprint <- sapply(matches, function(d) {
-    any(startsWith(d, preprint_prefixes))
-  })
-  
-  publication_dois <- matches[!is_preprint]
-  
-  if (length(publication_dois) > 0) {
-    return(publication_dois[1])
-  } else if (length(matches) > 0) {
-    return(matches[1])
-  }
-  
-  return(NA)
+  m <- unlist(regmatches(text, gregexpr("10\\.\\d{4,}/[^\\s<>\\[\\]\"']+", text, perl = TRUE)))
+  if (!length(m)) return(NA)
+  gsub("[.,;:]+$", "", m[1])
 }
 
-# Get Dimensions URL
 get_dimensions_url <- function(doi) {
   paste0("https://badge.dimensions.ai/details/doi/", doi)
 }
 
-# Create badge XML
-create_text_badge_xml <- function(citations, hyperlink_rid) {
-  citation_text <- ifelse(is.na(citations), "0", as.character(citations))
-  nbsp <- "\u00A0"
-  
-  n_digits <- nchar(citation_text)
-  if (n_digits == 1) {
-    number_display <- paste0(nbsp, nbsp, citation_text, nbsp, nbsp)
-  } else if (n_digits == 2) {
-    number_display <- paste0(nbsp, " ", citation_text, " ", nbsp)
-  } else {
-    number_display <- paste0(nbsp, citation_text, nbsp)
-  }
-  
-  paste0(
-    '<w:r><w:t xml:space="preserve"> </w:t></w:r>',
-    '<w:hyperlink r:id="', hyperlink_rid, '">',
-    '<w:r>',
-    '<w:rPr>',
-    '<w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>',
-    '<w:color w:val="FFFFFF"/>',
-    '<w:sz w:val="20"/>',
-    '<w:szCs w:val="20"/>',
-    '<w:shd w:val="clear" w:color="auto" w:fill="555555"/>',
-    '</w:rPr>',
-    '<w:t xml:space="preserve">', nbsp, 'Citations', nbsp, '</w:t>',
-    '</w:r>',
-    '<w:r>',
-    '<w:rPr>',
-    '<w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/>',
-    '<w:b/>',
-    '<w:color w:val="FFFFFF"/>',
-    '<w:sz w:val="20"/>',
-    '<w:szCs w:val="20"/>',
-    '<w:shd w:val="clear" w:color="auto" w:fill="888888"/>',
-    '</w:rPr>',
-    '<w:t xml:space="preserve">', number_display, '</w:t>',
-    '</w:r>',
-    '</w:hyperlink>'
-  )
-}
+# =============================================================================
+# 2. STAGE 1: GENERATE DOCX (FIXED PATHING & FORMATTING)
+# =============================================================================
 
-# Main processing function
-process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR_ID) {
+create_badged_docx <- function(input_file, output_docx_path) {
+  message("\n📘 STAGE 1: Generating Badged DOCX")
   
-  message("========================================")
-  message("CV Citation Badge Generator")
-  message("========================================")
-  message(paste("Input:", input_file))
-  message(paste("Output:", output_file))
-  message("")
+  # --- 1. RESOLVE ABSOLUTE PATHS BEFORE UNZIPPING ---
+  out_dir <- dirname(output_docx_path)
+  if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+  abs_output_path <- file.path(normalizePath(out_dir), basename(output_docx_path))
   
-  # Read document using officer
-  doc <- read_docx(input_file)
+  # --- 2. UNZIP ---
+  tmp <- tempdir()
+  unzip_dir <- file.path(tmp, "docx_unzipped")
+  if (dir.exists(unzip_dir)) unlink(unzip_dir, recursive = TRUE)
+  dir.create(unzip_dir)
+  unzip(input_file, exdir = unzip_dir, overwrite = TRUE)
   
-  # Get document content as data frame
-  content <- docx_summary(doc)
+  doc_path  <- file.path(unzip_dir, "word", "document.xml")
+  rels_path <- file.path(unzip_dir, "word", "_rels", "document.xml.rels")
   
-  # Find paragraphs containing [[ADD BADGE]]
-  badge_rows <- grep("\\[\\[ADD BADGE\\]\\]", content$text)
-  message(paste("Found", length(badge_rows), "badge markers"))
+  doc_xml  <- read_xml(doc_path)
+  rels_xml <- read_xml(rels_path)
+  ns <- xml_ns(doc_xml) 
   
-  # Find paragraphs containing [[XX]] for total citations
-  xx_rows <- grep("\\[\\[XX\\]\\]", content$text)
-  
-  if (length(xx_rows) > 0) {
-    message("Fetching total citations from Google Scholar via SerpAPI...")
-    total_cites <- get_total_citations(scholar_id)
-    if (! is.na(total_cites) && length(total_cites) > 0) {
-      message(paste("  Total Citations:", total_cites[1]))
+  # --- 3. HANDLE [[XX]] ---
+  xx_nodes <- xml_find_all(doc_xml, "//w:t[contains(text(), '[[XX]]')]", ns)
+  if (length(xx_nodes) > 0) {
+    total <- get_total_citations(SCHOLAR_ID) 
+    for (node in xx_nodes) {
+      xml_text(node) <- gsub("\\[\\[XX\\]\\]", total, xml_text(node))
     }
+    message("   ✅ Updated [[XX]] -> ", total)
   }
   
-  # Process the document using cursor-based approach
-  # For each badge marker, find the DOI in preceding text and create badge
+  # --- 4. HANDLE BADGES ---
+  badge_nodes <- xml_find_all(doc_xml, "//w:t[contains(text(), '[[ADD BADGE]]')]", ns)
+  count <- length(badge_nodes)
   
-  for (i in seq_along(badge_rows)) {
-    row_idx <- badge_rows[i]
-    
-    # Look backwards to find DOI in previous paragraphs
-    search_text <- paste(content$text[max(1, row_idx-5):row_idx], collapse = " ")
-    doi <- extract_doi(search_text)
-    
-    message(paste("Processing publication", i, "of", length(badge_rows)))
-    
-    if (!is.na(doi)) {
-      message(paste("  DOI:", doi))
-      citation_result <- get_citations_best(doi)
-      citations <- citation_result$count
+  if (count > 0) {
+    next_id <- 20000 
+    for (i in seq_along(badge_nodes)) {
+      t_node <- badge_nodes[[i]]
+      run_node <- xml_parent(t_node)
+      p_node   <- xml_parent(run_node)
+      doi <- extract_doi(xml_text(p_node)) 
       
-      if (! is.na(citations)) {
-        message(paste("  Citations:", citations))
-        # Replace [[ADD BADGE]] with citation text
-        badge_text <- paste0(" [Citations: ", citations, "]")
-      } else {
-        message("  Citations: N/A")
-        badge_text <- " [Citations: 0]"
+      xml_text(t_node) <- gsub("\\[\\[ADD BADGE\\]\\]", "", xml_text(t_node))
+      
+      if (!is.na(doi)) {
+        cites <- get_citations_dimensions(doi) 
+        rid <- paste0("rId", next_id)
+        next_id <- next_id + 1
+        
+        # A. Relationship
+        xml_add_child(rels_xml, "Relationship",
+                      Id = rid,
+                      Type = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                      Target = get_dimensions_url(doi),
+                      TargetMode = "External"
+        )
+        
+        # B. Badge Visuals
+        cite_txt <- ifelse(is.na(cites), "0", as.character(cites))
+        badge_str <- paste0(
+          '<w:hyperlink xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" ',
+          'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="', rid, '">',
+          '<w:r>',
+          '<w:rPr>',
+          '<w:color w:val="0563C1"/>', # Blue
+          '<w:u w:val="single"/>',      # Underline
+          '</w:rPr>',
+          '<w:t xml:space="preserve">(Citations = ', cite_txt, ')</w:t>',
+          '</w:r>',
+          '</w:hyperlink>'
+        )
+        xml_add_sibling(run_node, read_xml(badge_str), .where = "after")
+        message(sprintf("   ✅ Badge %d/%d added (rId: %s)", i, count, rid))
       }
-    } else {
-      message("  Warning: No DOI found")
-      badge_text <- " [No DOI]"
     }
-    
-    Sys.sleep(0.2)
   }
   
-  # For now, use text replacement approach on raw XML with normalization
-  temp_dir <- tempdir()
-  unzip_dir <- file.path(temp_dir, "docx_unzipped")
-  unlink(unzip_dir, recursive = TRUE)
-  unzip(input_file, exdir = unzip_dir)
-  
-  doc_xml_path <- file.path(unzip_dir, "word", "document.xml")
-  doc_xml <- paste(readLines(doc_xml_path, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
-  
-  # NORMALIZE:  Remove XML tags between bracket characters to find markers
-  # Extract just the text content to find markers, then work backwards
-  text_only <- gsub("<[^>]+>", "", doc_xml)
-  
-  # Check if markers exist in text
-  if (grepl("\\[\\[ADD BADGE\\]\\]", text_only)) {
-    message("Badge markers found in normalized text!")
-    
-    # Use a regex that matches [[ADD BADGE]] even when split across XML tags
-    # Match:  [ possibly tags ][ possibly tags ]ADD possibly tags BADGE possibly tags ] possibly tags ]
-    badge_pattern <- "\\[(<[^>]*>)*\\[(<[^>]*>)*A(<[^>]*>)*D(<[^>]*>)*D(<[^>]*>)* (<[^>]*>)*B(<[^>]*>)*A(<[^>]*>)*D(<[^>]*>)*G(<[^>]*>)*E(<[^>]*>)*\\](<[^>]*>)*\\]"
-    
-    # Simpler approach: find </w:t> patterns and consolidate
-    # Replace the fragmented marker with a placeholder, then replace placeholder with badge
-    
-    # This pattern catches common fragmentations
-    doc_xml <- gsub("\\[\\[ADD BADGE\\]\\]", "{{BADGE_PLACEHOLDER}}", doc_xml)
-    doc_xml <- gsub("\\[(<[^>]*>)*\\[(<[^>]*>)*ADD BADGE(<[^>]*>)*\\](<[^>]*>)*\\]", "{{BADGE_PLACEHOLDER}}", doc_xml)
-    
-  }
-  
-  writeLines(doc_xml, doc_xml_path, useBytes = TRUE)
-  
-  if (length(new_rels) > 0) {
-    rels_xml <- gsub("</Relationships>", 
-                     paste(paste(new_rels, collapse = "\n"), "\n</Relationships>", sep = ""),
-                     rels_xml)
-    writeLines(rels_xml, rels_path, useBytes = TRUE)
-  }
-  
-  message("")
-  message("Creating output document...")
-  
-  # Create output file with absolute path
-  output_file_abs <- normalizePath(output_file, mustWork = FALSE)
+  # --- 5. SAVE & ZIP ---
+  write_xml(doc_xml, doc_path)
+  write_xml(rels_xml, rels_path)
   
   old_wd <- getwd()
-  setwd(unzip_dir)
+  setwd(unzip_dir) 
   
-  if (file.exists(output_file_abs)) {
-    file.remove(output_file_abs)
+  all_files <- list.files(".", recursive = TRUE, all.files = TRUE, no.. = TRUE)
+  if ("[Content_Types].xml" %in% all_files) {
+    files_ordered <- c("[Content_Types].xml", setdiff(all_files, "[Content_Types].xml"))
+  } else {
+    files_ordered <- all_files
   }
   
-  zip(output_file_abs, files = list.files(".", recursive = TRUE, all.files = TRUE), 
-      flags = "-r9Xq")
+  if (file.exists(abs_output_path)) unlink(abs_output_path)
+  
+  zip(abs_output_path, files_ordered, flags = "-r9Xq")
+  
   setwd(old_wd)
   
-  message(paste("✅ Output saved to:", output_file_abs))
-  message("========================================")
+  if (file.exists(abs_output_path)) {
+    message("   💾 DOCX Saved (Intermediate): ", abs_output_path)
+  } else {
+    stop("❌ Error: DOCX was not created at ", abs_output_path)
+  }
+  
+  return(abs_output_path)
 }
 
-# ============== MAIN ==============
-args <- commandArgs(trailingOnly = TRUE)
+# =============================================================================
+# 3. STAGE 2: CONVERT TO PDF (FIXED APPLESCRIPT)
+# =============================================================================
 
-if (length(args) < 2) {
-  message("Usage: Rscript process_cv.R <input.docx> <output.docx>")
-  quit(status = 1)
+convert_docx_to_pdf <- function(input_docx, output_pdf) {
+  message("\n📕 STAGE 2: Converting to PDF")
+  
+  input_abs <- normalizePath(input_docx)
+  
+  out_dir <- dirname(output_pdf)
+  if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+  output_abs <- file.path(normalizePath(out_dir), basename(output_pdf))
+  
+  if(file.exists(output_abs)) unlink(output_abs)
+  
+  scpt_path <- file.path(tempdir(), "convert_fixed.scpt")
+  
+  script_content <- paste0(
+    'tell application "Microsoft Word"\n',
+    '   activate\n',
+    '   set inputPath to "', input_abs, '"\n',
+    '   set outputPath to "', output_abs, '"\n',
+    '   \n',
+    '   open POSIX file inputPath\n',
+    '   delay 2\n', 
+    '   \n',
+    '   set theDoc to active document\n',
+    '   save as theDoc file name outputPath file format 17\n',
+    '   close theDoc saving no\n',
+    'end tell'
+  )
+  
+  cat(script_content, file = scpt_path)
+  
+  message("   ⏳ Launching Word to convert...")
+  tryCatch({
+    res <- system(paste("osascript", shQuote(scpt_path)), intern = TRUE, ignore.stderr = FALSE)
+    
+    if (file.exists(output_abs) && file.size(output_abs) > 0) {
+      message("   ✅ PDF Success: ", output_abs)
+    } else {
+      message("   ❌ PDF Conversion failed.")
+      message("      AppleScript Log: ", paste(res, collapse=" "))
+    }
+  }, error = function(e) {
+    message("   ❌ AppleScript Execution Error: ", e$message)
+  })
 }
 
-input_file <- args[1]
-output_file <- args[2]
+# =============================================================================
+# MAIN
+# =============================================================================
 
-if (!file.exists(input_file)) {
-  stop(paste("Input file not found:", input_file))
+update_cv <- function() {
+  message("\n════════ TWO-STAGE CV GENERATOR ════════\n")
+  
+  # Naming convention: 
+  # DOCX is temporary/intermediate (_BADGED suffix)
+  # PDF is final (no suffix)
+  doc_name <- paste0(file_path_sans_ext(basename(CV_SOURCE_PATH)), "_BADGED.docx")
+  pdf_name <- paste0(file_path_sans_ext(basename(CV_SOURCE_PATH)), ".pdf")
+  
+  final_docx_path <- file.path(OUTPUT_FOLDER, doc_name)
+  final_pdf_path  <- file.path(OUTPUT_FOLDER, pdf_name)
+  
+  # 1. Stage 1: Generate DOCX
+  tryCatch({
+    create_badged_docx(CV_SOURCE_PATH, final_docx_path)
+  }, error = function(e) {
+    stop("Stage 1 Failed: ", e$message)
+  })
+  
+  # 2. Stage 2: Convert to PDF
+  if (file.exists(final_docx_path)) {
+    tryCatch({
+      convert_docx_to_pdf(final_docx_path, final_pdf_path)
+      
+      # 3. Stage 3: Cleanup
+      if (file.exists(final_pdf_path) && file.size(final_pdf_path) > 0) {
+        message("\n🧹 STAGE 3: Cleanup")
+        unlink(final_docx_path)
+        message("   🗑️  Deleted intermediate DOCX: ", final_docx_path)
+        message("   ✨ Final Output: ", final_pdf_path)
+      } else {
+        message("\n⚠️  PDF creation failed, keeping DOCX for debugging.")
+      }
+      
+    }, error = function(e) {
+      message("Stage 2 Failed: ", e$message)
+    })
+  } else {
+    message("❌ Skipping Stage 2: DOCX file was not found.")
+  }
+  
+  message("\n════════ DONE ════════")
 }
 
-process_cv_with_badges(input_file, output_file)
+update_cv()

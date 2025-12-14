@@ -1,0 +1,235 @@
+---
+title: "CV Citation Badge Generator"
+format: html
+engine: knitr
+---
+
+## 1. Setup & Configuration
+
+This section loads necessary libraries for both R and Python.
+
+**Prerequisites:**
+
+1.  **R Packages:** Run `install.packages(c("xml2", "httr", "jsonlite", "scholar", "reticulate", "tools"))` in your R console once.
+2.  **Python Package:** Open your terminal and run `pip install docx2pdf`.
+3.  **Microsoft Word:** Must be installed on your Mac.
+
+```{r setup, message=FALSE, warning=FALSE}
+# --- R Library Loading ---
+library(xml2)
+library(httr)
+library(jsonlite)
+library(scholar)
+library(tools)
+library(reticulate)
+
+# --- USER CONFIGURATION ---
+CV_SOURCE_PATH <- "/Users/seungjukim/Library/CloudStorage/GoogleDrive-seungju7@illinois.edu/My Drive/PERSONAL/CV/SK_cv.docx"
+SCHOLAR_ID     <- "JWNJV9UAAAAJ"
+OUTPUT_FOLDER  <- "_site/cv"
+
+# Ensure output directory exists
+if(!dir.exists(OUTPUT_FOLDER)) dir.create(OUTPUT_FOLDER, recursive = TRUE)
+
+# Define paths for intermediate DOCX and final PDF
+# We use absolute paths to ensure Python finds them easily
+INTERMEDIATE_DOCX <- normalizePath(file.path(getwd(), OUTPUT_FOLDER, paste0(file_path_sans_ext(basename(CV_SOURCE_PATH)), "_BADGED.docx")), mustWork = FALSE)
+FINAL_PDF         <- sub("\\.docx$", ".pdf", INTERMEDIATE_DOCX)
+
+message("Source: ", CV_SOURCE_PATH)
+message("Target: ", FINAL_PDF)
+````
+
+## 2\. Citation Data Fetching (R)
+
+We use R to fetch citation counts because `scholar` and `httr` are robust for this task.
+
+```{r fetch_data}
+# --- Helper Functions ---
+
+get_total_citations <- function(id) {
+  message("📊 Fetching Google Scholar total...")
+  tryCatch({
+    get_profile(id)$total_cites
+  }, error = function(e) { message("Error fetching Google Scholar: ", e$message); NA })
+}
+
+get_dimensions_citations <- function(doi) {
+  # Dimensions API lookup
+  url <- paste0("[https://metrics-api.dimensions.ai/doi/](https://metrics-api.dimensions.ai/doi/)", doi)
+  tryCatch({
+    res <- GET(url, add_headers(Accept = "application/json"), timeout(10))
+    if (status_code(res) == 200) {
+      fromJSON(content(res, "text", encoding = "UTF-8"))$times_cited
+    } else { NA }
+  }, error = function(e) { NA })
+}
+
+# --- Execution ---
+total_cites <- get_total_citations(SCHOLAR_ID)
+message("✅ Total Citations Found: ", total_cites)
+```
+
+## 3\. XML Processing (R)
+
+This chunk performs the "surgery" on the DOCX file to insert the badges. We use a **safe ID strategy** (starting at 50,000) to ensure we never clash with Word's internal IDs.
+
+```{r process_xml}
+# 1. Setup Temp Directory
+tmp_dir <- tempdir()
+unzip_dir <- file.path(tmp_dir, "docx_unzipped")
+
+# Clean previous runs
+if(dir.exists(unzip_dir)) unlink(unzip_dir, recursive = TRUE)
+dir.create(unzip_dir)
+
+# 2. Unzip the DOCX
+message("📝 Unzipping DOCX structure...")
+unzip(CV_SOURCE_PATH, exdir = unzip_dir)
+
+# 3. Read XML Files
+doc_xml_path  <- file.path(unzip_dir, "word", "document.xml")
+rels_xml_path <- file.path(unzip_dir, "word", "_rels", "document.xml.rels")
+
+doc_xml  <- read_xml(doc_xml_path)
+rels_xml <- read_xml(rels_xml_path)
+ns       <- xml_ns(doc_xml)
+
+# --- A. Update [[XX]] Placeholder ---
+xx_nodes <- xml_find_all(doc_xml, "//w:t[contains(text(), '[[XX]]')]", ns)
+if(length(xx_nodes) > 0) {
+  xml_text(xx_nodes) <- gsub("\\[\\[XX\\]\\]", total_cites, xml_text(xx_nodes))
+  message("✅ Updated [[XX]] placeholder -> ", total_cites)
+}
+
+# --- B. Insert Badges ---
+badge_nodes <- xml_find_all(doc_xml, "//w:t[contains(text(), '[[ADD BADGE]]')]", ns)
+message("🏷️  Found ", length(badge_nodes), " badge markers.")
+
+if(length(badge_nodes) > 0) {
+  # Start high to avoid collision with Word's internal rIds
+  next_id <- 50000 
+  
+  for(node in badge_nodes) {
+    # 1. Find DOI in the surrounding paragraph
+    run_node <- xml_parent(node)
+    p_node   <- xml_parent(run_node)
+    p_text   <- xml_text(p_node)
+    
+    # Robust DOI Regex
+    doi_match <- regmatches(p_text, gregexpr("10\\.\\d{4,}/[^\\s<>\\[\\]\"']+", p_text, perl=TRUE))[[1]]
+    doi <- if(length(doi_match) > 0) gsub("[.,;:]+$", "", doi_match[1]) else NA
+    
+    # 2. Clear the marker text immediately
+    xml_text(node) <- gsub("\\[\\[ADD BADGE\\]\\]", "", xml_text(node))
+    
+    if(!is.na(doi)) {
+      message("   🔎 DOI: ", doi)
+      cites <- get_dimensions_citations(doi)
+      rid   <- paste0("rId", next_id)
+      next_id <- next_id + 1
+      
+      # 3. Add Relationship (Link Target)
+      xml_add_child(rels_xml, "Relationship", 
+                    Id=rid, 
+                    Type="[http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink](http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink)",
+                    Target=paste0("[https://badge.dimensions.ai/details/doi/](https://badge.dimensions.ai/details/doi/)", doi),
+                    TargetMode="External")
+      
+      # 4. Create Badge XML Node
+      # We style manually (Blue/Underline) to avoid "Styles" corruption errors
+      cite_str <- if(is.na(cites)) "0" else as.character(cites)
+      
+      badge_fragment <- paste0(
+        '<w:hyperlink xmlns:w="[http://schemas.openxmlformats.org/wordprocessingml/2006/main](http://schemas.openxmlformats.org/wordprocessingml/2006/main)" ',
+        'xmlns:r="[http://schemas.openxmlformats.org/officeDocument/2006/relationships](http://schemas.openxmlformats.org/officeDocument/2006/relationships)" r:id="', rid, '">',
+        '<w:r>',
+          '<w:rPr>',
+            '<w:b/>',                   # Bold
+            '<w:color w:val="0563C1"/>', # Standard Blue Link Color
+            '<w:u w:val="single"/>',     # Underline
+          '</w:rPr>',
+          '<w:t xml:space="preserve">[Citation = ', cite_str, ']</w:t>',
+        '</w:r>',
+        '</w:hyperlink>'
+      )
+      
+      # 5. Insert Sibling
+      xml_add_sibling(run_node, read_xml(badge_fragment), .where="after")
+      message("      ✅ Badge added: ", cite_str)
+    } else {
+      message("      ⚠️ No DOI found for this marker.")
+    }
+  }
+}
+
+# --- C. Save & Zip ---
+message("💾 Saving XML modifications...")
+write_xml(doc_xml, doc_xml_path)
+write_xml(rels_xml, rels_xml_path)
+
+# Correct file ordering for Word: [Content_Types].xml MUST be first
+all_files <- list.files(unzip_dir, recursive = TRUE)
+if("[Content_Types].xml" %in% all_files) {
+  files_to_zip <- c("[Content_Types].xml", setdiff(all_files, "[Content_Types].xml"))
+} else {
+  files_to_zip <- all_files
+}
+
+# Create the intermediate DOCX
+if(file.exists(INTERMEDIATE_DOCX)) unlink(INTERMEDIATE_DOCX)
+
+old_wd <- getwd()
+setwd(unzip_dir)
+zip(INTERMEDIATE_DOCX, files_to_zip, flags = "-r9Xq")
+setwd(old_wd)
+
+message("📦 Intermediate DOCX ready: ", INTERMEDIATE_DOCX)
+```
+
+## 4\. PDF Conversion (Python)
+
+We use Python's `docx2pdf` library here. This is cleaner than R because `docx2pdf` handles the complex AppleScript identifiers (like the integer `17` for PDF format) internally, preventing the errors we saw earlier.
+
+```{python convert_pdf}
+import sys
+import os
+try:
+    from docx2pdf import convert
+except ImportError:
+    print("❌ Error: 'docx2pdf' not installed. Run 'pip install docx2pdf' in terminal.")
+    sys.exit(1)
+
+# Get paths passed from R
+input_docx = r.INTERMEDIATE_DOCX
+output_pdf = r.FINAL_PDF
+
+print(f"🔄 Starting PDF Conversion...")
+print(f"   Input:  {input_docx}")
+print(f"   Output: {output_pdf}")
+
+try:
+    # Convert directly
+    convert(input_docx, output_pdf)
+    print("✅ Conversion Successful!")
+except Exception as e:
+    print(f"❌ Conversion Failed: {e}")
+```
+
+## 5\. Verification
+
+Check if the file was actually created.
+
+```{r verify}
+if(file.exists(FINAL_PDF)) {
+  message("🎉 FINAL SUCCESS! Your CV is ready.")
+  message("📂 Location: ", FINAL_PDF)
+  message("📏 Size: ", file.info(FINAL_PDF)$size, " bytes")
+  
+  # Optional: Open the file automatically
+  system(paste("open", shQuote(FINAL_PDF)))
+} else {
+  warning("⚠️ PDF file was not created. Check Python chunk output above.")
+}
+```
+
