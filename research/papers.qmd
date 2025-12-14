@@ -49,7 +49,7 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<a href="https://bitli.pro/2Dduw_35aa4223" 
+<a href="https://bitli.pro/2EM1S_4e984e5c" 
    class="btn btn-success" 
    target="_blank"
    id="cv-download-button"
