@@ -89,6 +89,7 @@ get_citations_best <- function(doi) {
 }
 
 # Extract DOI from text
+# Extract DOI from text
 extract_doi <- function(text) {
   matches <- unlist(regmatches(text, gregexpr("10\\.\\d{4,}/[^\\s<>\\[\\]\"']+", text, perl = TRUE)))
   
@@ -100,9 +101,12 @@ extract_doi <- function(text) {
   
   preprint_prefixes <- c("10.31234", "10.1101", "10.2139")
   
-  publication_dois <- matches[!sapply(matches, function(d) {
-    any(sapply(preprint_prefixes, function(p) startsWith(d, p)))
-  })]
+  # Fixed: handle each match individually
+  is_preprint <- sapply(matches, function(d) {
+    any(startsWith(d, preprint_prefixes))
+  })
+  
+  publication_dois <- matches[!is_preprint]
   
   if (length(publication_dois) > 0) {
     return(publication_dois[1])
