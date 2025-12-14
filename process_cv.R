@@ -11,6 +11,7 @@ SCHOLAR_ID <- "JWNJV9UAAAAJ"
 # ============== FUNCTIONS ==============
 
 # Get total citations from Google Scholar via SerpAPI
+# Get total citations from Google Scholar via SerpAPI
 get_total_citations <- function(scholar_id) {
   api_key <- Sys.getenv("SERPAPI_KEY")
   
@@ -32,9 +33,28 @@ get_total_citations <- function(scholar_id) {
       data <- fromJSON(content(response, "text"))
       
       if ("cited_by" %in% names(data) && "table" %in% names(data$cited_by)) {
-        # Get "Citations" -> "All" value
-        citations_all <- data$cited_by$table$citations$all
-        return(as.numeric(citations_all))
+        # Get "Citations" -> "All" value - handle different response structures
+        table_data <- data$cited_by$table
+        
+        # It might be a data frame or list - extract carefully
+        if (is.data.frame(table_data)) {
+          # Look for citations row
+          citations_row <- table_data[table_data$h_index == "Citations" | 
+                                        rownames(table_data) == "Citations", ]
+          if (nrow(citations_row) > 0) {
+            return(as.numeric(citations_row$all[1]))
+          }
+        }
+        
+        # Alternative: direct access if it's a nested list
+        if (!is.null(table_data$citations) && !is.null(table_data$citations$all)) {
+          return(as.numeric(table_data$citations$all[1]))
+        }
+      }
+      
+      # Fallback: try cited_by total
+      if ("cited_by" %in% names(data) && "total" %in% names(data$cited_by)) {
+        return(as.numeric(data$cited_by$total[1]))
       }
     }
     return(NA)
