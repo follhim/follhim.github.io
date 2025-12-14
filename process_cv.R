@@ -312,18 +312,21 @@ process_cv_with_badges <- function(input_file, output_file, scholar_id = SCHOLAR
   message("")
   message("Creating output document...")
   
+  # Create output file with absolute path
+  output_file_abs <- normalizePath(output_file, mustWork = FALSE)
+  
   old_wd <- getwd()
   setwd(unzip_dir)
   
-  if (file.exists(output_file)) {
-    file.remove(output_file)
+  if (file.exists(output_file_abs)) {
+    file.remove(output_file_abs)
   }
   
-  zip(output_file, files = list.files(".", recursive = TRUE, all.files = TRUE), 
+  zip(output_file_abs, files = list.files(".", recursive = TRUE, all.files = TRUE), 
       flags = "-r9Xq")
   setwd(old_wd)
   
-  message(paste("✅ Output saved to:", output_file))
+  message(paste("✅ Output saved to:", output_file_abs))
   message("========================================")
 }
 

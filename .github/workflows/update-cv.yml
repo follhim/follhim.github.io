@@ -36,7 +36,12 @@ jobs:
       - name: Process CV with citation badges
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
-        run: Rscript process_cv.R cv_source.docx cv_with_badges.docx
+        run: |
+          Rscript process_cv.R cv_source.docx ${{ github.workspace }}/cv_with_badges.docx
+          echo "Checking output:"
+          ls -la ${{ github.workspace }}/cv_with_badges.docx || echo "Not in workspace"
+          ls -la cv_with_badges.docx || echo "Not in current dir"
+          ls -la /tmp/*.docx 2>/dev/null || echo "Not in tmp"
       
       - name: Install LibreOffice
         run: |
