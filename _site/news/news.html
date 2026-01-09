@@ -221,129 +221,86 @@ window.Quarto = {
 
 <div id="listing-news-listing" class="quarto-listing quarto-listing-container-custom">
 <style>
-/* News Section Styles - Always Dark Mode */
 .news-section {
   margin: 2rem 0;
   padding: 0;
 }
+
 .news-heading {
   font-size: 2rem;
   font-weight: 700;
-  color: #e2e8f0; /* Always light text */
+  color: #e2e8f0;
   margin-bottom: 1.5rem;
   text-align: center;
 }
+
 .news-container {
   max-width: 800px;
   margin: 0 auto;
 }
+
 .news-item {
-  display: flex;
-  flex-direction: column;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  background: #2d3748; /* Always dark background */
-  color: #e2e8f0; /* Always light text */
+  background: #2d3748;
+  color: #e2e8f0;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .news-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
-.news-item.news-hidden {
-  display: none;
-}
-.news-item.news-fade-in {
-  opacity: 0;
-  animation: newsFadeIn 0.4s ease forwards;
-}
-@keyframes newsFadeIn {
-  to {
-    opacity: 1;
-  }
-}
+
 .news-date {
   font-size: 0.9rem;
-  color: #a0aec0; /* Light gray for dark mode */
+  color: #a0aec0;
   font-weight: 600;
   text-align: center;
   margin-bottom: 1rem;
 }
-.news-content {
-  margin-bottom: 0.5rem;
-}
+
 .news-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #63b3ed; /* Light blue for dark mode */
-  margin-bottom: 0.5rem;
+  color: #63b3ed;
+  margin-bottom: 0.75rem;
   line-height: 1.4;
 }
-.news-subtitle {
+
+.news-description {
   font-size: 0.95rem;
-  color: #fff; /* White for subtitle */
-  line-height: 1.4;
-  text-align: left;
+  color: #fff;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  white-space: pre-line;
 }
-.news-actions {
+
+.news-link {
   text-align: right;
 }
-.read-more {
-  color: #68d391; /* Light green for dark mode */
+
+.news-link a {
+  color: #68d391;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s ease;
 }
-.read-more:hover {
-  color: #9ae6b4; /* Lighter green on hover */
+
+.news-link a:hover {
+  color: #9ae6b4;
 }
+
 .arrow {
   margin-left: 0.25rem;
   transition: transform 0.2s ease;
 }
-.read-more:hover .arrow {
-  transform: translateX(3px);
-}
 
-/* Show More/Less Button Styles */
-.news-controls {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-.news-show-more-btn, .news-show-less-btn {
-  background: #4a5568;
-  color: #e2e8f0;
-  border: 2px solid #63b3ed;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin: 0 0.5rem;
-}
-.news-show-more-btn:hover, .news-show-less-btn:hover {
-  background: #63b3ed;
-  color: #1a202c;
-  transform: translateY(-1px);
-}
-.news-show-more-btn:active, .news-show-less-btn:active {
-  transform: translateY(0);
-}
-.news-controls button {
-  display: none;
-}
-.news-controls button.news-visible {
-  display: inline-block;
-}
-.news-summary {
-  text-align: center;
-  color: #a0aec0;
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
+.news-link a:hover .arrow {
+  transform: translateX(3px);
 }
 </style>
 
@@ -351,98 +308,8 @@ window.Quarto = {
   <h3 class="news-heading anchored">Recent News</h3>
   <div class="news-container">
     
-    
-    
   </div>
 </div>
-
-<script>
-(function() {
-  let newsVisibleCount = 3;
-  const newsTotalItems = 0;
-  const newsItemsPerLoad = 5;
-
-  function newsShowMore() {
-    const hiddenItems = document.querySelectorAll('.news-item.news-hidden');
-    const itemsToShow = Math.min(newsItemsPerLoad, hiddenItems.length);
-    
-    for (let i = 0; i < itemsToShow; i++) {
-      const item = hiddenItems[i];
-      item.classList.remove('news-hidden');
-      item.classList.add('news-fade-in');
-      
-      setTimeout(() => {
-        item.classList.remove('news-fade-in');
-      }, 400);
-    }
-    
-    newsVisibleCount += itemsToShow;
-    newsUpdateControls();
-    
-    if (itemsToShow > 0) {
-      setTimeout(() => {
-        hiddenItems[0].scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      }, 200);
-    }
-  }
-
-  function newsShowLess() {
-    const allItems = document.querySelectorAll('.news-item');
-    
-    for (let i = 3; i < allItems.length; i++) {
-      allItems[i].classList.add('news-hidden');
-      allItems[i].classList.remove('news-fade-in');
-    }
-    
-    newsVisibleCount = 3;
-    newsUpdateControls();
-    
-    document.querySelector('.news-heading').scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'start' 
-    });
-  }
-
-  function newsUpdateControls() {
-    const showMoreBtn = document.querySelector('.news-show-more-btn');
-    const showLessBtn = document.querySelector('.news-show-less-btn');
-    const visibleCountSpan = document.getElementById('news-visible-count');
-    
-    const remainingItems = newsTotalItems - newsVisibleCount;
-    
-    if (remainingItems > 0 && showMoreBtn) {
-      showMoreBtn.classList.add('news-visible');
-      showMoreBtn.textContent = 'Show More News (' + remainingItems + ' more)';
-    } else if (showMoreBtn) {
-      showMoreBtn.classList.remove('news-visible');
-    }
-    
-    if (newsVisibleCount > 3 && showLessBtn) {
-      showLessBtn.classList.add('news-visible');
-    } else if (showLessBtn) {
-      showLessBtn.classList.remove('news-visible');
-    }
-    
-    if (visibleCountSpan) {
-      visibleCountSpan.textContent = newsVisibleCount;
-    }
-  }
-
-  // Make functions globally available
-  window.newsShowMore = newsShowMore;
-  window.newsShowLess = newsShowLess;
-
-  // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', newsUpdateControls);
-  } else {
-    newsUpdateControls();
-  }
-})();
-</script>
 <div class="listing-no-matching d-none">
 No matching items
 </div>

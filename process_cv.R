@@ -111,33 +111,39 @@ create_badged_docx <- function(input_file, output_docx_path) {
       
       if (!is.na(doi)) {
         cites <- get_citations_dimensions(doi) 
-        rid <- paste0("rId", next_id)
-        next_id <- next_id + 1
         
-        # A. Relationship
-        xml_add_child(rels_xml, "Relationship",
-                      Id = rid,
-                      Type = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
-                      Target = get_dimensions_url(doi),
-                      TargetMode = "External"
-        )
-        
-        # B. Badge Visuals
-        cite_txt <- ifelse(is.na(cites), "0", as.character(cites))
-        badge_str <- paste0(
-          '<w:hyperlink xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" ',
-          'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="', rid, '">',
-          '<w:r>',
-          '<w:rPr>',
-          '<w:color w:val="0563C1"/>', # Blue
-          '<w:u w:val="single"/>',      # Underline
-          '</w:rPr>',
-          '<w:t xml:space="preserve">(Citations = ', cite_txt, ')</w:t>',
-          '</w:r>',
-          '</w:hyperlink>'
-        )
-        xml_add_sibling(run_node, read_xml(badge_str), .where = "after")
-        message(sprintf("   ✅ Badge %d/%d added (rId: %s)", i, count, rid))
+        # Only add badge if citations > 0
+        if (!is.na(cites) && cites > 0) {
+          rid <- paste0("rId", next_id)
+          next_id <- next_id + 1
+          
+          # A. Relationship
+          xml_add_child(rels_xml, "Relationship",
+                        Id = rid,
+                        Type = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink",
+                        Target = get_dimensions_url(doi),
+                        TargetMode = "External"
+          )
+          
+          # B. Badge Visuals
+          cite_txt <- as.character(cites)
+          badge_str <- paste0(
+            '<w:hyperlink xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" ',
+            'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="', rid, '">',
+            '<w:r>',
+            '<w:rPr>',
+            '<w:color w:val="0563C1"/>', # Blue
+            '<w:u w:val="single"/>',      # Underline
+            '</w:rPr>',
+            '<w:t xml:space="preserve"> (Citations = ', cite_txt, ')</w:t>',
+            '</w:r>',
+            '</w:hyperlink>'
+          )
+          xml_add_sibling(run_node, read_xml(badge_str), .where = "after")
+          message(sprintf("   ✅ Badge %d/%d added (rId: %s, cites: %s)", i, count, rid, cite_txt))
+        } else {
+          message(sprintf("   ⏭️  Badge %d/%d skipped (0 or NA citations)", i, count))
+        }
       }
     }
   }

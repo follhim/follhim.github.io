@@ -104,7 +104,7 @@
   doi: "10.1177/0034673X251336459"
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1177/0034673X251336459"     # Publisher version (if not open access)
-  pdf: "https://www.researchgate.net/profile/Seungju-Kim-11/publication/392097181_Contrasting_Experiences_Gender_Disparities_in_Spirituality_Character_Strengths_Mental_Health_and_Social_Justice_Among_Next-Generation_Religious_Leaders/links/6838a26cc33afe388ac7f727/Contrasting-Experiences-Gender-Disparities-in-Spirituality-Character-Strengths-Mental-Health-and-Social-Justice-Among-Next-Generation-Religious-Leaders.pdf"   # Direct PDF link
+  pdf: "Shttps://www.researchgate.net/profile/Seungju-Kim-11/publication/392097181_Contrasting_Experiences_Gender_Disparities_in_Spirituality_Character_Strengths_Mental_Health_and_Social_Justice_Among_Next-Generation_Religious_Leaders/links/6838a26cc33afe388ac7f727/Contrasting-Experiences-Gender-Disparities-in-Spirituality-Character-Strengths-Mental-Health-and-Social-Justice-Among-Next-Generation-Religious-Leaders.pdf"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
   preprint: "https://doi.org/10.31234/osf.io/mqwg9"
@@ -191,7 +191,7 @@
   doi: "10.1080/00918369.2024.2378745"       # DOI without the https://doi.org/ prefix
   # pubopen: "https://journal.com/open/article123"  # Open access version
   pubclosed: "https://doi.org/10.1080/00918369.2024.2378745"     # Publisher version (if not open access)
-  pdf: "https://www.researchgate.net/profile/Seungju-Kim-11/publication/382396728_Mitigating_the_Impact_of_Religiously_Based_Family_Expectations_on_Depression_Among_Sexual_and_Gender_Minorities_The_Role_of_Authenticity/links/66a3d9bdc6e41359a84033c0/Mitigating-the-Impact-of-Religiously-Based-Family-Expectations-on-Depression-Among-Sexual-and-Gender-Minorities-The-Role-of-Authenticity.pdf?origin=publicationDetail&_sg%5B0%5D=HJFHGxujDEochZ8dq0GsgMMxVvSGKIceMJTBl2g65jrTwLDzukV7jwF9YNlhECgloNE-cbIw0mZ6OhDxzgJ-fw.YfekfXODhLPeroKYfkhnF4h38v89m8Ng9jNwEPxP9uvnsjInkj0h1DRQDTPp5vru7I37wUHWty7b-LQamZGe_g&_sg%5B1%5D=OuNP3NzEE-pGXSiDkbbksjyisqH1CekJ11kSzrJydh_hDL5IjHyhFwq11gVlilzZEMlLJxA3rzTtiYG4D5b4iTsLr9mtbMKHXnQp-yynYd26.YfekfXODhLPeroKYfkhnF4h38v89m8Ng9jNwEPxP9uvnsjInkj0h1DRQDTPp5vru7I37wUHWty7b-LQamZGe_g&_iepl=&_rtd=eyJjb250ZW50SW50ZW50IjoibWFpbkl0ZW0ifQ%3D%3D&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHVibGljYXRpb24iLCJwcmV2aW91c1BhZ2UiOiJwcm9maWxlIiwicG9zaXRpb24iOiJwYWdlSGVhZGVyIn19"
+  pdf: "https://www.researchgate.net/profile/Seungju-Kim-11/publication/382396728_Mitigating_the_Impact_of_Religiously_Based_Family_Expectations_on_Depression_Among_Sexual_and_Gender_Minorities_The_Role_of_Authenticity/links/66a3d9bdc6e41359a84033c0/Mitigating-the-Impact-of-Religiously-Based-Family-Expectations-on-Depression-Among-Sexual-and-Gender-Minorities-The-Role-of-Authenticity.pdf"
   viewonlinefree: "https://www.tandfonline.com/share/7Z7APPKPZ7S7WZSTUGYU?target=10.1080/00918369.2024.2378745"   # Direct PDF link
   # appendix: "https://journal.com/appendix123"     # Supplementary materials
   # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
