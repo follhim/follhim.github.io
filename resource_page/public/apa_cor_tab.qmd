@@ -10,6 +10,8 @@ author:
         department: Psychology
 title-block-banner: false
 format: html
+execute:
+  eval: false
 editor_options: 
   chunk_output_type: console
 categories:
@@ -34,6 +36,7 @@ Do not install the package from CRAN, as one of the key features is not availabl
 
 ```{r}
 install.packages("remotes")
+install.packages("rlang") 
 remotes::install_github("dstanley4/apaTables")
 library(apaTables)
 ```

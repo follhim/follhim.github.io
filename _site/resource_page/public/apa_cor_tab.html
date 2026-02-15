@@ -144,10 +144,6 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     <a class="nav-link" href="../../resource.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
-<span class="menu-text">About</span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -247,32 +243,17 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 <h1>Step 1: Install {apaTables}</h1>
 <p>Do not install the package from CRAN, as one of the key features is not available there.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>The following package(s) will be installed:
-- remotes [2.5.0]
-These packages will be installed into "~/R_Coding/Personal/follhim.github.io/renv/library/macos/R-4.4/aarch64-apple-darwin20".
-
-# Installing packages --------------------------------------------------------
-- Installing remotes ...                        OK [linked from cache]
-Successfully installed 1 package in 7.9 milliseconds.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"dstanley4/apaTables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Using GitHub PAT from the git credential store.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Skipping install of 'apaTables' from a github remote, the SHA1 (bd45cfd5) has not changed since last install.
-  Use `force = TRUE` to force installation</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rlang"</span>) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"dstanley4/apaTables"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apaTables)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-load-the-data" class="level1">
 <h1>Step 2: Load the data</h1>
 <p>To support maximum reproducibility, I will use the built-in dataset in R called <code>trees</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(trees)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -292,34 +273,7 @@ Tip
 <h1>Step 3: Create the correlation table</h1>
 <p>Final step!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.cor.table</span>(trees, <span class="at">filename =</span> <span class="st">"correlation_table.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-Table 0 
-
-Descriptive Statistics and Correlations
- 
-
-  Variable  N  M     SD    1          2         
-  1. Girth  31 13.25 3.14                       
-                                                
-                                                
-                                                
-  2. Height 31 76.00 6.37  .52**                
-                           [.20, .74]           
-                           p = .003             
-                                                
-  3. Volume 31 30.17 16.44 .97**      .60**     
-                           [.93, .98] [.31, .79]
-                           p &lt; .001   p &lt; .001  
-                                                
-
-Note. N = number of cases. M = mean. SD = standard deviation.
-Values in square brackets indicate the 95% confidence interval.
- * indicates p &lt; .05. ** indicates p &lt; .01.
- </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.cor.table</span>(trees, <span class="at">filename =</span> <span class="st">"correlation_table.doc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a correlation table in a Word document.</p>
 <p><img src="word_doc_cor.png" class="img-fluid"></p>
@@ -340,42 +294,15 @@ Warning
 <h2 class="anchored" data-anchor-id="modify-output.">Modify Output.</h2>
 <p>The full arguments are below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.cor.table</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  trees,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="cn">NA</span>, <span class="co"># (optional) a filename must end in .doc or .rtf</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.number =</span> <span class="dv">0</span>, <span class="co"># optional, you can add in Word.</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.conf.interval =</span> <span class="cn">TRUE</span>, <span class="co"># Optional, and most would make this FALSE.</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.sig.stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.pvalue =</span> <span class="cn">TRUE</span>, <span class="co"># unfortunately, it will only show ** &lt; .01, which is why you should keep this TRUE to add a third *** for &lt; .001.</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">landscape =</span> <span class="cn">TRUE</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-Table 0 
-
-Descriptive Statistics and Correlations
- 
-
-  Variable  N  M     SD    1          2         
-  1. Girth  31 13.25 3.14                       
-                                                
-                                                
-                                                
-  2. Height 31 76.00 6.37  .52**                
-                           [.20, .74]           
-                           p = .003             
-                                                
-  3. Volume 31 30.17 16.44 .97**      .60**     
-                           [.93, .98] [.31, .79]
-                           p &lt; .001   p &lt; .001  
-                                                
-
-Note. N = number of cases. M = mean. SD = standard deviation.
-Values in square brackets indicate the 95% confidence interval.
- * indicates p &lt; .05. ** indicates p &lt; .01.
- </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apa.cor.table</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  trees,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filename =</span> <span class="cn">NA</span>, <span class="co"># (optional) a filename must end in .doc or .rtf</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">table.number =</span> <span class="dv">0</span>, <span class="co"># optional, you can add in Word.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.conf.interval =</span> <span class="cn">TRUE</span>, <span class="co"># Optional, and most would make this FALSE.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.sig.stars =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show.pvalue =</span> <span class="cn">TRUE</span>, <span class="co"># unfortunately, it will only show ** &lt; .01, which is why you should keep this TRUE to add a third *** for &lt; .001.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">landscape =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -400,48 +327,8 @@ Important
 <section id="citations" class="level1">
 <h1>Citations</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>To cite R in publications use:
-
-  R Core Team (2024). _R: A Language and Environment for Statistical
-  Computing_. R Foundation for Statistical Computing, Vienna, Austria.
-  &lt;https://www.R-project.org/&gt;.
-
-A BibTeX entry for LaTeX users is
-
-  @Manual{,
-    title = {R: A Language and Environment for Statistical Computing},
-    author = {{R Core Team}},
-    organization = {R Foundation for Statistical Computing},
-    address = {Vienna, Austria},
-    year = {2024},
-    url = {https://www.R-project.org/},
-  }
-
-We have invested a lot of time and effort in creating R, please cite it
-when using it for data analysis. See also 'citation("pkgname")' for
-citing R packages.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"apaTables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>To cite package 'apaTables' in publications use:
-
-  Stanley D (2023). _apaTables: Create American Psychological
-  Association (APA) Style Tables_. R package version 3.0.0, commit
-  bd45cfd51891138e805f0fc169c0978c4c6cdfce,
-  &lt;https://github.com/dstanley4/apaTables&gt;.
-
-A BibTeX entry for LaTeX users is
-
-  @Manual{,
-    title = {apaTables: Create American Psychological Association (APA) Style Tables},
-    author = {David Stanley},
-    year = {2023},
-    note = {R package version 3.0.0, commit bd45cfd51891138e805f0fc169c0978c4c6cdfce},
-    url = {https://github.com/dstanley4/apaTables},
-  }</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">"apaTables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
