@@ -6,7 +6,6 @@
 suppressPackageStartupMessages({
   library(httr)
   library(jsonlite)
-  library(scholar)
   library(xml2)
   library(tools) 
 })
@@ -22,12 +21,46 @@ OUTPUT_FOLDER <- "_site/cv"
 # =============================================================================
 
 get_total_citations <- function(scholar_id) {
-  message("📊 Fetching total citations (Google Scholar)")
+  message("📊 Fetching total citations (SerpApi)")
   tryCatch({
-    profile <- get_profile(scholar_id)
-    message("    ✅ Total: ", profile$total_cites)
-    profile$total_cites
-  }, error = function(e) NA)
+    api_key <- Sys.getenv("SERPAPI_KEY")
+    if (api_key == "") stop("SERPAPI_KEY not found in environment variables")
+    
+    res <- GET("https://serpapi.com/search.json", query = list(
+      engine = "google_scholar_author",
+      author_id = scholar_id,
+      api_key = api_key
+    ))
+    
+    if (status_code(res) == 200) {
+      data <- fromJSON(content(res, "text", encoding = "UTF-8"))
+      
+      # Structure: cited_by$table is a data frame where $citations is 
+      # itself a nested data frame with $all and $since_2021 columns.
+      # Row 1 = citations, Row 2 = h_index, Row 3 = i10_index
+      # We need: data$cited_by$table$citations$all[1]
+      total <- data$cited_by$table$citations$all[1]
+      
+      # Debug output
+      message("    🔍 Raw total value: ", total)
+      message("    🔍 Class: ", class(total))
+      
+      if (!is.null(total) && !is.na(total)) {
+        total <- as.integer(total)
+        message("    ✅ Total citations: ", total)
+        return(total)
+      } else {
+        message("    ⚠️ Could not extract total from response")
+        return(NA)
+      }
+    } else {
+      message("    ⚠️ API Status: ", status_code(res))
+      return(NA)
+    }
+  }, error = function(e) {
+    message("    ❌ Error: ", e$message)
+    NA
+  })
 }
 
 get_citations_dimensions <- function(doi) {
@@ -89,10 +122,14 @@ create_badged_docx <- function(input_file, output_docx_path) {
   xx_nodes <- xml_find_all(doc_xml, "//w:t[contains(text(), '[[XX]]')]", ns)
   if (length(xx_nodes) > 0) {
     total <- get_total_citations(SCHOLAR_ID) 
-    for (node in xx_nodes) {
-      xml_text(node) <- gsub("\\[\\[XX\\]\\]", total, xml_text(node))
+    if (!is.na(total)) {
+      for (node in xx_nodes) {
+        xml_text(node) <- gsub("\\[\\[XX\\]\\]", as.character(total), xml_text(node))
+      }
+      message("   ✅ Updated [[XX]] -> ", total)
+    } else {
+      message("   ⚠️ Skipping [[XX]] replacement — could not fetch total citations")
     }
-    message("   ✅ Updated [[XX]] -> ", total)
   }
   
   # --- 4. HANDLE BADGES ---
