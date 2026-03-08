@@ -135,7 +135,20 @@ pacman::p_load(httr, jsonlite, tidyverse, ggiraph, patchwork, here)
 
 scholar_id <- "JWNJV9UAAAAJ"
 
-# SerpApi functions
+# ── Cache helpers ──────────────────────────────────────────────────────────────
+cache_dir <- here("_data_cache")
+if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
+
+save_cache <- function(data, name) {
+  saveRDS(data, file.path(cache_dir, paste0(name, ".rds")))
+}
+
+load_cache <- function(name) {
+  path <- file.path(cache_dir, paste0(name, ".rds"))
+  if (file.exists(path)) readRDS(path) else NULL
+}
+
+# ── SerpApi functions ──────────────────────────────────────────────────────────
 get_citation_history_serpapi <- function(scholar_id, api_key) {
   url <- "https://serpapi.com/search.json"
   
@@ -148,14 +161,11 @@ get_citation_history_serpapi <- function(scholar_id, api_key) {
   if (status_code(response) == 200) {
     data <- fromJSON(content(response, "text"))
     
-    # Extract citation graph data - it's already a data frame!
     if ("cited_by" %in% names(data) && "graph" %in% names(data$cited_by)) {
       citation_graph <- data$cited_by$graph
-      
-      # The graph has 'year' and 'citations' columns (not 'cited_by')
       citation_data <- data.frame(
         year = as.numeric(citation_graph$year),
-        cites = as.numeric(citation_graph$citations)  # Fixed: was 'cited_by', now 'citations'
+        cites = as.numeric(citation_graph$citations)
       )
       return(citation_data)
     }
@@ -166,7 +176,6 @@ get_citation_history_serpapi <- function(scholar_id, api_key) {
 get_publications_serpapi <- function(scholar_id, api_key) {
   url <- "https://serpapi.com/search.json"
   
-  # Get the publications list
   response <- GET(url, query = list(
     engine = "google_scholar_author",
     author_id = scholar_id,
@@ -181,12 +190,10 @@ get_publications_serpapi <- function(scholar_id, api_key) {
     if ("articles" %in% names(data)) {
       publications <- data$articles
       
-      # Filter and count by year (no OSF filtering since no publication_info field)
       if (nrow(publications) > 0 && "year" %in% names(publications)) {
         publication_data <- publications %>%
-          filter(!is.na(year)) %>%  # Remove rows with missing years
-          # Note: Removed OSF filtering since publication_info field doesn't exist in this response
-          count(year, name = "publications")  # Count publications per year
+          filter(!is.na(year)) %>%
+          count(year, name = "publications")
         
         return(publication_data)
       }
@@ -195,40 +202,62 @@ get_publications_serpapi <- function(scholar_id, api_key) {
   return(NULL)
 }
 
-# Get API key from environment variable
+# ── Get API key ────────────────────────────────────────────────────────────────
 api_key <- Sys.getenv("SERPAPI_KEY")
 
 if (api_key == "") {
   stop("SERPAPI_KEY not found in environment variables. Please set your SerpApi key.")
 }
 
-# Get citation data from API
+# ── Fetch citation data with cache fallback ────────────────────────────────────
 citation_data <- tryCatch({
-  get_citation_history_serpapi(scholar_id, api_key)
+  result <- get_citation_history_serpapi(scholar_id, api_key)
+  if (!is.null(result)) {
+    save_cache(result, "citation_data")
+    message("Citation data fetched from SerpApi and cache updated.")
+  }
+  result
 }, error = function(e) {
-  stop(paste("Error fetching citation data via SerpApi:", e$message))
+  message("Error fetching citation data: ", e$message)
+  NULL
 })
 
 if (is.null(citation_data)) {
-  stop("No citation data returned from SerpApi")
+  citation_data <- load_cache("citation_data")
+  if (!is.null(citation_data)) {
+    message("SerpApi returned no citation data — using cached data.")
+  } else {
+    stop("No citation data available and no cache found. Cannot render page.")
+  }
 }
 
-# Get publication data from API
+# ── Fetch publication data with cache fallback ─────────────────────────────────
 publication_data <- tryCatch({
-  get_publications_serpapi(scholar_id, api_key)
+  result <- get_publications_serpapi(scholar_id, api_key)
+  if (!is.null(result)) {
+    save_cache(result, "publication_data")
+    message("Publication data fetched from SerpApi and cache updated.")
+  }
+  result
 }, error = function(e) {
-  stop(paste("Error fetching publication data via SerpApi:", e$message))
+  message("Error fetching publication data: ", e$message)
+  NULL
 })
 
 if (is.null(publication_data)) {
-  stop("No publication data returned from SerpApi")
+  publication_data <- load_cache("publication_data")
+  if (!is.null(publication_data)) {
+    message("SerpApi returned no publication data — using cached data.")
+  } else {
+    stop("No publication data available and no cache found. Cannot render page.")
+  }
 }
 
-# Calculate totals
+# ── Calculate totals ───────────────────────────────────────────────────────────
 total_citations <- sum(citation_data$cites)
 total_publications <- sum(publication_data$publications)
 
-# Create citations plot (horizontal)
+# ── Citations plot ─────────────────────────────────────────────────────────────
 citations_plot <- citation_data %>%
   ggplot(aes(x = cites, y = as.factor(year))) +
   geom_col_interactive(
@@ -255,7 +284,7 @@ citations_plot <- citation_data %>%
     panel.grid.minor = element_blank()
   )
 
-# Create publications plot (horizontal)
+# ── Publications plot ──────────────────────────────────────────────────────────
 publications_plot <- publication_data %>%
   ggplot(aes(x = publications, y = as.factor(year))) +
   geom_col_interactive(
@@ -282,7 +311,7 @@ publications_plot <- publication_data %>%
     panel.grid.minor = element_blank()
   )
 
-# Combine plots side by side
+# ── Combined plot ──────────────────────────────────────────────────────────────
 combined_plot <- citations_plot + publications_plot + 
   plot_layout(ncol = 2) +
   plot_annotation(
@@ -293,7 +322,6 @@ combined_plot <- citations_plot + publications_plot +
     )
   )
 
-# Create the girafe object with Helvetica font
 interactive_plot <- girafe(
   ggobj = combined_plot,
   width_svg = 12,
