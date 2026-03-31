@@ -1,4 +1,29 @@
 ---
+
+- title: "Is Religious Coping a Protective Factor, and for Whom? A Moderation and Subgroup Analysis on Loneliness and Suicide Attempts Among LGBTQ+ Adults Raised as Latter-Day Saints"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "**Kim, S.**"
+    - "Lefevor, G.T."
+    - "Miller, C.K."
+    - "& Jankowski, P.J."
+  year: 2026                        # Publication year (for published papers)
+  journal: "Suicide and Life-Threatening Behavior"  # Journal name
+  doi: "10.1111/sltb.70088"
+  pubopen: "https://doi.org/10.1111/sltb.70088"  # Open access version
+  # pubclosed: "https://doi.org/10.31234/osf.io/rc8sh"     # Publisher version (if not open access)
+  # pdf: "https://yoursite.com/papers/sample.pdf"   # Direct PDF link
+  # appendix: "https://journal.com/appendix123"     # Supplementary materials
+  # dataverse: "https://dataverse.harvard.edu/dataset.xhtml?id=123"  # Dataverse repository
+  # preprint: "https://doi.org/10.31234/osf.io/rc8sh_v3"
+  # osf: "https://osf.io/epdvu"    # OSF project
+  # github: "https://github.com/username/project"   # GitHub repository
+  # prereg: "https://osf.io/vy2bc"  # Preregistration
+  # website: "https://project-website.com"  # Project website
+  # errata: "https://journal.com/errata123"  # Errata/correction
+  # note: "Winner of Best Paper Award 2024"  # Additional note (displayed at bottom)
+
+
 - title: "Sexual Attraction and Perceived Relational Insecurity in Sexual Minorities of Mixed Orientation Marriages: Is Religiousness a Risk or Protective Factor?"
   type: "Published"                  # Use "Published" for published papers
   author:                           # Can be array or string
@@ -6,7 +31,7 @@
     - "Yarhouse, M.A."
     - "Zaporozhets, O."
     - "Matthews, E."
-    - "Matlack, J."
+    - "& Matlack, J."
   year: 2025                        # Publication year (for published papers)
   journal: "Contemporary Family Therapy"  # Journal name
   doi: "10.1007/s10591-025-09762-y"
@@ -27,7 +52,7 @@
   type: "Published"                  # Use "Published" for published papers
   author:                           # Can be array or string
     - "**Kim, S.**"
-    - "Xu, W."
+    - "& Xu, W."
   year: 2025                        # Publication year (for published papers)
   journal: "Sexuality Research and Social Policy"  # Journal name
   doi: "10.1007/s13178-025-01192-7"
@@ -50,7 +75,7 @@
     - "**Kim, S.**"
     - "Jankowski, P.J."
     - "Wang, D.C."
-    - "Hawkins, H.A."
+    - "& Hawkins, H.A."
   year: 2025                        # Publication year (for published papers)
   journal: "Pastoral Psychology"  # Journal name
   doi: "10.1007/s11089-025-01241-3"
@@ -74,7 +99,7 @@
     - "Nguyễn, D.M."
     - "Blackburn, A.M."
     - "La R."
-    - "Kim, S."
+    - "& Kim, S."
   year: 2025                        # Publication year (for published papers)
   journal: "American Journal of Community Psychology"  # Journal name
   doi: "doi.org/10.1002/ajcp.70002"
@@ -98,7 +123,7 @@
     - "Wang, D. C."
     - "Gin, D.H."
     - "Deasy, J.A."
-    - "Sandage, S."
+    - "& Sandage, S."
   year: 2025                        # Publication year (for published papers)
   journal: "Review of Religious Research"  # Journal name
   doi: "10.1177/0034673X251336459"
@@ -127,7 +152,7 @@
     - "Littleton, H." 
     - "Gardella, J."
     - "Farquhar-Leicester, A."
-    - "Chavez, A."                   # First author                   # Second author
+    - "& Chavez, A."                   # First author                   # Second author
   year: 2025                        # Publication year (for published papers)
   journal: "Journal of Interpersonal Violence"  # Journal name
   doi: "10.1177/08862605251329471"       # DOI without the https://doi.org/ prefix
@@ -164,7 +189,7 @@
     - Girard, J. 
     - Higgins, M. 
     - Hopfauf, S.
-    - Neighbors, C.                  
+    - "& Neighbors, C."                 
   year: 2025                        # Publication year (for published papers)
   journal: "Journal of Studies on Alcohol and Drugs"  # Journal name
   doi: "10.15288/jsad.24-00007"       # DOI without the https://doi.org/ prefix
@@ -185,7 +210,7 @@
   author:                           # Can be array or string
     - "**Kim, S.**"
     - "Lefevor, G.T."
-    - "Skidmore, S.J."                
+    - "& Skidmore, S.J."                
   year: 2025                        # Publication year (for published papers)
   journal: "Journal of Homosexuality"  # Journal name
   doi: "10.1080/00918369.2024.2378745"       # DOI without the https://doi.org/ prefix
@@ -209,7 +234,7 @@
   author:                           # Can be array or string
     - "Lefevor, G.T."
     - "**Kim, S.**"
-    - "Perez-Figueroa, A.M."
+    - "& Perez-Figueroa, A.M."
                    # First author                   # Second author
   year: 2024                        # Publication year (for published papers)
   journal: "Psychology of Sexual Orientation and Gender Diversity"  # Journal name
