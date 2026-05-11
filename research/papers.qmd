@@ -8,7 +8,11 @@ author:
       - name: University of Illinois, Urbana-Champaign
         department: Psychology
 title-block-banner: false
-format: html
+format:
+  html:
+    include-in-header:
+      - text: |
+          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 comments: false
 description: "" 
 listing:
@@ -20,18 +24,14 @@ listing:
     filter-ui: false
     sort: "date desc"
     sort-ui: false
-    #categories: true  
   - id: preprints
     include: 
-      type: "Preprint"    # Changed from lowercase "preprint" to "Preprint" to match YAML
+      type: "Preprint"
     contents: papers.yaml
     template: papers.ejs
-    #filter-ui: true
     sort: "date desc" 
     sort-ui: false
-    #categories: true
 toc: true    
-#page-layout: full
 editor_options: 
   chunk_output_type: console
 ---
@@ -49,83 +49,38 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<a href="https://bitli.pro/2KRCT_c18bc349" 
-   class="btn btn-success" 
-   target="_blank"
-   id="cv-download-button"
-   data-tracking="cv-download">
-    <i class="bi bi-file-earmark-pdf"></i> Download CV
-</a>
-<span id="count" class="badge bg-primary ms-2">0</span>
+<button id="test-worker" class="btn btn-secondary btn-sm" style="margin-top:0.5rem;">
+  🧪 Test Worker connection
+</button>
+<div id="test-result" style="margin-top:0.5rem; font-size:0.85rem;"></div>
 
-
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-  import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
-
-  document.addEventListener('DOMContentLoaded', function() {
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "{{ FB_API }}",
-      authDomain: "cv-download-40a41.firebaseapp.com",
-      projectId: "cv-download-40a41",
-      storageBucket: "cv-download-40a41.firebasestorage.app",
-      messagingSenderId: "842134969852",
-      appId: "{{ APPID }}",
-      measurementId: "G-7149VRMDP5"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const countRef = doc(db, "counts", "cvDownload"); // Updated to match your new structure
-
-    // Function to increment the CV download count
-    async function incrementCount() {
-      console.log("Increment button clicked");
-      try {
-        await runTransaction(db, async (transaction) => {
-          const countDoc = await transaction.get(countRef);
-          if (!countDoc.exists()) {
-            console.log("Document does not exist. Creating new document.");
-            transaction.set(countRef, { counts: 1 }); // Changed count to counts to match your field name
-          } else {
-            const newCount = countDoc.data().counts + 1; // Changed count to counts
-            console.log("Document exists. Updating count to:", newCount);
-            transaction.update(countRef, { counts: newCount }); // Changed count to counts
-          }
-        });
-        console.log("Transaction successful!");
-        getCount();
-      } catch (error) {
-        console.error("Transaction failed:", error);
-      }
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('test-worker').addEventListener('click', async function() {
+    const resultDiv = document.getElementById('test-result');
+    resultDiv.innerText = 'Testing...';
+    try {
+      const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: 'test-fake-token' })
+      });
+      const data = await response.json();
+      resultDiv.innerText = '✅ Worker reachable. Response: ' + JSON.stringify(data);
+      resultDiv.style.color = 'lightgreen';
+    } catch (err) {
+      resultDiv.innerText = '❌ Worker NOT reachable: ' + err.message;
+      resultDiv.style.color = 'salmon';
     }
-
-    // Function to get the current CV download count
-    async function getCount() {
-      console.log("Fetching count from Firestore");
-      try {
-        const countDoc = await getDoc(countRef);
-        if (countDoc.exists()) {
-          console.log("Count document exists:", countDoc.data());
-          document.getElementById("count").innerText = countDoc.data().counts; // Changed count to counts
-        } else {
-          console.log("Count document does not exist");
-          document.getElementById("count").innerText = "0";
-        }
-      } catch (error) {
-        console.error("Error getting document:", error);
-      }
-    }
-
-    // Load the current count when the page loads
-    getCount();
-
-    // Attach event listener to the CV download button
-    document.getElementById('cv-download-button').addEventListener('click', incrementCount);
   });
+});
 </script>
+```{r}
+```
+
+
+```{r}
+```
 
 ```{r}
 #| echo: FALSE
