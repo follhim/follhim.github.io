@@ -47,6 +47,14 @@ register_gfont("Inter")
 </a>
 <span id="count" class="badge bg-primary ms-2">0</span>
 
+<!-- Hidden download link -->
+<a id="cv-download-link" 
+   href="https://bitli.pro/2KRCT_c18bc349" 
+   download 
+   target="_blank"
+   style="display:none;">
+</a>
+
 <div id="turnstile-container" style="display:none; margin-top:0.75rem;">
   <div id="turnstile-widget"></div>
   <small style="color: #aaa; font-size: 0.75rem; display:block; margin-top:0.25rem;">
@@ -102,6 +110,14 @@ register_gfont("Inter")
     getCount();
 
     window.onTurnstileSuccess = async function(token) {
+      // Trigger download immediately before any async ops
+      // Using hidden <a> click works better on Safari/iPhone than window.open
+      document.getElementById('cv-download-link').click();
+
+      // Hide widget immediately
+      document.getElementById('turnstile-container').style.display = 'none';
+
+      // Then do async stuff after
       try {
         const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
           method: 'POST',
@@ -114,9 +130,6 @@ register_gfont("Inter")
         console.error('Worker error:', err);
       }
 
-      // Proceed regardless — widget completion is the gate
-      document.getElementById('turnstile-container').style.display = 'none';
-      window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
       await incrementCount();
     };
 
