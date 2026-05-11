@@ -10,9 +10,7 @@ author:
 title-block-banner: false
 format:
   html:
-    include-in-header:
-      - text: |
-          <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+    include-in-header: []
 comments: false
 description: "" 
 listing:
@@ -113,7 +111,6 @@ register_gfont("Inter")
           body: JSON.stringify({ token })
         });
         const result = await response.json();
-
         if (result.success) {
           document.getElementById('turnstile-container').style.display = 'none';
           window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
@@ -130,11 +127,32 @@ register_gfont("Inter")
     };
 
     let widgetRendered = false;
+    let turnstileLoaded = false;
 
-    document.getElementById('cv-download-trigger').addEventListener('click', function() {
-      const container = document.getElementById('turnstile-container');
-      container.style.display = 'block';
+    function loadTurnstileAndRender() {
+      if (turnstileLoaded) {
+        // Already loaded, just render
+        if (!widgetRendered) {
+          turnstile.render('#turnstile-widget', {
+            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
+            callback: window.onTurnstileSuccess,
+            theme: 'dark'
+          });
+          widgetRendered = true;
+        }
+        return;
+      }
 
+      // Dynamically load Turnstile script
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
+      script.async = true;
+      document.head.appendChild(script);
+      turnstileLoaded = true;
+    }
+
+    // Called by Turnstile once the script is fully ready
+    window.onTurnstileLoad = function() {
       if (!widgetRendered) {
         turnstile.render('#turnstile-widget', {
           sitekey: '0x4AAAAAADNayBUca6pR_5fG',
@@ -143,6 +161,11 @@ register_gfont("Inter")
         });
         widgetRendered = true;
       }
+    };
+
+    document.getElementById('cv-download-trigger').addEventListener('click', function() {
+      document.getElementById('turnstile-container').style.display = 'block';
+      loadTurnstileAndRender();
     });
   });
 </script>
