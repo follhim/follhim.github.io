@@ -8,9 +8,7 @@ author:
       - name: University of Illinois, Urbana-Champaign
         department: Psychology
 title-block-banner: false
-format:
-  html:
-    include-in-header: []
+format: html
 comments: false
 description: "" 
 listing:
@@ -104,54 +102,16 @@ register_gfont("Inter")
     getCount();
 
     window.onTurnstileSuccess = async function(token) {
-      try {
-        const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token })
-        });
-        const result = await response.json();
-        if (result.success) {
-          document.getElementById('turnstile-container').style.display = 'none';
-          window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
-          await incrementCount();
-        } else {
-          alert('Verification failed. Please try again.');
-          turnstile.reset('#turnstile-widget');
-        }
-      } catch (err) {
-        console.error('Worker error:', err);
-        alert('Something went wrong. Please try again.');
-        turnstile.reset('#turnstile-widget');
-      }
+      console.log('Token received:', token);
+      // Temporarily bypass Worker verification
+      document.getElementById('turnstile-container').style.display = 'none';
+      window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
+      await incrementCount();
     };
 
     let widgetRendered = false;
     let turnstileLoaded = false;
 
-    function loadTurnstileAndRender() {
-      if (turnstileLoaded) {
-        // Already loaded, just render
-        if (!widgetRendered) {
-          turnstile.render('#turnstile-widget', {
-            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
-            callback: window.onTurnstileSuccess,
-            theme: 'dark'
-          });
-          widgetRendered = true;
-        }
-        return;
-      }
-
-      // Dynamically load Turnstile script
-      const script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
-      script.async = true;
-      document.head.appendChild(script);
-      turnstileLoaded = true;
-    }
-
-    // Called by Turnstile once the script is fully ready
     window.onTurnstileLoad = function() {
       if (!widgetRendered) {
         turnstile.render('#turnstile-widget', {
@@ -162,6 +122,25 @@ register_gfont("Inter")
         widgetRendered = true;
       }
     };
+
+    function loadTurnstileAndRender() {
+      if (turnstileLoaded) {
+        if (!widgetRendered) {
+          turnstile.render('#turnstile-widget', {
+            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
+            callback: window.onTurnstileSuccess,
+            theme: 'dark'
+          });
+          widgetRendered = true;
+        }
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
+      script.async = true;
+      document.head.appendChild(script);
+      turnstileLoaded = true;
+    }
 
     document.getElementById('cv-download-trigger').addEventListener('click', function() {
       document.getElementById('turnstile-container').style.display = 'block';
