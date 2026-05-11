@@ -102,8 +102,19 @@ register_gfont("Inter")
     getCount();
 
     window.onTurnstileSuccess = async function(token) {
-      console.log('Token received:', token);
-      // Temporarily bypass Worker verification
+      try {
+        const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const result = await response.json();
+        console.log('Worker result:', result);
+      } catch (err) {
+        console.error('Worker error:', err);
+      }
+
+      // Proceed regardless — widget completion is the gate
       document.getElementById('turnstile-container').style.display = 'none';
       window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
       await incrementCount();
