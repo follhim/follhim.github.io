@@ -49,38 +49,111 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<button id="test-worker" class="btn btn-secondary btn-sm" style="margin-top:0.5rem;">
-  🧪 Test Worker connection
-</button>
-<div id="test-result" style="margin-top:0.5rem; font-size:0.85rem;"></div>
+<a class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;">
+    <i class="bi bi-file-earmark-pdf"></i> Download CV
+</a>
+<span id="count" class="badge bg-primary ms-2">0</span>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('test-worker').addEventListener('click', async function() {
-    const resultDiv = document.getElementById('test-result');
-    resultDiv.innerText = 'Testing...';
-    try {
-      const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: 'test-fake-token' })
-      });
-      const data = await response.json();
-      resultDiv.innerText = '✅ Worker reachable. Response: ' + JSON.stringify(data);
-      resultDiv.style.color = 'lightgreen';
-    } catch (err) {
-      resultDiv.innerText = '❌ Worker NOT reachable: ' + err.message;
-      resultDiv.style.color = 'salmon';
+<div id="turnstile-container" style="display:none; margin-top:0.75rem;">
+  <div id="turnstile-widget"></div>
+  <small style="color: #aaa; font-size: 0.75rem; display:block; margin-top:0.25rem;">
+    Complete the verification to download
+  </small>
+</div>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const firebaseConfig = {
+      apiKey: "{{ FB_API }}",
+      authDomain: "cv-download-40a41.firebaseapp.com",
+      projectId: "cv-download-40a41",
+      storageBucket: "cv-download-40a41.firebasestorage.app",
+      messagingSenderId: "842134969852",
+      appId: "{{ APPID }}",
+      measurementId: "G-7149VRMDP5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const countRef = doc(db, "counts", "cvDownload");
+
+    async function incrementCount() {
+      try {
+        await runTransaction(db, async (transaction) => {
+          const countDoc = await transaction.get(countRef);
+          if (!countDoc.exists()) {
+            transaction.set(countRef, { counts: 1 });
+          } else {
+            transaction.update(countRef, { counts: countDoc.data().counts + 1 });
+          }
+        });
+        getCount();
+      } catch (error) {
+        console.error("Transaction failed:", error);
+      }
     }
+
+    async function getCount() {
+      try {
+        const countDoc = await getDoc(countRef);
+        document.getElementById("count").innerText =
+          countDoc.exists() ? countDoc.data().counts : "0";
+      } catch (error) {
+        console.error("Error getting document:", error);
+      }
+    }
+
+    getCount();
+
+    window.onTurnstileSuccess = async function(token) {
+      try {
+        const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token })
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          document.getElementById('turnstile-container').style.display = 'none';
+          window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
+          await incrementCount();
+        } else {
+          alert('Verification failed. Please try again.');
+          turnstile.reset('#turnstile-widget');
+        }
+      } catch (err) {
+        console.error('Worker error:', err);
+        alert('Something went wrong. Please try again.');
+        turnstile.reset('#turnstile-widget');
+      }
+    };
+
+    let widgetRendered = false;
+
+    document.getElementById('cv-download-trigger').addEventListener('click', function() {
+      const container = document.getElementById('turnstile-container');
+      container.style.display = 'block';
+
+      // Only render the widget once
+      if (!widgetRendered) {
+        turnstile.ready(function() {
+          turnstile.render('#turnstile-widget', {
+            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
+            callback: window.onTurnstileSuccess,
+            theme: 'dark'
+          });
+          widgetRendered = true;
+        });
+      }
+    });
   });
-});
 </script>
-```{r}
-```
-
-
-```{r}
-```
 
 ```{r}
 #| echo: FALSE
