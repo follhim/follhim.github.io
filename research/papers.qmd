@@ -41,11 +41,8 @@ editor_options:
 #| message: FALSE
 #| warning: FALSE
 #| include: FALSE
-# Required packages
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, ggiraph, patchwork, gdtools, gfonts)
-
-# Register a web font for better consistency
 register_gfont("Inter")
 ```
 
@@ -60,8 +57,6 @@ register_gfont("Inter")
     Complete the verification to download
   </small>
 </div>
-
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
@@ -140,16 +135,13 @@ register_gfont("Inter")
       const container = document.getElementById('turnstile-container');
       container.style.display = 'block';
 
-      // Only render the widget once
       if (!widgetRendered) {
-        turnstile.ready(function() {
-          turnstile.render('#turnstile-widget', {
-            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
-            callback: window.onTurnstileSuccess,
-            theme: 'dark'
-          });
-          widgetRendered = true;
+        turnstile.render('#turnstile-widget', {
+          sitekey: '0x4AAAAAADNayBUca6pR_5fG',
+          callback: window.onTurnstileSuccess,
+          theme: 'dark'
         });
+        widgetRendered = true;
       }
     });
   });
@@ -163,7 +155,6 @@ pacman::p_load(httr, jsonlite, tidyverse, ggiraph, patchwork, here)
 
 scholar_id <- "JWNJV9UAAAAJ"
 
-# ── Cache helpers ──────────────────────────────────────────────────────────────
 cache_dir <- here("_data_cache")
 if (!dir.exists(cache_dir)) dir.create(cache_dir, recursive = TRUE)
 
@@ -176,26 +167,21 @@ load_cache <- function(name) {
   if (file.exists(path)) readRDS(path) else NULL
 }
 
-# ── SerpApi functions ──────────────────────────────────────────────────────────
 get_citation_history_serpapi <- function(scholar_id, api_key) {
   url <- "https://serpapi.com/search.json"
-  
   response <- GET(url, query = list(
     engine = "google_scholar_author",
     author_id = scholar_id,
     api_key = api_key
   ))
-  
   if (status_code(response) == 200) {
     data <- fromJSON(content(response, "text"))
-    
     if ("cited_by" %in% names(data) && "graph" %in% names(data$cited_by)) {
       citation_graph <- data$cited_by$graph
-      citation_data <- data.frame(
+      return(data.frame(
         year = as.numeric(citation_graph$year),
         cites = as.numeric(citation_graph$citations)
-      )
-      return(citation_data)
+      ))
     }
   }
   return(NULL)
@@ -203,7 +189,6 @@ get_citation_history_serpapi <- function(scholar_id, api_key) {
 
 get_publications_serpapi <- function(scholar_id, api_key) {
   url <- "https://serpapi.com/search.json"
-  
   response <- GET(url, query = list(
     engine = "google_scholar_author",
     author_id = scholar_id,
@@ -211,94 +196,51 @@ get_publications_serpapi <- function(scholar_id, api_key) {
     view_op = "list_works",
     num = 100
   ))
-  
   if (status_code(response) == 200) {
     data <- fromJSON(content(response, "text"))
-    
     if ("articles" %in% names(data)) {
       publications <- data$articles
-      
       if (nrow(publications) > 0 && "year" %in% names(publications)) {
-        publication_data <- publications %>%
-          filter(!is.na(year)) %>%
-          count(year, name = "publications")
-        
-        return(publication_data)
+        return(publications %>% filter(!is.na(year)) %>% count(year, name = "publications"))
       }
     }
   }
   return(NULL)
 }
 
-# ── Get API key ────────────────────────────────────────────────────────────────
 api_key <- Sys.getenv("SERPAPI_KEY")
+if (api_key == "") stop("SERPAPI_KEY not found in environment variables.")
 
-if (api_key == "") {
-  stop("SERPAPI_KEY not found in environment variables. Please set your SerpApi key.")
-}
-
-# ── Fetch citation data with cache fallback ────────────────────────────────────
 citation_data <- tryCatch({
   result <- get_citation_history_serpapi(scholar_id, api_key)
-  if (!is.null(result)) {
-    save_cache(result, "citation_data")
-    message("Citation data fetched from SerpApi and cache updated.")
-  }
+  if (!is.null(result)) save_cache(result, "citation_data")
   result
-}, error = function(e) {
-  message("Error fetching citation data: ", e$message)
-  NULL
-})
+}, error = function(e) { message("Error: ", e$message); NULL })
 
 if (is.null(citation_data)) {
   citation_data <- load_cache("citation_data")
-  if (!is.null(citation_data)) {
-    message("SerpApi returned no citation data — using cached data.")
-  } else {
-    stop("No citation data available and no cache found. Cannot render page.")
-  }
+  if (is.null(citation_data)) stop("No citation data available.")
 }
 
-# ── Fetch publication data with cache fallback ─────────────────────────────────
 publication_data <- tryCatch({
   result <- get_publications_serpapi(scholar_id, api_key)
-  if (!is.null(result)) {
-    save_cache(result, "publication_data")
-    message("Publication data fetched from SerpApi and cache updated.")
-  }
+  if (!is.null(result)) save_cache(result, "publication_data")
   result
-}, error = function(e) {
-  message("Error fetching publication data: ", e$message)
-  NULL
-})
+}, error = function(e) { message("Error: ", e$message); NULL })
 
 if (is.null(publication_data)) {
   publication_data <- load_cache("publication_data")
-  if (!is.null(publication_data)) {
-    message("SerpApi returned no publication data — using cached data.")
-  } else {
-    stop("No publication data available and no cache found. Cannot render page.")
-  }
+  if (is.null(publication_data)) stop("No publication data available.")
 }
 
-# ── Calculate totals ───────────────────────────────────────────────────────────
 total_citations <- sum(citation_data$cites)
 total_publications <- sum(publication_data$publications)
 
-# ── Citations plot ─────────────────────────────────────────────────────────────
 citations_plot <- citation_data %>%
   ggplot(aes(x = cites, y = as.factor(year))) +
-  geom_col_interactive(
-    aes(tooltip = cites),
-    fill = "#4A90A4",
-    width = 0.7
-  ) +
-  labs(
-    title = "Citation History Over Time",
-    subtitle = paste("Total Citations:", total_citations),
-    x = "# of Citations",
-    y = "Year"
-  ) +
+  geom_col_interactive(aes(tooltip = cites), fill = "#4A90A4", width = 0.7) +
+  labs(title = "Citation History Over Time", subtitle = paste("Total Citations:", total_citations),
+       x = "# of Citations", y = "Year") +
   theme_minimal() +
   theme(
     plot.background = element_rect(fill = "#0E2638", color = NA),
@@ -308,24 +250,14 @@ citations_plot <- citation_data %>%
     axis.title = element_text(size = 12, color = "#EBEBEB", family = "Helvetica"),
     axis.text = element_text(size = 10, color = "#EBEBEB", family = "Helvetica"),
     axis.line = element_line(color = "#EBEBEB", size = 0.5),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank()
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
   )
 
-# ── Publications plot ──────────────────────────────────────────────────────────
 publications_plot <- publication_data %>%
   ggplot(aes(x = publications, y = as.factor(year))) +
-  geom_col_interactive(
-    aes(tooltip = publications),
-    fill = "#7FB069",
-    width = 0.7
-  ) +
-  labs(
-    title = "Publications Over Time",
-    subtitle = paste("Total Publications:", total_publications),
-    x = "# of Publications",
-    y = "Year"
-  ) +
+  geom_col_interactive(aes(tooltip = publications), fill = "#7FB069", width = 0.7) +
+  labs(title = "Publications Over Time", subtitle = paste("Total Publications:", total_publications),
+       x = "# of Publications", y = "Year") +
   theme_minimal() +
   theme(
     plot.background = element_rect(fill = "#0E2638", color = NA),
@@ -335,12 +267,10 @@ publications_plot <- publication_data %>%
     axis.title = element_text(size = 12, color = "#EBEBEB", family = "Helvetica"),
     axis.text = element_text(size = 10, color = "#EBEBEB", family = "Helvetica"),
     axis.line = element_line(color = "#EBEBEB", size = 0.5),
-    panel.grid.major = element_blank(),
-    panel.grid.minor = element_blank()
+    panel.grid.major = element_blank(), panel.grid.minor = element_blank()
   )
 
-# ── Combined plot ──────────────────────────────────────────────────────────────
-combined_plot <- citations_plot + publications_plot + 
+combined_plot <- citations_plot + publications_plot +
   plot_layout(ncol = 2) +
   plot_annotation(
     caption = paste("Data from Google Scholar via SerpApi (", Sys.Date(), ")", sep = ""),
@@ -350,14 +280,7 @@ combined_plot <- citations_plot + publications_plot +
     )
   )
 
-interactive_plot <- girafe(
-  ggobj = combined_plot,
-  width_svg = 12,
-  height_svg = 5,
-  fonts = list(sans = "Helvetica")
-)
-
-interactive_plot
+girafe(ggobj = combined_plot, width_svg = 12, height_svg = 5, fonts = list(sans = "Helvetica"))
 ```
 
 ## Published Papers
