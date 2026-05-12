@@ -199,7 +199,6 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.25rem;
-    margin-top: 0.5rem;
   }
   .post-card {
     background-color: rgba(255,255,255,0.05);
@@ -210,169 +209,170 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     display: flex;
     flex-direction: column;
     transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+    color: inherit;
   }
   .post-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(255,255,255,0.25);
+    border-color: rgba(255,255,255,0.3);
     background-color: rgba(255,255,255,0.08);
     text-decoration: none;
+    color: inherit;
   }
   .post-thumbnail {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
     display: block;
-    background-color: rgba(255,255,255,0.08);
   }
-  .post-thumbnail-placeholder {
+  .post-placeholder {
     width: 100%;
     aspect-ratio: 16/9;
-    background: linear-gradient(135deg, rgba(74,144,164,0.3), rgba(127,176,105,0.2));
+    background: linear-gradient(135deg, rgba(74,144,164,0.25), rgba(127,176,105,0.15));
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .post-thumbnail-placeholder svg {
-    opacity: 0.3;
   }
   .post-body {
     padding: 1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.35rem;
   }
   .post-date {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.02em;
+    font-size: 0.73rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   .post-title {
-    font-size: 0.97rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: rgba(255,255,255,0.9);
     line-height: 1.4;
-    margin: 0;
   }
-  .loading-msg {
+  #posts-status {
     color: rgba(255,255,255,0.5);
     font-size: 0.9rem;
-    padding: 2rem 0;
-  }
-  .error-msg {
-    color: rgba(255,255,255,0.6);
-    font-size: 0.9rem;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
   }
 </style>
 <div class="substack-header">
 <p class="substack-subtitle">
 Essays and reflections on research, faith, and identity
 </p>
-<p><a href="https://follhim.substack.com" target="_blank" class="substack-btn"> <svg width="14" height="14" viewbox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"></path></svg> View on Substack </a></p>
+<p><a href="https://follhim.substack.com" target="_blank" class="substack-btn"> <svg width="14" height="14" viewbox="0 0 24 24" fill="currentColor"> <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"></path> </svg> View on Substack </a></p>
 </div>
-<div id="posts-container">
-<p class="loading-msg">
+<div id="posts-status">
 Loading posts…
-</p>
+</div>
+<div id="posts-grid" class="posts-grid">
+
 </div>
 <script>
-(function() {
-  // Use a CORS proxy to fetch Substack's RSS feed
-  const FEED_URL = 'https://follhim.substack.com/feed';
-  const PROXY_URL = 'https://api.allorigins.win/get?url=' + encodeURIComponent(FEED_URL);
+document.addEventListener('DOMContentLoaded', function () {
+  const FEED = 'https://follhim.substack.com/feed';
+  const PROXY = 'https://corsproxy.io/?' + encodeURIComponent(FEED);
+  const status = document.getElementById('posts-status');
+  const grid = document.getElementById('posts-grid');
 
-  function formatDate(dateStr) {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const SUBSTACK_ICON = `<svg width="36" height="36" viewBox="0 0 24 24" fill="rgba(255,255,255,0.2)">
+    <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+  </svg>`;
+
+  function formatDate(str) {
+    if (!str) return '';
+    try {
+      return new Date(str).toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+    } catch(e) { return ''; }
   }
 
-  function extractThumbnail(item) {
-    // Try <media:content> first
-    const mediaContent = item.querySelector('content');
-    if (mediaContent && mediaContent.getAttribute('url')) {
-      return mediaContent.getAttribute('url');
-    }
-    // Try <enclosure>
-    const enclosure = item.querySelector('enclosure');
-    if (enclosure && enclosure.getAttribute('url')) {
-      return enclosure.getAttribute('url');
-    }
-    // Try first <img> inside <description>
-    const desc = item.querySelector('description');
+  function getNodeText(item, tag) {
+    const el = item.getElementsByTagName(tag)[0];
+    if (!el) return '';
+    // <link> is a weird element in RSS — its text is a child text node
+    return (el.textContent || el.innerText || '').trim();
+  }
+
+  function getThumbnail(item) {
+    // 1. media:content url attribute
+    const media = item.getElementsByTagName('media:content')[0];
+    if (media && media.getAttribute('url')) return media.getAttribute('url');
+
+    // 2. enclosure url attribute
+    const enc = item.getElementsByTagName('enclosure')[0];
+    if (enc && enc.getAttribute('url')) return enc.getAttribute('url');
+
+    // 3. First <img> inside description CDATA
+    const desc = getNodeText(item, 'description');
     if (desc) {
-      const html = desc.textContent || desc.innerHTML;
-      const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-      if (match) return match[1];
-      // Also try CDATA content
-      const cdataMatch = html.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))["']/i);
-      if (cdataMatch) return cdataMatch[1];
+      const m = desc.match(/<img[^>]+src=["']([^"']+)["']/i);
+      if (m) return m[1];
     }
     return null;
   }
 
-  function parseAndRender(xmlText) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(xmlText, 'text/xml');
-    const items = Array.from(doc.querySelectorAll('item'));
-
-    const container = document.getElementById('posts-container');
-
+  function renderItems(items) {
     if (!items.length) {
-      container.innerHTML = '<p class="error-msg">No posts found. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.7);">Visit Substack directly →</a></p>';
+      status.textContent = 'No posts found.';
       return;
     }
+    status.style.display = 'none';
 
-    const grid = document.createElement('div');
-    grid.className = 'posts-grid';
-
-    items.forEach(function(item) {
-      const title = item.querySelector('title') ? item.querySelector('title').textContent : 'Untitled';
-      const link = item.querySelector('link') ? item.querySelector('link').textContent : '#';
-      const pubDate = item.querySelector('pubDate') ? item.querySelector('pubDate').textContent : '';
-      const thumb = extractThumbnail(item);
+    items.forEach(function (item) {
+      const title = getNodeText(item, 'title');
+      const link  = getNodeText(item, 'link');
+      const date  = getNodeText(item, 'pubDate');
+      const thumb = getThumbnail(item);
 
       const card = document.createElement('a');
-      card.href = link.trim();
+      card.className = 'post-card';
+      card.href = link || '#';
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
-      card.className = 'post-card';
 
-      const imgHtml = thumb
-        ? `<img class="post-thumbnail" src="${thumb}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'post-thumbnail-placeholder\\'><svg width=\\'40\\' height=\\'40\\' viewBox=\\'0 0 24 24\\' fill=\\'white\\'><path d=\\'M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z\\'/></svg></div>'">`
-        : `<div class="post-thumbnail-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></div>`;
+      const imgEl = thumb
+        ? `<img class="post-thumbnail" src="${thumb}" alt="" loading="lazy">`
+        : `<div class="post-placeholder">${SUBSTACK_ICON}</div>`;
 
-      card.innerHTML = imgHtml + `
+      card.innerHTML = imgEl + `
         <div class="post-body">
-          <div class="post-date">${pubDate ? formatDate(pubDate) : ''}</div>
+          <div class="post-date">${formatDate(date)}</div>
           <div class="post-title">${title}</div>
         </div>`;
 
       grid.appendChild(card);
     });
-
-    container.innerHTML = '';
-    container.appendChild(grid);
   }
 
-  // Try direct fetch first (works if Substack allows CORS)
-  fetch(FEED_URL)
-    .then(function(r) {
-      if (!r.ok) throw new Error('Direct fetch failed');
+  function parseAndRender(xmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'application/xml');
+    const parseError = doc.querySelector('parsererror');
+    if (parseError) throw new Error('XML parse error');
+    const items = Array.from(doc.getElementsByTagName('item'));
+    renderItems(items);
+  }
+
+  // Try direct fetch first; fall back to CORS proxy
+  fetch(FEED)
+    .then(function (r) {
+      if (!r.ok) throw new Error('Direct blocked');
       return r.text();
     })
     .then(parseAndRender)
-    .catch(function() {
-      // Fall back to allorigins proxy
-      fetch(PROXY_URL)
-        .then(function(r) { return r.json(); })
-        .then(function(data) { parseAndRender(data.contents); })
-        .catch(function() {
-          document.getElementById('posts-container').innerHTML =
-            '<p class="error-msg">Could not load posts. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.7);">Visit Substack directly →</a></p>';
-        });
+    .catch(function () {
+      return fetch(PROXY)
+        .then(function (r) { return r.text(); })
+        .then(parseAndRender);
+    })
+    .catch(function (err) {
+      status.innerHTML = 'Could not load posts. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.6)">Visit Substack →</a>';
+      console.error('Substack feed error:', err);
     });
-})();
+});
 </script>
 
 
