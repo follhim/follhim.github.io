@@ -21,7 +21,7 @@ jobs:
         id: cache-r
         uses: actions/cache@v4
         with:
-          path: /usr/local/lib/R
+          path: /opt/R/4.4.2
           key: r-4.4.2-ubuntu-latest
 
       - name: Install R

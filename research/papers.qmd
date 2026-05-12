@@ -65,93 +65,103 @@ register_gfont("Inter")
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
   import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const firebaseConfig = {
-      apiKey: "{{ FB_API }}",
-      authDomain: "cv-download-40a41.firebaseapp.com",
-      projectId: "cv-download-40a41",
-      storageBucket: "cv-download-40a41.firebasestorage.app",
-      messagingSenderId: "842134969852",
-      appId: "{{ APPID }}",
-      measurementId: "G-7149VRMDP5"
-    };
+  const firebaseConfig = {
+    apiKey: "{{ FB_API }}",
+    authDomain: "cv-download-40a41.firebaseapp.com",
+    projectId: "cv-download-40a41",
+    storageBucket: "cv-download-40a41.firebasestorage.app",
+    messagingSenderId: "842134969852",
+    appId: "{{ APPID }}",
+    measurementId: "G-7149VRMDP5"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const countRef = doc(db, "counts", "cvDownload");
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const countRef = doc(db, "counts", "cvDownload");
 
-    async function incrementCount() {
-      try {
-        await runTransaction(db, async (transaction) => {
-          const countDoc = await transaction.get(countRef);
-          if (!countDoc.exists()) {
-            transaction.set(countRef, { counts: 1 });
-          } else {
-            transaction.update(countRef, { counts: countDoc.data().counts + 1 });
-          }
-        });
-        getCount();
-      } catch (error) {
-        console.error("Transaction failed:", error);
-      }
-    }
-
-    async function getCount() {
-      try {
-        const countDoc = await getDoc(countRef);
-        document.getElementById("count").innerText =
-          countDoc.exists() ? countDoc.data().counts : "0";
-      } catch (error) {
-        console.error("Error getting document:", error);
-      }
-    }
-
-    getCount();
-
-    document.getElementById('download-btn').addEventListener('click', function() {
-      incrementCount();
-    });
-
-    // Listen for custom event fired from onTurnstileSuccess
-    document.addEventListener('turnstile-verified', async function(e) {
-      const token = e.detail.token;
-      try {
-        const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token })
-        });
-        const result = await response.json();
-        alert('Worker response: ' + JSON.stringify(result));
-
-        if (result.success && result.url) {
-          const btn = document.getElementById('download-btn');
-          btn.href = result.url;
-          document.getElementById('turnstile-container').style.display = 'none';
-          document.getElementById('cv-download-trigger').style.display = 'none';
-          btn.style.display = 'inline-block';
+  async function incrementCount() {
+    try {
+      await runTransaction(db, async (transaction) => {
+        const countDoc = await transaction.get(countRef);
+        if (!countDoc.exists()) {
+          transaction.set(countRef, { counts: 1 });
         } else {
-          document.getElementById('turnstile-container').style.display = 'none';
-          document.getElementById('cv-download-trigger').style.display = 'inline-block';
-          turnstile.reset('#turnstile-widget');
+          transaction.update(countRef, { counts: countDoc.data().counts + 1 });
         }
-      } catch (err) {
-        alert('Error: ' + err.message);
+      });
+      getCount();
+    } catch (error) {
+      console.error("Transaction failed:", error);
+    }
+  }
+
+  async function getCount() {
+    try {
+      const countDoc = await getDoc(countRef);
+      document.getElementById("count").innerText =
+        countDoc.exists() ? countDoc.data().counts : "0";
+    } catch (error) {
+      console.error("Error getting document:", error);
+    }
+  }
+
+  getCount();
+
+  document.getElementById('download-btn').addEventListener('click', function() {
+    incrementCount();
+  });
+
+  // Event listener is now outside DOMContentLoaded so it's always ready
+  document.addEventListener('turnstile-verified', async function(e) {
+    const token = e.detail.token;
+    try {
+      const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token })
+      });
+      const result = await response.json();
+      alert('Worker response: ' + JSON.stringify(result));
+
+      if (result.success && result.url) {
+        const btn = document.getElementById('download-btn');
+        btn.href = result.url;
+        document.getElementById('turnstile-container').style.display = 'none';
+        document.getElementById('cv-download-trigger').style.display = 'none';
+        btn.style.display = 'inline-block';
+      } else {
         document.getElementById('turnstile-container').style.display = 'none';
         document.getElementById('cv-download-trigger').style.display = 'inline-block';
         turnstile.reset('#turnstile-widget');
       }
-    });
+    } catch (err) {
+      alert('Error: ' + err.message);
+      document.getElementById('turnstile-container').style.display = 'none';
+      document.getElementById('cv-download-trigger').style.display = 'inline-block';
+      turnstile.reset('#turnstile-widget');
+    }
+  });
 
-    // Turnstile callback fires custom event instead of doing fetch directly
-    window.onTurnstileSuccess = function(token) {
-      document.dispatchEvent(new CustomEvent('turnstile-verified', { detail: { token } }));
-    };
+  window.onTurnstileSuccess = function(token) {
+    document.dispatchEvent(new CustomEvent('turnstile-verified', { detail: { token } }));
+  };
 
-    let widgetRendered = false;
-    let turnstileLoaded = false;
+  let widgetRendered = false;
+  let turnstileLoaded = false;
 
-    window.onTurnstileLoad = function() {
+  window.onTurnstileLoad = function() {
+    if (!widgetRendered) {
+      turnstile.render('#turnstile-widget', {
+        sitekey: '0x4AAAAAADNayBUca6pR_5fG',
+        callback: window.onTurnstileSuccess,
+        theme: 'dark'
+      });
+      widgetRendered = true;
+    }
+  };
+
+  function loadTurnstileAndRender() {
+    if (turnstileLoaded) {
       if (!widgetRendered) {
         turnstile.render('#turnstile-widget', {
           sitekey: '0x4AAAAAADNayBUca6pR_5fG',
@@ -160,31 +170,18 @@ register_gfont("Inter")
         });
         widgetRendered = true;
       }
-    };
-
-    function loadTurnstileAndRender() {
-      if (turnstileLoaded) {
-        if (!widgetRendered) {
-          turnstile.render('#turnstile-widget', {
-            sitekey: '0x4AAAAAADNayBUca6pR_5fG',
-            callback: window.onTurnstileSuccess,
-            theme: 'dark'
-          });
-          widgetRendered = true;
-        }
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
-      script.async = true;
-      document.head.appendChild(script);
-      turnstileLoaded = true;
+      return;
     }
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad';
+    script.async = true;
+    document.head.appendChild(script);
+    turnstileLoaded = true;
+  }
 
-    document.getElementById('cv-download-trigger').addEventListener('click', function() {
-      document.getElementById('turnstile-container').style.display = 'block';
-      loadTurnstileAndRender();
-    });
+  document.getElementById('cv-download-trigger').addEventListener('click', function() {
+    document.getElementById('turnstile-container').style.display = 'block';
+    loadTurnstileAndRender();
   });
 </script>
 
