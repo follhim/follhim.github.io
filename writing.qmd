@@ -97,6 +97,16 @@ format:
     color: rgba(255,255,255,0.9);
     line-height: 1.4;
   }
+  .post-excerpt {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    margin-top: 0.15rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   #posts-status {
     color: rgba(255,255,255,0.5);
     font-size: 0.9rem;
@@ -144,6 +154,21 @@ document.addEventListener('DOMContentLoaded', function () {
     return (el.textContent || el.innerText || '').trim();
   }
 
+  function getExcerpt(item) {
+    // Try <subtitle> first (Substack sometimes includes this)
+    const subtitle = item.getElementsByTagName('subtitle')[0];
+    if (subtitle && subtitle.textContent.trim()) return subtitle.textContent.trim();
+
+    // Fall back to stripping HTML from <description>
+    const desc = getNodeText(item, 'description');
+    if (!desc) return '';
+    // Strip HTML tags
+    const tmp = document.createElement('div');
+    tmp.innerHTML = desc;
+    const text = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    return text.length > 180 ? text.slice(0, 180).replace(/\s\S*$/, '') + '…' : text;
+  }
+
   function getThumbnail(item) {
     // 1. media:content url attribute
     const media = item.getElementsByTagName('media:content')[0];
@@ -170,10 +195,11 @@ document.addEventListener('DOMContentLoaded', function () {
     status.style.display = 'none';
 
     items.forEach(function (item) {
-      const title = getNodeText(item, 'title');
-      const link  = getNodeText(item, 'link');
-      const date  = getNodeText(item, 'pubDate');
-      const thumb = getThumbnail(item);
+      const title   = getNodeText(item, 'title');
+      const link    = getNodeText(item, 'link');
+      const date    = getNodeText(item, 'pubDate');
+      const thumb   = getThumbnail(item);
+      const excerpt = getExcerpt(item);
 
       const card = document.createElement('a');
       card.className = 'post-card';
@@ -189,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="post-body">
           <div class="post-date">${formatDate(date)}</div>
           <div class="post-title">${title}</div>
+          ${excerpt ? `<div class="post-excerpt">${excerpt}</div>` : ''}
         </div>`;
 
       grid.appendChild(card);
