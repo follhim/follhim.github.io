@@ -121,21 +121,22 @@ register_gfont("Inter")
         });
         const result = await response.json();
 
+        // Temporary: show exactly what Worker returns
+        alert('Worker response: ' + JSON.stringify(result));
+
         if (result.success && result.url) {
-          // Set the URL on the button only after verification passes
           const btn = document.getElementById('download-btn');
           btn.href = result.url;
           document.getElementById('turnstile-container').style.display = 'none';
           document.getElementById('cv-download-trigger').style.display = 'none';
           btn.style.display = 'inline-block';
         } else {
-          // Verification failed — reset and try again
           document.getElementById('turnstile-container').style.display = 'none';
           document.getElementById('cv-download-trigger').style.display = 'inline-block';
           turnstile.reset('#turnstile-widget');
         }
       } catch (err) {
-        console.error('Worker error:', err);
+        alert('Error: ' + err.message);
         document.getElementById('turnstile-container').style.display = 'none';
         document.getElementById('cv-download-trigger').style.display = 'inline-block';
         turnstile.reset('#turnstile-widget');
