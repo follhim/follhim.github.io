@@ -1,21 +1,17 @@
-import urllib.request
+import subprocess
 import xml.etree.ElementTree as ET
 import json
 import re
 import html
-import ssl
 
 FEED_URL = "https://follhim.substack.com/feed"
 
-# Mac Python doesn't bundle system SSL certs — bypass verification for this public feed
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
-
 try:
-    req = urllib.request.Request(FEED_URL, headers={"User-Agent": "Mozilla/5.0"})
-    with urllib.request.urlopen(req, timeout=15, context=ctx) as response:
-        xml_data = response.read()
+    result = subprocess.run(
+        ["curl", "-s", "-L", "--max-time", "15", FEED_URL],
+        capture_output=True, text=True, check=True
+    )
+    xml_data = result.stdout.encode("utf-8")
 except Exception as e:
     print(f"Warning: Could not fetch Substack feed: {e}")
     with open("substack_posts.json", "w") as f:
