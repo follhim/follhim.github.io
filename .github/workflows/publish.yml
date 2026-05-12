@@ -27,9 +27,6 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-      - name: Fetch Substack posts
-        run: python3 fetch_substack.py
-
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:

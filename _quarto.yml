@@ -1,10 +1,8 @@
 project:
   type: website
-  pre-render: fetch_substack.py
   resources:
     - "google9541c230ce597c09. html"
     - "_site/cv/*"
-    - "substack_posts.json"
     
 website:
   google-analytics: G-4B73YXR349
@@ -17,8 +15,6 @@ website:
       text: Research
     - href: resource.qmd
       text: Resources
-    - href: writing.qmd
-      text: Writing
     tools:
     - icon: github
       menu:
