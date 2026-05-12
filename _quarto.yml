@@ -1,8 +1,10 @@
 project:
   type: website
+  pre-render: fetch_substack.py
   resources:
     - "google9541c230ce597c09. html"
-    - "_site/cv/*"    # ADD THIS - or put cv files in a different location
+    - "_site/cv/*"
+    - "substack_posts.json"
     
 website:
   google-analytics: G-4B73YXR349

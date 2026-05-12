@@ -129,10 +129,8 @@ format:
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const FEED = 'https://follhim.substack.com/feed';
-  const PROXY = 'https://corsproxy.io/?' + encodeURIComponent(FEED);
   const status = document.getElementById('posts-status');
-  const grid = document.getElementById('posts-grid');
+  const grid   = document.getElementById('posts-grid');
 
   const SUBSTACK_ICON = `<svg width="36" height="36" viewBox="0 0 24 24" fill="rgba(255,255,255,0.2)">
     <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
@@ -147,105 +145,44 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch(e) { return ''; }
   }
 
-  function getNodeText(item, tag) {
-    const el = item.getElementsByTagName(tag)[0];
-    if (!el) return '';
-    // <link> is a weird element in RSS — its text is a child text node
-    return (el.textContent || el.innerText || '').trim();
-  }
-
-  function getExcerpt(item) {
-    // Try <subtitle> first (Substack sometimes includes this)
-    const subtitle = item.getElementsByTagName('subtitle')[0];
-    if (subtitle && subtitle.textContent.trim()) return subtitle.textContent.trim();
-
-    // Fall back to stripping HTML from <description>
-    const desc = getNodeText(item, 'description');
-    if (!desc) return '';
-    // Strip HTML tags
-    const tmp = document.createElement('div');
-    tmp.innerHTML = desc;
-    const text = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
-    return text.length > 180 ? text.slice(0, 180).replace(/\s\S*$/, '') + '…' : text;
-  }
-
-  function getThumbnail(item) {
-    // 1. media:content url attribute
-    const media = item.getElementsByTagName('media:content')[0];
-    if (media && media.getAttribute('url')) return media.getAttribute('url');
-
-    // 2. enclosure url attribute
-    const enc = item.getElementsByTagName('enclosure')[0];
-    if (enc && enc.getAttribute('url')) return enc.getAttribute('url');
-
-    // 3. First <img> inside description CDATA
-    const desc = getNodeText(item, 'description');
-    if (desc) {
-      const m = desc.match(/<img[^>]+src=["']([^"']+)["']/i);
-      if (m) return m[1];
-    }
-    return null;
-  }
-
-  function renderItems(items) {
-    if (!items.length) {
-      status.textContent = 'No posts found.';
+  function renderPosts(posts) {
+    if (!posts || !posts.length) {
+      status.innerHTML = 'No posts found. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.6)">Visit Substack →</a>';
       return;
     }
     status.style.display = 'none';
 
-    items.forEach(function (item) {
-      const title   = getNodeText(item, 'title');
-      const link    = getNodeText(item, 'link');
-      const date    = getNodeText(item, 'pubDate');
-      const thumb   = getThumbnail(item);
-      const excerpt = getExcerpt(item);
-
+    posts.forEach(function (post) {
       const card = document.createElement('a');
       card.className = 'post-card';
-      card.href = link || '#';
+      card.href = post.link || '#';
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
 
-      const imgEl = thumb
-        ? `<img class="post-thumbnail" src="${thumb}" alt="" loading="lazy">`
+      const imgEl = post.thumbnail
+        ? `<img class="post-thumbnail" src="${post.thumbnail}" alt="" loading="lazy">`
         : `<div class="post-placeholder">${SUBSTACK_ICON}</div>`;
 
       card.innerHTML = imgEl + `
         <div class="post-body">
-          <div class="post-date">${formatDate(date)}</div>
-          <div class="post-title">${title}</div>
-          ${excerpt ? `<div class="post-excerpt">${excerpt}</div>` : ''}
+          <div class="post-date">${formatDate(post.pubDate)}</div>
+          <div class="post-title">${post.title}</div>
+          ${post.excerpt ? `<div class="post-excerpt">${post.excerpt}</div>` : ''}
         </div>`;
 
       grid.appendChild(card);
     });
   }
 
-  function parseAndRender(xmlText) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(xmlText, 'application/xml');
-    const parseError = doc.querySelector('parsererror');
-    if (parseError) throw new Error('XML parse error');
-    const items = Array.from(doc.getElementsByTagName('item'));
-    renderItems(items);
-  }
-
-  // Try direct fetch first; fall back to CORS proxy
-  fetch(FEED)
+  fetch('substack_posts.json')
     .then(function (r) {
-      if (!r.ok) throw new Error('Direct blocked');
-      return r.text();
+      if (!r.ok) throw new Error('JSON not found');
+      return r.json();
     })
-    .then(parseAndRender)
-    .catch(function () {
-      return fetch(PROXY)
-        .then(function (r) { return r.text(); })
-        .then(parseAndRender);
-    })
+    .then(renderPosts)
     .catch(function (err) {
       status.innerHTML = 'Could not load posts. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.6)">Visit Substack →</a>';
-      console.error('Substack feed error:', err);
+      console.error('Posts error:', err);
     });
 });
 </script>
