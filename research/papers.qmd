@@ -112,7 +112,9 @@ register_gfont("Inter")
       incrementCount();
     });
 
-    window.onTurnstileSuccess = async function(token) {
+    // Listen for custom event fired from onTurnstileSuccess
+    document.addEventListener('turnstile-verified', async function(e) {
+      const token = e.detail.token;
       try {
         const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
           method: 'POST',
@@ -120,8 +122,6 @@ register_gfont("Inter")
           body: JSON.stringify({ token })
         });
         const result = await response.json();
-
-        // Temporary: show exactly what Worker returns
         alert('Worker response: ' + JSON.stringify(result));
 
         if (result.success && result.url) {
@@ -141,6 +141,11 @@ register_gfont("Inter")
         document.getElementById('cv-download-trigger').style.display = 'inline-block';
         turnstile.reset('#turnstile-widget');
       }
+    });
+
+    // Turnstile callback fires custom event instead of doing fetch directly
+    window.onTurnstileSuccess = function(token) {
+      document.dispatchEvent(new CustomEvent('turnstile-verified', { detail: { token } }));
     };
 
     let widgetRendered = false;
