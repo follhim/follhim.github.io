@@ -52,7 +52,7 @@ register_gfont("Inter")
    id="mobile-download-btn"
    style="display:none; cursor:pointer; background-color:#6B3FA0; border-color:#6B3FA0; color:white;"
    class="btn">
-  <i class="bi bi-file-earmark-pdf"></i> Click here
+  Click Here
 </a>
 
 <div id="turnstile-container" style="display:none; margin-top:0.75rem;">
@@ -117,10 +117,10 @@ register_gfont("Inter")
     });
 
     window.onTurnstileSuccess = async function(token) {
+      alert('Turnstile completed!');
       document.getElementById('turnstile-container').style.display = 'none';
 
       if (isMobile) {
-        // Hide the original button, show the purple one in its place
         document.getElementById('cv-download-trigger').style.display = 'none';
         document.getElementById('mobile-download-btn').style.display = 'inline-block';
       } else {
@@ -128,7 +128,6 @@ register_gfont("Inter")
         await incrementCount();
       }
 
-      // Log verification in background
       try {
         const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
           method: 'POST',
