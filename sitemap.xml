@@ -2,38 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://follhim.net/index.html</loc>
-    <lastmod>2026-05-12T21:19:33.486Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/news/news.html</loc>
-    <lastmod>2026-05-12T21:19:33.487Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/research/papers.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/public/apa_cor_tab.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/private/mod_reg_lavaan.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
+    <lastmod>2026-05-12T21:35:42.273Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/resource.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
+    <lastmod>2026-05-12T21:35:42.274Z</lastmod>
   </url>
   <url>
-    <loc>https://follhim.net/writing.html</loc>
-    <lastmod>2026-05-12T21:19:33.488Z</lastmod>
+    <loc>https://follhim.net/resource_page/private/mod_reg_lavaan.html</loc>
+    <lastmod>2026-05-12T21:35:42.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/public/apa_cor_tab.html</loc>
+    <lastmod>2026-05-12T21:35:42.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
+    <lastmod>2026-05-12T21:35:42.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
+    <lastmod>2026-05-12T21:35:42.275Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/research/papers.html</loc>
+    <lastmod>2026-05-12T21:35:42.274Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/news/news.html</loc>
+    <lastmod>2026-05-12T21:35:42.274Z</lastmod>
   </url>
 </urlset>
