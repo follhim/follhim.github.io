@@ -47,6 +47,14 @@ register_gfont("Inter")
 </a>
 <span id="count" class="badge bg-primary ms-2">0</span>
 
+<a href="https://bitli.pro/2KRCT_c18bc349" 
+   target="_blank"
+   id="mobile-download-btn"
+   style="display:none; cursor:pointer; background-color:#6B3FA0; border-color:#6B3FA0; color:white;"
+   class="btn">
+  <i class="bi bi-file-earmark-pdf"></i> Click here
+</a>
+
 <div id="turnstile-container" style="display:none; margin-top:0.75rem;">
   <div id="turnstile-widget"></div>
   <small style="color: #aaa; font-size: 0.75rem; display:block; margin-top:0.25rem;">
@@ -72,6 +80,9 @@ register_gfont("Inter")
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const countRef = doc(db, "counts", "cvDownload");
+
+    const CV_URL = 'https://bitli.pro/2KRCT_c18bc349';
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     async function incrementCount() {
       try {
@@ -101,7 +112,23 @@ register_gfont("Inter")
 
     getCount();
 
+    document.getElementById('mobile-download-btn').addEventListener('click', function() {
+      incrementCount();
+    });
+
     window.onTurnstileSuccess = async function(token) {
+      document.getElementById('turnstile-container').style.display = 'none';
+
+      if (isMobile) {
+        // Hide the original button, show the purple one in its place
+        document.getElementById('cv-download-trigger').style.display = 'none';
+        document.getElementById('mobile-download-btn').style.display = 'inline-block';
+      } else {
+        window.open(CV_URL, '_blank');
+        await incrementCount();
+      }
+
+      // Log verification in background
       try {
         const response = await fetch('https://turnstile-verify.follhim.workers.dev', {
           method: 'POST',
@@ -113,11 +140,6 @@ register_gfont("Inter")
       } catch (err) {
         console.error('Worker error:', err);
       }
-
-      // Proceed regardless — widget completion is the gate
-      document.getElementById('turnstile-container').style.display = 'none';
-      window.open('https://bitli.pro/2KRCT_c18bc349', '_blank');
-      await incrementCount();
     };
 
     let widgetRendered = false;
