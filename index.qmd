@@ -1,5 +1,5 @@
 ---
-title: "Modeling Religion and Health"
+title: "Advancing Health Equity Research"
 about:
   id: intro-bio
   template: jolla
@@ -31,13 +31,13 @@ listing:
 ---
 
 :::{#intro-bio .text-center}
-My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work!
+My name is Seungju Kim[^1] and thank you for visiting my personal website <br> detailing my research interests and work!
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
-I am a **National Science Foundation Graduate Research Fellow** and second-year PhD student in Clinical/Community Psychology Program at the **University of Illinois** under Dr. Nathan Todd.
+I am a **National Science Foundation Graduate Research Fellow** and third-year PhD student in Clinical/Community Psychology Program at the **University of Illinois**.
 
-My [research](https://follhim.github.io/research/papers.html) is broadly focused advancing the **science of LGBTQ+ health disparities** by looking ath the **socio-ecological** effects of **religion/spirituality**.
+My [research](https://follhim.github.io/research/papers.html) is broadly focused advancing the **science of LGBTQ+ health disparities** by looking at <br> **socio-ecological** sources of stigma and resilience.
 :::
 
 ::: {#news}
@@ -45,16 +45,18 @@ My [research](https://follhim.github.io/research/papers.html) is broadly focused
 
 ## Research Interests
 
-My research is ultimately informed by my commitment to creating lasting change for the health and well-being of LGBTQ+ people within the context of religion.
+My research is ultimately informed by my commitment to creating lasting change for the mental and behavioral health of LGBTQ+ people through three lines of research:
 
-1.  I engaged in modeling how **religion/spirituality** across varying **socioecological levels** are associated with health for LGBTQ+ individuals.
+1.   I use [longitudinal methods]{.highlight-term} to map the dynamic pathways through which stigma, resilience, and social context accumulate over time to produce mental health disparities among LGBTQ+ individuals.
 
-2.  I currently pursuing efforts in **meta-science** focused on advancing methodological rigor in LGBTQ+ health research. This includes critically examining dominant theoretical frameworks, methodological innovations (e.g., Bayesian inference), and creation of software/resources to advance the quantitative infrastructure of LGBTQ+ science.
+2.   I invest in the [meta-scientific infrastructure]{.highlight-term} of LGBTQ+ health research — through systematic review, meta-analysis, and tools like stigmaR — to strengthen how the field measures, synthesizes, and communicates evidence.
 
-3.  As part of my commitment to **translational research**, I seek to collaborate with religious communities to develop empirically-supported, culturally-responsive resources and training protocols. This work aims to enhance the capacity of religious leaders, institutions, and families to effectively support LGBTQ+ individuals in ways that honor both their faith commitments and sexual/gender identities.
+3.  I examine how [religion and spirituality]{.highlight-term} across socioecological levels — from individual beliefs to structural policy — shape mental health for LGBTQ+ individuals, with particular attention to conservative religious contexts.
 
 
 ## Education & Training
+
+Seungju's research is grounded in a deep commitment to the flourishing of LGBTQ+ people. His training spans the full spectrum of religious and clinical contexts — from conservative evangelical institutions to affirming community settings — reflecting his conviction that achieving health equity for LGBTQ+ people, particularly youth in conservative families and churches, requires building bridges across difference rather than around it.
 
 Prior to beginning his doctoral studies, Seungju earned his B.A. in Psychology *magna cum laude* from Wheaton College, where he completed an honors thesis examining psychological well-being in religious mixed-orientation marriages during his junior year. His research training began as a freshman working with Dr. Sandra Rueger, before joining Dr. Mark Yarhouse at the Sexuality and Gender Identity Institute, where he contributed to a national study investigating the complex intersection of faith and LGBTQ+ identities.
 

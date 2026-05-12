@@ -6,3 +6,7 @@
 }
 
 @import url("news/styles.css");
+
+.highlight-term {
+  color: #FF6B35; /* or whatever orange your site uses */
+}
