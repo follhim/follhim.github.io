@@ -1,0 +1,224 @@
+---
+title: "Writing"
+comments: false
+description: ""
+toc: false
+format:
+  html:
+    css: styles.css
+---
+
+<style>
+  .substack-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .substack-subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .substack-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    background-color: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .substack-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    text-decoration: none;
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  .post-card {
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+  }
+  .post-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.25);
+    background-color: rgba(255,255,255,0.08);
+    text-decoration: none;
+  }
+  .post-thumbnail {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    background-color: rgba(255,255,255,0.08);
+  }
+  .post-thumbnail-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, rgba(74,144,164,0.3), rgba(127,176,105,0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .post-thumbnail-placeholder svg {
+    opacity: 0.3;
+  }
+  .post-body {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .post-date {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.02em;
+  }
+  .post-title {
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .loading-msg {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    padding: 2rem 0;
+  }
+  .error-msg {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    padding: 1rem 0;
+  }
+</style>
+
+<div class="substack-header">
+  <p class="substack-subtitle">Essays and reflections on research, faith, and identity</p>
+  <a href="https://follhim.substack.com" target="_blank" class="substack-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+    View on Substack
+  </a>
+</div>
+
+<div id="posts-container">
+  <p class="loading-msg">Loading posts...</p>
+</div>
+
+<script>
+(function() {
+  // Use a CORS proxy to fetch Substack's RSS feed
+  const FEED_URL = 'https://follhim.substack.com/feed';
+  const PROXY_URL = 'https://api.allorigins.win/get?url=' + encodeURIComponent(FEED_URL);
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  function extractThumbnail(item) {
+    // Try <media:content> first
+    const mediaContent = item.querySelector('content');
+    if (mediaContent && mediaContent.getAttribute('url')) {
+      return mediaContent.getAttribute('url');
+    }
+    // Try <enclosure>
+    const enclosure = item.querySelector('enclosure');
+    if (enclosure && enclosure.getAttribute('url')) {
+      return enclosure.getAttribute('url');
+    }
+    // Try first <img> inside <description>
+    const desc = item.querySelector('description');
+    if (desc) {
+      const html = desc.textContent || desc.innerHTML;
+      const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+      if (match) return match[1];
+      // Also try CDATA content
+      const cdataMatch = html.match(/src=["']([^"']+\.(jpg|jpeg|png|webp))["']/i);
+      if (cdataMatch) return cdataMatch[1];
+    }
+    return null;
+  }
+
+  function parseAndRender(xmlText) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xmlText, 'text/xml');
+    const items = Array.from(doc.querySelectorAll('item'));
+
+    const container = document.getElementById('posts-container');
+
+    if (!items.length) {
+      container.innerHTML = '<p class="error-msg">No posts found. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.7);">Visit Substack directly →</a></p>';
+      return;
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'posts-grid';
+
+    items.forEach(function(item) {
+      const title = item.querySelector('title') ? item.querySelector('title').textContent : 'Untitled';
+      const link = item.querySelector('link') ? item.querySelector('link').textContent : '#';
+      const pubDate = item.querySelector('pubDate') ? item.querySelector('pubDate').textContent : '';
+      const thumb = extractThumbnail(item);
+
+      const card = document.createElement('a');
+      card.href = link.trim();
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.className = 'post-card';
+
+      const imgHtml = thumb
+        ? `<img class="post-thumbnail" src="${thumb}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'post-thumbnail-placeholder\\'><svg width=\\'40\\' height=\\'40\\' viewBox=\\'0 0 24 24\\' fill=\\'white\\'><path d=\\'M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z\\'/></svg></div>'">`
+        : `<div class="post-thumbnail-placeholder"><svg width="40" height="40" viewBox="0 0 24 24" fill="white"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg></div>`;
+
+      card.innerHTML = imgHtml + `
+        <div class="post-body">
+          <div class="post-date">${pubDate ? formatDate(pubDate) : ''}</div>
+          <div class="post-title">${title}</div>
+        </div>`;
+
+      grid.appendChild(card);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(grid);
+  }
+
+  // Try direct fetch first (works if Substack allows CORS)
+  fetch(FEED_URL)
+    .then(function(r) {
+      if (!r.ok) throw new Error('Direct fetch failed');
+      return r.text();
+    })
+    .then(parseAndRender)
+    .catch(function() {
+      // Fall back to allorigins proxy
+      fetch(PROXY_URL)
+        .then(function(r) { return r.json(); })
+        .then(function(data) { parseAndRender(data.contents); })
+        .catch(function() {
+          document.getElementById('posts-container').innerHTML =
+            '<p class="error-msg">Could not load posts. <a href="https://follhim.substack.com" target="_blank" style="color:rgba(255,255,255,0.7);">Visit Substack directly →</a></p>';
+        });
+    });
+})();
+</script>
