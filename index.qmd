@@ -1,5 +1,6 @@
 ---
 title: "Advancing Health Equity Research"
+pagetitle: "Seungju Kim"
 about:
   id: intro-bio
   template: jolla
