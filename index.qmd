@@ -17,6 +17,8 @@ about:
       href: https://www.linkedin.com/in/kimseungju/
     - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
       href: https://orcid.org/0009-0009-5166-9170
+    - text: "{{< iconify octicon:mark-github-16 height=35px width=35px >}}"
+      href: https://github.com/follhim
 comments: false
 format:
   html:
@@ -50,7 +52,7 @@ My research is ultimately informed by my commitment to creating lasting change f
 
 1.   I use [longitudinal methods]{.highlight-term} to map the dynamic pathways through which stigma, resilience, and social context accumulate over time to produce mental health disparities among LGBTQ+ individuals.
 
-2.   I invest in the [meta-scientific infrastructure]{.highlight-term} of LGBTQ+ health research — through systematic review, meta-analysis, and tools like stigmaR — to strengthen how the field measures, synthesizes, and communicates evidence.
+2.   I invest in the [meta-scientific infrastructure]{.highlight-term} of LGBTQ+ health research — through systematic review, meta-analysis, and creating software — to strengthen how the field measures, synthesizes, and communicates evidence.
 
 3.  I examine how [religion and spirituality]{.highlight-term} across socioecological levels — from individual beliefs to structural policy — shape mental health for LGBTQ+ individuals, with particular attention to conservative religious contexts.
 
