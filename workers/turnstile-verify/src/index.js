@@ -1,4 +1,5 @@
 const ALLOWED_ORIGIN = "https://follhim.net";
+const CV_URL = "https://bitli.pro/2KRCT_c18bc349";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
@@ -52,7 +53,7 @@ export default {
       return new Response(
         JSON.stringify({
           success: outcome.success,
-          url: outcome.success ? env.CV_URL : null
+          url: outcome.success ? CV_URL : null
         }),
         { headers: { "Content-Type": "application/json", ...corsHeaders } }
       );

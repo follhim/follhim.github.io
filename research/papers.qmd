@@ -47,7 +47,11 @@ register_gfont("Inter")
 </button>
 <span id="count" class="badge bg-primary ms-2">0</span>
 
-<div id="turnstile-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;"><div style="background:#fff;padding:2rem 2.5rem;border-radius:0.75rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:320px;"><p id="ts-status" style="margin:0 0 1rem;font-weight:600;font-size:1rem;">Verifying&hellip;</p><div id="turnstile-container"></div></div></div>
+<!-- Turnstile widget: off-screen but visible so the iframe initialises properly -->
+<div id="turnstile-container" style="position:fixed;left:-9999px;top:-9999px;"></div>
+
+<!-- Status modal (no widget inside — avoids display:none iframe suspension) -->
+<div id="turnstile-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;"><div style="background:#fff;padding:2rem 2.5rem;border-radius:0.75rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:280px;"><p id="ts-status" style="margin:0;font-weight:600;font-size:1rem;">Verifying&hellip;</p></div></div>
 
 <!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
 <script>
