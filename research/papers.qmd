@@ -47,8 +47,13 @@ register_gfont("Inter")
 </a>
 <span id="count" class="badge bg-primary ms-2">0</span>
 
-<!-- Turnstile widget container (invisible until challenge is needed) -->
-<div id="turnstile-container" style="margin-top: 0.5rem;"></div>
+<!-- Turnstile modal overlay -->
+<div id="turnstile-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:2rem 2.5rem; border-radius:0.75rem; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.25); min-width:320px;">
+    <p style="margin:0 0 1rem; font-weight:600; font-size:1rem;">Verify to download CV</p>
+    <div id="turnstile-container"></div>
+  </div>
+</div>
 
 <!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
 <script>
@@ -132,8 +137,14 @@ register_gfont("Inter")
     function runChallenge() {
       return new Promise((resolve) => {
         window._tsResolve = resolve;
+        const modal = document.getElementById('turnstile-modal');
+        modal.style.display = 'flex';
         turnstile.execute(window._tsWidgetId);
       });
+    }
+
+    function closeModal() {
+      document.getElementById('turnstile-modal').style.display = 'none';
     }
 
     // Send token to Worker for server-side validation
@@ -158,10 +169,17 @@ register_gfont("Inter")
       e.preventDefault();
       const href = this.getAttribute('href');
 
+      // Open tab immediately (synchronous, before any awaits)
+      // so mobile browsers don't block it as a popup
+      const tab = window.open('', '_blank');
+
       // 1. Run Turnstile challenge
       const result = await runChallenge();
+      closeModal();
+
       if (!result.ok) {
         console.error('Turnstile challenge failed:', result.code);
+        tab.close();
         turnstile.reset(window._tsWidgetId);
         return;
       }
@@ -170,9 +188,10 @@ register_gfont("Inter")
       const verified = await verifyWithWorker(result.token);
       if (verified) {
         await incrementCount();
-        window.open(href, '_blank');
+        tab.location.href = href;  // navigate the already-open tab
       } else {
         console.error('Server-side token verification failed');
+        tab.close();
       }
 
       // 3. Reset for next click
