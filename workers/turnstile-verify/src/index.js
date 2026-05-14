@@ -50,7 +50,10 @@ export default {
       const outcome = await verifyRes.json();
 
       return new Response(
-        JSON.stringify({ success: outcome.success }),
+        JSON.stringify({
+          success: outcome.success,
+          url: outcome.success ? env.CV_URL : null
+        }),
         { headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     } catch (err) {

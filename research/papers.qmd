@@ -42,18 +42,12 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<a class="btn btn-success" id="cv-download-trigger" href="https://bitli.pro/2KRCT_c18bc349" style="cursor:pointer;">
+<button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;">
     <i class="bi bi-file-earmark-pdf"></i> Download CV
-</a>
+</button>
 <span id="count" class="badge bg-primary ms-2">0</span>
 
-<!-- Turnstile modal overlay -->
-<div id="turnstile-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; padding:2rem 2.5rem; border-radius:0.75rem; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.25); min-width:320px;">
-    <p style="margin:0 0 1rem; font-weight:600; font-size:1rem;">Verify to download CV</p>
-    <div id="turnstile-container"></div>
-  </div>
-</div>
+<div id="turnstile-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;"><div style="background:#fff;padding:2rem 2.5rem;border-radius:0.75rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:320px;"><p id="ts-status" style="margin:0 0 1rem;font-weight:600;font-size:1rem;">Verifying&hellip;</p><div id="turnstile-container"></div></div></div>
 
 <!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
 <script>
@@ -147,7 +141,7 @@ register_gfont("Inter")
       document.getElementById('turnstile-modal').style.display = 'none';
     }
 
-    // Send token to Worker for server-side validation
+    // Send token to Worker — returns { success, url } on pass
     async function verifyWithWorker(token) {
       try {
         const res  = await fetch(`${WORKER_URL}/verify`, {
@@ -155,47 +149,58 @@ register_gfont("Inter")
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ token })
         });
-        const data = await res.json();
-        return data.success === true;
+        return await res.json();
       } catch (err) {
         console.error('Worker verification error:', err);
-        return false;
+        return { success: false };
       }
+    }
+
+    // Navigate without triggering popup blockers on any device
+    function navigateTo(url) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }
 
     getCount();
 
-    document.getElementById('cv-download-trigger').addEventListener('click', async function(e) {
-      e.preventDefault();
-      const href = this.getAttribute('href');
+    document.getElementById('cv-download-trigger').addEventListener('click', async function() {
+      const modal  = document.getElementById('turnstile-modal');
+      const status = document.getElementById('ts-status');
 
-      // Open tab immediately (synchronous, before any awaits)
-      // so mobile browsers don't block it as a popup
-      const tab = window.open('', '_blank');
-
-      // 1. Run Turnstile challenge
+      // 1. Show modal and run Turnstile challenge
+      status.textContent = 'Verifying…';
+      modal.style.display = 'flex';
       const result = await runChallenge();
-      closeModal();
 
       if (!result.ok) {
-        console.error('Turnstile challenge failed:', result.code);
-        tab.close();
+        status.textContent = 'Verification failed — please try again.';
+        setTimeout(closeModal, 2000);
         turnstile.reset(window._tsWidgetId);
         return;
       }
 
-      // 2. Verify token server-side via Worker
-      const verified = await verifyWithWorker(result.token);
-      if (verified) {
-        await incrementCount();
-        tab.location.href = href;  // navigate the already-open tab
-      } else {
-        console.error('Server-side token verification failed');
-        tab.close();
-      }
+      // 2. Verify token server-side and get URL from Worker
+      status.textContent = 'Verified ✓ — opening your CV…';
+      const data = await verifyWithWorker(result.token);
 
-      // 3. Reset for next click
-      turnstile.reset(window._tsWidgetId);
+      if (data.success && data.url) {
+        await incrementCount();
+        setTimeout(() => {
+          closeModal();
+          navigateTo(data.url);
+          turnstile.reset(window._tsWidgetId);
+        }, 800);  // brief pause so user sees the ✓ confirmed state
+      } else {
+        status.textContent = 'Verification failed — please try again.';
+        setTimeout(closeModal, 2000);
+        turnstile.reset(window._tsWidgetId);
+      }
     });
   });
 </script>
