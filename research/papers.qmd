@@ -59,7 +59,7 @@ register_gfont("Inter")
     window._tsWidgetId = turnstile.render('#turnstile-container', {
       sitekey:            '0x4AAAAAADNayBUca6pR_5fG',
       execution:          'execute',       // don't run until we call execute()
-      appearance:         'interaction-only', // only shows UI if human interaction required
+      appearance:         'always',            // always show the widget
       callback: function(token) {
         if (window._tsResolve) {
           window._tsResolve({ ok: true, token: token });
