@@ -273,45 +273,35 @@ window.Quarto = {
 </header>
 
 
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;">
 <button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;">
 <i class="bi bi-file-earmark-pdf"></i> Download CV
 </button>
-<p><span id="count" class="badge bg-primary ms-2">0</span></p>
-<!-- Turnstile widget: off-screen but visible so the iframe initialises properly -->
-<div id="turnstile-container" style="position:fixed;left:-9999px;top:-9999px;">
+<p><span id="count" class="badge bg-primary">0</span></p>
+</div>
+<div id="turnstile-container" style="margin-top:0.5rem;">
 
 </div>
-<!-- Status modal (no widget inside — avoids display:none iframe suspension) -->
-<div id="turnstile-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;">
-<div style="background:#fff;padding:2rem 2.5rem;border-radius:0.75rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:280px;">
-<p id="ts-status" style="margin:0;font-weight:600;font-size:1rem;">
-Verifying…
+<p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;">
 </p>
-</div>
-</div>
-<!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
+<!-- Turnstile globals: plain script so onTurnstileLoad callback is reachable -->
 <script>
-  window._tsWidgetId   = null;
-  window._tsResolve    = null;
+  window._tsToken    = null;
+  window._tsWidgetId = null;
 
   function onTurnstileLoad() {
     window._tsWidgetId = turnstile.render('#turnstile-container', {
-      sitekey:            '0x4AAAAAADNayBUca6pR_5fG',
-      execution:          'execute',       // don't run until we call execute()
-      appearance:         'interaction-only',  // only shows if Cloudflare needs a click
+      sitekey:           '0x4AAAAAADNayBUca6pR_5fG',
+      execution:         'render',
+      appearance:        'always',
       callback: function(token) {
-        if (window._tsResolve) {
-          window._tsResolve({ ok: true, token: token });
-          window._tsResolve = null;
-        }
+        window._tsToken = token;
       },
-      'error-callback': function(code) {
-        if (window._tsResolve) {
-          window._tsResolve({ ok: false, code: code });
-          window._tsResolve = null;
-        }
+      'error-callback': function() {
+        window._tsToken = null;
       },
       'expired-callback': function() {
+        window._tsToken = null;
         turnstile.reset(window._tsWidgetId);
       }
     });
@@ -333,7 +323,6 @@ Verifying…
       measurementId: "G-7149VRMDP5"
     };
 
-    // !! Replace with your deployed Worker URL after running: wrangler deploy
     const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
 
     const app = initializeApp(firebaseConfig);
@@ -366,24 +355,9 @@ Verifying…
       }
     }
 
-    // Run the Turnstile challenge and return a Promise<{ok, token}>
-    function runChallenge() {
-      return new Promise((resolve) => {
-        window._tsResolve = resolve;
-        const modal = document.getElementById('turnstile-modal');
-        modal.style.display = 'flex';
-        turnstile.execute(window._tsWidgetId);
-      });
-    }
-
-    function closeModal() {
-      document.getElementById('turnstile-modal').style.display = 'none';
-    }
-
-    // Send token to Worker — returns { success, url } on pass
     async function verifyWithWorker(token) {
       try {
-        const res  = await fetch(`${WORKER_URL}/verify`, {
+        const res = await fetch(`${WORKER_URL}/verify`, {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ token })
@@ -395,7 +369,6 @@ Verifying…
       }
     }
 
-    // Navigate without triggering popup blockers on any device
     function navigateTo(url) {
       const a = document.createElement('a');
       a.href = url;
@@ -409,44 +382,40 @@ Verifying…
     getCount();
 
     document.getElementById('cv-download-trigger').addEventListener('click', async function() {
-      const modal  = document.getElementById('turnstile-modal');
       const status = document.getElementById('ts-status');
+      const btn    = this;
 
-      // 1. Show modal and run Turnstile challenge
-      status.textContent = 'Verifying…';
-      modal.style.display = 'flex';
-      const result = await runChallenge();
-
-      if (!result.ok) {
-        status.textContent = 'Verification failed — please try again.';
-        setTimeout(closeModal, 2000);
-        turnstile.reset(window._tsWidgetId);
+      if (!window._tsToken) {
+        status.textContent = 'Please wait for verification to complete…';
         return;
       }
 
-      // 2. Verify token server-side and get URL from Worker
-      status.textContent = 'Verified ✓ — opening your CV…';
-      const data = await verifyWithWorker(result.token);
+      btn.disabled = true;
+      status.textContent = 'Opening your CV…';
+
+      const token = window._tsToken;
+      window._tsToken = null;
+
+      const data = await verifyWithWorker(token);
 
       if (data.success && data.url) {
         await incrementCount();
-        setTimeout(() => {
-          closeModal();
-          navigateTo(data.url);
-          turnstile.reset(window._tsWidgetId);
-        }, 800);  // brief pause so user sees the ✓ confirmed state
+        navigateTo(data.url);
+        status.textContent = '';
+        turnstile.reset(window._tsWidgetId);
       } else {
         status.textContent = 'Verification failed — please try again.';
-        setTimeout(closeModal, 2000);
         turnstile.reset(window._tsWidgetId);
       }
+
+      btn.disabled = false;
     });
   });
 </script>
 <div class="cell" data-asis="true">
 <div class="cell-output-display">
-<div class="girafe html-widget html-fill-item" id="htmlwidget-c662017bb1a8c7842976" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-c662017bb1a8c7842976">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_79b9312c5cc555c1' viewBox='0 0 864 360'>\n <defs id='svg_79b9312c5cc555c1_defs'>\n  <clipPath id='svg_79b9312c5cc555c1_c1'>\n   <rect x='0' y='0' width='864' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_79b9312c5cc555c1_c2'>\n   <rect x='52.12' y='46.35' width='800.92' height='259.49'/>\n  <\/clipPath>\n  <clipPath id='svg_79b9312c5cc555c1_c3'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.17'/>\n  <\/clipPath>\n  <clipPath id='svg_79b9312c5cc555c1_c4'>\n   <rect x='432' y='5.48' width='426.52' height='334.17'/>\n  <\/clipPath>\n  <clipPath id='svg_79b9312c5cc555c1_c5'>\n   <rect x='52.12' y='46.35' width='374.4' height='259.49'/>\n  <\/clipPath>\n  <clipPath id='svg_79b9312c5cc555c1_c6'>\n   <rect x='478.65' y='46.35' width='374.4' height='259.49'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_79b9312c5cc555c1_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c1)'>\n   <rect x='0' y='0' width='864' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='864' height='360' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c3)'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.17' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c4)'>\n   <rect x='432' y='5.48' width='426.52' height='334.17' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c5)'>\n   <rect x='52.12' y='46.35' width='374.4' height='259.49' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_79b9312c5cc555c1_e1' x='69.14' y='228.8' width='42.55' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='2'/>\n   <rect id='svg_79b9312c5cc555c1_e2' x='69.14' y='147.71' width='340.36' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='16'/>\n   <rect id='svg_79b9312c5cc555c1_e3' x='69.14' y='66.62' width='255.27' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='12'/>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c1)'>\n   <polyline points='52.12,305.84 52.12,46.35' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='24.96' y='260.77' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='24.96' y='179.68' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <text x='24.96' y='98.59' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2026<\/text>\n   <polyline points='52.12,305.84 426.52,305.84' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='66.36' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='172.73' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>5<\/text>\n   <text x='276.31' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>10<\/text>\n   <text x='382.67' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>15<\/text>\n   <text x='204.31' y='331.52' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Citations<\/text>\n   <text transform='translate(19.57,188.77) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='52.12' y='38.22' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Citations: 30<\/text>\n   <text x='52.12' y='21.03' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Citation History Over Time<\/text>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c6)'>\n   <rect x='478.65' y='46.35' width='374.4' height='259.49' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_79b9312c5cc555c1_e4' x='495.66' y='228.8' width='42.55' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='1'/>\n   <rect id='svg_79b9312c5cc555c1_e5' x='495.66' y='147.71' width='340.36' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='8'/>\n   <rect id='svg_79b9312c5cc555c1_e6' x='495.66' y='66.62' width='42.55' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='1'/>\n  <\/g>\n  <g clip-path='url(#svg_79b9312c5cc555c1_c1)'>\n   <polyline points='478.65,305.84 478.65,46.35' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='451.48' y='260.77' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='451.48' y='179.68' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <text x='451.48' y='98.59' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2026<\/text>\n   <polyline points='478.65,305.84 853.04,305.84' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='492.88' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='577.97' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='663.06' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='748.15' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='833.24' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>8<\/text>\n   <text x='621.82' y='331.52' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Publications<\/text>\n   <text transform='translate(446.09,188.77) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='478.65' y='38.22' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Publications: 10<\/text>\n   <text x='478.65' y='21.03' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Publications Over Time<\/text>\n   <text x='622.97' y='352.3' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Data from Google Scholar via SerpApi (2026-05-14)<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_79b9312c5cc555c1","ratio":2.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300,"default_on":false},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<div class="girafe html-widget html-fill-item" id="htmlwidget-245c598adcc2b2055b85" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-245c598adcc2b2055b85">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_bb3bc8be45488454' viewBox='0 0 864 360'>\n <defs id='svg_bb3bc8be45488454_defs'>\n  <clipPath id='svg_bb3bc8be45488454_c1'>\n   <rect x='0' y='0' width='864' height='360'/>\n  <\/clipPath>\n  <clipPath id='svg_bb3bc8be45488454_c2'>\n   <rect x='52.12' y='46.35' width='800.92' height='259.49'/>\n  <\/clipPath>\n  <clipPath id='svg_bb3bc8be45488454_c3'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.17'/>\n  <\/clipPath>\n  <clipPath id='svg_bb3bc8be45488454_c4'>\n   <rect x='432' y='5.48' width='426.52' height='334.17'/>\n  <\/clipPath>\n  <clipPath id='svg_bb3bc8be45488454_c5'>\n   <rect x='52.12' y='46.35' width='374.4' height='259.49'/>\n  <\/clipPath>\n  <clipPath id='svg_bb3bc8be45488454_c6'>\n   <rect x='478.65' y='46.35' width='374.4' height='259.49'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_bb3bc8be45488454_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_bb3bc8be45488454_c1)'>\n   <rect x='0' y='0' width='864' height='360' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n   <rect x='0' y='0' width='864' height='360' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c3)'>\n   <rect x='5.48' y='5.48' width='426.52' height='334.17' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c4)'>\n   <rect x='432' y='5.48' width='426.52' height='334.17' fill='#0E2638' fill-opacity='1' stroke='none'/>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c5)'>\n   <rect x='52.12' y='46.35' width='374.4' height='259.49' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_bb3bc8be45488454_e1' x='69.14' y='228.8' width='42.55' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='2'/>\n   <rect id='svg_bb3bc8be45488454_e2' x='69.14' y='147.71' width='340.36' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='16'/>\n   <rect id='svg_bb3bc8be45488454_e3' x='69.14' y='66.62' width='255.27' height='56.76' fill='#4A90A4' fill-opacity='1' stroke='none' title='12'/>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c1)'>\n   <polyline points='52.12,305.84 52.12,46.35' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='24.96' y='260.77' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='24.96' y='179.68' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <text x='24.96' y='98.59' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2026<\/text>\n   <polyline points='52.12,305.84 426.52,305.84' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='66.36' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='172.73' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>5<\/text>\n   <text x='276.31' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>10<\/text>\n   <text x='382.67' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>15<\/text>\n   <text x='204.31' y='331.52' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Citations<\/text>\n   <text transform='translate(19.57,188.77) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='52.12' y='38.22' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Citations: 30<\/text>\n   <text x='52.12' y='21.03' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Citation History Over Time<\/text>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c6)'>\n   <rect x='478.65' y='46.35' width='374.4' height='259.49' fill='#0E2638' fill-opacity='1' stroke='none'/>\n   <rect id='svg_bb3bc8be45488454_e4' x='495.66' y='228.8' width='42.55' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='1'/>\n   <rect id='svg_bb3bc8be45488454_e5' x='495.66' y='147.71' width='340.36' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='8'/>\n   <rect id='svg_bb3bc8be45488454_e6' x='495.66' y='66.62' width='42.55' height='56.76' fill='#7FB069' fill-opacity='1' stroke='none' title='1'/>\n  <\/g>\n  <g clip-path='url(#svg_bb3bc8be45488454_c1)'>\n   <polyline points='478.65,305.84 478.65,46.35' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='451.48' y='260.77' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2024<\/text>\n   <text x='451.48' y='179.68' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2025<\/text>\n   <text x='451.48' y='98.59' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2026<\/text>\n   <polyline points='478.65,305.84 853.04,305.84' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <text x='492.88' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>0<\/text>\n   <text x='577.97' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>2<\/text>\n   <text x='663.06' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>4<\/text>\n   <text x='748.15' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>6<\/text>\n   <text x='833.24' y='317.95' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>8<\/text>\n   <text x='621.82' y='331.52' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'># of Publications<\/text>\n   <text transform='translate(446.09,188.77) rotate(-90.00)' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Year<\/text>\n   <text x='478.65' y='38.22' font-size='9pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Total Publications: 10<\/text>\n   <text x='478.65' y='21.03' font-size='10.5pt' font-weight='bold' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Publications Over Time<\/text>\n   <text x='622.97' y='352.3' font-size='7.5pt' font-family='Helvetica' fill='#EBEBEB' fill-opacity='1'>Data from Google Scholar via SerpApi (2026-05-14)<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_bb3bc8be45488454","ratio":2.4,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_data_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_data_SVGID_ { fill:orange;stroke:black; }\nline.hover_data_SVGID_, polyline.hover_data_SVGID_ { fill:none;stroke:orange; }\nrect.hover_data_SVGID_, polygon.hover_data_SVGID_, path.hover_data_SVGID_ { fill:orange;stroke:none; }\nimage.hover_data_SVGID_ { stroke:orange; }","reactive":true,"nearest_distance":null},"hover_inv":{"css":""},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300,"default_on":false},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <section id="published-papers" class="level2">

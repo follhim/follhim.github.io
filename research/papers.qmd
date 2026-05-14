@@ -42,40 +42,31 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;">
-    <i class="bi bi-file-earmark-pdf"></i> Download CV
-</button>
-<span id="count" class="badge bg-primary ms-2">0</span>
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+<button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i> Download CV</button>
+<span id="count" class="badge bg-primary">0</span>
+</div>
+<div id="turnstile-container" style="margin-top:0.5rem;"></div>
+<p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;"></p>
 
-<!-- Turnstile widget: off-screen but visible so the iframe initialises properly -->
-<div id="turnstile-container" style="position:fixed;left:-9999px;top:-9999px;"></div>
-
-<!-- Status modal (no widget inside — avoids display:none iframe suspension) -->
-<div id="turnstile-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;"><div style="background:#fff;padding:2rem 2.5rem;border-radius:0.75rem;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.25);min-width:280px;"><p id="ts-status" style="margin:0;font-weight:600;font-size:1rem;">Verifying&hellip;</p></div></div>
-
-<!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
+<!-- Turnstile globals: plain script so onTurnstileLoad callback is reachable -->
 <script>
-  window._tsWidgetId   = null;
-  window._tsResolve    = null;
+  window._tsToken    = null;
+  window._tsWidgetId = null;
 
   function onTurnstileLoad() {
     window._tsWidgetId = turnstile.render('#turnstile-container', {
-      sitekey:            '0x4AAAAAADNayBUca6pR_5fG',
-      execution:          'execute',       // don't run until we call execute()
-      appearance:         'interaction-only',  // only shows if Cloudflare needs a click
+      sitekey:           '0x4AAAAAADNayBUca6pR_5fG',
+      execution:         'render',
+      appearance:        'always',
       callback: function(token) {
-        if (window._tsResolve) {
-          window._tsResolve({ ok: true, token: token });
-          window._tsResolve = null;
-        }
+        window._tsToken = token;
       },
-      'error-callback': function(code) {
-        if (window._tsResolve) {
-          window._tsResolve({ ok: false, code: code });
-          window._tsResolve = null;
-        }
+      'error-callback': function() {
+        window._tsToken = null;
       },
       'expired-callback': function() {
+        window._tsToken = null;
         turnstile.reset(window._tsWidgetId);
       }
     });
@@ -98,7 +89,6 @@ register_gfont("Inter")
       measurementId: "G-7149VRMDP5"
     };
 
-    // !! Replace with your deployed Worker URL after running: wrangler deploy
     const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
 
     const app = initializeApp(firebaseConfig);
@@ -131,24 +121,9 @@ register_gfont("Inter")
       }
     }
 
-    // Run the Turnstile challenge and return a Promise<{ok, token}>
-    function runChallenge() {
-      return new Promise((resolve) => {
-        window._tsResolve = resolve;
-        const modal = document.getElementById('turnstile-modal');
-        modal.style.display = 'flex';
-        turnstile.execute(window._tsWidgetId);
-      });
-    }
-
-    function closeModal() {
-      document.getElementById('turnstile-modal').style.display = 'none';
-    }
-
-    // Send token to Worker — returns { success, url } on pass
     async function verifyWithWorker(token) {
       try {
-        const res  = await fetch(`${WORKER_URL}/verify`, {
+        const res = await fetch(`${WORKER_URL}/verify`, {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ token })
@@ -160,7 +135,6 @@ register_gfont("Inter")
       }
     }
 
-    // Navigate without triggering popup blockers on any device
     function navigateTo(url) {
       const a = document.createElement('a');
       a.href = url;
@@ -174,37 +148,33 @@ register_gfont("Inter")
     getCount();
 
     document.getElementById('cv-download-trigger').addEventListener('click', async function() {
-      const modal  = document.getElementById('turnstile-modal');
       const status = document.getElementById('ts-status');
+      const btn    = this;
 
-      // 1. Show modal and run Turnstile challenge
-      status.textContent = 'Verifying…';
-      modal.style.display = 'flex';
-      const result = await runChallenge();
-
-      if (!result.ok) {
-        status.textContent = 'Verification failed — please try again.';
-        setTimeout(closeModal, 2000);
-        turnstile.reset(window._tsWidgetId);
+      if (!window._tsToken) {
+        status.textContent = 'Please wait for verification to complete…';
         return;
       }
 
-      // 2. Verify token server-side and get URL from Worker
-      status.textContent = 'Verified ✓ — opening your CV…';
-      const data = await verifyWithWorker(result.token);
+      btn.disabled = true;
+      status.textContent = 'Opening your CV…';
+
+      const token = window._tsToken;
+      window._tsToken = null;
+
+      const data = await verifyWithWorker(token);
 
       if (data.success && data.url) {
         await incrementCount();
-        setTimeout(() => {
-          closeModal();
-          navigateTo(data.url);
-          turnstile.reset(window._tsWidgetId);
-        }, 800);  // brief pause so user sees the ✓ confirmed state
+        navigateTo(data.url);
+        status.textContent = '';
+        turnstile.reset(window._tsWidgetId);
       } else {
         status.textContent = 'Verification failed — please try again.';
-        setTimeout(closeModal, 2000);
         turnstile.reset(window._tsWidgetId);
       }
+
+      btn.disabled = false;
     });
   });
 </script>
