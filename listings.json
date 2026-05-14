@@ -1,14 +1,6 @@
 [
   {
-    "listing": "/news/news.html",
-    "items": []
-  },
-  {
     "listing": "/index.html",
-    "items": []
-  },
-  {
-    "listing": "/research/papers.html",
     "items": []
   },
   {
@@ -17,5 +9,13 @@
       "/resource_page/public/scra25_blitz.html",
       "/resource_page/public/apa_cor_tab.html"
     ]
+  },
+  {
+    "listing": "/research/papers.html",
+    "items": []
+  },
+  {
+    "listing": "/news/news.html",
+    "items": []
   }
 ]
