@@ -1,4 +1,4 @@
-const ALLOWED_ORIGIN = "https://follhim.github.io";
+const ALLOWED_ORIGIN = "https://follhim.net";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": ALLOWED_ORIGIN,

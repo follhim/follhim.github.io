@@ -96,7 +96,7 @@ register_gfont("Inter")
     };
 
     // !! Replace with your deployed Worker URL after running: wrangler deploy
-    const WORKER_URL = 'https://turnstile-verify.yourname.workers.dev';
+    const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
 
     const app = initializeApp(firebaseConfig);
     const db  = getFirestore(app);
