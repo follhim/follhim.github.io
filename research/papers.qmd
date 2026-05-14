@@ -46,31 +46,14 @@ register_gfont("Inter")
 <button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i> Download CV</button>
 <span id="count" class="badge bg-primary">0</span>
 </div>
-<div id="turnstile-container" style="margin-top:0.5rem;"></div>
+<div id="turnstile-container" style="display:none;margin-top:0.5rem;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;"></p>
 
-<!-- Turnstile globals: plain script so onTurnstileLoad callback is reachable -->
+<!-- Turnstile globals: plain script so onTurnstileLoad is reachable -->
 <script>
-  window._tsToken    = null;
-  window._tsWidgetId = null;
-
-  function onTurnstileLoad() {
-    window._tsWidgetId = turnstile.render('#turnstile-container', {
-      sitekey:           '0x4AAAAAADNayBUca6pR_5fG',
-      execution:         'render',
-      appearance:        'always',
-      callback: function(token) {
-        window._tsToken = token;
-      },
-      'error-callback': function() {
-        window._tsToken = null;
-      },
-      'expired-callback': function() {
-        window._tsToken = null;
-        turnstile.reset(window._tsWidgetId);
-      }
-    });
-  }
+  window._tsScriptLoaded = false;
+  window._tsWidgetId     = null;
+  function onTurnstileLoad() { window._tsScriptLoaded = true; }
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
 
@@ -145,36 +128,56 @@ register_gfont("Inter")
       document.body.removeChild(a);
     }
 
+    const container = document.getElementById('turnstile-container');
+    const status    = document.getElementById('ts-status');
+
+    function renderWidget() {
+      // Only render once; ignore extra clicks while widget is showing
+      if (window._tsWidgetId !== null) return;
+
+      container.style.display = 'block';
+      status.textContent = '';
+
+      window._tsWidgetId = turnstile.render('#turnstile-container', {
+        sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
+        execution:  'render',
+        appearance: 'always',
+        callback: async function(token) {
+          status.textContent = 'Opening your CV…';
+          const data = await verifyWithWorker(token);
+          if (data.success && data.url) {
+            await incrementCount();
+            navigateTo(data.url);
+            container.style.display = 'none';
+            status.textContent = '';
+            turnstile.remove(window._tsWidgetId);
+            window._tsWidgetId = null;
+          } else {
+            status.textContent = 'Verification failed — please try again.';
+            turnstile.remove(window._tsWidgetId);
+            window._tsWidgetId = null;
+          }
+        },
+        'error-callback': function() {
+          status.textContent = 'Verification error — please try again.';
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        },
+        'expired-callback': function() {
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        }
+      });
+    }
+
     getCount();
 
-    document.getElementById('cv-download-trigger').addEventListener('click', async function() {
-      const status = document.getElementById('ts-status');
-      const btn    = this;
-
-      if (!window._tsToken) {
-        status.textContent = 'Please wait for verification to complete…';
+    document.getElementById('cv-download-trigger').addEventListener('click', function() {
+      if (!window._tsScriptLoaded) {
+        status.textContent = 'Still loading — please try again in a moment.';
         return;
       }
-
-      btn.disabled = true;
-      status.textContent = 'Opening your CV…';
-
-      const token = window._tsToken;
-      window._tsToken = null;
-
-      const data = await verifyWithWorker(token);
-
-      if (data.success && data.url) {
-        await incrementCount();
-        navigateTo(data.url);
-        status.textContent = '';
-        turnstile.reset(window._tsWidgetId);
-      } else {
-        status.textContent = 'Verification failed — please try again.';
-        turnstile.reset(window._tsWidgetId);
-      }
-
-      btn.disabled = false;
+      renderWidget();
     });
   });
 </script>
