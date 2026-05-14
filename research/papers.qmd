@@ -42,10 +42,43 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
-<a class="btn btn-success" id="cv-download-trigger" href="https://bitli.pro/2KRCT_c18bc349" target="_blank" style="cursor:pointer;">
+<a class="btn btn-success" id="cv-download-trigger" href="https://bitli.pro/2KRCT_c18bc349" style="cursor:pointer;">
     <i class="bi bi-file-earmark-pdf"></i> Download CV
 </a>
 <span id="count" class="badge bg-primary ms-2">0</span>
+
+<!-- Turnstile widget container (invisible until challenge is needed) -->
+<div id="turnstile-container" style="margin-top: 0.5rem;"></div>
+
+<!-- Turnstile globals: must be a plain script so the onload callback is reachable -->
+<script>
+  window._tsWidgetId   = null;
+  window._tsResolve    = null;
+
+  function onTurnstileLoad() {
+    window._tsWidgetId = turnstile.render('#turnstile-container', {
+      sitekey:            '0x4AAAAAADNayBUca6pR_5fG',
+      execution:          'execute',       // don't run until we call execute()
+      appearance:         'interaction-only', // only shows UI if human interaction required
+      callback: function(token) {
+        if (window._tsResolve) {
+          window._tsResolve({ ok: true, token: token });
+          window._tsResolve = null;
+        }
+      },
+      'error-callback': function(code) {
+        if (window._tsResolve) {
+          window._tsResolve({ ok: false, code: code });
+          window._tsResolve = null;
+        }
+      },
+      'expired-callback': function() {
+        turnstile.reset(window._tsWidgetId);
+      }
+    });
+  }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
@@ -62,8 +95,11 @@ register_gfont("Inter")
       measurementId: "G-7149VRMDP5"
     };
 
+    // !! Replace with your deployed Worker URL after running: wrangler deploy
+    const WORKER_URL = 'https://turnstile-verify.yourname.workers.dev';
+
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const db  = getFirestore(app);
     const countRef = doc(db, "counts", "cvDownload");
 
     async function incrementCount() {
@@ -92,10 +128,55 @@ register_gfont("Inter")
       }
     }
 
+    // Run the Turnstile challenge and return a Promise<{ok, token}>
+    function runChallenge() {
+      return new Promise((resolve) => {
+        window._tsResolve = resolve;
+        turnstile.execute(window._tsWidgetId);
+      });
+    }
+
+    // Send token to Worker for server-side validation
+    async function verifyWithWorker(token) {
+      try {
+        const res  = await fetch(`${WORKER_URL}/verify`, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ token })
+        });
+        const data = await res.json();
+        return data.success === true;
+      } catch (err) {
+        console.error('Worker verification error:', err);
+        return false;
+      }
+    }
+
     getCount();
 
-    document.getElementById('cv-download-trigger').addEventListener('click', function() {
-      incrementCount();
+    document.getElementById('cv-download-trigger').addEventListener('click', async function(e) {
+      e.preventDefault();
+      const href = this.getAttribute('href');
+
+      // 1. Run Turnstile challenge
+      const result = await runChallenge();
+      if (!result.ok) {
+        console.error('Turnstile challenge failed:', result.code);
+        turnstile.reset(window._tsWidgetId);
+        return;
+      }
+
+      // 2. Verify token server-side via Worker
+      const verified = await verifyWithWorker(result.token);
+      if (verified) {
+        await incrementCount();
+        window.open(href, '_blank');
+      } else {
+        console.error('Server-side token verification failed');
+      }
+
+      // 3. Reset for next click
+      turnstile.reset(window._tsWidgetId);
     });
   });
 </script>
