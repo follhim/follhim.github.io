@@ -58,7 +58,7 @@ register_gfont("Inter")
     window._tsWidgetId = turnstile.render('#turnstile-container', {
       sitekey:            '0x4AAAAAADNayBUca6pR_5fG',
       execution:          'execute',       // don't run until we call execute()
-      appearance:         'always',            // always show the widget
+      appearance:         'interaction-only',  // only shows if Cloudflare needs a click
       callback: function(token) {
         if (window._tsResolve) {
           window._tsResolve({ ok: true, token: token });
