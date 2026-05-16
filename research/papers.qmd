@@ -111,7 +111,10 @@ register_gfont("Inter")
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ token })
         });
-        return await res.json();
+        console.log('HTTP status:', res.status);
+        const data = await res.json();
+        console.log('Worker response:', JSON.stringify(data));
+        return data;
       } catch (err) {
         console.error('Worker verification error:', err);
         return { success: false };
@@ -138,6 +141,8 @@ register_gfont("Inter")
         callback: async function(token) {
           status.textContent = 'Opening your CV…';
           const data = await verifyWithWorker(token);
+          console.log('data.success:', data.success);
+          console.log('data.token:', data.token);
           if (data.success && data.token) {
             await incrementCount();
             navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
@@ -147,6 +152,7 @@ register_gfont("Inter")
             window._tsWidgetId = null;
           } else {
             status.textContent = 'Verification failed — please try again.';
+            console.error('Verification failed. Full response:', JSON.stringify(data));
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           }
