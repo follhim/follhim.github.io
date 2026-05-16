@@ -126,7 +126,6 @@ register_gfont("Inter")
     const status    = document.getElementById('ts-status');
 
     function renderWidget() {
-      // Only render once; ignore extra clicks while widget is showing
       if (window._tsWidgetId !== null) return;
 
       container.style.display = 'block';
@@ -139,9 +138,9 @@ register_gfont("Inter")
         callback: async function(token) {
           status.textContent = 'Opening your CV…';
           const data = await verifyWithWorker(token);
-          if (data.success && data.url) {
+          if (data.success && data.token) {
             await incrementCount();
-            navigateTo(data.url);
+            navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
