@@ -79,6 +79,59 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </script>
+<style>
+.edu-timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 1.5rem 0 2rem;
+  border-left: 2px solid #FF6B35;
+}
+.edu-item {
+  position: relative;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.edu-item::before {
+  content: '';
+  position: absolute;
+  left: -2.4rem;
+  top: 0.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #FF6B35;
+  border: 2px solid #0d1b2a;
+  box-shadow: 0 0 0 2px #FF6B35;
+}
+.edu-year {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FF6B35;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.1rem;
+}
+.edu-degree {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.edu-school {
+  display: block;
+  font-size: 0.95rem;
+  color: #a8b2be;
+}
+.edu-detail {
+  display: block;
+  font-size: 0.82rem;
+  color: #6c757d;
+  font-style: italic;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
