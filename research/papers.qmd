@@ -42,9 +42,11 @@ pacman::p_load(scholar, rcrossref, dplyr, stringr, htmltools, here, tidyverse, g
 register_gfont("Inter")
 ```
 
+<div style="display:flex;justify-content:left;margin-top:1.5rem;margin-bottom:1rem;">
+<button class="btn btn-outline-secondary" id="cv-download-trigger" style="cursor:pointer;border-color:#ffffff;color:#ffffff;"><i class="bi bi-file-earmark-pdf"></i> CV</button>
+</div>
+
 <div style="display:flex;align-items:center;flex-wrap:wrap;gap:0.5rem;">
-<button class="btn btn-success" id="cv-download-trigger" style="cursor:pointer;"><i class="bi bi-file-earmark-pdf"></i> Download CV</button>
-<span id="count" class="badge bg-primary">0</span>
 </div>
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;"></p>
@@ -59,7 +61,7 @@ register_gfont("Inter")
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-  import { getFirestore, doc, getDoc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+  import { getFirestore, doc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
 
   document.addEventListener('DOMContentLoaded', function() {
     const firebaseConfig = {
@@ -88,19 +90,8 @@ register_gfont("Inter")
             transaction.update(countRef, { counts: countDoc.data().counts + 1 });
           }
         });
-        getCount();
       } catch (error) {
         console.error("Transaction failed:", error);
-      }
-    }
-
-    async function getCount() {
-      try {
-        const countDoc = await getDoc(countRef);
-        document.getElementById("count").innerText =
-          countDoc.exists() ? countDoc.data().counts : "0";
-      } catch (error) {
-        console.error("Error getting document:", error);
       }
     }
 
@@ -119,10 +110,6 @@ register_gfont("Inter")
         console.error('Worker verification error:', err);
         return { success: false };
       }
-    }
-
-    function navigateTo(url) {
-      window.location.href = url;
     }
 
     const container = document.getElementById('turnstile-container');
@@ -145,7 +132,7 @@ register_gfont("Inter")
           console.log('data.token:', data.token);
           if (data.success && data.token) {
             await incrementCount();
-            navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
+            window.open(`${WORKER_URL}/redeem?token=${data.token}`, '_blank');
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
@@ -169,8 +156,6 @@ register_gfont("Inter")
       });
     }
 
-    getCount();
-
     document.getElementById('cv-download-trigger').addEventListener('click', function() {
       if (!window._tsScriptLoaded) {
         status.textContent = 'Still loading — please try again in a moment.';
@@ -180,7 +165,6 @@ register_gfont("Inter")
     });
   });
 </script>
-
 ```{r}
 #| echo: FALSE
 #| warning: FALSE
@@ -320,12 +304,4 @@ girafe(ggobj = combined_plot, width_svg = 12, height_svg = 5, fonts = list(sans 
 ## Published Papers
 
 :::{#published}
-:::
-
-## Preprints
-:::callout-warning
-A preprint is an early-stage research paper not yet peer-reviewed or published in a scientific journal. Findings should be considered preliminary, may contain errors, and could change substantially in the final published version. While preprints promote rapid scientific exchange, they should not be cited as established scientific fact, reported as definitive in news media, or used to guide clinical decisions without appropriate context.
-:::
-
-:::{#preprints}
 :::

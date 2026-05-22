@@ -1,7 +1,7 @@
 project:
   type: website
   resources:
-    - "google9541c230ce597c09. html"
+    - "google9541c230ce597c09.html"
     - "_site/cv/*"
     
 website:
@@ -15,13 +15,13 @@ website:
       text: Research
     - href: resource.qmd
       text: Resources
-    tools:
-    - icon: github
-      menu:
-        - text: Source Code
-          href:  https://github.com/follhim/follhim.github.io
-        - text: Report a Bug
-          href:  https://github.com/follhim/follhim.github.io/issues
+    - href: about.qmd
+      text: About
+    right:
+    - text: "{{< iconify academicons:google-scholar height=28px width=28px >}}"
+      href: https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl
+    - text: "{{< iconify academicons:researchgate height=28px width=28px >}}"
+      href: https://www.researchgate.net/profile/Seungju-Kim-11
   comments:
     giscus:
       repo: follhim/follhim.github.io

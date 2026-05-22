@@ -1,0 +1,196 @@
+---
+title: "Seungju Kim"
+pagetitle: "About"
+about:
+  template: jolla
+  image: images/headshot.png
+  image-title: "Seungju Kim"
+comments: false
+format:
+  html:
+    css: styles.css
+---
+
+My name is Seungju Kim[^1] and thank you for visiting my personal website <br> detailing my research interests and work!
+
+[^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
+
+I am a mental health researcher, [National Science Foundation Graduate Research Fellow]{.highlight-term}, and third-year PhD student in Clinical/Community Psychology Program at the [University of Illinois]{.highlight-term}.
+
+<div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
+<p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>
+
+<!-- Turnstile globals: plain script so onTurnstileLoad is reachable -->
+<script>
+  window._tsScriptLoaded = false;
+  window._tsWidgetId     = null;
+  function onTurnstileLoad() { window._tsScriptLoaded = true; }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
+  import { getFirestore, doc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const firebaseConfig = {
+      apiKey: "{{ FB_API }}",
+      authDomain: "cv-download-40a41.firebaseapp.com",
+      projectId: "cv-download-40a41",
+      storageBucket: "cv-download-40a41.firebasestorage.app",
+      messagingSenderId: "842134969852",
+      appId: "{{ APPID }}",
+      measurementId: "G-7149VRMDP5"
+    };
+
+    const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+    const countRef = doc(db, "counts", "cvDownload");
+
+    async function incrementCount() {
+      try {
+        await runTransaction(db, async (transaction) => {
+          const countDoc = await transaction.get(countRef);
+          if (!countDoc.exists()) {
+            transaction.set(countRef, { counts: 1 });
+          } else {
+            transaction.update(countRef, { counts: countDoc.data().counts + 1 });
+          }
+        });
+      } catch (error) {
+        console.error("Transaction failed:", error);
+      }
+    }
+
+    async function verifyWithWorker(token) {
+      try {
+        const res = await fetch(`${WORKER_URL}/verify`, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ token })
+        });
+        const data = await res.json();
+        return data;
+      } catch (err) {
+        console.error('Worker verification error:', err);
+        return { success: false };
+      }
+    }
+
+    const container = document.getElementById('turnstile-container');
+    const status    = document.getElementById('ts-status');
+
+    function renderWidget() {
+      if (window._tsWidgetId !== null) return;
+
+      container.style.display = 'block';
+      status.textContent = '';
+
+      window._tsWidgetId = turnstile.render('#turnstile-container', {
+        sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
+        execution:  'render',
+        appearance: 'always',
+        callback: async function(token) {
+          status.textContent = 'Opening your CV…';
+          const data = await verifyWithWorker(token);
+          if (data.success && data.token) {
+            await incrementCount();
+            window.open(`${WORKER_URL}/redeem?token=${data.token}`, '_blank');
+            container.style.display = 'none';
+            status.textContent = '';
+            turnstile.remove(window._tsWidgetId);
+            window._tsWidgetId = null;
+          } else {
+            status.textContent = 'Verification failed — please try again.';
+            turnstile.remove(window._tsWidgetId);
+            window._tsWidgetId = null;
+          }
+        },
+        'error-callback': function() {
+          status.textContent = 'Verification error — please try again.';
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        },
+        'expired-callback': function() {
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        }
+      });
+    }
+
+    document.getElementById('cv-download-trigger').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (!window._tsScriptLoaded) {
+        status.textContent = 'Still loading — please try again in a moment.';
+        return;
+      }
+      renderWidget();
+    });
+  });
+</script>
+
+<div style="text-align:left;">
+
+
+<div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;">
+  <a href="mailto:seungju7@illinois.edu" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="Email">{{< iconify fluent:mail-48-filled height=32px width=32px >}}</a>
+  <a href="https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="Google Scholar">{{< iconify academicons:google-scholar height=32px width=32px >}}</a>
+  <a href="https://www.researchgate.net/profile/Seungju-Kim-11" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="ResearchGate">{{< iconify la:researchgate height=32px width=32px >}}</a>
+  <a href="https://www.linkedin.com/in/kimseungju/" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="LinkedIn">{{< iconify ion:logo-linkedin height=32px width=32px >}}</a>
+  <a href="https://orcid.org/0009-0009-5166-9170" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="ORCID">{{< iconify fa6-brands:orcid height=32px width=32px >}}</a>
+  <a href="https://github.com/follhim" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="GitHub">{{< iconify octicon:mark-github-16 height=32px width=32px >}}</a>
+  <a href="#" id="cv-download-trigger" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-decoration:none;line-height:1;flex-shrink:0;vertical-align:middle;" title="CV">CV</a>
+</div>
+
+## Research Interests
+
+My research is ultimately informed by my commitment to creating lasting change for the mental and behavioral health of LGBTQ+ people through three lines of research:
+
+1.   I use [longitudinal methods]{.highlight-term} to map the dynamic pathways through which stigma, resilience, and social context accumulate over time to produce mental health disparities among LGBTQ+ individuals.
+
+2.   I invest in the [meta-scientific infrastructure]{.highlight-term} of LGBTQ+ health research — through systematic review, meta-analysis, and creating software — to strengthen how the field measures, synthesizes, and communicates evidence.
+
+3.  I examine how [religion and spirituality]{.highlight-term} across socioecological levels — from individual beliefs to structural policy — shape mental health for LGBTQ+ individuals, with particular attention to conservative religious contexts.
+
+## Education
+
+::: {.edu-timeline}
+
+::: {.edu-item}
+[2024]{.edu-year}
+[B.A. in Psychology]{.edu-degree}
+[Wheaton College]{.edu-school}
+[Magna cum laude]{.edu-detail}
+:::
+
+::: {.edu-item}
+[2026]{.edu-year}
+[M.S. in Psychology]{.edu-degree}
+[University of Illinois at Urbana-Champaign]{.edu-school}
+:::
+
+::: {.edu-item}
+[2031 (expected)]{.edu-year}
+[Ph.D. in Clinical/Community Psychology]{.edu-degree}
+[University of Illinois at Urbana-Champaign]{.edu-school}
+:::
+
+:::
+
+## Training
+
+My research is grounded in a deep commitment to the [flourishing of LGBTQ+ people]{.highlight-term}. My training spans the full spectrum of religious and clinical contexts — from conservative evangelical institutions to affirming community settings — reflecting my conviction that achieving health equity for LGBTQ+ people, particularly youth in conservative families and churches, requires building bridges across differences rather than around it.
+
+Prior to beginning my doctoral studies, I earned my B.A. in Psychology *magna cum laude* from [Wheaton College]{.highlight-term}, where I completed an honors thesis examining psychological well-being in religious mixed-orientation marriages during my junior year. My research training began as a freshman working with Dr. Sandra Rueger, before joining Dr. Mark Yarhouse at the Sexuality and Gender Identity Institute, where I contributed to a national study investigating the complex intersection of faith and LGBTQ+ identities.
+
+Expanding my research training before senior year, I established significant external collaborations with leading researchers. At [Utah State University]{.highlight-term}, I worked with Dr. Tyler Lefevor examining the effects of religiousness and spirituality on LGBTQ+ mental health, where I developed skills in psychometric scale development and validation using R's {psych} and {lavaan} packages.
+
+Simultaneously, I joined Dr. David Wang at [Fuller Theological Seminary]{.highlight-term}, analyzing longitudinal data from a $1.9 million study on spiritual formation. This collaboration strengthened my experience in sophisticated longitudinal modeling using R and Mplus, examining complex patterns of change over time.
+
+My quantitative methodological expertise was further enhanced when I was selected for the competitive [NSF-REU Health Equity](https://mhdi.unl.edu/undergraduate-research-programs/nsf-reu-site-community-engaged-training-advancing-health-equity/) summer internship at the [University of Nebraska-Lincoln]{.highlight-term}. Working with Drs. Katie Edwards and Lorey Wheeler on multiple NIH-funded studies examining LGBTQ+ youth and emerging adults, I gained advanced skills for identifying mischievous responders in survey data, regression models, and scale development. I was later recruited as a post-bac research associate at the [UNL methodology and psychometrics center](https://mapacademy.unl.edu/).
+
+Before entering graduate school, I was awarded the [National Science Foundation Graduate Research Fellowship](https://www.nsfgrfp.org/), among one of the only awardees at Wheaton.
+
+</div>
