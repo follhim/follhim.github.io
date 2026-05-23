@@ -263,6 +263,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     }
     const container = document.getElementById('turnstile-container');
     const status    = document.getElementById('ts-status');
+    let _cvWindow = null;
     function renderWidget() {
       if (window._tsWidgetId !== null) return;
       container.style.display = 'block';
@@ -276,12 +277,19 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
           const data = await verifyWithWorker(token);
           if (data.success && data.token) {
             await incrementCount();
-            window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
+            const url = `${WORKER_URL}/redeem?token=${data.token}`;
+            if (_cvWindow) {
+              _cvWindow.location.href = url;
+              _cvWindow = null;
+            } else {
+              window.location.href = url;
+            }
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           } else {
+            if (_cvWindow) { _cvWindow.close(); _cvWindow = null; }
             status.textContent = 'Verification failed — please try again.';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
@@ -304,6 +312,9 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
         status.textContent = 'Still loading — please try again in a moment.';
         return;
       }
+      // Open a blank window synchronously while the user gesture is still active.
+      // This is the only reliable way to trigger navigation on mobile after an async callback.
+      _cvWindow = window.open('', '_blank');
       renderWidget();
     });
   });
@@ -335,8 +346,8 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="training-12" class="level2">
-<h2 data-anchor-id="training-12">Training 12</h2>
+<section id="training" class="level2">
+<h2 data-anchor-id="training">Training</h2>
 <p>My research is grounded in a deep commitment to the <span class="highlight-term">flourishing of LGBTQ+ people</span>. My training spans the full spectrum of religious and clinical contexts — from conservative evangelical institutions to affirming community settings — reflecting my conviction that achieving health equity for LGBTQ+ people, particularly youth in conservative families and churches, requires building bridges across differences rather than around it.</p>
 <p>Prior to beginning my doctoral studies, I earned my B.A. in Psychology <em>magna cum laude</em> from <span class="highlight-term">Wheaton College</span>, where I completed an honors thesis examining psychological well-being in religious mixed-orientation marriages during my junior year. My research training began as a freshman working with Dr.&nbsp;Sandra Rueger, before joining Dr.&nbsp;Mark Yarhouse at the Sexuality and Gender Identity Institute, where I contributed to a national study investigating the complex intersection of faith and LGBTQ+ identities.</p>
 <p>Expanding my research training before senior year, I established significant external collaborations with leading researchers. At <span class="highlight-term">Utah State University</span>, I worked with Dr.&nbsp;Tyler Lefevor examining the effects of religiousness and spirituality on LGBTQ+ mental health, where I developed skills in psychometric scale development and validation using R’s {psych} and {lavaan} packages.</p>
