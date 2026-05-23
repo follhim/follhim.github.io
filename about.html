@@ -276,7 +276,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
           const data = await verifyWithWorker(token);
           if (data.success && data.token) {
             await incrementCount();
-            window.open(`${WORKER_URL}/redeem?token=${data.token}`, '_blank');
+            window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
