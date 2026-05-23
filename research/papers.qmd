@@ -60,40 +60,8 @@ register_gfont("Inter")
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
 
 <script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-  import { getFirestore, doc, runTransaction } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
-
   document.addEventListener('DOMContentLoaded', function() {
-    const firebaseConfig = {
-      apiKey: "{{ FB_API }}",
-      authDomain: "cv-download-40a41.firebaseapp.com",
-      projectId: "cv-download-40a41",
-      storageBucket: "cv-download-40a41.firebasestorage.app",
-      messagingSenderId: "842134969852",
-      appId: "{{ APPID }}",
-      measurementId: "G-7149VRMDP5"
-    };
-
     const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
-
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
-    const countRef = doc(db, "counts", "cvDownload");
-
-    async function incrementCount() {
-      try {
-        await runTransaction(db, async (transaction) => {
-          const countDoc = await transaction.get(countRef);
-          if (!countDoc.exists()) {
-            transaction.set(countRef, { counts: 1 });
-          } else {
-            transaction.update(countRef, { counts: countDoc.data().counts + 1 });
-          }
-        });
-      } catch (error) {
-        console.error("Transaction failed:", error);
-      }
-    }
 
     async function verifyWithWorker(token) {
       try {
@@ -102,14 +70,16 @@ register_gfont("Inter")
           headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify({ token })
         });
-        console.log('HTTP status:', res.status);
         const data = await res.json();
-        console.log('Worker response:', JSON.stringify(data));
         return data;
       } catch (err) {
         console.error('Worker verification error:', err);
         return { success: false };
       }
+    }
+
+    function navigateTo(url) {
+      window.location.href = url;
     }
 
     const container = document.getElementById('turnstile-container');
@@ -128,25 +98,14 @@ register_gfont("Inter")
         callback: async function(token) {
           status.textContent = 'Opening your CV…';
           const data = await verifyWithWorker(token);
-          console.log('data.success:', data.success);
-          console.log('data.token:', data.token);
           if (data.success && data.token) {
-            await incrementCount();
-            const url = `${WORKER_URL}/redeem?token=${data.token}`;
-            if (_cvWindow) {
-              _cvWindow.location.href = url;
-              _cvWindow = null;
-            } else {
-              window.location.href = url;
-            }
+            navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           } else {
-            if (_cvWindow) { _cvWindow.close(); _cvWindow = null; }
             status.textContent = 'Verification failed — please try again.';
-            console.error('Verification failed. Full response:', JSON.stringify(data));
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           }
@@ -163,16 +122,11 @@ register_gfont("Inter")
       });
     }
 
-    let _cvWindow = null;
-
     document.getElementById('cv-download-trigger').addEventListener('click', function() {
       if (!window._tsScriptLoaded) {
         status.textContent = 'Still loading — please try again in a moment.';
         return;
       }
-      // Open a blank window synchronously while the user gesture is still active.
-      // This is the only reliable way to trigger navigation on mobile after an async callback.
-      _cvWindow = window.open('', '_blank');
       renderWidget();
     });
   });
