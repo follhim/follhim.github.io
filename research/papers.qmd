@@ -132,12 +132,19 @@ register_gfont("Inter")
           console.log('data.token:', data.token);
           if (data.success && data.token) {
             await incrementCount();
-            window.open(`${WORKER_URL}/redeem?token=${data.token}`, '_blank');
+            const url = `${WORKER_URL}/redeem?token=${data.token}`;
+            if (_cvWindow) {
+              _cvWindow.location.href = url;
+              _cvWindow = null;
+            } else {
+              window.location.href = url;
+            }
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           } else {
+            if (_cvWindow) { _cvWindow.close(); _cvWindow = null; }
             status.textContent = 'Verification failed — please try again.';
             console.error('Verification failed. Full response:', JSON.stringify(data));
             turnstile.remove(window._tsWidgetId);
@@ -156,11 +163,16 @@ register_gfont("Inter")
       });
     }
 
+    let _cvWindow = null;
+
     document.getElementById('cv-download-trigger').addEventListener('click', function() {
       if (!window._tsScriptLoaded) {
         status.textContent = 'Still loading — please try again in a moment.';
         return;
       }
+      // Open a blank window synchronously while the user gesture is still active.
+      // This is the only reliable way to trigger navigation on mobile after an async callback.
+      _cvWindow = window.open('', '_blank');
       renderWidget();
     });
   });

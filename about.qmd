@@ -137,6 +137,8 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
     const container = document.getElementById('turnstile-container');
     const status    = document.getElementById('ts-status');
 
+    let _cvWindow = null;
+
     function renderWidget() {
       if (window._tsWidgetId !== null) return;
 
@@ -152,12 +154,19 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
           const data = await verifyWithWorker(token);
           if (data.success && data.token) {
             await incrementCount();
-            window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
+            const url = `${WORKER_URL}/redeem?token=${data.token}`;
+            if (_cvWindow) {
+              _cvWindow.location.href = url;
+              _cvWindow = null;
+            } else {
+              window.location.href = url;
+            }
             container.style.display = 'none';
             status.textContent = '';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
           } else {
+            if (_cvWindow) { _cvWindow.close(); _cvWindow = null; }
             status.textContent = 'Verification failed — please try again.';
             turnstile.remove(window._tsWidgetId);
             window._tsWidgetId = null;
@@ -181,6 +190,9 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
         status.textContent = 'Still loading — please try again in a moment.';
         return;
       }
+      // Open a blank window synchronously while the user gesture is still active.
+      // This is the only reliable way to trigger navigation on mobile after an async callback.
+      _cvWindow = window.open('', '_blank');
       renderWidget();
     });
   });
@@ -234,7 +246,7 @@ My research is ultimately informed by my commitment to creating lasting change f
 
 :::
 
-## Training 12
+## Training
 
 My research is grounded in a deep commitment to the [flourishing of LGBTQ+ people]{.highlight-term}. My training spans the full spectrum of religious and clinical contexts — from conservative evangelical institutions to affirming community settings — reflecting my conviction that achieving health equity for LGBTQ+ people, particularly youth in conservative families and churches, requires building bridges across differences rather than around it.
 
