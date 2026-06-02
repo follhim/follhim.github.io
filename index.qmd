@@ -39,7 +39,7 @@ My name is Seungju Kim[^1] and thank you for visiting my personal website <br> d
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
-My [research](https://follhim.net/research/papers.html) is broadly focused advancing the **science of LGBTQ+ health disparities** by looking at <br> **socio-ecological** sources of stigma and resilience.
+My [research](https://follhim.net/research/papers.html) is broadly focused advancing the science of [LGBTQ+ health disparities]{.highlight-term} <br> by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience.
 :::
 
 ::: {#news}

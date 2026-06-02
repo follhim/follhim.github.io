@@ -2,9 +2,26 @@
 title: "Seungju Kim"
 pagetitle: "About"
 about:
+  id: about-bio
   template: jolla
   image: images/headshot.png
   image-title: "Seungju Kim"
+  links:
+    - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
+      href: mailto:seungju7@illinois.edu
+    - text: "{{< iconify academicons:google-scholar height=35px width=35px >}}"
+      href: https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl
+    - text: "{{< iconify la:researchgate height=35px width=35px >}}"
+      href: https://www.researchgate.net/profile/Seungju-Kim-11
+    - text: "{{< iconify ion:logo-linkedin height=35px width=35px >}}"
+      href: https://www.linkedin.com/in/kimseungju/
+    - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
+      href: https://orcid.org/0009-0009-5166-9170
+    - text: "{{< iconify octicon:mark-github-16 height=35px width=35px >}}"
+      href: https://github.com/follhim
+    - text: "{{< iconify academicons:cv height=35px width=35px >}}"
+      id: cv-download-trigger
+      href: "#"
 comments: false
 format:
   html:
@@ -66,11 +83,13 @@ format:
         </style>
 ---
 
-My name is Seungju Kim[^1] and thank you for visiting my personal website  detailing my research interests and work!
+:::{#about-bio .text-center}
+My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work!
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
 I am a mental health researcher, [National Science Foundation Graduate Research Fellow]{.highlight-term}, and <br> third-year PhD student in Clinical/Community Psychology Program at the [University of Illinois]{.highlight-term}.
+:::
 
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>
@@ -146,6 +165,9 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
       });
     }
 
+    // Quarto doesn't forward id: from YAML about links, so find the CV link by href
+    const cvTrigger = document.querySelector('#about-bio a[href="#"]');
+    if (cvTrigger) cvTrigger.id = 'cv-download-trigger';
     document.getElementById('cv-download-trigger').addEventListener('click', function(e) {
       e.preventDefault();
       if (!window._tsScriptLoaded) {
@@ -159,16 +181,6 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
 
 <div style="text-align:left;">
 
-
-<div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;">
-  <a href="mailto:seungju7@illinois.edu" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="Email">{{< iconify fluent:mail-48-filled height=32px width=32px >}}</a>
-  <a href="https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="Google Scholar">{{< iconify academicons:google-scholar height=32px width=32px >}}</a>
-  <a href="https://www.researchgate.net/profile/Seungju-Kim-11" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="ResearchGate">{{< iconify la:researchgate height=32px width=32px >}}</a>
-  <a href="https://www.linkedin.com/in/kimseungju/" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="LinkedIn">{{< iconify ion:logo-linkedin height=32px width=32px >}}</a>
-  <a href="https://orcid.org/0009-0009-5166-9170" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="ORCID">{{< iconify fa6-brands:orcid height=32px width=32px >}}</a>
-  <a href="https://github.com/follhim" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);text-decoration:none;line-height:0;flex-shrink:0;vertical-align:middle;" title="GitHub">{{< iconify octicon:mark-github-16 height=32px width=32px >}}</a>
-  <a href="#" id="cv-download-trigger" style="display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);font-size:0.9rem;font-weight:700;letter-spacing:0.08em;text-decoration:none;line-height:1;flex-shrink:0;vertical-align:middle;" title="CV">CV</a>
-</div>
 
 ## Research Interests
 
