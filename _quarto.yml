@@ -28,6 +28,7 @@ website:
       theme: dark
 format:
   html:
+    page-layout: full
     toc: true
     theme: superhero
     html-meta:

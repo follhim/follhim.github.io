@@ -24,6 +24,7 @@ format:
   html:
     css: styles.css
     toc: false
+    page-layout: full
 listing:
   - id: news
     contents: "news.yml"
