@@ -42,11 +42,11 @@ My name is Seungju Kim[^1] and thank you for visiting my personal website <br> d
 My research is broadly focused advancing the science of [LGBTQ+ health disparities]{.highlight-term} <br> by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience.
 :::
 
-::: {#news}
-:::
-
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>
+
+::: {#news}
+:::
 
 <script>
   window._tsScriptLoaded = false;
