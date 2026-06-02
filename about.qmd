@@ -19,9 +19,6 @@ about:
       href: https://orcid.org/0009-0009-5166-9170
     - text: "{{< iconify octicon:mark-github-16 height=35px width=35px >}}"
       href: https://github.com/follhim
-    - text: "{{< iconify academicons:cv height=35px width=35px >}}"
-      id: cv-download-trigger
-      href: "#"
 comments: false
 format:
   html:
@@ -103,73 +100,76 @@ I am a mental health researcher, [National Science Foundation Graduate Research 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
 
 <script type="module">
-  document.addEventListener('DOMContentLoaded', function() {
-    const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
+  const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
 
-    async function verifyWithWorker(token) {
-      try {
-        const res = await fetch(`${WORKER_URL}/verify`, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ token })
-        });
-        const data = await res.json();
-        return data;
-      } catch (err) {
-        console.error('Worker verification error:', err);
-        return { success: false };
-      }
+  async function verifyWithWorker(token) {
+    try {
+      const res = await fetch(`${WORKER_URL}/verify`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token })
+      });
+      return await res.json();
+    } catch (err) {
+      console.error('Worker verification error:', err);
+      return { success: false };
     }
+  }
 
-    function navigateTo(url) {
-      window.location.href = url;
-    }
-
+  function renderWidget() {
     const container = document.getElementById('turnstile-container');
     const status    = document.getElementById('ts-status');
+    if (window._tsWidgetId !== null) return;
 
-    function renderWidget() {
-      if (window._tsWidgetId !== null) return;
+    container.style.display = 'block';
+    status.textContent = '';
 
-      container.style.display = 'block';
-      status.textContent = '';
-
-      window._tsWidgetId = turnstile.render('#turnstile-container', {
-        sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
-        execution:  'render',
-        appearance: 'always',
-        callback: async function(token) {
-          status.textContent = 'Opening your CV…';
-          const data = await verifyWithWorker(token);
-          if (data.success && data.token) {
-            navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
-            container.style.display = 'none';
-            status.textContent = '';
-            turnstile.remove(window._tsWidgetId);
-            window._tsWidgetId = null;
-          } else {
-            status.textContent = 'Verification failed — please try again.';
-            turnstile.remove(window._tsWidgetId);
-            window._tsWidgetId = null;
-          }
-        },
-        'error-callback': function() {
-          status.textContent = 'Verification error — please try again.';
+    window._tsWidgetId = turnstile.render('#turnstile-container', {
+      sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
+      execution:  'render',
+      appearance: 'always',
+      callback: async function(token) {
+        status.textContent = 'Opening your CV…';
+        const data = await verifyWithWorker(token);
+        if (data.success && data.token) {
+          window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
+          container.style.display = 'none';
+          status.textContent = '';
           turnstile.remove(window._tsWidgetId);
           window._tsWidgetId = null;
-        },
-        'expired-callback': function() {
+        } else {
+          status.textContent = 'Verification failed — please try again.';
           turnstile.remove(window._tsWidgetId);
           window._tsWidgetId = null;
         }
-      });
-    }
+      },
+      'error-callback': function() {
+        const status = document.getElementById('ts-status');
+        status.textContent = 'Verification error — please try again.';
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      },
+      'expired-callback': function() {
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      }
+    });
+  }
 
-    // Quarto doesn't forward id: from YAML about links, so find the CV link by href
-    const cvTrigger = document.querySelector('#about-bio a[href="#"]');
-    if (cvTrigger) cvTrigger.id = 'cv-download-trigger';
-    document.getElementById('cv-download-trigger').addEventListener('click', function(e) {
+  // Inject CV button directly into .about-links so we own the element
+  document.addEventListener('DOMContentLoaded', function() {
+    const aboutLinks = document.querySelector('.about-links');
+    if (!aboutLinks) return;
+
+    const cvLink = document.createElement('a');
+    cvLink.className = 'about-link';
+    cvLink.title = 'CV';
+    cvLink.innerHTML = '<span class="about-link-text"><iconify-icon icon="academicons:cv" width="35px" height="35px" inline></iconify-icon></span>';
+    aboutLinks.appendChild(cvLink);
+
+    cvLink.addEventListener('click', function(e) {
       e.preventDefault();
+      const status = document.getElementById('ts-status');
       if (!window._tsScriptLoaded) {
         status.textContent = 'Still loading — please try again in a moment.';
         return;

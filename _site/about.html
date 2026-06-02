@@ -133,7 +133,7 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -167,16 +167,6 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=JWNJV9UAAAAJ&amp;hl"> 
-<span class="menu-text"><iconify-icon role="img" inline="" icon="academicons:google-scholar" aria-label="Icon google-scholar from academicons Iconify.design set." title="Icon google-scholar from academicons Iconify.design set." width="28px" height="28px"></iconify-icon></span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://www.researchgate.net/profile/Seungju-Kim-11"> 
-<span class="menu-text"><iconify-icon role="img" inline="" icon="academicons:researchgate" aria-label="Icon researchgate from academicons Iconify.design set." title="Icon researchgate from academicons Iconify.design set." width="28px" height="28px"></iconify-icon></span></a>
-  </li>  
-</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
@@ -184,24 +174,24 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 
 
-<div class="quarto-about-jolla column-page">
+<div class="quarto-about-jolla">
   <img src="images/headshot.png" class="about-image
   round " style="height: 15em; width: 15em;" title="Seungju Kim">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Seungju Kim</h1>
 </div>
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta">
   </div>
 </header><div id="about-bio" class="text-center">
 <p>My name is Seungju Kim<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and thank you for visiting my personal website detailing my research interests and work!</p>
@@ -227,9 +217,6 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
   <a href="https://github.com/follhim" class="about-link" rel="" target="">
      <span class="about-link-text"><iconify-icon role="img" inline="" icon="octicon:mark-github-16" aria-label="Icon mark-github-16 from octicon Iconify.design set." title="Icon mark-github-16 from octicon Iconify.design set." width="35px" height="35px"></iconify-icon></span>
   </a>
-  <a href="/#" class="about-link" rel="" target="">
-     <span class="about-link-text"><iconify-icon role="img" inline="" icon="academicons:cv" aria-label="Icon cv from academicons Iconify.design set." title="Icon cv from academicons Iconify.design set." width="35px" height="35px"></iconify-icon></span>
-  </a>
 </div>
 </div>
 
@@ -246,73 +233,76 @@ gtag('config', 'G-4B73YXR349', { 'anonymize_ip': true});
 </script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&amp;onload=onTurnstileLoad" defer=""></script>
 <script type="module">
-  document.addEventListener('DOMContentLoaded', function() {
-    const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
+  const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
 
-    async function verifyWithWorker(token) {
-      try {
-        const res = await fetch(`${WORKER_URL}/verify`, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ token })
-        });
-        const data = await res.json();
-        return data;
-      } catch (err) {
-        console.error('Worker verification error:', err);
-        return { success: false };
-      }
+  async function verifyWithWorker(token) {
+    try {
+      const res = await fetch(`${WORKER_URL}/verify`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token })
+      });
+      return await res.json();
+    } catch (err) {
+      console.error('Worker verification error:', err);
+      return { success: false };
     }
+  }
 
-    function navigateTo(url) {
-      window.location.href = url;
-    }
-
+  function renderWidget() {
     const container = document.getElementById('turnstile-container');
     const status    = document.getElementById('ts-status');
+    if (window._tsWidgetId !== null) return;
 
-    function renderWidget() {
-      if (window._tsWidgetId !== null) return;
+    container.style.display = 'block';
+    status.textContent = '';
 
-      container.style.display = 'block';
-      status.textContent = '';
-
-      window._tsWidgetId = turnstile.render('#turnstile-container', {
-        sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
-        execution:  'render',
-        appearance: 'always',
-        callback: async function(token) {
-          status.textContent = 'Opening your CV…';
-          const data = await verifyWithWorker(token);
-          if (data.success && data.token) {
-            navigateTo(`${WORKER_URL}/redeem?token=${data.token}`);
-            container.style.display = 'none';
-            status.textContent = '';
-            turnstile.remove(window._tsWidgetId);
-            window._tsWidgetId = null;
-          } else {
-            status.textContent = 'Verification failed — please try again.';
-            turnstile.remove(window._tsWidgetId);
-            window._tsWidgetId = null;
-          }
-        },
-        'error-callback': function() {
-          status.textContent = 'Verification error — please try again.';
+    window._tsWidgetId = turnstile.render('#turnstile-container', {
+      sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
+      execution:  'render',
+      appearance: 'always',
+      callback: async function(token) {
+        status.textContent = 'Opening your CV…';
+        const data = await verifyWithWorker(token);
+        if (data.success && data.token) {
+          window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
+          container.style.display = 'none';
+          status.textContent = '';
           turnstile.remove(window._tsWidgetId);
           window._tsWidgetId = null;
-        },
-        'expired-callback': function() {
+        } else {
+          status.textContent = 'Verification failed — please try again.';
           turnstile.remove(window._tsWidgetId);
           window._tsWidgetId = null;
         }
-      });
-    }
+      },
+      'error-callback': function() {
+        const status = document.getElementById('ts-status');
+        status.textContent = 'Verification error — please try again.';
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      },
+      'expired-callback': function() {
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      }
+    });
+  }
 
-    // Quarto doesn't forward id: from YAML about links, so find the CV link by href
-    const cvTrigger = document.querySelector('#about-bio a[href="#"]');
-    if (cvTrigger) cvTrigger.id = 'cv-download-trigger';
-    document.getElementById('cv-download-trigger').addEventListener('click', function(e) {
+  // Inject CV button directly into .about-links so we own the element
+  document.addEventListener('DOMContentLoaded', function() {
+    const aboutLinks = document.querySelector('.about-links');
+    if (!aboutLinks) return;
+
+    const cvLink = document.createElement('a');
+    cvLink.className = 'about-link';
+    cvLink.title = 'CV';
+    cvLink.innerHTML = '<span class="about-link-text"><iconify-icon icon="academicons:cv" width="35px" height="35px" inline></iconify-icon></span>';
+    aboutLinks.appendChild(cvLink);
+
+    cvLink.addEventListener('click', function(e) {
       e.preventDefault();
+      const status = document.getElementById('ts-status');
       if (!window._tsScriptLoaded) {
         status.textContent = 'Still loading — please try again in a moment.';
         return;

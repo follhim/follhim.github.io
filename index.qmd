@@ -39,8 +39,97 @@ My name is Seungju Kim[^1] and thank you for visiting my personal website <br> d
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
-My [research](https://follhim.net/research/papers.html) is broadly focused advancing the science of [LGBTQ+ health disparities]{.highlight-term} <br> by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience.
+My research is broadly focused advancing the science of [LGBTQ+ health disparities]{.highlight-term} <br> by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience.
 :::
 
 ::: {#news}
 :::
+
+<div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
+<p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>
+
+<script>
+  window._tsScriptLoaded = false;
+  window._tsWidgetId     = null;
+  function onTurnstileLoad() { window._tsScriptLoaded = true; }
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTurnstileLoad" defer></script>
+
+<script type="module">
+  const WORKER_URL = 'https://turnstile-verify.follhim.workers.dev';
+
+  async function verifyWithWorker(token) {
+    try {
+      const res = await fetch(`${WORKER_URL}/verify`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token })
+      });
+      return await res.json();
+    } catch (err) {
+      console.error('Worker verification error:', err);
+      return { success: false };
+    }
+  }
+
+  function renderWidget() {
+    const container = document.getElementById('turnstile-container');
+    const status    = document.getElementById('ts-status');
+    if (window._tsWidgetId !== null) return;
+
+    container.style.display = 'block';
+    status.textContent = '';
+
+    window._tsWidgetId = turnstile.render('#turnstile-container', {
+      sitekey:    '0x4AAAAAADNayBUca6pR_5fG',
+      execution:  'render',
+      appearance: 'always',
+      callback: async function(token) {
+        status.textContent = 'Opening your CV…';
+        const data = await verifyWithWorker(token);
+        if (data.success && data.token) {
+          window.location.href = `${WORKER_URL}/redeem?token=${data.token}`;
+          container.style.display = 'none';
+          status.textContent = '';
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        } else {
+          status.textContent = 'Verification failed — please try again.';
+          turnstile.remove(window._tsWidgetId);
+          window._tsWidgetId = null;
+        }
+      },
+      'error-callback': function() {
+        const status = document.getElementById('ts-status');
+        status.textContent = 'Verification error — please try again.';
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      },
+      'expired-callback': function() {
+        turnstile.remove(window._tsWidgetId);
+        window._tsWidgetId = null;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const aboutLinks = document.querySelector('.about-links');
+    if (!aboutLinks) return;
+
+    const cvLink = document.createElement('a');
+    cvLink.className = 'about-link';
+    cvLink.title = 'CV';
+    cvLink.innerHTML = '<span class="about-link-text"><iconify-icon icon="academicons:cv" width="35px" height="35px" inline></iconify-icon></span>';
+    aboutLinks.appendChild(cvLink);
+
+    cvLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      const status = document.getElementById('ts-status');
+      if (!window._tsScriptLoaded) {
+        status.textContent = 'Still loading — please try again in a moment.';
+        return;
+      }
+      renderWidget();
+    });
+  });
+</script>

@@ -17,18 +17,13 @@ website:
       text: Resources
     - href: about.qmd
       text: About
-    right:
-    - text: "{{< iconify academicons:google-scholar height=28px width=28px >}}"
-      href: https://scholar.google.com/citations?user=JWNJV9UAAAAJ&hl
-    - text: "{{< iconify academicons:researchgate height=28px width=28px >}}"
-      href: https://www.researchgate.net/profile/Seungju-Kim-11
   comments:
     giscus:
       repo: follhim/follhim.github.io
       theme: dark
 format:
   html:
-    page-layout: full
+    # page-layout: full
     toc: true
     theme: superhero
     html-meta:
