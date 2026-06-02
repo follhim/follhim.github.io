@@ -251,7 +251,7 @@ window.Quarto = {
 .news-heading {
   font-size: 2rem;
   font-weight: 700;
-  color: #e2e8f0; /* Always light text */
+  color: #e2e8f0;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -264,15 +264,15 @@ window.Quarto = {
   flex-direction: column;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  background: #2d3748; /* Always dark background */
-  color: #e2e8f0; /* Always light text */
+  background: #2d3748;
+  color: #e2e8f0;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Darker shadow for dark theme */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
 }
 .news-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); /* Darker hover shadow */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 .news-item.news-hidden {
   display: none;
@@ -288,7 +288,7 @@ window.Quarto = {
 }
 .news-date {
   font-size: 0.9rem;
-  color: #a0aec0; /* Light gray for dark mode */
+  color: #a0aec0;
   font-weight: 600;
   text-align: center;
   margin-bottom: 1rem;
@@ -299,13 +299,14 @@ window.Quarto = {
 .news-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #63b3ed; /* Light blue for dark mode */
+  color: #63b3ed;
   margin-bottom: 0.5rem;
   line-height: 1.4;
+  text-align: center;
 }
 .news-subtitle {
   font-size: 0.95rem;
-  color: #fff; /* White for subtitle */
+  color: #fff;
   line-height: 1.4;
   text-align: left;
 }
@@ -313,14 +314,14 @@ window.Quarto = {
   text-align: right;
 }
 .read-more {
-  color: #68d391; /* Light green for dark mode */
+  color: #68d391;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 .read-more:hover {
-  color: #9ae6b4; /* Lighter green on hover */
+  color: #9ae6b4;
 }
 .arrow {
   margin-left: 0.25rem;
@@ -621,11 +622,9 @@ window.Quarto = {
     }
   }
 
-  // Make functions globally available
   window.newsShowMore = newsShowMore;
   window.newsShowLess = newsShowLess;
 
-  // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', newsUpdateControls);
   } else {
