@@ -66,11 +66,11 @@ format:
         </style>
 ---
 
-My name is Seungju Kim[^1] and thank you for visiting my personal website <br> detailing my research interests and work!
+My name is Seungju Kim[^1] and thank you for visiting my personal website  detailing my research interests and work!
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 
-I am a mental health researcher, [National Science Foundation Graduate Research Fellow]{.highlight-term}, and third-year PhD student in Clinical/Community Psychology Program at the [University of Illinois]{.highlight-term}.
+I am a mental health researcher, [National Science Foundation Graduate Research Fellow]{.highlight-term}, and <br> third-year PhD student in Clinical/Community Psychology Program at the [University of Illinois]{.highlight-term}.
 
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>

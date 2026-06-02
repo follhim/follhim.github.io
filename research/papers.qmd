@@ -27,7 +27,7 @@ listing:
     template: papers.ejs
     sort: "date desc" 
     sort-ui: false
-toc: true    
+toc: false    
 editor_options: 
   chunk_output_type: console
 ---
