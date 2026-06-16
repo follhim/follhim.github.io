@@ -6,6 +6,8 @@ about:
   template: jolla
   image: images/trajectory_prism.svg
   image-title: "Trajectory Prism"
+  image-shape: rectangle
+  image-width: 900px
   links: 
     - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
       href: mailto:seungju7@illinois.edu
