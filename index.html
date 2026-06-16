@@ -197,7 +197,7 @@ window.Quarto = {
 
 <div class="quarto-about-jolla column-page">
   <img src="images/trajectory_prism.svg" class="about-image
-  rectangle " style="width: 900px;" title="Trajectory Prism">
+  rectangle " style="width: 1100px;" title="Trajectory Prism">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Advancing Health Equity Research</h1>
@@ -234,7 +234,7 @@ window.Quarto = {
 <style>
   img.about-image {
     border-radius: 0 !important;
-    width: 900px !important;
+    width: 1100px !important;
     max-width: 98vw !important;
     height: auto !important;
     object-fit: contain !important;
@@ -245,10 +245,15 @@ window.Quarto = {
   document.addEventListener('DOMContentLoaded', function () {
     var img = document.querySelector('img.about-image');
     if (img) {
-      img.style.removeProperty('height');
-      img.style.removeProperty('width');
-      img.style.removeProperty('border-radius');
+      img.removeAttribute('style');
       img.classList.remove('round');
+      img.style.setProperty('border-radius', '0', 'important');
+      img.style.setProperty('width', 'min(1100px, 98vw)', 'important');
+      img.style.setProperty('height', 'auto', 'important');
+      img.style.setProperty('object-fit', 'contain', 'important');
+      img.style.setProperty('filter', 'brightness(1.4)', 'important');
+      img.style.setProperty('display', 'block', 'important');
+      img.style.setProperty('margin', '0 auto', 'important');
     }
   });
 </script>
