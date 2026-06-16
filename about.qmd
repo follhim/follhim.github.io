@@ -1,6 +1,6 @@
 ---
 title: "Seungju Kim"
-pagetitle: "About"
+pagetitle: "About Me"
 about:
   id: about-bio
   template: jolla
@@ -15,8 +15,8 @@ about:
       href: https://www.researchgate.net/profile/Seungju-Kim-11
     - text: "{{< iconify ion:logo-linkedin height=35px width=35px >}}"
       href: https://www.linkedin.com/in/kimseungju/
-    - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
-      href: https://orcid.org/0009-0009-5166-9170
+    - text: "{{< iconify mingcute:substack-fill height=35px width=35px >}}"
+      href: https://follhim.substack.com/
     - text: "{{< iconify octicon:mark-github-16 height=35px width=35px >}}"
       href: https://github.com/follhim
 comments: false
@@ -81,7 +81,7 @@ format:
 ---
 
 :::{#about-bio .text-center}
-My name is Seungju Kim[^1] and thank you for visiting my personal website detailing my research interests and work!
+My name is Seungju Kim[^1] and thank you for visiting my personal website  <br> detailing my research interests and work!
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 

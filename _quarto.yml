@@ -16,7 +16,7 @@ website:
     - href: resource.qmd
       text: Resources
     - href: about.qmd
-      text: About
+      text: About Me
   comments:
     giscus:
       repo: follhim/follhim.github.io

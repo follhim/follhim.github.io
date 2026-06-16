@@ -4,8 +4,8 @@ pagetitle: "Seungju Kim"
 about:
   id: intro-bio
   template: jolla
-  image: images/headshot.png
-  image-title: "Seungju Kim"
+  image: images/trajectory_prism.svg
+  image-title: "Trajectory Prism"
   links: 
     - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
       href: mailto:seungju7@illinois.edu
@@ -15,8 +15,8 @@ about:
       href: https://www.researchgate.net/profile/Seungju-Kim-11
     - text: "{{< iconify ion:logo-linkedin height=35px width=35px >}}"
       href: https://www.linkedin.com/in/kimseungju/
-    - text: "{{< iconify fa6-brands:orcid height=35px width=35px >}}"
-      href: https://orcid.org/0009-0009-5166-9170
+    - text: "{{< iconify mingcute:substack-fill height=35px width=35px >}}"
+      href: https://follhim.substack.com/
     - text: "{{< iconify octicon:mark-github-16 height=35px width=35px >}}"
       href: https://github.com/follhim
 comments: false
@@ -35,11 +35,11 @@ listing:
 ---
 
 :::{#intro-bio .text-center}
-My name is Seungju Kim[^1] and thank you for visiting my personal website <br> detailing my research interests and work!
+My name is Seungju Kim[^1] and I am mental health researcher broadly focused on  advancing the science of <br> [LGBTQ+ health equity]{.highlight-term} by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience using [longitudinal methods]{.highlight-term}.
+
+Learn more about my own research here or read my Substack.
 
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
-
-My research is broadly focused advancing the science of [LGBTQ+ health disparities]{.highlight-term} <br> by looking at  [socio-ecological]{.highlight-term} sources of stigma and resilience.
 :::
 
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
