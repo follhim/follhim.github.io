@@ -194,7 +194,7 @@ window.Quarto = {
 
 <div class="quarto-about-jolla column-page">
   <img src="images/trajectory_prism.svg" class="about-image
-  round " style="height: 15em; width: 15em;" title="Trajectory Prism">
+  rectangle " style="width: 900px;" title="Trajectory Prism">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Advancing Health Equity Research</h1>
@@ -228,6 +228,17 @@ window.Quarto = {
 </div>
 </div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var img = document.querySelector('img.about-image');
+    if (img) {
+      img.style.removeProperty('height');
+      img.style.removeProperty('width');
+      img.style.removeProperty('border-radius');
+      img.classList.remove('round');
+    }
+  });
+</script>
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;">
 
 </div>

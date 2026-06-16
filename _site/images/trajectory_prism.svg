@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360">
   <defs>
-    
     <linearGradient id="rb" x1="170" y1="0" x2="1030" y2="0" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#b090e8"></stop>
       <stop offset="16%" stop-color="#7896e0"></stop>
@@ -10,16 +9,12 @@
       <stop offset="83%" stop-color="#e088b4"></stop>
       <stop offset="100%" stop-color="#a878d0"></stop>
     </linearGradient>
-
-    
     <filter id="glowWide" x="-10%" y="-500%" width="120%" height="1100%">
       <feGaussianBlur stdDeviation="14"></feGaussianBlur>
     </filter>
     <filter id="glowMid" x="-10%" y="-200%" width="120%" height="500%">
       <feGaussianBlur stdDeviation="4"></feGaussianBlur>
     </filter>
-
-    
     <filter id="stars" color-interpolation-filters="sRGB">
       <feTurbulence type="turbulence" baseFrequency="0.58 0.58" numOctaves="2" seed="17" result="n"></feTurbulence>
       <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 16 -14.5"></feColorMatrix>
@@ -27,54 +22,63 @@
     <mask id="starMask">
       <rect width="1200" height="360" fill="#fff" filter="url(#stars)"></rect>
     </mask>
-
-    
     <radialGradient id="moon">
       <stop offset="0" stop-color="#fff" stop-opacity="0.92"></stop>
       <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
     </radialGradient>
-
-    
     <marker id="arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#fff" fill-opacity="0.45"></path>
+      <path d="M0 0 L10 5 L0 10 z" fill="#fff" fill-opacity="0.50"></path>
     </marker>
   </defs>
 
   
-  
 
   
-  <ellipse cx="600" cy="185" rx="510" ry="108" fill="#18296a" opacity="0.42" style="filter:blur(52px)"></ellipse>
+  <ellipse cx="600" cy="185" rx="510" ry="108" fill="#18296a" opacity="0.48" style="filter:blur(52px)"></ellipse>
 
   
-  <rect width="1200" height="360" fill="#fff" mask="url(#starMask)" opacity="0.62"></rect>
+  <rect width="1200" height="360" fill="#fff" mask="url(#starMask)" opacity="0.70"></rect>
 
   
-  <g stroke="#fff" stroke-opacity="0.055" stroke-width="1">
-    <line x1="170" y1="72" x2="170" y2="302"></line>
-    <line x1="277.5" y1="72" x2="277.5" y2="302"></line>
-    <line x1="385" y1="72" x2="385" y2="302"></line>
-    <line x1="492.5" y1="72" x2="492.5" y2="302"></line>
-    <line x1="600" y1="72" x2="600" y2="302"></line>
-    <line x1="707.5" y1="72" x2="707.5" y2="302"></line>
-    <line x1="815" y1="72" x2="815" y2="302"></line>
-    <line x1="922.5" y1="72" x2="922.5" y2="302"></line>
-    <line x1="1030" y1="72" x2="1030" y2="302"></line>
+  <g stroke="#fff" stroke-opacity="0.20" stroke-width="1">
+    <line x1="170" y1="68" x2="170" y2="306"></line>
+    <line x1="277.5" y1="68" x2="277.5" y2="306"></line>
+    <line x1="385" y1="68" x2="385" y2="306"></line>
+    <line x1="492.5" y1="68" x2="492.5" y2="306"></line>
+    <line x1="600" y1="68" x2="600" y2="306"></line>
+    <line x1="707.5" y1="68" x2="707.5" y2="306"></line>
+    <line x1="815" y1="68" x2="815" y2="306"></line>
+    <line x1="922.5" y1="68" x2="922.5" y2="306"></line>
+    <line x1="1030" y1="68" x2="1030" y2="306"></line>
   </g>
 
   
   <path d="M 170 220.3 L 277.5 214.2 L 385 198.8 L 492.5 177.4&#xA;           L 600 138.4 L 707.5 112.8 L 815 99.5 L 922.5 87.5 L 1030 83.2&#xA;           L 1030 159.2 L 922.5 157.5 L 815 163.5 L 707.5 170.8&#xA;           L 600 190.4 L 492.5 223.4 L 385 238.8 L 277.5 248.2 L 170 248.3 Z" fill="url(#rb)" fill-opacity="0.07" stroke="none"></path>
 
   
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 170 240 C 224 240, 282 226, 338 210 C 394 194, 432 158, 492 138&#xA;             C 548 118, 574 104, 628 98 C 682 92, 730 89, 800 88&#xA;             C 860 87, 940 87, 1030 87" stroke="#fff" stroke-width="1.05" stroke-opacity="0.17"></path>
-    <path d="M 170 244 C 224 244, 282 242, 338 240 C 394 238, 432 230, 492 222&#xA;             C 548 215, 574 196, 628 189 C 682 182, 730 168, 800 162&#xA;             C 860 157, 940 152, 1030 151" stroke="#fff" stroke-width="1.05" stroke-opacity="0.21"></path>
-    <path d="M 170 210 C 224 210, 282 208, 338 205 C 394 202, 432 194, 492 189&#xA;             C 548 184, 574 166, 628 161 C 682 156, 730 147, 800 144&#xA;             C 860 141, 940 137, 1030 135" stroke="#fff" stroke-width="1.05" stroke-opacity="0.18"></path>
-    <path d="M 170 250 C 224 250, 282 236, 338 215 C 394 194, 432 158, 492 132&#xA;             C 548 107, 574 99, 628 96 C 682 93, 730 92, 800 92&#xA;             C 860 92, 940 92, 1030 92" stroke="#fff" stroke-width="1.05" stroke-opacity="0.15"></path>
-  </g>
+  
+  
 
   
-  <g stroke="#cfe0f6" stroke-width="1" stroke-opacity="0.30" fill="none">
+  <path d="M 170 225&#xA;           C 223.8 225, 223.8 220, 277.5 220&#xA;           C 331.3 220, 331.3 206, 385 206&#xA;           C 438.8 206, 438.8 185, 492.5 185&#xA;           C 546.3 185, 546.3 145, 600 145&#xA;           C 653.8 145, 653.8 122, 707.5 122&#xA;           C 761.3 122, 761.3 110, 815 110&#xA;           C 868.8 110, 868.8 98, 922.5 98&#xA;           C 976.3 98,  976.3 95,  1030 95" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.30" stroke-linecap="round"></path>
+
+  
+  <path d="M 170 242&#xA;           C 223.8 242, 223.8 240, 277.5 240&#xA;           C 331.3 240, 331.3 228, 385 228&#xA;           C 438.8 228, 438.8 213, 492.5 213&#xA;           C 546.3 213, 546.3 178, 600 178&#xA;           C 653.8 178, 653.8 156, 707.5 156&#xA;           C 761.3 156, 761.3 148, 815 148&#xA;           C 868.8 148, 868.8 138, 922.5 138&#xA;           C 976.3 138, 976.3 137, 1030 137" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.28" stroke-linecap="round"></path>
+
+  
+  <path d="M 170 240 L 277.5 240 L 385 238&#xA;           L 492.5 207 L 600 165&#xA;           L 707.5 145 L 815 133&#xA;           L 922.5 124 L 1030 122" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.30" stroke-linecap="square" stroke-linejoin="miter"></path>
+
+  
+  <path d="M 170 247 L 277.5 247 L 385 228&#xA;           L 492.5 228 L 600 178&#xA;           L 707.5 178 L 815 148&#xA;           L 922.5 148 L 1030 134" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.26" stroke-linecap="square" stroke-linejoin="miter"></path>
+
+  
+  <path d="M 170 232 L 277.5 218 L 385 196&#xA;           L 492.5 170 L 600 148&#xA;           L 707.5 136 L 815 128&#xA;           L 922.5 120 L 1030 118" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.32" stroke-linecap="square" stroke-linejoin="miter"></path>
+
+  
+  <path d="M 170 236 L 277.5 244 L 385 238&#xA;           L 492.5 218 L 600 180&#xA;           L 707.5 158 L 815 148&#xA;           L 922.5 140 L 1030 138" fill="none" stroke="#fff" stroke-width="1.3" stroke-opacity="0.28" stroke-linecap="square" stroke-linejoin="miter"></path>
+
+  
+  <g stroke="#cfe0f6" stroke-width="1" stroke-opacity="0.44" fill="none">
     <line x1="170" y1="234.3" x2="277.5" y2="231.2"></line>
     <line x1="277.5" y1="231.2" x2="385" y2="218.8"></line>
     <line x1="385" y1="218.8" x2="492.5" y2="200.4"></line>
@@ -102,7 +106,7 @@
   </g>
 
   
-  <g stroke="#b9ccef" stroke-width="1" stroke-opacity="0.22" fill="none" stroke-dasharray="4 5">
+  <g stroke="#b9ccef" stroke-width="1" stroke-opacity="0.24" fill="none">
     <line x1="815" y1="131.5" x2="922.5" y2="122.5"></line>
     <line x1="922.5" y1="122.5" x2="1030" y2="121.2"></line>
     <line x1="815" y1="131.5" x2="804.8" y2="115.2"></line>
@@ -115,7 +119,7 @@
   </g>
 
   
-  <g fill="#9fc0e6" fill-opacity="0.58" stroke="none">
+  <g fill="#9fc0e6" fill-opacity="0.75" stroke="none">
     <circle cx="163.4" cy="212.1" r="1.9"></circle>
     <circle cx="273.6" cy="222.7" r="1.9"></circle>
     <circle cx="378.2" cy="245.3" r="1.9"></circle>
@@ -124,14 +128,14 @@
     <circle cx="710.4" cy="171.4" r="1.9"></circle>
   </g>
   
-  <g fill="#8ea4c6" fill-opacity="0.38" stroke="none">
+  <g fill="#8ea4c6" fill-opacity="0.55" stroke="none">
     <circle cx="804.8" cy="115.2" r="1.9"></circle>
     <circle cx="928.1" cy="120.8" r="1.9"></circle>
     <circle cx="1031.5" cy="124.3" r="1.9"></circle>
   </g>
 
   
-  <g fill="#eef3ff" fill-opacity="0.92" stroke="none">
+  <g fill="#eef3ff" fill-opacity="1.0" stroke="none">
     <circle cx="170" cy="234.3" r="3.4"></circle>
     <circle cx="277.5" cy="231.2" r="3.4"></circle>
     <circle cx="385" cy="218.8" r="3.4"></circle>
@@ -139,26 +143,23 @@
     <circle cx="707.5" cy="141.8" r="3.4"></circle>
   </g>
   
-  <g fill="#aebfdd" fill-opacity="0.55" stroke="none">
+  <g fill="#aebfdd" fill-opacity="0.72" stroke="none">
     <circle cx="815" cy="131.5" r="3.4"></circle>
     <circle cx="922.5" cy="122.5" r="3.4"></circle>
     <circle cx="1030" cy="121.2" r="3.4"></circle>
   </g>
 
   
-  
   <path d="M 170 234.3 C 223.8 234.3, 223.8 231.2, 277.5 231.2&#xA;           C 331.3 231.2, 331.3 218.8, 385 218.8&#xA;           C 438.8 218.8, 438.8 200.4, 492.5 200.4&#xA;           C 546.3 200.4, 546.3 164.4, 600 164.4&#xA;           C 653.8 164.4, 653.8 141.8, 707.5 141.8&#xA;           C 761.3 141.8, 761.3 131.5, 815 131.5&#xA;           C 868.8 131.5, 868.8 122.5, 922.5 122.5&#xA;           C 976.3 122.5, 976.3 121.2, 1030 121.2" fill="none" stroke="url(#rb)" stroke-width="32" stroke-opacity="0.10" stroke-linecap="round" filter="url(#glowWide)"></path>
-  
-  <path d="M 170 234.3 C 223.8 234.3, 223.8 231.2, 277.5 231.2&#xA;           C 331.3 231.2, 331.3 218.8, 385 218.8&#xA;           C 438.8 218.8, 438.8 200.4, 492.5 200.4&#xA;           C 546.3 200.4, 546.3 164.4, 600 164.4&#xA;           C 653.8 164.4, 653.8 141.8, 707.5 141.8&#xA;           C 761.3 141.8, 761.3 131.5, 815 131.5&#xA;           C 868.8 131.5, 868.8 122.5, 922.5 122.5&#xA;           C 976.3 122.5, 976.3 121.2, 1030 121.2" fill="none" stroke="url(#rb)" stroke-width="7" stroke-opacity="0.22" stroke-linecap="round" filter="url(#glowMid)"></path>
-  
-  <path d="M 170 234.3 C 223.8 234.3, 223.8 231.2, 277.5 231.2&#xA;           C 331.3 231.2, 331.3 218.8, 385 218.8&#xA;           C 438.8 218.8, 438.8 200.4, 492.5 200.4&#xA;           C 546.3 200.4, 546.3 164.4, 600 164.4&#xA;           C 653.8 164.4, 653.8 141.8, 707.5 141.8&#xA;           C 761.3 141.8, 761.3 131.5, 815 131.5&#xA;           C 868.8 131.5, 868.8 122.5, 922.5 122.5&#xA;           C 976.3 122.5, 976.3 121.2, 1030 121.2" fill="none" stroke="url(#rb)" stroke-width="1.8" stroke-opacity="0.72" stroke-linecap="round"></path>
+  <path d="M 170 234.3 C 223.8 234.3, 223.8 231.2, 277.5 231.2&#xA;           C 331.3 231.2, 331.3 218.8, 385 218.8&#xA;           C 438.8 218.8, 438.8 200.4, 492.5 200.4&#xA;           C 546.3 200.4, 546.3 164.4, 600 164.4&#xA;           C 653.8 164.4, 653.8 141.8, 707.5 141.8&#xA;           C 761.3 141.8, 761.3 131.5, 815 131.5&#xA;           C 868.8 131.5, 868.8 122.5, 922.5 122.5&#xA;           C 976.3 122.5, 976.3 121.2, 1030 121.2" fill="none" stroke="url(#rb)" stroke-width="7" stroke-opacity="0.24" stroke-linecap="round" filter="url(#glowMid)"></path>
+  <path d="M 170 234.3 C 223.8 234.3, 223.8 231.2, 277.5 231.2&#xA;           C 331.3 231.2, 331.3 218.8, 385 218.8&#xA;           C 438.8 218.8, 438.8 200.4, 492.5 200.4&#xA;           C 546.3 200.4, 546.3 164.4, 600 164.4&#xA;           C 653.8 164.4, 653.8 141.8, 707.5 141.8&#xA;           C 761.3 141.8, 761.3 131.5, 815 131.5&#xA;           C 868.8 131.5, 868.8 122.5, 922.5 122.5&#xA;           C 976.3 122.5, 976.3 121.2, 1030 121.2" fill="none" stroke="url(#rb)" stroke-width="1.8" stroke-opacity="0.82" stroke-linecap="round"></path>
 
   
-  <line x1="600" y1="104" x2="600" y2="312" stroke="#fff" stroke-opacity="0.38" stroke-width="1" stroke-dasharray="1 6" stroke-linecap="round"></line>
+  <line x1="600" y1="100" x2="600" y2="316" stroke="#fff" stroke-opacity="0.44" stroke-width="1" stroke-dasharray="1 6" stroke-linecap="round"></line>
   
   <circle cx="600" cy="164.4" r="16" fill="url(#moon)"></circle>
   <circle cx="600" cy="164.4" r="4" fill="#fff"></circle>
 
   
-  <line x1="148" y1="326" x2="1064" y2="326" stroke="#fff" stroke-opacity="0.28" stroke-width="1" stroke-dasharray="1 7" stroke-linecap="round" marker-end="url(#arrow)"></line>
+  <line x1="148" y1="328" x2="1064" y2="328" stroke="#fff" stroke-opacity="0.34" stroke-width="1" stroke-dasharray="1 7" stroke-linecap="round" marker-end="url(#arrow)"></line>
 </svg>

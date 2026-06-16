@@ -44,6 +44,18 @@ Learn more about my own research here or read my Substack.
 [^1]: Click [here](https://www.name-coach.com/seungju-kim) to learn how to pronounce my name
 :::
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var img = document.querySelector('img.about-image');
+    if (img) {
+      img.style.removeProperty('height');
+      img.style.removeProperty('width');
+      img.style.removeProperty('border-radius');
+      img.classList.remove('round');
+    }
+  });
+</script>
+
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
 <p id="ts-status" style="font-size:0.875rem;margin-top:0.25rem;min-height:1.2em;text-align:center;"></p>
 
