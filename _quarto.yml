@@ -4,7 +4,9 @@ project:
     - "google9541c230ce597c09.html"
     - "_site/cv/*"
     
+  
 website:
+  favicon: images/spectrum-pulse.svg
   google-analytics: G-4B73YXR349
   title: Seungju Kim
   navbar:

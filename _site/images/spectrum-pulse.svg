@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.5" r="0.72">
+      <stop offset="0" stop-color="#152860"></stop>
+      <stop offset="1" stop-color="#04050e"></stop>
+    </radialGradient>
+    <linearGradient id="rb" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#b090e8"></stop>
+      <stop offset="30%" stop-color="#48c8d8"></stop>
+      <stop offset="55%" stop-color="#58d8a0"></stop>
+      <stop offset="80%" stop-color="#deca68"></stop>
+      <stop offset="100%" stop-color="#e088b4"></stop>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+    </filter>
+    <radialGradient id="halo">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.9"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+
+  
+  <rect width="64" height="64" rx="12" fill="url(#bg)"></rect>
+
+  
+  <g stroke="#fff" stroke-opacity="0.14" stroke-width="0.7">
+    <line x1="16" y1="26" x2="16" y2="52"></line>
+    <line x1="28" y1="26" x2="28" y2="52"></line>
+    <line x1="40" y1="26" x2="40" y2="52"></line>
+    <line x1="52" y1="26" x2="52" y2="52"></line>
+  </g>
+
+  
+  <line x1="6" y1="40" x2="58" y2="40" stroke="#fff" stroke-opacity="0.22" stroke-width="0.8" stroke-dasharray="1 4"></line>
+
+  
+  <path d="M 6 40 L 16 40 L 22 26 L 28 40 L 34 18 L 40 40 L 46 32 L 52 40 L 58 40" fill="none" stroke="url(#rb)" stroke-width="7" stroke-opacity="0.22" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"></path>
+
+  
+  <path d="M 6 40 L 16 40 L 22 26 L 28 40 L 34 18 L 40 40 L 46 32 L 52 40 L 58 40" fill="none" stroke="url(#rb)" stroke-width="1.8" stroke-opacity="0.92" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  
+  <circle cx="34" cy="18" r="8" fill="url(#halo)"></circle>
+
+  
+  <circle cx="34" cy="18" r="3.2" fill="#fff"></circle>
+</svg>
