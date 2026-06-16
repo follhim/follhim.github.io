@@ -3,12 +3,6 @@
   margin-left: auto;
   margin-right: auto;
   display: block;
-  border-radius: 0 !important;
-  width: 1100px !important;
-  max-width: 98vw !important;
-  height: auto !important;
-  object-fit: contain !important;
-  filter: brightness(1.4) !important;
 }
 @import url("news/styles.css");
 .highlight-term {
