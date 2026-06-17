@@ -195,7 +195,7 @@ window.Quarto = {
 
 <div class="quarto-about-jolla column-page">
   <img src="images/trajectory-prism-4800.png" class="about-image
-  rectangle " style="width: 100vw;" title="Trajectory Prism">
+  rectangle " style="width: 1200px;" title="Dynamic model of LGBTQ+ mental health over time">
  <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Advancing Health Equity Research</h1>
@@ -230,20 +230,16 @@ window.Quarto = {
 </div>
 
 <style>
-  /* Kill all top spacing before the image */
-  #quarto-content { padding-top: 0 !important; }
-  .quarto-about-jolla { padding-top: 0 !important; margin-top: 0 !important; }
+  .quarto-about-jolla { margin-top: -1.5rem !important; }
 
-  /* Full-bleed: stretch edge-to-edge */
   img.about-image {
     border-radius: 0 !important;
-    width: 100vw !important;
-    max-width: 100vw !important;
+    width: 1200px !important;
+    max-width: 98vw !important;
     height: auto !important;
     filter: brightness(1.4) !important;
     display: block !important;
-    margin-left: 50% !important;
-    transform: translateX(-50%) !important;
+    margin: 0 auto !important;
   }
 </style>
 <script>
@@ -253,30 +249,15 @@ window.Quarto = {
       img.removeAttribute('style');
       img.classList.remove('round');
       img.style.setProperty('border-radius', '0', 'important');
-      img.style.setProperty('width', '100vw', 'important');
-      img.style.setProperty('max-width', '100vw', 'important');
+      img.style.setProperty('width', 'min(1200px, 98vw)', 'important');
       img.style.setProperty('height', 'auto', 'important');
       img.style.setProperty('filter', 'brightness(1.4)', 'important');
       img.style.setProperty('display', 'block', 'important');
-      img.style.setProperty('margin-left', '50%', 'important');
-      img.style.setProperty('transform', 'translateX(-50%)', 'important');
-    }
-
-    // quarto-nav.js sets body.style.paddingTop dynamically for the fixed navbar.
-    // Pull that value and use it as a negative margin on the jolla container
-    // so the image butts right up against the navbar.
-    var jollaEl = document.querySelector('.quarto-about-jolla');
-    if (jollaEl) {
-      var navH = parseInt(document.body.style.paddingTop) || 0;
-      jollaEl.style.setProperty('margin-top', '-' + navH + 'px', 'important');
-      jollaEl.style.setProperty('padding-top', '0', 'important');
+      img.style.setProperty('margin', '0 auto', 'important');
     }
   }
 
-  // Run after DOM + quarto-nav.js have both had a chance to set paddingTop
-  document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(applyImageStyles, 50);
-  });
+  document.addEventListener('DOMContentLoaded', applyImageStyles);
 </script>
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;">
 
