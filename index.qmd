@@ -7,7 +7,7 @@ about:
   image: images/trajectory-prism-4800.png
   image-title: "Dynamic model of LGBTQ+ mental health over time"
   image-shape: rectangle
-  image-width: 100vw
+  image-width: 1400px
   links: 
     - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
       href: mailto:seungju7@illinois.edu
@@ -49,7 +49,7 @@ Learn more about my own research here or read my Substack.
 
   img.about-image {
     border-radius: 0 !important;
-    width: 1100px !important;
+    width: 1400px !important;
     max-width: 98vw !important;
     height: auto !important;
     filter: brightness(1.4) !important;
@@ -65,7 +65,7 @@ Learn more about my own research here or read my Substack.
       img.removeAttribute('style');
       img.classList.remove('round');
       img.style.setProperty('border-radius', '0', 'important');
-      img.style.setProperty('width', 'min(1100px, 98vw)', 'important');
+      img.style.setProperty('width', 'min(1400px, 98vw)', 'important');
       img.style.setProperty('height', 'auto', 'important');
       img.style.setProperty('filter', 'brightness(1.4)', 'important');
       img.style.setProperty('display', 'block', 'important');
