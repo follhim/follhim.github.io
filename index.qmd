@@ -7,7 +7,7 @@ about:
   image: images/trajectory-prism-4800.png
   image-title: "Dynamic model of LGBTQ+ mental health over time"
   image-shape: rectangle
-  image-width: 1200px
+  image-width: 1400px
   links: 
     - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
       href: mailto:seungju7@illinois.edu
