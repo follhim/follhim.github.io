@@ -7,7 +7,7 @@ about:
   image: images/trajectory-prism-4800.png
   image-title: "Dynamic model of LGBTQ+ mental health over time"
   image-shape: rectangle
-  image-width: 1400px
+  image-width: 1500px
   links: 
     - text: "{{< iconify fluent:mail-48-filled height=35px width=35px >}}"
       href: mailto:seungju7@illinois.edu
@@ -45,35 +45,42 @@ Learn more about my own research here or read my Substack.
 :::
 
 <style>
-  .quarto-about-jolla { margin-top: -1.5rem !important; }
+  /* Trim top gap */
+  .quarto-about-jolla { margin-top: -2rem !important; }
 
   img.about-image {
     border-radius: 0 !important;
-    width: 1200px !important;
-    max-width: 98vw !important;
+    width: min(1500px, 95vw) !important;
     height: auto !important;
     filter: brightness(1.4) !important;
     display: block !important;
-    margin: 0 auto !important;
+    /* center trick that works regardless of container width */
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .quarto-about-jolla h1.title {
+    font-size: 2.8rem !important;
   }
 </style>
 
 <script>
-  function applyImageStyles() {
+  document.addEventListener('DOMContentLoaded', function () {
     var img = document.querySelector('img.about-image');
     if (img) {
       img.removeAttribute('style');
       img.classList.remove('round');
       img.style.setProperty('border-radius', '0', 'important');
-      img.style.setProperty('width', 'min(1200px, 98vw)', 'important');
+      img.style.setProperty('width', 'min(1500px, 95vw)', 'important');
       img.style.setProperty('height', 'auto', 'important');
       img.style.setProperty('filter', 'brightness(1.4)', 'important');
       img.style.setProperty('display', 'block', 'important');
-      img.style.setProperty('margin', '0 auto', 'important');
+      img.style.setProperty('position', 'relative', 'important');
+      img.style.setProperty('left', '50%', 'important');
+      img.style.setProperty('transform', 'translateX(-50%)', 'important');
     }
-  }
-
-  document.addEventListener('DOMContentLoaded', applyImageStyles);
+  });
 </script>
 
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;"></div>
