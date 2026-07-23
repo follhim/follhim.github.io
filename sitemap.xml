@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
-    <lastmod>2026-07-22T12:22:23.785Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
-    <lastmod>2026-07-22T12:22:23.785Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/index.html</loc>
-    <lastmod>2026-07-22T12:22:23.782Z</lastmod>
-  </url>
-  <url>
     <loc>https://follhim.net/resource.html</loc>
-    <lastmod>2026-07-22T12:22:23.784Z</lastmod>
+    <lastmod>2026-07-23T12:19:37.820Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/research/papers.html</loc>
-    <lastmod>2026-07-22T12:22:23.784Z</lastmod>
+    <lastmod>2026-07-23T12:19:37.820Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
+    <lastmod>2026-07-23T12:19:37.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
+    <lastmod>2026-07-23T12:19:37.821Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/about.html</loc>
-    <lastmod>2026-07-22T12:22:23.752Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/news/news.html</loc>
-    <lastmod>2026-07-22T12:22:23.783Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/public/apa_cor_tab.html</loc>
-    <lastmod>2026-07-22T12:22:23.785Z</lastmod>
+    <lastmod>2026-07-23T12:19:37.787Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/resource_page/private/mod_reg_lavaan.html</loc>
-    <lastmod>2026-07-22T12:22:23.785Z</lastmod>
+    <lastmod>2026-07-23T12:19:37.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/public/apa_cor_tab.html</loc>
+    <lastmod>2026-07-23T12:19:37.821Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/news/news.html</loc>
+    <lastmod>2026-07-23T12:19:37.819Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/index.html</loc>
+    <lastmod>2026-07-23T12:19:37.818Z</lastmod>
   </url>
 </urlset>

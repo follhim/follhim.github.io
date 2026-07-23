@@ -1,9 +1,5 @@
 [
   {
-    "listing": "/index.html",
-    "items": []
-  },
-  {
     "listing": "/resource.html",
     "items": [
       "/resource_page/public/scra25_blitz.html",
@@ -16,6 +12,10 @@
   },
   {
     "listing": "/news/news.html",
+    "items": []
+  },
+  {
+    "listing": "/index.html",
     "items": []
   }
 ]
