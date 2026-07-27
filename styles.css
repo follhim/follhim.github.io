@@ -4,19 +4,6 @@
   margin-right: auto;
   display: block;
 }
-
-/* Reduce side margins sitewide */
-main.content {
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
-}
-
-/* For full-layout pages, constrain max content width so text stays readable */
-main.content.column-page {
-  max-width: 1400px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
 @import url("news/styles.css");
 .highlight-term {
   color: #FF6B35;

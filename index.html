@@ -241,12 +241,14 @@ window.Quarto = {
 
   img.about-image {
     border-radius: 0 !important;
-    width: 1500px !important;
-    max-width: 95vw !important;
+    width: min(1500px, 95vw) !important;
     height: auto !important;
     filter: brightness(1.4) !important;
     display: block !important;
-    margin: 0 auto !important;
+    /* center trick that works regardless of container width */
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 
   .quarto-about-jolla h1.title {
@@ -260,52 +262,15 @@ window.Quarto = {
       img.removeAttribute('style');
       img.classList.remove('round');
       img.style.setProperty('border-radius', '0', 'important');
-      img.style.setProperty('width', '1500px', 'important');
-      img.style.setProperty('max-width', '95vw', 'important');
+      img.style.setProperty('width', 'min(1500px, 95vw)', 'important');
       img.style.setProperty('height', 'auto', 'important');
       img.style.setProperty('filter', 'brightness(1.4)', 'important');
       img.style.setProperty('display', 'block', 'important');
-      img.style.setProperty('margin', '0 auto', 'important');
+      img.style.setProperty('position', 'relative', 'important');
+      img.style.setProperty('left', '50%', 'important');
+      img.style.setProperty('transform', 'translateX(-50%)', 'important');
     }
   });
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Seungju Kim",
-  "alternateName": "Kim Seungju",
-  "url": "https://follhim.net",
-  "jobTitle": "PhD Student, Clinical/Community Psychology",
-  "affiliation": {
-    "@type": "Organization",
-    "name": "University of Illinois Urbana-Champaign",
-    "alternateName": ["UIUC", "U of I", "Illinois"]
-  },
-  "knowsAbout": [
-    "LGBTQ+ mental health",
-    "health equity",
-    "religion and health",
-    "spirituality and health",
-    "stigma",
-    "resilience",
-    "longitudinal methods",
-    "latent growth curve modeling",
-    "sexual minority health",
-    "socio-ecological models",
-    "Christian nationalism",
-    "religious coping",
-    "clinical psychology",
-    "community psychology"
-  ],
-  "sameAs": [
-    "https://scholar.google.com/citations?user=JWNJV9UAAAAJ",
-    "https://www.researchgate.net/profile/Seungju-Kim-11",
-    "https://www.linkedin.com/in/kimseungju/",
-    "https://github.com/follhim",
-    "https://follhim.substack.com/"
-  ]
-}
 </script>
 <div id="turnstile-container" style="display:none;margin-top:0.5rem;text-align:center;">
 
