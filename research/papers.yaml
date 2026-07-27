@@ -1,4 +1,14 @@
 ---
+- title: "A Prospective Study Examining the Consequences of Family Rejection for Sexual and Gender Minority Youth"
+  type: "Published"                  # Use "Published" for published papers
+  author:                           # Can be array or string
+    - "Xu, W., Wheeler, L.A., Littleton, H."
+    - "**Kim, S.**"
+    - "Thomas, R., Gardella, G., Scheer, J., Ryan, C., Barba, A., Spitz, C., Chavez, A., & Edwards, K.M."
+  year: 2026                        # Publication year (for published papers)
+  journal: "Family Relations"  # Journal name
+  doi: "10.1111/fare.70286"
+  pubopen: "https://doi.org/10.1111/fare.70286"  # Open access version
 
 - title: "Is Religious Coping a Protective Factor, and for Whom? A Moderation and Subgroup Analysis on Loneliness and Suicide Attempts Among LGBTQ+ Adults Raised as Latter-Day Saints"
   type: "Published"                  # Use "Published" for published papers
