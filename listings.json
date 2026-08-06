@@ -1,5 +1,9 @@
 [
   {
+    "listing": "/research/papers.html",
+    "items": []
+  },
+  {
     "listing": "/resource.html",
     "items": [
       "/resource_page/public/scra25_blitz.html",
@@ -7,15 +11,11 @@
     ]
   },
   {
-    "listing": "/research/papers.html",
+    "listing": "/index.html",
     "items": []
   },
   {
     "listing": "/news/news.html",
-    "items": []
-  },
-  {
-    "listing": "/index.html",
     "items": []
   }
 ]
