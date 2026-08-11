@@ -34,5 +34,6 @@ format:
     # page-layout: full
     toc: true
     theme: superhero
+    canonical-url: true
     include-in-header:
       - person-schema.html
