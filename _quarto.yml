@@ -29,9 +29,6 @@ website:
       repo: follhim/follhim.github.io
       theme: dark
 
-author: "Seungju Kim"
-keywords: "Seungju Kim, Kim Seungju, religion and health, LGBTQ research, mental health, spirituality research, psychology, clinical psychology, University of Illinois, Urbana, Champaign, UIUC"
-
 format:
   html:
     # page-layout: full
