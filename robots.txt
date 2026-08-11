@@ -12,3 +12,5 @@ Disallow: /
 
 User-agent: DotBot
 Disallow: /
+
+Sitemap: https://follhim.net/sitemap.xml
