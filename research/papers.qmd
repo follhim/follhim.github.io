@@ -10,7 +10,6 @@ author:
 title-block-banner: false
 format: html
 comments: false
-description: "Published and in-progress research by Seungju Kim on religion/spirituality, LGBTQ+ mental health disparities, and health equity at the University of Illinois Urbana-Champaign."
 listing:
   - id: published
     include: 
