@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://follhim.net/resource.html</loc>
-    <lastmod>2026-08-14T00:15:25.453Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/research/papers.html</loc>
-    <lastmod>2026-08-14T00:15:25.453Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
-    <lastmod>2026-08-14T00:15:25.454Z</lastmod>
-  </url>
-  <url>
-    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
-    <lastmod>2026-08-14T00:15:25.454Z</lastmod>
+    <loc>https://follhim.net/index.html</loc>
+    <lastmod>2026-08-14T00:21:54.166Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/about.html</loc>
-    <lastmod>2026-08-14T00:15:25.417Z</lastmod>
+    <lastmod>2026-08-14T00:21:54.137Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/resource_page/private/mod_reg_lavaan.html</loc>
-    <lastmod>2026-08-14T00:15:25.454Z</lastmod>
+    <lastmod>2026-08-14T00:21:54.169Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/resource_page/public/apa_cor_tab.html</loc>
-    <lastmod>2026-08-14T00:15:25.454Z</lastmod>
+    <lastmod>2026-08-14T00:21:54.169Z</lastmod>
   </url>
   <url>
     <loc>https://follhim.net/news/news.html</loc>
-    <lastmod>2026-08-14T00:15:25.452Z</lastmod>
+    <lastmod>2026-08-14T00:21:54.167Z</lastmod>
   </url>
   <url>
-    <loc>https://follhim.net/index.html</loc>
-    <lastmod>2026-08-14T00:15:25.451Z</lastmod>
+    <loc>https://follhim.net/resource.html</loc>
+    <lastmod>2026-08-14T00:21:54.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/public/scra25_blitz.html</loc>
+    <lastmod>2026-08-14T00:21:54.169Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/resource_page/private/gh-cards.html</loc>
+    <lastmod>2026-08-14T00:21:54.169Z</lastmod>
+  </url>
+  <url>
+    <loc>https://follhim.net/research/papers.html</loc>
+    <lastmod>2026-08-14T00:21:54.168Z</lastmod>
   </url>
 </urlset>
